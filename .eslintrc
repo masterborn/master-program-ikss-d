@@ -1,0 +1,10 @@
+{
+  "extends": [
+      "@masterborn/eslint-config/frontend/typescript",
+      "prettier"
+  ],
+  "rules": {
+    "react/jsx-one-expression-per-line": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}

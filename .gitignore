@@ -1,0 +1,28 @@
+# Dependency directories
+node_modules/
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+.env.development
+.envrc
+
+# next.js build output
+.next
+
+# system files
+.zfs
+.DS_Store
+.*.swp
+*~
+
+# directories used by IDEs
+.idea
+.project
+.settings
+.vscode
+
+# test coverage
+coverage
