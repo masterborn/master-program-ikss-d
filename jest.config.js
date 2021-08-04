@@ -1,12 +1,12 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   collectCoverageFrom: [
     'src/**/*.{ts,tsx,js,jsx}',
     '!**/mocks/**',
     '!src/**/*.types.ts',
-    '!src/pages/_app.tsx',
-    '!src/pages/_document.tsx',
+    '!src/pages/_app.jsx',
+    '!src/pages/_document.jsx',
   ],
   testPathIgnorePatterns: ['/node_modules/', '/mocks/.*'],
   coverageReporters: ['lcov', 'text-summary'],
@@ -24,6 +24,6 @@ module.exports = {
     '@styles/(.*)': '<rootDir>/src/styles/$1',
     '@utils/(.*)': '<rootDir>/src/utils/$1',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/tests/fileMock.ts',
+      '<rootDir>/tests/fileMock.js',
   },
 };
