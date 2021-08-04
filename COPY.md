@@ -1,6 +1,6 @@
-### Stack: 
+### Stack:
+
 - Next
-- TypeScript
 - StyledComponents
 - Eslint + MasterBorn TS Config
 - Prettier
@@ -11,4 +11,3 @@
 
 1. Run `npm install`
 2. Run `husky install`
-
