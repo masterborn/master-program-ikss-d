@@ -1,7 +1,7 @@
 <br />
 <div align="center">
 
-<h3 align="center">App Name</h3>
+<h3 align="center">master-program-ikss-d</h3>
 
   <p align="center">
     📈
@@ -33,7 +33,7 @@ About app
 
 ## Getting Started
 
-Follow these instructions to get the application up and running
+Follow these instructions to get the application up and running.
 
 ### Prerequisites
 
