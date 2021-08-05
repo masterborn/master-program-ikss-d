@@ -33,7 +33,7 @@
     "styled-components": "5.3.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.14.7",
+    "@babel/eslint-parser": "^7.14.7",
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@masterborn/eslint-config": "0.0.9",
