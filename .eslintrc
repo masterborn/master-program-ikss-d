@@ -1,8 +1,5 @@
 {
-  "extends": [
-      "@masterborn/eslint-config/frontend/typescript",
-      "prettier"
-  ],
+  "extends": ["@masterborn/eslint-config/frontend", "prettier"],
   "rules": {
     "react/jsx-one-expression-per-line": "off",
     "react/react-in-jsx-scope": "off"
