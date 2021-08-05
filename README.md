@@ -33,7 +33,7 @@ About app
 
 ## Getting Started
 
-Follow these instructions to get the application up and running.
+Follow these instructions to get the application up and running
 
 ### Prerequisites
 
