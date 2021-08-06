@@ -6,7 +6,7 @@ import Example from '../index';
 test('test', () => {
   render(<Example />);
 
-  const heading = screen.getByText('Example');
+  const heading = screen.getByText('Exaample');
 
   expect(heading).toBeInTheDocument();
 });
