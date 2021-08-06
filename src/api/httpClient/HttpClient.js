@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import ApiError from './models/ApiError';
 
 class HttpClient {
@@ -11,7 +12,6 @@ class HttpClient {
     this.api.defaults.headers.Authorization = `Bearer ${token}`;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static afterResponse(resp) {
     return {
       ...resp,
