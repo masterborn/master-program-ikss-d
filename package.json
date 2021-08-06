@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
+    "deploy:master": "node scripts/deployMaster.js",
     "start": "next start",
     "lint": "eslint ./src --ext .js,.jsx --cache",
     "lint:fresh": "eslint",
