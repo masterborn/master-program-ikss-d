@@ -1,17 +1,15 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-
 class ApiError extends Error {
-  config: AxiosRequestConfig;
+  config;
 
-  data: AxiosResponse['data'];
+  data;
 
-  status: AxiosResponse['status'] | null;
+  status;
 
-  headers: AxiosResponse['headers'];
+  headers;
 
-  code: number | null;
+  code;
 
-  constructor(error: AxiosError) {
+  constructor(error) {
     super(error.message);
     this.name = 'ApiError';
     this.config = error.config;
