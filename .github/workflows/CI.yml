@@ -31,5 +31,5 @@ jobs:
         run: npm run test:ci
 
       - name: Deploy
-        if: ${{ github.ref == 'ref/head/master' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: npm run deploy:master
