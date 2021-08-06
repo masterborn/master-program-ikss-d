@@ -28,7 +28,6 @@ About app
 - [React](https://reactjs.org/)
 - [Next.js](https://nextjs.org)
 - [StyledComponents](https://styled-components.com/)
-- [tailwind](https://tailwindcss.com/)
 - [Sentry](https://sentry.io/)
 
 ## Getting Started
