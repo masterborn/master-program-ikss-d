@@ -12,3 +12,8 @@ export const getFontWeight =
   (fontWeightName) =>
   ({ theme }) =>
     theme.fontWeight[fontWeightName];
+
+export const getMedias =
+  (mediasName) =>
+  ({ theme }) =>
+    theme.medias[mediasName];
