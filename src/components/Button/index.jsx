@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { getColor } from '@styles/utils';
@@ -9,15 +9,15 @@ import { getColor } from '@styles/utils';
 // withIcon - display button with icon and it takes boolean,
 // secondary - display secondary version of button and it takes boolean.
 
-const styledButton = ({ className, buttonLabel, withIcon }) => (
+const styledButton = ({ className, buttonLabel, withIcon, disabled }) => (
   <>
     {withIcon ? (
-      <button type="button" className={className}>
+      <button type="button" disabled={disabled} className={className}>
         {/* TODO: Someone needs to create facebook icon component and it will be placed here */}
         {buttonLabel}
       </button>
     ) : (
-      <button type="button" className={className}>
+      <button type="button" disabled={disabled} className={className}>
         {buttonLabel}
       </button>
     )}
@@ -29,20 +29,20 @@ const Button = styled(styledButton)`
   justify-content: space-evenly;
   align-items: center;
   height: ${(props) => (props.small ? '36px' : '48px')};
-  width: ${(props) => {
+  padding: ${(props) => {
     if (props.withIcon && !props.small) {
-      return '162px';
+      return '12px 24px 12px 18px';
     }
 
     if (props.withIcon && props.small) {
-      return '128px';
+      return '9px 16px 9px 12px';
     }
 
     if (props.small) {
-      return '108px';
+      return '9px 16px';
     }
 
-    return '134px';
+    return '14px 24px';
   }};
   border-radius: 26px;
   border: ${(props) => (props.secondary ? '2px solid #1A2847' : 'none')};
@@ -58,11 +58,24 @@ const Button = styled(styledButton)`
       props.secondary
         ? getColor('white')
         : 'linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), #1889e9'};
-    box-shadow: ${(props) => !props.secondary && '0 4px 8px rgba(24, 137, 233, 0.15)'};
 
-    border-color: ${(props) => props.secondary && '#3C4863'};
+    ${(props) =>
+      !props.secondary &&
+      css`
+        box-shadow: 0 4px 8px rgba(24, 137, 233, 0.15);
+      `};
 
-    color: ${(props) => props.secondary && '#3C4863'};
+    ${(props) =>
+      props.secondary &&
+      css`
+        border-color: #3c4863;
+      `};
+
+    ${(props) =>
+      props.secondary &&
+      css`
+        color: #3c4863;
+      `};
   }
 
   &:active {
@@ -70,8 +83,18 @@ const Button = styled(styledButton)`
       props.secondary
         ? getColor('white')
         : 'linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), #1889e9'};
-    border-color: ${(props) => props.secondary && '#535E75'};
-    color: ${(props) => props.secondary && '#535E75'};
+
+    ${(props) =>
+      props.secondary &&
+      css`
+        border-color: #535e75;
+      `};
+
+    ${(props) =>
+      props.secondary &&
+      css`
+        color: #535e75;
+      `};
   }
 
   &:disabled {
@@ -79,9 +102,19 @@ const Button = styled(styledButton)`
       props.secondary
         ? getColor('white')
         : 'linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #1889e9'};
+
     box-shadow: none;
-    border-color: ${(props) => props.secondary && '#BABEC8'};
-    color: ${(props) => props.secondary && '#BABEC8'};
+    ${(props) =>
+      props.secondary &&
+      css`
+        border-color: #babec8;
+      `};
+
+    ${(props) =>
+      props.secondary &&
+      css`
+        color: #babec8;
+      `};
   }
 `;
 
@@ -90,6 +123,7 @@ Button.propTypes = {
   withIcon: PropTypes.bool,
   secondary: PropTypes.bool,
   small: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Button;
