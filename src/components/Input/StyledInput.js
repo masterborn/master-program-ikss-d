@@ -79,8 +79,33 @@ const Input = styled.input`
   }
 `;
 
-const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
+const StyledInput = ({
+  type = 'text',
+  icon = false,
+  name = '',
+  placeholder = '',
+  required = false,
+  disabled = false,
+}) => {
   const [isInvalid, setIsInvalid] = useState(false);
+
+  if (icon) {
+    return (
+      <Container>
+        <Input
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          onInvalid={() => setIsInvalid(true)}
+          onChange={() => setIsInvalid(false)}
+          required={required}
+          disabled={disabled}
+          icon={icon}
+        />
+        {isInvalid ? <AlertLogo disabled={disabled} /> : <LogoInfo disabled={disabled} />}
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -94,13 +119,6 @@ const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
         disabled={disabled}
         icon={icon}
       />
-      {icon ? (
-        isInvalid ? (
-          <AlertLogo disabled={disabled} />
-        ) : (
-          <LogoInfo disabled={disabled} />
-        )
-      ) : null}
     </Container>
   );
 };
