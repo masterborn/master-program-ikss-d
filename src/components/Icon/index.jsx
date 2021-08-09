@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-import { getColor } from '@root/styles/utils';
+import { getColor } from '@styles/utils';
 
 const styledIcon = ({ icon: IconElement, className }) => (
   <>
