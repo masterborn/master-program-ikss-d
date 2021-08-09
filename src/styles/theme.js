@@ -5,6 +5,7 @@ export const fontFamily = {
 export const fontWeight = {
   extraBold: '900',
   bold: '800',
+  buttonWeight: '700',
   regular: '400',
 };
 

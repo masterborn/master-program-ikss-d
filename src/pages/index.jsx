@@ -1,3 +1,6 @@
 import Example from '@components/Example';
+import Button from '@components/Button';
 
-export default Example;
+const homeComponent = () => <Button buttonLabel="Text" />;
+
+export default homeComponent;
