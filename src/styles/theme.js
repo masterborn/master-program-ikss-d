@@ -1,6 +1,13 @@
-export const fontFamily = {};
+export const fontFamily = {
+  Mulish: 'Mulish, sans-serif;',
+};
 
-export const fontWeight = {};
+export const fontWeight = {
+  extraBold: '900',
+  bold: '800',
+  buttonWeight: '700',
+  regular: '400',
+};
 
 export const color = {
   ikksBlue: '#1889E9',
@@ -36,7 +43,9 @@ export const color = {
     #FFFFFF)`,
 };
 
-export const medias = {};
+export const medias = {
+  mobile: '375px',
+};
 
 const theme = {
   fontFamily,

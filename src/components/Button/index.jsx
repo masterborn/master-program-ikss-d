@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { getColor } from '@styles/utils';
+import { getColor, getFontWeight } from '@styles/utils';
 
 // Button props legend:
 // small - if u want mobile version and its boolean,
@@ -49,8 +49,7 @@ const Button = styled(styledButton)`
   background: ${(props) => (props.secondary ? getColor('white') : getColor('ikksBlue'))};
   color: ${(props) => (props.secondary ? getColor('navy') : getColor('white'))};
   line-height: 20px;
-  font-weight: 700;
-  // TODO: Change hardcoded values to values assigned in topography.
+  font-weight: ${getFontWeight('buttonWeight')};
   font-size: ${(props) => (props.small ? '14px' : '16px')};
 
   &:hover {
