@@ -13,7 +13,7 @@ const styledButton = ({ className, buttonLabel, withIcon, disabled }) => (
   <>
     {withIcon ? (
       <button type="button" disabled={disabled} className={className}>
-        {/* TODO: Someone needs to create facebook icon component and it will be placed here */}
+        {/* TODO: Someone needs to create facebook icon component and it will be placed here. */}
         {buttonLabel}
       </button>
     ) : (
