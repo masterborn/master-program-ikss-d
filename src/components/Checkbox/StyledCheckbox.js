@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+
 import { getColor } from '@root/styles/utils';
 
 const CheckboxContainer = styled.div`

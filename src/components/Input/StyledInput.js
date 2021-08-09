@@ -79,14 +79,7 @@ const Input = styled.input`
   }
 `;
 
-const StyledInput = ({
-  type = 'text',
-  icon = false,
-  name = '',
-  placeholder = '',
-  required = false,
-  disabled = false,
-}) => {
+const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
   const [isInvalid, setIsInvalid] = useState(false);
 
   if (icon) {
@@ -121,6 +114,15 @@ const StyledInput = ({
       />
     </Container>
   );
+};
+
+StyledInput.defaultProps = {
+  type: 'text',
+  icon: false,
+  name: '',
+  placeholder: '',
+  required: false,
+  disabled: false,
 };
 
 StyledInput.propTypes = {
