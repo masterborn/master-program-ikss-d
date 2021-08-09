@@ -8,8 +8,12 @@ export const color = {
   white: '#ffffff',
   navy: '#1A2847',
 
+  secondaryButtonBorderActive: '#3c4863',
+  secondaryButtonBorderPressed: '#535e75',
+  secondaryButtonBorderDisabled: '#babec8',
+
   blue_50: '#8CC4F4',
-  blue_40: '#8CC4F4',
+  blue_40: '#A3D0F6',
   blue_30: '#BADCF8',
   blue_20: '#D1E7FB',
   blue_10: '#E8F3FD',
