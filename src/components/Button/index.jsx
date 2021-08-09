@@ -45,7 +45,7 @@ const Button = styled(styledButton)`
     return '14px 24px';
   }};
   border-radius: 26px;
-  border: ${(props) => (props.secondary ? '2px solid #1A2847' : 'none')};
+  border: ${(props) => (props.secondary ? `2px solid #1A2847` : 'none')};
   background: ${(props) => (props.secondary ? getColor('white') : getColor('ikksBlue'))};
   color: ${(props) => (props.secondary ? getColor('navy') : getColor('white'))};
   line-height: 20px;
@@ -69,11 +69,6 @@ const Button = styled(styledButton)`
       props.secondary &&
       css`
         border-color: #3c4863;
-      `};
-
-    ${(props) =>
-      props.secondary &&
-      css`
         color: #3c4863;
       `};
   }
@@ -88,11 +83,6 @@ const Button = styled(styledButton)`
       props.secondary &&
       css`
         border-color: #535e75;
-      `};
-
-    ${(props) =>
-      props.secondary &&
-      css`
         color: #535e75;
       `};
   }
@@ -108,11 +98,6 @@ const Button = styled(styledButton)`
       props.secondary &&
       css`
         border-color: #babec8;
-      `};
-
-    ${(props) =>
-      props.secondary &&
-      css`
         color: #babec8;
       `};
   }
