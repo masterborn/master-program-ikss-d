@@ -57,6 +57,7 @@ const GlobalStyles = createGlobalStyle`
     letter-spacing: -0.015em;
     line-height: 32px;
     font-weight: ${getFontWeight('regular')};
+    font-size: 16px;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
