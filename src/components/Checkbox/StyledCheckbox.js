@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 import { getColor } from '@root/styles/utils';
+import Checked from '@root/assets/checked.svg';
 
-const Label = styled.label`
+const Wrapper = styled.div`
   visibility: none;
 `;
 
@@ -14,8 +15,6 @@ const CheckboxContainer = styled.div`
 
 const Icon = styled.svg`
   background-color: ${getColor('ikksBlue')};
-  stroke: white;
-  stroke-width: 3px;
 `;
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
@@ -42,6 +41,10 @@ const Checkbox = styled.div`
     border-color: ${getColor('ikksBlue')};
   }
 
+  ${HiddenCheckbox}:checked + & {
+    border-color: ${getColor('ikksBlue')};
+  }
+
   ${Icon} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }
@@ -50,16 +53,16 @@ const Checkbox = styled.div`
 const StyledCheckbox = () => {
   const [isChecked, setIsChecked] = useState(false);
   return (
-    <Label>
+    <Wrapper>
       <CheckboxContainer>
         <HiddenCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
         <Checkbox checked={isChecked}>
           <Icon viewBox="0 0 24 24">
-            <polyline points="20 6 9 17 4 12" />
+            <Checked />
           </Icon>
         </Checkbox>
       </CheckboxContainer>
-    </Label>
+    </Wrapper>
   );
 };
 

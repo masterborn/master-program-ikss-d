@@ -21,26 +21,22 @@ const Container = styled.div`
   & svg {
     position: relative;
     top: -2.3em;
-    left: 14em;
+    left: 11em;
+  }
 
-    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* Condition below is reponsible for positioning icon
+     on the Mozilla browsers
+  */
+
+  @-moz-document url-prefix() {
+    & svg {
       top: -2.3em;
-      left: 11em;
+      left: 14.5em;
     }
   }
 `;
 
-const LogoInfo = styled(infoLogo)`
-  height: 16.67px;
-  width: 16.67px;
-
-  ${(props) =>
-    props.disabled &&
-    css`
-      filter: grayscale(100%) contrast(10%);
-    `}
-`;
-const AlertLogo = styled(alertLogo)`
+const InfoIcon = styled(infoLogo)`
   height: 16.67px;
   width: 16.67px;
 
@@ -86,6 +82,16 @@ const Input = styled.input`
 
 const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
   const [isInvalid, setIsInvalid] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+
+  const onChange = (event) => {
+    setInputValue(event.target.value);
+    if (event.target.value.length !== 0) {
+      setIsInvalid(false);
+    } else {
+      setIsInvalid(true);
+    }
+  };
 
   if (icon) {
     return (
@@ -94,13 +100,17 @@ const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
           type={type}
           name={name}
           placeholder={placeholder}
-          onInvalid={() => setIsInvalid(true)}
-          onChange={() => setIsInvalid(false)}
+          onChange={onChange}
+          value={inputValue}
           required={required}
           disabled={disabled}
           icon={icon}
         />
-        {isInvalid ? <AlertLogo disabled={disabled} /> : <LogoInfo disabled={disabled} />}
+        {isInvalid ? (
+          <InfoIcon as={alertLogo} disabled={disabled} />
+        ) : (
+          <InfoIcon disabled={disabled} />
+        )}
       </Container>
     );
   }
@@ -112,7 +122,8 @@ const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
         name={name}
         placeholder={placeholder}
         onInvalid={() => setIsInvalid(true)}
-        onChange={() => setIsInvalid(false)}
+        onChange={onChange}
+        value={inputValue}
         required={required}
         disabled={disabled}
         icon={icon}
