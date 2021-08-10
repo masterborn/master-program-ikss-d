@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight } from '@styles/utils';
+import Icon from '@components/Icon';
+import FacebookIcon from '@root/assets/icons/facebook-icon.svg';
 
 // Button props legend:
 // small - if u want mobile version and its boolean,
@@ -9,24 +11,36 @@ import { getColor, getFontWeight } from '@styles/utils';
 // withIcon - display button with icon and it takes boolean,
 // secondary - display secondary version of button and it takes boolean.
 
-const styledButton = ({ className, buttonLabel, withIcon, disabled }) => (
-  <>
-    {withIcon ? (
+const styledButton = ({ className, buttonLabel, withIcon, disabled, secondary }) => {
+  let button;
+
+  if (withIcon && !secondary) {
+    button = (
       <button type="button" disabled={disabled} className={className}>
-        {/* TODO: Someone needs to create facebook icon component and it will be placed here. */}
+        <Icon icon={FacebookIcon} color="white" size="1.3em" />
         {buttonLabel}
       </button>
-    ) : (
+    );
+  } else if (withIcon && secondary) {
+    button = (
+      <button type="button" disabled={disabled} className={className}>
+        <Icon icon={FacebookIcon} color={getColor('navy')} size="1.3em" />
+        {buttonLabel}
+      </button>
+    );
+  } else {
+    button = (
       <button type="button" disabled={disabled} className={className}>
         {buttonLabel}
       </button>
-    )}
-  </>
-);
+    );
+  }
+  return <>{button}</>;
+};
 
 const Button = styled(styledButton)`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   height: ${(props) => (props.small ? '36px' : '48px')};
   padding: ${(props) => {
