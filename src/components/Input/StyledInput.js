@@ -22,6 +22,11 @@ const Container = styled.div`
     position: relative;
     top: -2.3em;
     left: 14em;
+
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      top: -2.3em;
+      left: 11em;
+    }
   }
 `;
 
