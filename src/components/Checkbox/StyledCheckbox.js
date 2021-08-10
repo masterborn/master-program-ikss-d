@@ -3,6 +3,10 @@ import { useState } from 'react';
 
 import { getColor } from '@root/styles/utils';
 
+const Label = styled.label`
+  visibility: none;
+`;
+
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
@@ -46,14 +50,16 @@ const Checkbox = styled.div`
 const StyledCheckbox = () => {
   const [isChecked, setIsChecked] = useState(false);
   return (
-    <CheckboxContainer>
-      <HiddenCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
-      <Checkbox checked={isChecked}>
-        <Icon viewBox="0 0 24 24">
-          <polyline points="20 6 9 17 4 12" />
-        </Icon>
-      </Checkbox>
-    </CheckboxContainer>
+    <Label>
+      <CheckboxContainer>
+        <HiddenCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
+        <Checkbox checked={isChecked}>
+          <Icon viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12" />
+          </Icon>
+        </Checkbox>
+      </CheckboxContainer>
+    </Label>
   );
 };
 
