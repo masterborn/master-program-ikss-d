@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import HeroText from '@components/Hero/HeroText';
 import HeroImage from '@components/Hero/HeroImage';
 import HeroSm from '@components/Hero/HeroSM';
+import { getMedias } from '@styles/utils';
 
 const styledHero = ({ headerText, smallText, imageSrc }) => (
   <>
@@ -24,12 +25,32 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & div:nth-child(1) {
+    order: 1;
+  }
+
+  & div:nth-child(2) {
+    order: 2;
+  }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    flex-direction: column;
+
+    & div:nth-child(1) {
+      order: 2;
+    }
+
+    & div:nth-child(2) {
+      order: 1;
+    }
+  }
 `;
 
 Hero.propTypes = {
   headerText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
-  imageSrc: PropTypes.objectOf(PropTypes.object),
+  imageSrc: PropTypes.shape({}).isRequired,
 };
 
 export default Hero;

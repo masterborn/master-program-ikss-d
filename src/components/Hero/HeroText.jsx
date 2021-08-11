@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Button from '@components/Button/Button';
+import { getMedias } from '@styles/utils';
 
 const styledHeroText = ({ headerText, smallText }) => (
   <Wrapper>
@@ -14,7 +15,7 @@ const styledHeroText = ({ headerText, smallText }) => (
 const HeroText = styled(styledHeroText)``;
 
 const Wrapper = styled.div`
-  margin: 77px 0 0 120px;
+  margin: 77px 60px 0 120px;
   display: flex;
   flex-direction: column;
   max-width: 420px;
@@ -22,6 +23,10 @@ const Wrapper = styled.div`
   & h1,
   p {
     margin-bottom: 32px;
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    margin: 40.75px 0 40px 24px;
   }
 `;
 

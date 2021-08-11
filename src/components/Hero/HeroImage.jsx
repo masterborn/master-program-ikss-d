@@ -7,7 +7,7 @@ const styledHeroImage = ({ imageSrc }) => <Image src={imageSrc} alt="cos" width=
 const HeroImage = styled(styledHeroImage)``;
 
 HeroImage.propTypes = {
-  imageSrc: PropTypes.objectOf(PropTypes.object),
+  imageSrc: PropTypes.shape({}).isRequired,
 };
 
 export default HeroImage;

@@ -5,6 +5,7 @@ import CircleFacebook from '@assets/icons/facebook-circle-icon.svg';
 import CircleInstagram from '@assets/icons/instagram-circle-icon.svg';
 import CircleYouTube from '@assets/icons/youTube-circle-icon.svg';
 import CircleLinkedIn from '@assets/icons/linkedIN-circle-icon.svg';
+import { getMedias } from '@styles/utils';
 
 const styledHeroSM = () => (
   <Wrapper>
@@ -49,6 +50,20 @@ const Wrapper = styled.div`
 
     & h5 {
       margin-left: 16px;
+    }
+  }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    width: 327px;
+    height: 80px;
+    border-radius: 16px;
+    margin: auto;
+    float: none;
+
+    & a {
+      & h5 {
+        display: none;
+      }
     }
   }
 `;
