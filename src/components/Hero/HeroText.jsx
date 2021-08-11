@@ -15,7 +15,7 @@ const styledHeroText = ({ headerText, smallText }) => (
 const HeroText = styled(styledHeroText)``;
 
 const Wrapper = styled.div`
-  margin: 77px 60px 0 120px;
+  margin: 77px 100px 0 120px;
   display: flex;
   flex-direction: column;
   max-width: 420px;
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     margin-bottom: 32px;
   }
 
-  @media (max-width: ${getMedias('mobile')}) {
+  @media (max-width: ${getMedias('laptop')}) {
     margin: 40.75px 0 40px 24px;
   }
 `;

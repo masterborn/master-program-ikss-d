@@ -6,24 +6,24 @@ import HeroImage from '@components/Hero/HeroImage';
 import HeroSm from '@components/Hero/HeroSM';
 import { getMedias } from '@styles/utils';
 
-const styledHero = ({ headerText, smallText, imageSrc }) => (
+const styledHero = ({ headerText, smallText, imageSrc, imageAlt }) => (
   <>
     <Wrapper>
       <HeroText headerText={headerText} smallText={smallText} />
-      <HeroImage imageSrc={imageSrc} />
+      <HeroImage imageSrc={imageSrc} imageAlt={imageAlt} />
     </Wrapper>
     <HeroSm />
   </>
 );
 
 const Hero = styled(styledHero)`
-  background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%), #ffffff;
   width: 100vw;
 `;
 
 const Wrapper = styled.section`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 
   & div:nth-child(1) {
@@ -34,7 +34,7 @@ const Wrapper = styled.section`
     order: 2;
   }
 
-  @media (max-width: ${getMedias('tablet')}) {
+  @media (max-width: ${getMedias('laptop')}) {
     flex-direction: column;
 
     & div:nth-child(1) {
@@ -51,6 +51,7 @@ Hero.propTypes = {
   headerText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
   imageSrc: PropTypes.shape({}).isRequired,
+  imageAlt: PropTypes.string.isRequired,
 };
 
 export default Hero;

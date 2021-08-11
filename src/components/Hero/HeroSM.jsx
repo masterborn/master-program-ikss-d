@@ -31,7 +31,7 @@ const styledHeroSM = () => (
 const HeroSm = styled(styledHeroSM)``;
 
 const Wrapper = styled.div`
-  width: 1038px;
+  width: 70%;
   height: 137px;
   float: right;
   display: flex;
@@ -53,8 +53,8 @@ const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: ${getMedias('tablet')}) {
-    width: 327px;
+  @media (max-width: ${getMedias('laptop')}) {
+    width: 80%;
     height: 80px;
     border-radius: 16px;
     margin: auto;
