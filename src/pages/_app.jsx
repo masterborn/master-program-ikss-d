@@ -8,8 +8,6 @@ import Head from 'next/head';
 
 import GlobalStyles from '@styles/GlobalStyles';
 import theme from '@styles/theme';
-import StyledInput from '@root/components/Input/StyledInput';
-import StyledCheckbox from '@root/components/Checkbox/StyledCheckbox';
 
 const App = (props) => {
   const queryClientRef = useRef;
@@ -39,8 +37,6 @@ const App = (props) => {
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
         <GlobalStyles />
-        <StyledCheckbox />
-        <StyledInput icon />
       </ThemeProvider>
     </>
   );
