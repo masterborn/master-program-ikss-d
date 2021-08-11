@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { getColor } from '@root/styles/utils';
 import Logo from '@root/components/Logos/Logo';
 import Button from '@root/components/Button/index';
+import Icon from '@root/components/Icon/index';
+import FBIcon from '@root/assets/icons/facebook-icon.svg';
+import ISIcon from '@root/assets/icons/instagram-icon.svg';
+import YTIcon from '@root/assets/icons/youTube-icon.svg';
+import LNIcon from '@root/assets/icons/linkedIn-icon.svg';
 
 const Nav = styled.div`
   padding: 1rem 5rem;
@@ -16,6 +21,9 @@ const Nav = styled.div`
   top: 0;
   left: 0;
   right: 0;
+  @media (max-width: 768px) {
+    padding: 1rem 1rem;
+  }
 `;
 
 const Menu = styled.div`
@@ -36,7 +44,7 @@ const MenuLink = styled.a`
   text-decoration: none;
   color: ${getColor('steel')};
   transition: all 0.3s ease-in;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 
   &:hover {
     color: ${getColor('navy')};
@@ -59,6 +67,18 @@ const Hamburger = styled.div`
   @media (max-width: 768px) {
     display: flex;
   }
+`;
+
+const SocialMedias = styled.div`
+  width: 12em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+const icon = styled(Icon)`
+  color: ${getColor('ikksBlue')};
 `;
 
 const ContactButton = styled(Button)`
@@ -89,6 +109,12 @@ function Navbar() {
         <MenuLink href="">O nas</MenuLink>
         <MenuLink href="">Współpraca</MenuLink>
       </Menu>
+      <SocialMedias>
+        <Icon as={icon} icon={FBIcon} />
+        <Icon icon={ISIcon} />
+        <Icon icon={YTIcon} />
+        <Icon icon={LNIcon} />
+      </SocialMedias>
       <Hamburger>
         <span />
         <span />
