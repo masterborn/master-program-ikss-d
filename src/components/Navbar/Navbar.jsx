@@ -5,7 +5,7 @@ import Logo from '@root/components/Logos/Logo';
 import Button from '@root/components/Button/index';
 
 const Nav = styled.div`
-  padding: 0 2 rem;
+  padding: 1rem 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,9 +20,9 @@ const Nav = styled.div`
 
 const Menu = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
 
   @media (max-width: 768px) {
     display: none;
@@ -44,7 +44,6 @@ const MenuLink = styled.a`
 `;
 
 const Hamburger = styled.div`
-  display: flex;
   flex-direction: column;
   cursor: pointer;
 
@@ -62,10 +61,28 @@ const Hamburger = styled.div`
   }
 `;
 
+const ContactButton = styled(Button)`
+  height: 36px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const DesktopLogo = styled(Logo)`
+  height: 48.82px;
+  width: 73.57px;
+
+  @media (max-width: 768px) {
+    height: 52.83px;
+    width: 35.05px;
+  }
+`;
+
 function Navbar() {
   return (
     <Nav>
-      <Logo />
+      <Logo as={DesktopLogo} />
       <Menu>
         <MenuLink href="">Strona główna</MenuLink>
         <MenuLink href="">Projekty</MenuLink>
@@ -77,7 +94,7 @@ function Navbar() {
         <span />
         <span />
       </Hamburger>
-      <Button buttonLabel="Skontaktuj się" />
+      <Button as={ContactButton} buttonLabel="Skontaktuj się" />
     </Nav>
   );
 }
