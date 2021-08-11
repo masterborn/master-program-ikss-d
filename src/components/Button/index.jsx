@@ -33,9 +33,12 @@ const Button = styled(styledButton)`
   font-weight: ${getFontWeight('buttonWeight')};
   font-size: 16px;
 
+  & ${Icon} {
+    margin-right: 8px;
+  }
+
   & * {
     fill: ${(props) => (props.secondary ? getColor('navy') : getColor('white'))};
-    margin-right: 8px;
   }
 
   &:hover {
@@ -93,7 +96,7 @@ const Button = styled(styledButton)`
     height: 36px;
     line-height: 18px;
 
-    & * {
+    & ${Icon} {
       height: 1.5em;
       margin-right: 4px;
     }
