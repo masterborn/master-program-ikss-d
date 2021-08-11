@@ -13,6 +13,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     color: ${getColor('steel')};
     font-family: ${getFontFamily('Mulish')};
+    height: 300vh;
   }
 
   h1,h2,h3,h4,h5 {
