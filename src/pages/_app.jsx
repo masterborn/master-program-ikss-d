@@ -39,8 +39,6 @@ const App = (props) => {
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
         <GlobalStyles />
-        <StyledCheckbox />
-        <StyledInput icon />
       </ThemeProvider>
     </>
   );
