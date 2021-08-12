@@ -8,7 +8,6 @@ import Head from 'next/head';
 
 import GlobalStyles from '@styles/GlobalStyles';
 import theme from '@styles/theme';
-import Navbar from '@root/components/Navbar/Navbar';
 
 const App = (props) => {
   const queryClientRef = useRef;
@@ -37,7 +36,6 @@ const App = (props) => {
           </Hydrate>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-        <Navbar />
         <GlobalStyles />
       </ThemeProvider>
     </>
