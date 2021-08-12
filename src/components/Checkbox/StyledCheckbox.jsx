@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { getColor } from '@root/styles/utils';
 import Checked from '@root/assets/checked.svg';
-import Icon from '@components/Icon';
+import Icon from '@components/Icon/Icon';
 
 const Wrapper = styled.label`
   visibility: none;
