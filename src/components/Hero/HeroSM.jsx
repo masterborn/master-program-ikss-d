@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Icon from '@components/Icon/Icon';
 import CircleFacebook from '@assets/icons/facebook-circle-icon.svg';
 import CircleInstagram from '@assets/icons/instagram-circle-icon.svg';
 import CircleYouTube from '@assets/icons/youTube-circle-icon.svg';
