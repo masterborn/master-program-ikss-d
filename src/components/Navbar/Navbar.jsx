@@ -4,10 +4,10 @@ import { getColor } from '@root/styles/utils';
 import Logo from '@root/components/Logos/Logo';
 import Button from '@root/components/Button/index';
 import Icon from '@root/components/Icon/index';
-import FBIcon from '@root/assets/icons/facebook-icon.svg';
-import ISIcon from '@root/assets/icons/instagram-icon.svg';
-import YTIcon from '@root/assets/icons/youTube-icon.svg';
-import LNIcon from '@root/assets/icons/linkedIn-icon.svg';
+import FBIcon from '@root/assets/icons/facebook-circle-icon.svg';
+import ISIcon from '@root/assets/icons/instagram-circle-icon.svg';
+import YTIcon from '@root/assets/icons/youTube-circle-icon.svg';
+import LNIcon from '@root/assets/icons/linkedIN-circle-icon.svg';
 
 const Nav = styled.div`
   padding: 1rem 5rem;
