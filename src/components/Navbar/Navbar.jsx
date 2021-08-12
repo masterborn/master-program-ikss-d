@@ -1,4 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
 
 import { getColor } from '@root/styles/utils';
 import Logo from '@root/components/Logos/Logo';
@@ -12,12 +15,13 @@ import LNIcon from '@root/assets/icons/linkedIN-circle-icon.svg';
 const Nav = styled.div`
   padding: 1rem 5rem;
   display: flex;
+  z-index: 9999;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   background: ${getColor('white')};
   box-shadow: 0px 4px 16px rgba(97, 121, 139, 0.1);
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -49,6 +53,12 @@ const MenuLink = styled.a`
   &:hover {
     color: ${getColor('navy')};
   }
+
+  ${(props) =>
+    props.active &&
+    css`
+      color: ${getColor('navy')};
+    `}
 `;
 
 const Hamburger = styled.div`
@@ -75,10 +85,17 @@ const SocialMedias = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-`;
+  visibility: hidden;
 
-const icon = styled(Icon)`
-  color: ${getColor('ikksBlue')};
+  ${(props) =>
+    props.show &&
+    css`
+      visibility: visible;
+    `}
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ContactButton = styled(Button)`
@@ -99,21 +116,55 @@ const DesktopLogo = styled(Logo)`
   }
 `;
 
-function Navbar() {
+function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    const scrolled = winScroll / height;
+    setScrollPosition(scrolled);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <Nav>
       <Logo as={DesktopLogo} />
       <Menu>
-        <MenuLink href="">Strona główna</MenuLink>
-        <MenuLink href="">Projekty</MenuLink>
-        <MenuLink href="">O nas</MenuLink>
-        <MenuLink href="">Współpraca</MenuLink>
+        <Link href="/">
+          <MenuLink active={page === 'home'}>Strona główna</MenuLink>
+        </Link>
+        <Link href="/projects">
+          <MenuLink active={page === 'projects'}>Projekty</MenuLink>
+        </Link>
+        <Link href="/about">
+          <MenuLink active={page === 'about'}>O nas</MenuLink>
+        </Link>
+        <Link href="/cooperation">
+          <MenuLink active={page === 'cooperation'}>Współpraca</MenuLink>
+        </Link>
       </Menu>
-      <SocialMedias>
-        <Icon as={icon} icon={FBIcon} />
-        <Icon icon={ISIcon} />
-        <Icon icon={YTIcon} />
-        <Icon icon={LNIcon} />
+      <SocialMedias show={scrollPosition > 0.25}>
+        <a href={fblink} target="_blank" rel="noreferrer">
+          <Icon icon={FBIcon} />
+        </a>
+        <a href={inlink} target="_blank" rel="noreferrer">
+          <Icon icon={ISIcon} />
+        </a>
+        <a href={ytlink} target="_blank" rel="noreferrer">
+          <Icon icon={YTIcon} />
+        </a>
+        <a href={lnlink} target="_blank" rel="noreferrer">
+          <Icon icon={LNIcon} />
+        </a>
       </SocialMedias>
       <Hamburger>
         <span />
@@ -126,3 +177,11 @@ function Navbar() {
 }
 
 export default Navbar;
+
+Navbar.propTypes = {
+  fblink: PropTypes.string.isRequired,
+  inlink: PropTypes.string.isRequired,
+  ytlink: PropTypes.string.isRequired,
+  lnlink: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
+};
