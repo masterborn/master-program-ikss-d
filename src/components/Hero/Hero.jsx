@@ -3,16 +3,30 @@ import PropTypes from 'prop-types';
 
 import HeroText from '@components/Hero/HeroText';
 import HeroImage from '@components/Hero/HeroImage';
-import HeroSm from '@components/Hero/HeroSM';
+import HeroSM from '@components/Hero/HeroSM';
 import { getMedias } from '@styles/utils';
 
-const styledHero = ({ headerText, smallText, imageSrc, imageAlt }) => (
+const styledHero = ({
+  headerText,
+  smallText,
+  imageSrc,
+  imageAlt,
+  facebookLink,
+  instagramLink,
+  youTubeLink,
+  linkedInLink,
+}) => (
   <>
     <Wrapper>
       <HeroText headerText={headerText} smallText={smallText} />
       <HeroImage imageSrc={imageSrc} imageAlt={imageAlt} />
     </Wrapper>
-    <HeroSm />
+    <HeroSM
+      facebookLink={facebookLink}
+      instagramLink={instagramLink}
+      youTubeLink={youTubeLink}
+      linkedInLink={linkedInLink}
+    />
   </>
 );
 
@@ -52,6 +66,10 @@ Hero.propTypes = {
   smallText: PropTypes.string.isRequired,
   imageSrc: PropTypes.shape({}).isRequired,
   imageAlt: PropTypes.string.isRequired,
+  facebookLink: PropTypes.string.isRequired,
+  instagramLink: PropTypes.string.isRequired,
+  youTubeLink: PropTypes.string.isRequired,
+  linkedInLink: PropTypes.string.isRequired,
 };
 
 export default Hero;
