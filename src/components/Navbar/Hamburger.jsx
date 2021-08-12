@@ -108,7 +108,7 @@ const Hamburger = () => {
         <Wrapper>
           <Nav>
             <CloseButton type="button" onClick={handleClick}>
-              <Icon icon={CloseIcon} color="navy" />
+              <Icon icon={CloseIcon} color="steel" />
             </CloseButton>
 
             <LinksWrapper>
