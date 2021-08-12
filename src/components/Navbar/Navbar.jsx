@@ -24,7 +24,7 @@ const Nav = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     padding: 1rem 1.25rem;
   }
 `;
@@ -34,7 +34,7 @@ const Menu = styled.div`
   flex-direction: row;
   align-items: flex-start;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `;
@@ -73,7 +73,7 @@ const Hamburger = styled.div`
     border-radius: 103px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     display: flex;
   }
 `;
@@ -83,7 +83,7 @@ const SMWrapper = styled.div`
   padding-left: 2.5em;
 
   @media (max-width: 1300px) {
-    padding-left: 0em;
+    padding-left: 0;
   }
 `;
 
@@ -100,7 +100,7 @@ const SocialMedias = styled.div`
       display: flex;
     `}
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `;
@@ -108,7 +108,7 @@ const SocialMedias = styled.div`
 const ContactButton = styled(Button)`
   height: 36px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     display: none;
   }
 `;
