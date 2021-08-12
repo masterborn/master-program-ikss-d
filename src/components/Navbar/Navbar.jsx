@@ -107,16 +107,6 @@ const ContactButton = styled(Button)`
   }
 `;
 
-const DesktopLogo = styled(Logo)`
-  height: 48.82px;
-  width: 73.57px;
-
-  @media (max-width: 768px) {
-    height: 52.83px;
-    width: 35.05px;
-  }
-`;
-
 function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
@@ -138,7 +128,7 @@ function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
 
   return (
     <Nav>
-      <Logo as={DesktopLogo} />
+      <Logo />
       <Menu>
         <Link href="/">
           <MenuLink active={page === 'home'}>Strona główna</MenuLink>

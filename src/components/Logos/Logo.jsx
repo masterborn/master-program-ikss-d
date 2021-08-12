@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import IkksLogo from '@assets/ikks-logo.svg';
 
@@ -13,14 +12,6 @@ const BaseLogo = styled(IkksLogo)`
   }
 `;
 
-const Logo = ({ className }) => <BaseLogo className={className} />;
+const Logo = () => <BaseLogo />;
 
 export default Logo;
-
-Logo.defaultProps = {
-  className: null,
-};
-
-Logo.propTypes = {
-  className: PropTypes.func,
-};
