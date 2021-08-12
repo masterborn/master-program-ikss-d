@@ -7,25 +7,14 @@ import CircleInstagram from '@assets/icons/instagram-circle-icon.svg';
 import CircleYouTube from '@assets/icons/youTube-circle-icon.svg';
 import CircleLinkedIn from '@assets/icons/linkedIN-circle-icon.svg';
 import { getMedias } from '@styles/utils';
+import HeroSMLink from '@components/Hero/HeroSMLink';
 
 const styledHeroSM = ({ facebookLink, instagramLink, youTubeLink, linkedInLink }) => (
   <Wrapper>
-    <a href={facebookLink} target="_blank" rel="noopener noreferrer">
-      <Icon icon={CircleFacebook} size="3em" />
-      <h5>Facebook</h5>
-    </a>
-    <a href={instagramLink} target="_blank" rel="noopener noreferrer">
-      <Icon icon={CircleInstagram} size="3em" />
-      <h5>Instagram</h5>
-    </a>
-    <a href={youTubeLink} target="_blank" rel="noopener noreferrer">
-      <Icon icon={CircleYouTube} size="3em" />
-      <h5>YouTube</h5>
-    </a>
-    <a href={linkedInLink} target="_blank" rel="noopener noreferrer">
-      <Icon icon={CircleLinkedIn} size="3em" />
-      <h5>LinkedIn</h5>
-    </a>
+    <HeroSMLink linkText="Facebook" hrefLink={facebookLink} linkIcon={CircleFacebook} />
+    <HeroSMLink linkText="Instagram" hrefLink={instagramLink} linkIcon={CircleInstagram} />
+    <HeroSMLink linkText="YouTube" iconSize="3em" hrefLink={youTubeLink} linkIcon={CircleYouTube} />
+    <HeroSMLink linkText="LinkedIn" hrefLink={linkedInLink} linkIcon={CircleLinkedIn} />
   </Wrapper>
 );
 
