@@ -15,7 +15,7 @@ const styledHeroText = ({ headerText, smallText }) => (
 const HeroText = styled(styledHeroText)``;
 
 const Wrapper = styled.div`
-  margin: 77px 100px 0 120px;
+  margin: 77px 7vw 0 10vw;
   display: flex;
   flex-direction: column;
   max-width: 420px;

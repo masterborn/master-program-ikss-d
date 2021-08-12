@@ -1,5 +1,5 @@
 import Hero from '@components/Hero/Hero';
-import HeroImagePng from '@root/assets/heroImage.png';
+import HeroImagePng from '@root/assets/heroImage2.jpg';
 
 const homePage = () => (
   <Hero
