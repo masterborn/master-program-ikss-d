@@ -7,7 +7,6 @@ import { getColor } from '@root/styles/utils';
 
 const NavLink = ({ url, linkLabel, className }) => {
   const router = useRouter();
-  console.log(router);
 
   return (
     <Link href={url} router={router}>

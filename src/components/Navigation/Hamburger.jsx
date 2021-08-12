@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   position: fixed;
   width: 100vw;
   height: 100vh;
+  z-index: 999999;
 
   &::before {
     content: '';
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const StyledNav = styled.nav`
+const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +50,7 @@ const StyledNav = styled.nav`
   animation: ${slideIn} 0.5s linear;
 `;
 
-const StyledButton = styled.button`
+const CloseButton = styled.button`
   padding: 16px 24px;
   margin-left: auto;
 `;
@@ -63,7 +64,7 @@ const StyledLink = styled(NavLink)`
 `;
 
 const ContactButton = styled(Button)`
-  margin: 40px;
+  margin: 40px 0;
 `;
 
 const LinksWrapper = styled.div`
@@ -80,20 +81,36 @@ const LinksWrapper = styled.div`
 const Hamburger = () => {
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const isMatches = window.matchMedia(`(max-width: 375px)`).matches;
-    if (isMatches) setIsVisible(true);
+  const handleChange = (event) => {
+    if (event.matches) setIsVisible(true);
     else setIsVisible(false);
+  };
+
+  const handleClick = () => {
+    setIsVisible(false);
+  };
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: 375px)`);
+
+    if (media.matches) setIsVisible(true);
+    else setIsVisible(false);
+
+    media.addEventListener('change', handleChange);
+
+    return () => {
+      media.removeEventListener('change', handleChange);
+    };
   }, []);
 
   return (
     <>
       {isVisible && (
         <Wrapper>
-          <StyledNav>
-            <StyledButton type="button">
+          <Nav>
+            <CloseButton type="button" onClick={handleClick}>
               <Icon icon={CloseIcon} color="navy" />
-            </StyledButton>
+            </CloseButton>
 
             <LinksWrapper>
               <StyledLink linkLabel="Strona główna" url="/" />
@@ -104,8 +121,16 @@ const Hamburger = () => {
 
             <ContactButton buttonLabel="Skontaktuj się" />
 
-            <Socials />
-          </StyledNav>
+            <Socials
+              urls={{
+                facebook: 'https://masterborn.com/',
+                instagram: 'https://masterborn.com/',
+                youtTube: 'https://masterborn.com/',
+                linkedIn: 'https://masterborn.com/',
+              }}
+              size="32px"
+            />
+          </Nav>
         </Wrapper>
       )}
     </>

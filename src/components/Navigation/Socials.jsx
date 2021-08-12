@@ -12,22 +12,30 @@ const SocialsWrapper = styled.div`
   gap: 24px;
 `;
 
+const Link = ({ url, icon, size }) => (
+  <a href={url} target="_blank" rel="noreferrer">
+    <Icon icon={icon} size={size} />
+  </a>
+);
+
 const Socials = ({ urls, size, className }) => (
   <SocialsWrapper className={className}>
-    <a href={urls.facebook}>
-      <Icon icon={FacebookIcon} size={size} />
-    </a>
-    <a href={urls.instagram}>
-      <Icon icon={InstagramIcon} size={size} />
-    </a>
-    <a href={urls.youTube}>
-      <Icon icon={YouTubeIcon} size={size} />
-    </a>
-    <a href={urls.linkedIn}>
-      <Icon icon={LinkedInIcon} size={size} />
-    </a>
+    <Link url={urls.facebook} icon={FacebookIcon} size={size} />
+    <Link url={urls.instagram} icon={InstagramIcon} size={size} />
+    <Link url={urls.youTube} icon={YouTubeIcon} size={size} />
+    <Link url={urls.linkedIn} icon={LinkedInIcon} size={size} />
   </SocialsWrapper>
 );
+
+Link.propTypes = {
+  url: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
+  size: PropTypes.string,
+};
+
+Link.defaultProps = {
+  size: '24px',
+};
 
 Socials.propTypes = {
   urls: PropTypes.shape({
