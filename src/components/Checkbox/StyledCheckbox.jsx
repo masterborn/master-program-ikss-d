@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 
-import { getColor } from '@root/styles/utils';
-import Checked from '@root/assets/checked.svg';
+import { getColor } from '@styles/utils';
+import Checked from '@assets/checked.svg';
 import Icon from '@components/Icon/Icon';
 
 const Wrapper = styled.label`
@@ -30,15 +30,12 @@ const Checkbox = styled.div`
   border: 1.5px solid ${getColor('steel_40')};
   border-radius: 4px;
   transition: all 150ms;
-
   ${HiddenCheckbox}:hover + & {
     border-color: ${getColor('ikksBlue')};
   }
-
   ${HiddenCheckbox}:checked + & {
     border: none;
   }
-
   ${Icon} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }

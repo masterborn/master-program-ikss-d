@@ -8,12 +8,10 @@ const styledIcon = ({ icon: IconElement, className }) => <IconElement className=
 const Icon = styled(styledIcon)`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
-
   @media (max-width: ${getMedias('mobile')}) {
     width: ${({ size, media }) => media || size};
     height: ${({ size, media }) => media || size};
   }
-
   & * {
     ${({ color }) =>
       color &&
