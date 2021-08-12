@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
-import Icon from '@components/Icon/index';
+import Icon from '@components/Icon/Icon';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
 // Button props legend:
@@ -21,6 +21,7 @@ const styledButton = ({ className, buttonLabel, withIcon, disabled }) => (
 
 const Button = styled(styledButton)`
   display: flex;
+  width: fit-content;
   justify-content: space-between;
   align-items: center;
   height: 48px;

@@ -61,6 +61,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
   @media (max-width: ${getMedias('mobile')}) {
+    h1 {
+      line-height: 44px;
+      font-size: 32px;
+    }
+    
     p {
       font-size: 14px;
       line-height: 28px;
