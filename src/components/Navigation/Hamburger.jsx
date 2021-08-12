@@ -3,9 +3,8 @@ import styled, { keyframes } from 'styled-components';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@root/styles/utils';
-
-import Icon from '../Icon/Icon';
-import Button from '../Button/Button';
+import Icon from '@components/Icon/Icon';
+import Button from '@components/Button/Button';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
@@ -125,7 +124,7 @@ const Hamburger = () => {
               urls={{
                 facebook: 'https://masterborn.com/',
                 instagram: 'https://masterborn.com/',
-                youtTube: 'https://masterborn.com/',
+                youTube: 'https://masterborn.com/',
                 linkedIn: 'https://masterborn.com/',
               }}
               size="32px"
