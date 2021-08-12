@@ -3,19 +3,12 @@ import { useState } from 'react';
 
 import { getColor } from '@styles/utils';
 import Checked from '@assets/checked.svg';
+import Icon from '@components/Icon';
 
-const Wrapper = styled.div`
+const Wrapper = styled.label`
   visibility: none;
 `;
 
-const CheckboxContainer = styled.div`
-  display: inline-block;
-  vertical-align: middle;
-`;
-
-const Icon = styled.svg`
-  background-color: ${getColor('ikksBlue')};
-`;
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);
@@ -32,19 +25,17 @@ const Checkbox = styled.div`
   display: inline-block;
   width: 24px;
   height: 24px;
+  overflow: hidden;
   background: ${getColor('white')};
   border: 1.5px solid ${getColor('steel_40')};
   border-radius: 4px;
   transition: all 150ms;
-
   ${HiddenCheckbox}:hover + & {
     border-color: ${getColor('ikksBlue')};
   }
-
   ${HiddenCheckbox}:checked + & {
-    border-color: ${getColor('ikksBlue')};
+    border: none;
   }
-
   ${Icon} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }
@@ -54,14 +45,13 @@ const StyledCheckbox = () => {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <Wrapper>
-      <CheckboxContainer>
-        <HiddenCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
-        <Checkbox checked={isChecked}>
-          <Icon viewBox="0 0 24 24">
-            <Checked />
-          </Icon>
-        </Checkbox>
-      </CheckboxContainer>
+      <HiddenCheckbox
+        checked={isChecked}
+        onChange={(event) => setIsChecked(event.target.checked)}
+      />
+      <Checkbox checked={isChecked}>
+        <Icon icon={Checked} />
+      </Checkbox>
     </Wrapper>
   );
 };

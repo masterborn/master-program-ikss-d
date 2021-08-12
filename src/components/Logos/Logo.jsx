@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import IkksLogo from '@root/assets/ikks-logo.svg';
+import IkksLogo from '@assets/ikks-logo.svg';
 
 const BaseLogo = styled(IkksLogo)`
   width: 56px;

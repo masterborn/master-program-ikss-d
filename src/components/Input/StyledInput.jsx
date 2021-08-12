@@ -13,25 +13,21 @@ const Container = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: left;
-
   & input {
     margin-right: auto;
   }
-
   & svg {
     position: relative;
     top: -2.3em;
-    left: 11em;
+    left: 12.5em;
   }
-
   /* Condition below is reponsible for positioning icon
      on the Mozilla browsers
   */
-
   @-moz-document url-prefix() {
     & svg {
       top: -2.3em;
-      left: 14.5em;
+      left: 14em;
     }
   }
 `;
@@ -39,7 +35,6 @@ const Container = styled.div`
 const InfoIcon = styled(infoLogo)`
   height: 16.67px;
   width: 16.67px;
-
   ${(props) =>
     props.disabled &&
     css`
@@ -47,8 +42,11 @@ const InfoIcon = styled(infoLogo)`
     `}
 `;
 
-const Input = styled.input`
-  border: 1.5px solid ${getColor('steel_30')};
+const Input = styled.input.attrs((props) => ({
+  borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
+  focusBorderColor: !props.isInvalid ? getColor('ikksBlue') : getColor('error'),
+}))`
+  border: 1.5px solid ${(props) => props.borderColor};
   padding: 0.5em;
   margin: 0.5em;
   box-sizing: border-box;
@@ -58,23 +56,18 @@ const Input = styled.input`
   transition: 0.3s;
   letter-spacing: 200%;
   color: ${getColor('steel')};
-
   ${(props) =>
     props.icon &&
     css`
       padding-right: 2em;
     `}
-
   &:focus {
     outline: none !important;
-    border-color: ${getColor('ikksBlue')};
+    border-color: ${(props) => props.focusBorderColor};
   }
-
   &:invalid {
     outline: none !important;
-    border-color: ${getColor('error')};
   }
-
   &::placeholder {
     color: ${getColor('steel_60')};
   }
@@ -86,34 +79,14 @@ const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
 
   const onChange = (event) => {
     setInputValue(event.target.value);
-    if (event.target.value.length !== 0) {
-      setIsInvalid(false);
-    } else {
-      setIsInvalid(true);
+    if (required) {
+      if (event.target.value.length === 0) {
+        setIsInvalid(true);
+      } else {
+        setIsInvalid(false);
+      }
     }
   };
-
-  if (icon) {
-    return (
-      <Container>
-        <Input
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          onChange={onChange}
-          value={inputValue}
-          required={required}
-          disabled={disabled}
-          icon={icon}
-        />
-        {isInvalid ? (
-          <InfoIcon as={alertLogo} disabled={disabled} />
-        ) : (
-          <InfoIcon disabled={disabled} />
-        )}
-      </Container>
-    );
-  }
 
   return (
     <Container>
@@ -121,13 +94,14 @@ const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
         type={type}
         name={name}
         placeholder={placeholder}
-        onInvalid={() => setIsInvalid(true)}
         onChange={onChange}
         value={inputValue}
         required={required}
         disabled={disabled}
         icon={icon}
+        isInvalid={isInvalid}
       />
+      {icon && <InfoIcon as={isInvalid && alertLogo} disabled={disabled} size="" />}
     </Container>
   );
 };

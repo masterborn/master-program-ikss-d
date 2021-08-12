@@ -13,7 +13,7 @@ import FacebookIcon from '@assets/icons/facebook-icon.svg';
 const styledButton = ({ className, buttonLabel, withIcon, disabled }) => (
   <>
     <button type="button" disabled={disabled} className={className}>
-      {withIcon && <Icon icon={FacebookIcon} />}
+      {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {buttonLabel}
     </button>
   </>
@@ -97,7 +97,6 @@ const Button = styled(styledButton)`
     line-height: 18px;
 
     & ${Icon} {
-      height: 1.5em;
       margin-right: 4px;
     }
   }

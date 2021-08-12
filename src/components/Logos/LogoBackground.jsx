@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-import IkksLogoAdditional from '@root/assets/ikks-logo-additional.svg';
+import IkksLogoBackground from '@assets/ikks-logo-bg.svg';
 
-const StyledLogoAdditional = styled(IkksLogoAdditional)`
-  width: 66px;
-  height: 38px;
+const StyledLogoBackground = styled(IkksLogoBackground)`
+  width: 82px;
+  height: 31px;
   @media (min-width: 375px) {
-    width: 84px;
-    height: 48px;
+    width: 100px;
+    height: 38px;
   }
 `;
 
-const LogoAdditional = () => <StyledLogoAdditional />;
+const LogoBackground = () => <StyledLogoBackground />;
 
-export default LogoAdditional;
+export default LogoBackground;
