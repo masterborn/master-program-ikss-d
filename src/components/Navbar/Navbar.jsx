@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import { getColor, getFontWeight } from '@root/styles/utils';
-import Logo from '@root/components/Logos/Logo';
-import Button from '@root/components/Button/index';
-import Icon from '@root/components/Icon/index';
+import { getColor, getFontWeight } from '@styles/utils';
+import Logo from '@components/Logos/Logo';
+import Button from '@components/Button/index';
+import Icon from '@components/Icon/Icon';
 import FBIcon from '@assets/icons/facebook-circle-icon.svg';
 import ISIcon from '@assets/icons/instagram-circle-icon.svg';
 import YTIcon from '@assets/icons/youTube-circle-icon.svg';
@@ -40,7 +40,7 @@ const Menu = styled.div`
 `;
 
 const MenuLink = styled.a`
-  padding: 1rem 2rem;
+  padding: 1rem;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -60,6 +60,7 @@ const MenuLink = styled.a`
 `;
 
 const Hamburger = styled.div`
+  display: none;
   flex-direction: column;
   cursor: pointer;
 
@@ -79,6 +80,7 @@ const Hamburger = styled.div`
 
 const SMWrapper = styled.div`
   width: 12em;
+  padding-left: 8em;
 `;
 
 const SocialMedias = styled.div`

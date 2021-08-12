@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { getColor } from '@root/styles/utils';
-import infoLogo from '@root/assets/info.svg';
-import alertLogo from '@root/assets/alert-triangle.svg';
+import { getColor } from '@styles/utils';
+import infoLogo from '@assets/info.svg';
+import alertLogo from '@assets/alert-triangle.svg';
 
 const Container = styled.div`
   min-width: 331px;

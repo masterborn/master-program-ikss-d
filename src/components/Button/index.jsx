@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
-import Icon from '@components/Icon';
-import FacebookIcon from '@root/assets/icons/facebook-icon.svg';
+import Icon from '@components/Icon/Icon';
+import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
 // Button props legend:
 // buttonLabel - set label shown on button and it takes string,

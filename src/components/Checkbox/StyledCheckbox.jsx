@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 
-import { getColor } from '@root/styles/utils';
-import Checked from '@root/assets/checked.svg';
+import { getColor } from '@styles/utils';
+import Checked from '@assets/checked.svg';
 
 const Wrapper = styled.div`
   visibility: none;
