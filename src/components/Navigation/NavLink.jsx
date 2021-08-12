@@ -5,13 +5,13 @@ import { useRouter } from 'next/router';
 
 import { getColor } from '@root/styles/utils';
 
-const NavLink = ({ url, linkLabel }) => {
-  console.log('tak');
+const NavLink = ({ url, linkLabel, className }) => {
   const router = useRouter();
+  console.log(router);
 
   return (
     <Link href={url} router={router}>
-      <PageLink href={url} router={router}>
+      <PageLink url={url} router={router} className={className}>
         {linkLabel}
       </PageLink>
     </Link>
@@ -19,18 +19,23 @@ const NavLink = ({ url, linkLabel }) => {
 };
 
 const PageLink = styled.a.attrs(({ router, url }) => ({
-  color: router.pathname === url ? getColor('navy') : '',
+  linkColor: router.pathname === url ? getColor('navy') : getColor('steel'),
 }))`
   ${(props) =>
-    props.color &&
+    props.linkColor &&
     css`
-      color: ${props.color};
+      color: ${props.linkColor};
     `}
 `;
 
 NavLink.propTypes = {
   url: PropTypes.string.isRequired,
   linkLabel: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+NavLink.defaultProps = {
+  className: null,
 };
 
 export default NavLink;

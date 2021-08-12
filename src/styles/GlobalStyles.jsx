@@ -67,6 +67,11 @@ const GlobalStyles = createGlobalStyle`
       line-height: 28px;
     }
   }
+
+  button {
+    background: none;
+    border: none;
+  }
 `;
 
 export default GlobalStyles;

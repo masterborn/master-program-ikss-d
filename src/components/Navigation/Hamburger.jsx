@@ -1,15 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
-import { getColor, getFontWeight } from '@root/styles/utils';
+import { getColor, getFontWeight, getMedias } from '@root/styles/utils';
 
-import Icon from '../Icon';
-import Button from '../Button';
+import Icon from '../Icon/Icon';
+import Button from '../Button/Button';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
+
+const slideIn = keyframes`
+from {
+  right: -100%;
+}
+
+to {
+  right: 0%;
+}
+`;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -19,8 +28,8 @@ const Wrapper = styled.div`
   &::before {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: inherit;
+    height: inherit;
     background: ${getColor('navy')};
     opacity: 0.6;
   }
@@ -32,20 +41,20 @@ const StyledNav = styled.nav`
   align-items: center;
   position: absolute;
   right: 0;
+  top: 0;
   background: ${getColor('white')};
   width: 300px;
   height: 100%;
   border-radius: 16px 0 0 0;
+  animation: ${slideIn} 0.5s linear;
 `;
 
 const StyledButton = styled.button`
-  border: none;
-  background: none;
   padding: 16px 24px;
   margin-left: auto;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled(NavLink)`
   text-decoration: none;
   font-weight: ${getFontWeight('buttonWeight')};
   width: 100%;
@@ -57,33 +66,50 @@ const ContactButton = styled(Button)`
   margin: 40px;
 `;
 
-const Hamburger = () => (
-  <Wrapper>
-    <StyledNav>
-      <StyledButton type="button">
-        <Icon icon={CloseIcon} color="navy" />
-      </StyledButton>
+const LinksWrapper = styled.div`
+  width: 100%;
+  display: inherit;
+  flex-direction: column;
+  box-shadow: 0px 1.5px 0px #eaf5ff, 0px -1.5px 0px #eaf5ff;
 
-      <NavLink linkLabel="Strona główna" url="/" />
+  @media (max-width: ${getMedias('mobile')}) {
+    font-size: 14px;
+  }
+`;
 
-      <Link href="/">
-        <StyledLink>Strona główna</StyledLink>
-      </Link>
-      <Link href="/projects">
-        <StyledLink>Projekty</StyledLink>
-      </Link>
-      <Link href="/about">
-        <StyledLink>O nas</StyledLink>
-      </Link>
-      <Link href="/cooperation">
-        <StyledLink>Współpraca</StyledLink>
-      </Link>
+const Hamburger = () => {
+  const [isVisible, setIsVisible] = useState(true);
 
-      <ContactButton buttonLabel="Skontaktuj się" />
+  useEffect(() => {
+    const isMatches = window.matchMedia(`(max-width: 375px)`).matches;
+    if (isMatches) setIsVisible(true);
+    else setIsVisible(false);
+  }, []);
 
-      <Socials />
-    </StyledNav>
-  </Wrapper>
-);
+  return (
+    <>
+      {isVisible && (
+        <Wrapper>
+          <StyledNav>
+            <StyledButton type="button">
+              <Icon icon={CloseIcon} color="navy" />
+            </StyledButton>
+
+            <LinksWrapper>
+              <StyledLink linkLabel="Strona główna" url="/" />
+              <StyledLink linkLabel="Projekty" url="/projects" />
+              <StyledLink linkLabel="O nas" url="/about" />
+              <StyledLink linkLabel="Współpraca" url="/cooperation" />
+            </LinksWrapper>
+
+            <ContactButton buttonLabel="Skontaktuj się" />
+
+            <Socials />
+          </StyledNav>
+        </Wrapper>
+      )}
+    </>
+  );
+};
 
 export default Hamburger;
