@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { getColor } from '@root/styles/utils';
+import { getColor } from '@styles/utils';
 
 const NavLink = ({ url, linkLabel, className }) => {
   const router = useRouter();

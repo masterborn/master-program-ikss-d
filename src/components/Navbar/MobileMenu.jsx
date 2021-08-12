@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
-import { getColor, getFontWeight, getMedias } from '@root/styles/utils';
+import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Icon from '@components/Icon/Icon';
 import Button from '@components/Button/Button';
 
@@ -77,7 +77,7 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const Hamburger = () => {
+const MobileMenu = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleChange = (event) => {
@@ -136,4 +136,4 @@ const Hamburger = () => {
   );
 };
 
-export default Hamburger;
+export default MobileMenu;
