@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { getColor, getFontWeight } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/index';
-import Icon from '@components/Icon/Icon';
+import Icon from '@components/Icon/index';
 import FBIcon from '@assets/icons/facebook-circle-icon.svg';
 import ISIcon from '@assets/icons/instagram-circle-icon.svg';
 import YTIcon from '@assets/icons/youTube-circle-icon.svg';
