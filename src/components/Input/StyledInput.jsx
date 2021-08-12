@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { getColor } from '@root/styles/utils';
-import infoLogo from '@root/assets/info.svg';
-import alertLogo from '@root/assets/alert-triangle.svg';
+import { getColor } from '@styles/utils';
+import infoLogo from '@assets/info.svg';
+import alertLogo from '@assets/alert-triangle.svg';
 
 const Container = styled.div`
   min-width: 331px;
@@ -13,21 +13,17 @@ const Container = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: left;
-
   & input {
     margin-right: auto;
   }
-
   & svg {
     position: relative;
     top: -2.3em;
     left: 12.5em;
   }
-
   /* Condition below is reponsible for positioning icon
      on the Mozilla browsers
   */
-
   @-moz-document url-prefix() {
     & svg {
       top: -2.3em;
@@ -39,7 +35,6 @@ const Container = styled.div`
 const InfoIcon = styled(infoLogo)`
   height: 16.67px;
   width: 16.67px;
-
   ${(props) =>
     props.disabled &&
     css`
@@ -61,22 +56,18 @@ const Input = styled.input.attrs((props) => ({
   transition: 0.3s;
   letter-spacing: 200%;
   color: ${getColor('steel')};
-
   ${(props) =>
     props.icon &&
     css`
       padding-right: 2em;
     `}
-
   &:focus {
     outline: none !important;
     border-color: ${(props) => props.focusBorderColor};
   }
-
   &:invalid {
     outline: none !important;
   }
-
   &::placeholder {
     color: ${getColor('steel_60')};
   }

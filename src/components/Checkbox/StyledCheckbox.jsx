@@ -30,15 +30,12 @@ const Checkbox = styled.div`
   border: 1.5px solid ${getColor('steel_40')};
   border-radius: 4px;
   transition: all 150ms;
-
   ${HiddenCheckbox}:hover + & {
     border-color: ${getColor('ikksBlue')};
   }
-
   ${HiddenCheckbox}:checked + & {
     border: none;
   }
-
   ${Icon} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }

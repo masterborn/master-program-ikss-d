@@ -21,6 +21,7 @@ const styledButton = ({ className, buttonLabel, withIcon, disabled }) => (
 
 const Button = styled(styledButton)`
   display: flex;
+  width: fit-content;
   justify-content: space-between;
   align-items: center;
   height: 48px;
