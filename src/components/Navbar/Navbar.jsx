@@ -80,12 +80,16 @@ const Hamburger = styled.div`
 
 const SMWrapper = styled.div`
   width: 12em;
-  padding-left: 8em;
+  padding-left: 2.5em;
+
+  @media (max-width: 1300px) {
+    padding-left: 0em;
+  }
 `;
 
 const SocialMedias = styled.div`
   width: 13em;
-  display: none;
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
