@@ -32,28 +32,12 @@ const Wrapper = styled.div`
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
   border-radius: 16px 0 0 16px;
 
-  & a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-
-    & h5 {
-      margin-left: 16px;
-    }
-  }
-
   @media (max-width: ${getMedias('laptop')}) {
     width: 90%;
     height: 80px;
     border-radius: 16px;
     margin: auto;
     float: none;
-
-    & a {
-      & h5 {
-        display: none;
-      }
-    }
   }
 `;
 
