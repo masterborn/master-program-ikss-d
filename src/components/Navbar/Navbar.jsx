@@ -51,12 +51,6 @@ const MenuLink = styled(NavLink)`
   &:hover {
     color: ${getColor('navy')};
   }
-
-  ${(props) =>
-    props.active &&
-    css`
-      color: ${getColor('navy')};
-    `}
 `;
 
 const Hamburger = styled.div`
