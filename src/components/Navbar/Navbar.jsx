@@ -128,7 +128,7 @@ function Navbar({ urls, page }) {
     setScrollPosition(scrolled);
   };
 
-  const getCloseInput = () => {
+  const closeMobileMenu = () => {
     setShow(false);
   };
 
@@ -142,7 +142,7 @@ function Navbar({ urls, page }) {
 
   return (
     <>
-      <MobileMenu urls={urls} show={show} sendClose={getCloseInput} />
+      <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
       <Nav>
         <Logo />
         <Menu>

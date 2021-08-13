@@ -78,7 +78,7 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const MobileMenu = ({ show, urls, sendClose }) => {
+const MobileMenu = ({ show, urls, closeMobileMenu }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleChange = (event) => {
@@ -87,7 +87,7 @@ const MobileMenu = ({ show, urls, sendClose }) => {
   };
 
   const handleClick = () => {
-    sendClose();
+    closeMobileMenu();
   };
 
   useEffect(() => {
@@ -147,5 +147,5 @@ MobileMenu.propTypes = {
     ytlink: PropTypes.string,
     lnlink: PropTypes.string,
   }).isRequired,
-  sendClose: PropTypes.func.isRequired,
+  closeMobileMenu: PropTypes.func.isRequired,
 };
