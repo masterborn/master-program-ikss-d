@@ -13,12 +13,7 @@ const styledHeroSM = ({ facebookLink, instagramLink, youTubeLink, linkedInLink }
     <div>
       <HeroSMLink linkText="Facebook" hrefLink={facebookLink} linkIcon={CircleFacebook} />
       <HeroSMLink linkText="Instagram" hrefLink={instagramLink} linkIcon={CircleInstagram} />
-      <HeroSMLink
-        linkText="YouTube"
-        iconSize="3em"
-        hrefLink={youTubeLink}
-        linkIcon={CircleYouTube}
-      />
+      <HeroSMLink linkText="YouTube" hrefLink={youTubeLink} linkIcon={CircleYouTube} />
       <HeroSMLink linkText="LinkedIn" hrefLink={linkedInLink} linkIcon={CircleLinkedIn} />
     </div>
   </Wrapper>
@@ -30,7 +25,7 @@ const Wrapper = styled.div`
   width: 100vw;
   display: flex;
 
-  & div {
+  & > div {
     width: 70%;
     height: 137px;
     float: right;
@@ -46,7 +41,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    & div {
+    & > div {
       width: 90%;
       height: 80px;
       border-radius: 16px;
