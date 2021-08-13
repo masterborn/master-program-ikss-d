@@ -1,6 +1,6 @@
 import Hero from '@components/Hero/Hero';
-import HeroImagePng from '@root/assets/heroImage2.jpg';
-import Navbar from '@root/components/Navbar/Navbar';
+import HeroImagePng from '@assets/heroImage2.jpg';
+import Navbar from '@components/Navbar/Navbar';
 
 const homePage = () => (
   <>
