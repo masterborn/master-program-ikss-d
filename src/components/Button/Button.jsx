@@ -33,6 +33,7 @@ const Button = styled(styledButton)`
   line-height: 20px;
   font-weight: ${getFontWeight('buttonWeight')};
   font-size: 16px;
+  cursor: pointer;
 
   & ${Icon} {
     margin-right: 8px;
