@@ -3,20 +3,16 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import { getColor, getFontWeight } from '@styles/utils';
+import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
-import Icon from '@components/Icon/Icon';
-import FBIcon from '@assets/icons/facebook-circle-icon.svg';
-import ISIcon from '@assets/icons/instagram-circle-icon.svg';
-import YTIcon from '@assets/icons/youTube-circle-icon.svg';
-import LNIcon from '@assets/icons/linkedIN-circle-icon.svg';
+import Socials from '@components/Navbar/Socials';
+import NavLink from '@components/Navbar/NavLink';
 
 const Nav = styled.div`
   padding: 1.25rem 7.5rem;
   display: flex;
   z-index: 9999;
-  justify-content: space-between;
   align-items: center;
   background: ${getColor('white')};
   box-shadow: 0px 4px 16px rgba(97, 121, 139, 0.1);
@@ -24,22 +20,26 @@ const Nav = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  @media (max-width: 1100px) {
+
+  @media (max-width: ${getMedias('desktop')}) {
     padding: 1rem 1.25rem;
   }
 `;
 
 const Menu = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  margin-left: 7.8em;
+
+  @media (max-width: 1400px) {
+    margin-left: 2em;
+  }
 
   @media (max-width: 1100px) {
     display: none;
   }
 `;
 
-const MenuLink = styled.a`
+const MenuLink = styled(NavLink)`
   padding: 1rem;
   cursor: pointer;
   text-align: center;
@@ -63,6 +63,7 @@ const Hamburger = styled.div`
   display: none;
   flex-direction: column;
   cursor: pointer;
+  margin-left: auto;
 
   span {
     height: 3px;
@@ -79,30 +80,27 @@ const Hamburger = styled.div`
 `;
 
 const SMWrapper = styled.div`
-  width: 12em;
-  padding-left: 2.5em;
+  margin: 0 5.6em 0 auto;
 
-  @media (max-width: 1300px) {
-    padding-left: 0;
+  @media (max-width: 1400px) {
+    margin: 0 2em 0 auto;
   }
-`;
-
-const SocialMedias = styled.div`
-  width: 13em;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-
-  ${(props) =>
-    props.show &&
-    css`
-      display: flex;
-    `}
 
   @media (max-width: 1100px) {
     display: none;
   }
+`;
+
+const SocialMedias = styled(Socials)`
+  opacity: 0;
+  align-items: center;
+  gap: 24px;
+
+  ${(props) =>
+    props.show &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 const ContactButton = styled(Button)`
@@ -113,7 +111,7 @@ const ContactButton = styled(Button)`
   }
 `;
 
-function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
+function Navbar({ fblink, inlink, ytlink, lnlink }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -134,42 +132,37 @@ function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
 
   return (
     <Nav>
-      <Logo />
+      <Link href="/">
+        <a>
+          <Logo />
+        </a>
+      </Link>
+
       <Menu>
-        <Link href="/">
-          <MenuLink active={page === 'home'}>Strona główna</MenuLink>
-        </Link>
-        <Link href="/projects">
-          <MenuLink active={page === 'projects'}>Projekty</MenuLink>
-        </Link>
-        <Link href="/about">
-          <MenuLink active={page === 'about'}>O nas</MenuLink>
-        </Link>
-        <Link href="/cooperation">
-          <MenuLink active={page === 'cooperation'}>Współpraca</MenuLink>
-        </Link>
+        <MenuLink url="/" linkLabel="Strona główna" />
+        <MenuLink url="/projects" linkLabel="Projekty" />
+        <MenuLink url="/about" linkLabel="O nas" />
+        <MenuLink url="/cooperation" linkLabel="Współpraca" />
       </Menu>
+
       <SMWrapper>
-        <SocialMedias show={scrollPosition > 0.25}>
-          <a href={fblink} target="_blank" rel="noreferrer">
-            <Icon icon={FBIcon} />
-          </a>
-          <a href={inlink} target="_blank" rel="noreferrer">
-            <Icon icon={ISIcon} />
-          </a>
-          <a href={ytlink} target="_blank" rel="noreferrer">
-            <Icon icon={YTIcon} />
-          </a>
-          <a href={lnlink} target="_blank" rel="noreferrer">
-            <Icon icon={LNIcon} />
-          </a>
-        </SocialMedias>
+        <SocialMedias
+          show={scrollPosition > 0.25}
+          urls={{
+            facebook: fblink,
+            instagram: inlink,
+            youTube: ytlink,
+            linkedIn: lnlink,
+          }}
+        />
       </SMWrapper>
+
       <Hamburger>
         <span />
         <span />
         <span />
       </Hamburger>
+
       <Button as={ContactButton} buttonLabel="Skontaktuj się" />
     </Nav>
   );
@@ -182,5 +175,4 @@ Navbar.propTypes = {
   inlink: PropTypes.string.isRequired,
   ytlink: PropTypes.string.isRequired,
   lnlink: PropTypes.string.isRequired,
-  page: PropTypes.string.isRequired,
 };
