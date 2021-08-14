@@ -8,14 +8,22 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
+  *::-webkit-scrollbar {
+    display: none;
+}
+
   body {
+
     color: ${getColor('steel')};
     font-family: ${getFontFamily('Mulish')};
     max-width: 100%;
     overflow-x: hidden;
   }
+  
 
   h1,h2,h3,h4,h5 {
     color: ${getColor('navy')};
