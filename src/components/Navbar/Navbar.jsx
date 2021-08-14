@@ -44,7 +44,6 @@ const MenuLink = styled(NavLink)`
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: ${getColor('steel')};
   transition: all 0.3s ease-in;
   font-weight: ${getFontWeight('buttonWeight')};
 
