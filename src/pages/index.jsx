@@ -1,5 +1,6 @@
 import Hero from '@components/Hero/Hero';
 import HeroImagePng from '@root/assets/heroImage2.jpg';
+import Slider from '@components/Values/Slider';
 
 const homePage = () => (
   <>
@@ -13,6 +14,7 @@ const homePage = () => (
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
     />
+    <Slider />
   </>
 );
 
