@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -39,7 +40,7 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
+  position: inherit;
   right: 0;
   top: 0;
   background: ${getColor('white')};
@@ -50,7 +51,7 @@ const Nav = styled.nav`
 `;
 
 const CloseButton = styled.button`
-  padding: 16px 24px;
+  padding: 27px 24px;
   margin-left: auto;
 `;
 
@@ -77,8 +78,8 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const MobileMenu = () => {
-  const [isVisible, setIsVisible] = useState(true);
+const MobileMenu = ({ show, urls, closeMobileMenu }) => {
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleChange = (event) => {
     if (event.matches) setIsVisible(true);
@@ -86,11 +87,11 @@ const MobileMenu = () => {
   };
 
   const handleClick = () => {
-    setIsVisible(false);
+    closeMobileMenu();
   };
 
   useEffect(() => {
-    const media = window.matchMedia(`(max-width: 375px)`);
+    const media = window.matchMedia(`(max-width: 1100px)`);
 
     if (media.matches) setIsVisible(true);
     else setIsVisible(false);
@@ -104,7 +105,7 @@ const MobileMenu = () => {
 
   return (
     <>
-      {isVisible && (
+      {isVisible && show && (
         <Wrapper>
           <Nav>
             <CloseButton type="button" onClick={handleClick}>
@@ -122,10 +123,10 @@ const MobileMenu = () => {
 
             <Socials
               urls={{
-                facebook: 'https://masterborn.com/',
-                instagram: 'https://masterborn.com/',
-                youTube: 'https://masterborn.com/',
-                linkedIn: 'https://masterborn.com/',
+                facebook: urls.fblink,
+                instagram: urls.inlink,
+                youTube: urls.ytlink,
+                linkedIn: urls.lnlink,
               }}
               size="32px"
             />
@@ -137,3 +138,14 @@ const MobileMenu = () => {
 };
 
 export default MobileMenu;
+
+MobileMenu.propTypes = {
+  show: PropTypes.bool.isRequired,
+  urls: PropTypes.shape({
+    fblink: PropTypes.string,
+    inlink: PropTypes.string,
+    ytlink: PropTypes.string,
+    lnlink: PropTypes.string,
+  }).isRequired,
+  closeMobileMenu: PropTypes.func.isRequired,
+};

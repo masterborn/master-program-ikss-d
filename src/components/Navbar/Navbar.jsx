@@ -9,6 +9,8 @@ import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
 import NavLink from '@components/Navbar/NavLink';
 
+import MobileMenu from './MobileMenu';
+
 const Nav = styled.div`
   padding: 1.25rem 7.5rem;
   display: flex;
@@ -104,8 +106,10 @@ const ContactButton = styled(Button)`
   }
 `;
 
-function Navbar({ fblink, inlink, ytlink, lnlink }) {
+function Navbar({ urls }) {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [show, setShow] = useState(false);
+
   const handleScroll = () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
 
@@ -113,6 +117,10 @@ function Navbar({ fblink, inlink, ytlink, lnlink }) {
 
     const scrolled = winScroll / height;
     setScrollPosition(scrolled);
+  };
+
+  const closeMobileMenu = () => {
+    setShow(false);
   };
 
   useEffect(() => {
@@ -124,48 +132,54 @@ function Navbar({ fblink, inlink, ytlink, lnlink }) {
   }, []);
 
   return (
-    <Nav>
-      <Link href="/">
-        <a>
-          <Logo />
-        </a>
-      </Link>
+    <>
+      <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
-      <Menu>
-        <MenuLink url="/" linkLabel="Strona główna" />
-        <MenuLink url="/projects" linkLabel="Projekty" />
-        <MenuLink url="/about" linkLabel="O nas" />
-        <MenuLink url="/cooperation" linkLabel="Współpraca" />
-      </Menu>
+      <Nav>
+        <Link href="/">
+          <a>
+            <Logo />
+          </a>
+        </Link>
 
-      <SMWrapper>
-        <SocialMedias
-          show={scrollPosition > 0.25}
-          urls={{
-            facebook: fblink,
-            instagram: inlink,
-            youTube: ytlink,
-            linkedIn: lnlink,
-          }}
-        />
-      </SMWrapper>
+        <Menu>
+          <MenuLink url="/" linkLabel="Strona główna" />
+          <MenuLink url="/projects" linkLabel="Projekty" />
+          <MenuLink url="/about" linkLabel="O nas" />
+          <MenuLink url="/cooperation" linkLabel="Współpraca" />
+        </Menu>
 
-      <Hamburger>
-        <span />
-        <span />
-        <span />
-      </Hamburger>
+        <SMWrapper>
+          <SocialMedias
+            show={scrollPosition > 0.25}
+            urls={{
+              facebook: urls.fblink,
+              instagram: urls.inlink,
+              youTube: urls.ytlink,
+              linkedIn: urls.lnlink,
+            }}
+          />
+        </SMWrapper>
 
-      <Button as={ContactButton} buttonLabel="Skontaktuj się" />
-    </Nav>
+        <Hamburger onClick={() => setShow(true)}>
+          <span />
+          <span />
+          <span />
+        </Hamburger>
+
+        <Button as={ContactButton} buttonLabel="Skontaktuj się" />
+      </Nav>
+    </>
   );
 }
 
 export default Navbar;
 
 Navbar.propTypes = {
-  fblink: PropTypes.string.isRequired,
-  inlink: PropTypes.string.isRequired,
-  ytlink: PropTypes.string.isRequired,
-  lnlink: PropTypes.string.isRequired,
+  urls: PropTypes.shape({
+    fblink: PropTypes.string,
+    inlink: PropTypes.string,
+    ytlink: PropTypes.string,
+    lnlink: PropTypes.string,
+  }).isRequired,
 };
