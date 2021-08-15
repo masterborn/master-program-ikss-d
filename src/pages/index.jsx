@@ -1,6 +1,7 @@
 import Hero from '@components/Hero/Hero';
 import HeroImagePng from '@assets/heroImage2.jpg';
 import Navbar from '@components/Navbar/Navbar';
+import Projects from '@components/Projects/Projects';
 
 const homePage = () => (
   <>
@@ -23,6 +24,7 @@ const homePage = () => (
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
     />
+    <Projects />
   </>
 );
 
