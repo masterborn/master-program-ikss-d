@@ -12,6 +12,8 @@ import ISIcon from '@assets/icons/instagram-circle-icon.svg';
 import YTIcon from '@assets/icons/youTube-circle-icon.svg';
 import LNIcon from '@assets/icons/linkedIN-circle-icon.svg';
 
+import MobileMenu from './MobileMenu';
+
 const Nav = styled.div`
   padding: 1.25rem 7.5rem;
   display: flex;
@@ -113,8 +115,10 @@ const ContactButton = styled(Button)`
   }
 `;
 
-function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
+function Navbar({ urls, page }) {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [show, setShow] = useState(false);
+
   const handleScroll = () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
 
@@ -122,6 +126,10 @@ function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
 
     const scrolled = winScroll / height;
     setScrollPosition(scrolled);
+  };
+
+  const closeMobileMenu = () => {
+    setShow(false);
   };
 
   useEffect(() => {
@@ -133,54 +141,59 @@ function Navbar({ fblink, inlink, ytlink, lnlink, page }) {
   }, []);
 
   return (
-    <Nav>
-      <Logo />
-      <Menu>
-        <Link href="/">
-          <MenuLink active={page === 'home'}>Strona główna</MenuLink>
-        </Link>
-        <Link href="/projects">
-          <MenuLink active={page === 'projects'}>Projekty</MenuLink>
-        </Link>
-        <Link href="/about">
-          <MenuLink active={page === 'about'}>O nas</MenuLink>
-        </Link>
-        <Link href="/cooperation">
-          <MenuLink active={page === 'cooperation'}>Współpraca</MenuLink>
-        </Link>
-      </Menu>
-      <SMWrapper>
-        <SocialMedias show={scrollPosition > 0.25}>
-          <a href={fblink} target="_blank" rel="noreferrer">
-            <Icon icon={FBIcon} />
-          </a>
-          <a href={inlink} target="_blank" rel="noreferrer">
-            <Icon icon={ISIcon} />
-          </a>
-          <a href={ytlink} target="_blank" rel="noreferrer">
-            <Icon icon={YTIcon} />
-          </a>
-          <a href={lnlink} target="_blank" rel="noreferrer">
-            <Icon icon={LNIcon} />
-          </a>
-        </SocialMedias>
-      </SMWrapper>
-      <Hamburger>
-        <span />
-        <span />
-        <span />
-      </Hamburger>
-      <Button as={ContactButton} buttonLabel="Skontaktuj się" />
-    </Nav>
+    <>
+      <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
+      <Nav>
+        <Logo />
+        <Menu>
+          <Link href="/">
+            <MenuLink active={page === 'home'}>Strona główna</MenuLink>
+          </Link>
+          <Link href="/projects">
+            <MenuLink active={page === 'projects'}>Projekty</MenuLink>
+          </Link>
+          <Link href="/about">
+            <MenuLink active={page === 'about'}>O nas</MenuLink>
+          </Link>
+          <Link href="/cooperation">
+            <MenuLink active={page === 'cooperation'}>Współpraca</MenuLink>
+          </Link>
+        </Menu>
+        <SMWrapper>
+          <SocialMedias show={scrollPosition > 0.25}>
+            <a href={urls.fblink} target="_blank" rel="noreferrer">
+              <Icon icon={FBIcon} />
+            </a>
+            <a href={urls.inlink} target="_blank" rel="noreferrer">
+              <Icon icon={ISIcon} />
+            </a>
+            <a href={urls.ytlink} target="_blank" rel="noreferrer">
+              <Icon icon={YTIcon} />
+            </a>
+            <a href={urls.lnlink} target="_blank" rel="noreferrer">
+              <Icon icon={LNIcon} />
+            </a>
+          </SocialMedias>
+        </SMWrapper>
+        <Hamburger onClick={() => setShow(true)}>
+          <span />
+          <span />
+          <span />
+        </Hamburger>
+        <Button as={ContactButton} buttonLabel="Skontaktuj się" />
+      </Nav>
+    </>
   );
 }
 
 export default Navbar;
 
 Navbar.propTypes = {
-  fblink: PropTypes.string.isRequired,
-  inlink: PropTypes.string.isRequired,
-  ytlink: PropTypes.string.isRequired,
-  lnlink: PropTypes.string.isRequired,
+  urls: PropTypes.shape({
+    fblink: PropTypes.string,
+    inlink: PropTypes.string,
+    ytlink: PropTypes.string,
+    lnlink: PropTypes.string,
+  }).isRequired,
   page: PropTypes.string.isRequired,
 };
