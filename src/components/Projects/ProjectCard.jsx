@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { getColor } from '@styles/utils';
+import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
 import CardImage from '@components/Projects/CardImage';
 
@@ -21,8 +21,24 @@ const Wrapper = styled.div`
     width: 998px;
     height: 659px;
     max-width: 100%;
-    height: auto;
     opacity: 0.6;
+  }
+
+  @media (max-width: ${getMedias('laptop')}) {
+    width: auto;
+    height: auto;
+    margin: 0 1.4em 2em 1.4em;
+
+    & img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    & article {
+      width: auto;
+      height: auto;
+      padding: 0 2em;
+    }
   }
 `;
 
@@ -30,7 +46,6 @@ const Description = styled.article`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
   width: 792px;
   height: 260px;
   margin: auto;
@@ -38,17 +53,41 @@ const Description = styled.article`
   & a {
     text-decoration: none;
   }
+
+  @media (max-width: ${getMedias('laptop')}) {
+    & a {
+      display: inline-block;
+      margin: 0 auto 1em auto;
+    }
+  }
 `;
 
 const Header = styled.header`
   width: 399px;
   height: 32px;
   display: flex;
-  margin: 4em 0 0.4em 0;
+  margin: 2em 0 0.4em 0;
 
   & h5 {
     color: ${getColor('steel')};
     margin: auto 10px;
+  }
+
+  @media (max-width: ${getMedias('laptop')}) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+
+    & h4 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    & h5 {
+      font-size: 14px;
+      line-height: 18px;
+      margin: 0;
+    }
   }
 `;
 
@@ -58,6 +97,11 @@ const Text = styled.section`
   order: 0;
   flex-grow: 0;
   margin: 32px 0px;
+
+  @media (max-width: ${getMedias('laptop')}) {
+    font-size: 14px;
+    line-height: 28px;
+  }
 `;
 
 const styledCard = ({ imgSrc, imgAlt, title, date, description, url, buttonLabel }) => (
@@ -83,7 +127,7 @@ const ProjectCard = styled(styledCard)``;
 export default ProjectCard;
 
 ProjectCard.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
+  imgSrc: PropTypes.shape({}).isRequired,
   imgAlt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 
-import { getColor } from '@styles/utils';
+import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
 import ProjectCard from '@components/Projects/ProjectCard';
 import firstImage from '@assets/cardImage1.jpg';
@@ -66,6 +66,11 @@ const Carousel = styled.div`
   margin: 2em auto;
   background: ${getColor('blue_10')};
   border-radius: 26px;
+
+  @media (max-width: ${getMedias('laptop')}) {
+    flex-direction: column;
+    background: none;
+  }
 `;
 
 const CarouselButton = styled(Button)`
@@ -90,20 +95,35 @@ const ProjectsButton = styled(Button)`
   margin: auto;
 `;
 
-const styledProjects = () => {
+const StyledProjects = () => {
   const [activeCard, setActiveCard] = useState(0);
 
   return (
     <Wrapper>
       <Header>Najnowsze projekty</Header>
       <Carousel>
-        <div onClick={() => setActiveCard(0)}>
+        <div
+          onClick={() => setActiveCard(0)}
+          onKeyUp={() => setActiveCard(0)}
+          role="button"
+          tabIndex={0}
+        >
           <CarouselButton active={activeCard === 0} buttonLabel={tempData[0].title} />
         </div>
-        <div onClick={() => setActiveCard(1)}>
+        <div
+          onClick={() => setActiveCard(1)}
+          onKeyUp={() => setActiveCard(1)}
+          role="button"
+          tabIndex={-1}
+        >
           <CarouselButton active={activeCard === 1} buttonLabel={tempData[1].title} />
         </div>
-        <div onClick={() => setActiveCard(2)}>
+        <div
+          onClick={() => setActiveCard(2)}
+          onKeyUp={() => setActiveCard(2)}
+          role="button"
+          tabIndex={-1}
+        >
           <CarouselButton active={activeCard === 2} buttonLabel={tempData[2].title} />
         </div>
       </Carousel>
@@ -125,7 +145,7 @@ const styledProjects = () => {
   );
 };
 
-const Projects = styled(styledProjects)`
+const Projects = styled(StyledProjects)`
   background: #e5e5e5;
   width: 100vw;
 `;
