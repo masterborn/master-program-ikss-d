@@ -47,7 +47,11 @@ const Header = styled.header`
 
   & > p {
     max-width: 560px;
-    margin-top: 2em;
+    margin-top: 2rem;
+
+    @media (max-width: ${getMedias('mobile')}) {
+      margin-top: 1.5rem;
+    }
   }
 `;
 
