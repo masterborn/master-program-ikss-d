@@ -11,7 +11,6 @@ const homePage = () => (
         ytlink: 'https://www.youtube.com',
         lnlink: 'https://pl.linkedin.com',
       }}
-      page="home"
     />
     <Hero
       headerText="Przykładowy nagłówek IKSS"
