@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Pagination } from 'swiper/core';
+import SwiperCore, { Autoplay, Pagination } from 'swiper/core';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
@@ -7,7 +7,7 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import { getColor } from '@styles/utils';
 
-SwiperCore.use([Pagination]);
+SwiperCore.use([Autoplay, Pagination]);
 
 const Slider = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -34,7 +34,16 @@ const Slider = () => {
     <>
       {isVisible && (
         <Wrapper>
-          <StyledSwiper pagination className="mySwiper">
+          <StyledSwiper
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            className="mySwiper"
+          >
             <SwiperSlide>
               <StyledCard>1</StyledCard>
             </SwiperSlide>
@@ -84,9 +93,6 @@ const StyledSwiper = styled(Swiper)`
 
   .swiper-pagination-bullet-active {
     background-color: ${getColor('ikksBlue')};
-    width: 16px;
-    height: 16px;
-    border-radius: 0.5rem;
   }
 `;
 
