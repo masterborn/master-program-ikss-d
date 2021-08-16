@@ -19,13 +19,11 @@ const Wrapper = styled.a`
   }
 `;
 
-const CooperationCard = ({ linkUrl, logo, altText }) => {
-  return (
-    <Wrapper href={linkUrl} target="_blank" rel="noopener noreferrer">
-      <img src={logo} alt={altText} />
-    </Wrapper>
-  );
-};
+const CooperationCard = ({ linkUrl, logo, altText }) => (
+  <Wrapper href={linkUrl} target="_blank" rel="noopener noreferrer">
+    <img src={logo} alt={altText} />
+  </Wrapper>
+);
 
 CooperationCard.propTypes = {
   linkUrl: PropTypes.string.isRequired,

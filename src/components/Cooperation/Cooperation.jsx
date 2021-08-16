@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 
 import { getMedias } from '@styles/utils';
 import CooperationCard from '@components/Cooperation/CooperationCard';
