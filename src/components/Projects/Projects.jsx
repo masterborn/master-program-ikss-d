@@ -67,14 +67,110 @@ const Carousel = styled.div`
   background: ${getColor('blue_10')};
   border-radius: 26px;
 
-  @media (max-width: ${getMedias('laptop')}) {
-    flex-direction: column;
+  @media (max-width: ${getMedias('tablet')}) {
+    /*z
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 3em;
+    grid-row-gap: 1em;
+    */
     background: none;
+    width: auto;
+    height: 74px;
+
+    flex-direction: column;
+    align-items: center;
+
+    & div:nth-child(1) {
+      // grid-area: 1 / 3 / 2 / 7;
+
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & div:nth-child(2) {
+      // grid-area: 2 / 1 / 3 / 5;
+      align-self: flex-start;
+      position: relative;
+      top: 0.6em;
+      margin-left: 5em;
+    }
+
+    & div:nth-child(3) {
+      // grid-area: 2 / 5 / 3 / 9;
+      align-self: flex-end;
+      position: relative;
+      bottom: 1.6em;
+      margin-right: 7em;
+    }
+  }
+
+  @media (max-width: 670px) {
+    & div:nth-child(2) {
+      margin-left: 4em;
+    }
+
+    & div:nth-child(3) {
+      margin-right: 4em;
+    }
+  }
+
+  @media (max-width: 620px) {
+    & div:nth-child(2) {
+      margin-left: 7em;
+    }
+
+    & div:nth-child(3) {
+      margin-right: 7em;
+    }
+  }
+
+  @media (max-width: 570px) {
+    & div:nth-child(2) {
+      margin-left: 4em;
+    }
+
+    & div:nth-child(3) {
+      margin-right: 4em;
+    }
+  }
+
+  @media (max-width: 430px) {
+    & div:nth-child(2) {
+      margin-left: 3em;
+    }
+
+    & div:nth-child(3) {
+      margin-right: 3em;
+    }
+  }
+
+  @media (max-width: 400px) {
+    & div:nth-child(2) {
+      margin-left: 2em;
+    }
+
+    & div:nth-child(3) {
+      margin-right: 2em;
+    }
+  }
+
+  @media (max-width: 360px) {
+    & div:nth-child(2) {
+      margin-left: 1em;
+    }
+
+    & div:nth-child(3) {
+      margin-right: 1em;
+    }
   }
 `;
 
 const CarouselButton = styled(Button)`
   transition: all 0.1s ease-in;
+  width: max-content;
 
   ${(props) =>
     !props.active &&
@@ -87,6 +183,15 @@ const CarouselButton = styled(Button)`
         color: ${getColor('white')};
       }
     `}
+
+  @media (max-width: ${getMedias('tablet')}) {
+    height: 36px;
+    line-height: 18px;
+  }
+
+  @media (max-width: 620px) {
+    font-size: 10px;
+  }
 `;
 
 const ProjectsButton = styled(Button)`
