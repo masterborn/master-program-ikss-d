@@ -43,30 +43,27 @@ const tempData = [
 ];
 
 const Wrapper = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 2em auto;
-
   & a {
     text-decoration: none;
   }
+  @media (max-width: ${getMedias('tablet')}) {
+    margin: 2em 24px;
+    & > h3 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
 `;
-
-const Header = styled.h3`
-  display: flex;
-  align-items: center;
-  width: 299px;
-  height: 44px;
-  margin: auto;
-`;
-
 const Carousel = styled.div`
   display: flex;
-  align-items: center;
-  width: max-content;
-  height: max-content;
-  margin: 2em auto;
+  justify-content: center;
+  margin: 2em 0;
   background: ${getColor('blue_10')};
   border-radius: 26px;
-
   @media (max-width: ${getMedias('tablet')}) {
     /*z
     display: grid;
@@ -76,128 +73,23 @@ const Carousel = styled.div`
     grid-row-gap: 1em;
     */
     background: none;
-    width: auto;
-    height: 74px;
-
-    flex-direction: column;
     align-items: center;
-
-    & div:nth-child(1) {
-      // grid-area: 1 / 3 / 2 / 7;
-
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-
-    & div:nth-child(2) {
-      // grid-area: 2 / 1 / 3 / 5;
-      align-self: flex-start;
-      position: relative;
-      top: 0.6em;
-      margin-left: 5em;
-    }
-
-    & div:nth-child(3) {
-      // grid-area: 2 / 5 / 3 / 9;
-      align-self: flex-end;
-      position: relative;
-      bottom: 1.6em;
-      margin-right: 7em;
-    }
-  }
-
-  @media (max-width: 670px) {
-    & div:nth-child(2) {
-      margin-left: 4em;
-    }
-
-    & div:nth-child(3) {
-      margin-right: 4em;
-    }
-  }
-
-  @media (max-width: 620px) {
-    & div:nth-child(2) {
-      margin-left: 7em;
-    }
-
-    & div:nth-child(3) {
-      margin-right: 7em;
-    }
-  }
-
-  @media (max-width: 570px) {
-    & div:nth-child(2) {
-      margin-left: 4em;
-    }
-
-    & div:nth-child(3) {
-      margin-right: 4em;
-    }
-  }
-
-  @media (max-width: 430px) {
-    & div:nth-child(2) {
-      margin-left: 3em;
-    }
-
-    & div:nth-child(3) {
-      margin-right: 3em;
-    }
-  }
-
-  @media (max-width: 400px) {
-    & div:nth-child(2) {
-      margin-left: 2em;
-    }
-
-    & div:nth-child(3) {
-      margin-right: 2em;
-    }
-  }
-
-  @media (max-width: 360px) {
-    & div:nth-child(2) {
-      margin-left: 1em;
-    }
-
-    & div:nth-child(3) {
-      margin-right: 1em;
-    }
+    gap: 12px;
+    flex-wrap: wrap;
   }
 `;
-
 const CarouselButton = styled(Button)`
   transition: all 0.1s ease-in;
-  width: max-content;
-
   ${(props) =>
     !props.active &&
     css`
       background: ${getColor('blue_10')};
       color: ${getColor('navy')};
-
       & :hover {
         background: ${getColor('blue_20')};
         color: ${getColor('white')};
       }
     `}
-
-  @media (max-width: ${getMedias('tablet')}) {
-    height: 36px;
-    line-height: 18px;
-  }
-
-  @media (max-width: 620px) {
-    font-size: 10px;
-  }
-`;
-
-const ProjectsButton = styled(Button)`
-  width: auto;
-  height: auto;
-  margin: auto;
 `;
 
 const StyledProjects = () => {
@@ -205,7 +97,7 @@ const StyledProjects = () => {
 
   return (
     <Wrapper>
-      <Header>Najnowsze projekty</Header>
+      <h3>Najnowsze projekty</h3>
       <Carousel>
         <div
           onClick={() => setActiveCard(0)}
@@ -243,7 +135,7 @@ const StyledProjects = () => {
       />
       <Link href="/projects">
         <a>
-          <ProjectsButton secondary buttonLabel="Zobacz wszystkie projekty" />
+          <Button secondary buttonLabel="Zobacz wszystkie projekty" />
         </a>
       </Link>
     </Wrapper>
