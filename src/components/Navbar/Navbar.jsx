@@ -92,7 +92,7 @@ const SocialMedias = styled(Socials)`
   gap: 24px;
 
   ${(props) =>
-    props.show &&
+    props.visible &&
     css`
       opacity: 1;
     `}
@@ -151,7 +151,7 @@ function Navbar({ urls }) {
 
         <SMWrapper>
           <SocialMedias
-            show={scrollPosition > 0.25}
+            visible={scrollPosition > 0.25}
             urls={{
               facebook: urls.fblink,
               instagram: urls.inlink,
