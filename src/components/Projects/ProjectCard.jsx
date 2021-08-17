@@ -83,13 +83,9 @@ const Text = styled.section`
   }
 `;
 
-const styledCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, buttonLabel }) => (
+const styledCard = ({ imgSrc, imgAlt, title, date, description, url, buttonLabel }) => (
   <Wrapper>
-    {videoUrl ? (
-      <CardVideo videoUrl={videoUrl} title={title} />
-    ) : (
-      <CardImage imageSrc={imgSrc} imageAlt={imgAlt} />
-    )}
+    <CardImage imageSrc={imgSrc} imageAlt={imgAlt} />
     <Description>
       <Header>
         <h4>{title}</h4>
