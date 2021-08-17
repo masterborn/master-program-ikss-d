@@ -6,8 +6,7 @@ import styled from 'styled-components';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import { getColor, getMedias } from '@styles/utils';
-
-import ValuesCard from './ValuesCard';
+import ValuesCard from '@components/Values/ValuesCard';
 
 SwiperCore.use([Autoplay, Pagination]);
 
@@ -22,7 +21,7 @@ const Slider = ({ data }) => {
   return (
     <Wrapper>
       <StyledSwiper
-        spaceBetween={200}
+        spaceBetween={250}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,

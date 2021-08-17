@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 import { getMedias } from '@styles/utils';
-
-import ValuesCard from './ValuesCard';
-import Slider from './Slider';
+import ValuesCard from '@components/Values/ValuesCard';
+import Slider from '@components/Values/Slider';
 
 const Wrapper = styled.section`
   display: flex;
@@ -13,10 +12,7 @@ const Wrapper = styled.section`
   width: 100vw;
   margin-bottom: 180px;
   text-align: center;
-
-  @media (max-width: ${getMedias('laptop')}) {
-    padding: 0 1.5rem;
-  }
+  padding: 0 1.5rem;
 `;
 
 const Cards = styled.div`
