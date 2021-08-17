@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { getColor, getMedias } from '@styles/utils';
-import Button from '@components/Button/Button';
+import CardVideo from '@components/Projects/CardVideo';
 import CardImage from '@components/Projects/CardImage';
+import Button from '@components/Button/Button';
+import { getColor, getMedias } from '@styles/utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -82,9 +83,13 @@ const Text = styled.section`
   }
 `;
 
-const styledCard = ({ imgSrc, imgAlt, title, date, description, url, buttonLabel }) => (
+const styledCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, buttonLabel }) => (
   <Wrapper>
-    <CardImage imageSrc={imgSrc} imageAlt={imgAlt} />
+    {videoUrl ? (
+      <CardVideo videoUrl={videoUrl} title={title} />
+    ) : (
+      <CardImage imageSrc={imgSrc} imageAlt={imgAlt} />
+    )}
     <Description>
       <Header>
         <h4>{title}</h4>
@@ -108,6 +113,7 @@ export default ProjectCard;
 
 ProjectCard.propTypes = {
   imgSrc: PropTypes.shape({}).isRequired,
+  videoUrl: PropTypes.string,
   imgAlt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
