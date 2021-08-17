@@ -34,6 +34,10 @@ const Wrapper = styled.div`
       padding: 0 2em;
     }
   }
+
+  @media (max-width: 1100px) {
+    margin: 2em 2em;
+  }
 `;
 const Description = styled.article`
   display: flex;
