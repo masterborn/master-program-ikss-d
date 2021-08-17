@@ -8,6 +8,7 @@ const CardImage = styled(styledCardImage)`
   max-width: 100%;
   height: auto;
   opacity: 0.6;
+  background: #61798b;
 `;
 
 CardImage.propTypes = {
