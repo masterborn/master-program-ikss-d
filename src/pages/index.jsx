@@ -30,7 +30,6 @@ const homePage = ({ heroData }) => {
         youTubeLink="https://www.youtube.com"
         linkedInLink="https://pl.linkedin.com"
       />
-      <Projects />
       <Values
         valuesHeader="Wyróżniki, wartości, X-factory organizacji"
         valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
@@ -53,6 +52,7 @@ const homePage = ({ heroData }) => {
           },
         ]}
       />
+      <Projects />
     </>
   );
 };
@@ -65,9 +65,25 @@ export const getStaticProps = async () => {
 
   const homePageBasicContent = await response.json();
 
+  // Hero data
+
+  const heroDataArray = homePageBasicContent.items.filter(
+    (item) => item.fields.identifier === 'homepage-top-section',
+  );
+
+  const heroData = heroDataArray[0].fields;
+
+  // Values data
+  const Value1Array = homePageBasicContent.items.filter(
+    (item) => item.fields.identifier === 'homepage-tile-1',
+  );
+
+  const Value1 = Value1Array[0].fields;
+
   return {
     props: {
-      heroData: homePageBasicContent,
+      heroData,
+      valuesFirstCardData: Value1,
     },
   };
 };
