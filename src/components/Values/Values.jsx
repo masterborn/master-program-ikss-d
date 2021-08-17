@@ -62,7 +62,7 @@ const Values = ({ data, valuesHeader, valuesText }) => {
   };
 
   useEffect(() => {
-    const media = window.matchMedia(`(max-width: 800px)`);
+    const media = window.matchMedia(`(max-width: 810px)`);
 
     if (media.matches) setIsVisible(true);
     else setIsVisible(false);

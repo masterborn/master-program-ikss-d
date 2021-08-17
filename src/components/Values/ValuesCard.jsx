@@ -20,7 +20,7 @@ const Card = styled.div`
     max-width: 20.4rem;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 810px) {
     margin: 5em 0 3em 0;
   }
 
