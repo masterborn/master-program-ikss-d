@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/dist/client/router';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
@@ -87,14 +88,14 @@ const SMWrapper = styled.div`
 `;
 
 const SocialMedias = styled(Socials)`
-  opacity: 0;
   align-items: center;
   gap: 24px;
+  display: none;
 
   ${(props) =>
     props.visible &&
     css`
-      opacity: 1;
+      display: flex;
     `}
 `;
 
@@ -109,6 +110,7 @@ const ContactButton = styled(Button)`
 function Navbar({ urls }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [show, setShow] = useState(false);
+  const router = useRouter();
 
   const handleScroll = () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -131,13 +133,25 @@ function Navbar({ urls }) {
     };
   }, []);
 
+  const handleLinkClick = (event) => {
+    if (router.pathname === '/') {
+      event.preventDefault();
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <>
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
         <Link href="/">
-          <a>
+          <a role="link" onClick={handleLinkClick} onKeyUp={handleLinkClick} tabIndex={0}>
             <Logo />
           </a>
         </Link>
@@ -151,7 +165,7 @@ function Navbar({ urls }) {
 
         <SMWrapper>
           <SocialMedias
-            visible={scrollPosition > 0.25}
+            visible={scrollPosition > 0.35}
             urls={{
               facebook: urls.fblink,
               instagram: urls.inlink,
