@@ -3,14 +3,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import { getColor, getFontWeight } from '@styles/utils';
+import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
-import Icon from '@components/Icon/Icon';
-import FBIcon from '@assets/icons/facebook-circle-icon.svg';
-import ISIcon from '@assets/icons/instagram-circle-icon.svg';
-import YTIcon from '@assets/icons/youTube-circle-icon.svg';
-import LNIcon from '@assets/icons/linkedIN-circle-icon.svg';
+import Socials from '@components/Navbar/Socials';
+import NavLink from '@components/Navbar/NavLink';
 
 import MobileMenu from './MobileMenu';
 
@@ -18,7 +15,6 @@ const Nav = styled.div`
   padding: 1.25rem 7.5rem;
   display: flex;
   z-index: 9999;
-  justify-content: space-between;
   align-items: center;
   background: ${getColor('white')};
   box-shadow: 0px 4px 16px rgba(97, 121, 139, 0.1);
@@ -26,45 +22,43 @@ const Nav = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  @media (max-width: 1100px) {
+
+  @media (max-width: ${getMedias('desktop')}) {
     padding: 1rem 1.25rem;
   }
 `;
 
 const Menu = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  margin-left: 7.8em;
+
+  @media (max-width: 1400px) {
+    margin-left: 2em;
+  }
 
   @media (max-width: 1100px) {
     display: none;
   }
 `;
 
-const MenuLink = styled.a`
+const MenuLink = styled(NavLink)`
   padding: 1rem;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: ${getColor('steel')};
   transition: all 0.3s ease-in;
   font-weight: ${getFontWeight('buttonWeight')};
 
   &:hover {
     color: ${getColor('navy')};
   }
-
-  ${(props) =>
-    props.active &&
-    css`
-      color: ${getColor('navy')};
-    `}
 `;
 
 const Hamburger = styled.div`
   display: none;
   flex-direction: column;
   cursor: pointer;
+  margin-left: auto;
 
   span {
     height: 3px;
@@ -81,30 +75,27 @@ const Hamburger = styled.div`
 `;
 
 const SMWrapper = styled.div`
-  width: 12em;
-  padding-left: 2.5em;
+  margin: 0 5.6em 0 auto;
 
-  @media (max-width: 1300px) {
-    padding-left: 0;
+  @media (max-width: 1400px) {
+    margin: 0 2em 0 auto;
   }
-`;
-
-const SocialMedias = styled.div`
-  width: 13em;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-
-  ${(props) =>
-    props.show &&
-    css`
-      display: flex;
-    `}
 
   @media (max-width: 1100px) {
     display: none;
   }
+`;
+
+const SocialMedias = styled(Socials)`
+  opacity: 0;
+  align-items: center;
+  gap: 24px;
+
+  ${(props) =>
+    props.visible &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 const ContactButton = styled(Button)`
@@ -115,7 +106,7 @@ const ContactButton = styled(Button)`
   }
 `;
 
-function Navbar({ urls, page }) {
+function Navbar({ urls }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [show, setShow] = useState(false);
 
@@ -143,43 +134,39 @@ function Navbar({ urls, page }) {
   return (
     <>
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
+
       <Nav>
-        <Logo />
+        <Link href="/">
+          <a>
+            <Logo />
+          </a>
+        </Link>
+
         <Menu>
-          <Link href="/">
-            <MenuLink active={page === 'home'}>Strona główna</MenuLink>
-          </Link>
-          <Link href="/projects">
-            <MenuLink active={page === 'projects'}>Projekty</MenuLink>
-          </Link>
-          <Link href="/about">
-            <MenuLink active={page === 'about'}>O nas</MenuLink>
-          </Link>
-          <Link href="/cooperation">
-            <MenuLink active={page === 'cooperation'}>Współpraca</MenuLink>
-          </Link>
+          <MenuLink url="/" linkLabel="Strona główna" />
+          <MenuLink url="/projects" linkLabel="Projekty" />
+          <MenuLink url="/about" linkLabel="O nas" />
+          <MenuLink url="/cooperation" linkLabel="Współpraca" />
         </Menu>
+
         <SMWrapper>
-          <SocialMedias show={scrollPosition > 0.25}>
-            <a href={urls.fblink} target="_blank" rel="noreferrer">
-              <Icon icon={FBIcon} />
-            </a>
-            <a href={urls.inlink} target="_blank" rel="noreferrer">
-              <Icon icon={ISIcon} />
-            </a>
-            <a href={urls.ytlink} target="_blank" rel="noreferrer">
-              <Icon icon={YTIcon} />
-            </a>
-            <a href={urls.lnlink} target="_blank" rel="noreferrer">
-              <Icon icon={LNIcon} />
-            </a>
-          </SocialMedias>
+          <SocialMedias
+            visible={scrollPosition > 0.25}
+            urls={{
+              facebook: urls.fblink,
+              instagram: urls.inlink,
+              youTube: urls.ytlink,
+              linkedIn: urls.lnlink,
+            }}
+          />
         </SMWrapper>
+
         <Hamburger onClick={() => setShow(true)}>
           <span />
           <span />
           <span />
         </Hamburger>
+
         <Button as={ContactButton} buttonLabel="Skontaktuj się" />
       </Nav>
     </>
@@ -195,5 +182,4 @@ Navbar.propTypes = {
     ytlink: PropTypes.string,
     lnlink: PropTypes.string,
   }).isRequired,
-  page: PropTypes.string.isRequired,
 };
