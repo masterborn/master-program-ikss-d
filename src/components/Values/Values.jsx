@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 import { getMedias } from '@styles/utils';
 
 import ValuesCard from './ValuesCard';
+import Slider from './Slider';
 
 const Wrapper = styled.section`
   display: flex;
@@ -26,10 +28,6 @@ const Cards = styled.div`
 
   @media (max-width: ${getMedias('desktop')}) {
     gap: 4rem 1.5rem;
-  }
-
-  @media (max-width: ${getMedias('mobile')}) {
-    margin-top: 4.5rem;
   }
 `;
 
@@ -56,6 +54,26 @@ const Header = styled.header`
 `;
 
 const Values = ({ data, valuesHeader, valuesText }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleChange = (event) => {
+    if (event.matches) setIsVisible(true);
+    else setIsVisible(false);
+  };
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: 800px)`);
+
+    if (media.matches) setIsVisible(true);
+    else setIsVisible(false);
+
+    media.addEventListener('change', handleChange);
+
+    return () => {
+      media.removeEventListener('change', handleChange);
+    };
+  }, []);
+
   const renderCards = () => data.map((card) => <ValuesCard card={card} key={card.title} />);
 
   return (
@@ -64,7 +82,7 @@ const Values = ({ data, valuesHeader, valuesText }) => {
         <h3>{valuesHeader}</h3>
         {valuesText && <p>{valuesText}</p>}
       </Header>
-      <Cards>{renderCards()}</Cards>
+      {isVisible ? <Slider data={data} /> : <Cards>{renderCards()}</Cards>}
     </Wrapper>
   );
 };

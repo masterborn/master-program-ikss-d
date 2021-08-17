@@ -6,7 +6,7 @@ import { getMedias } from '@styles/utils';
 
 const Card = styled.div`
   position: relative;
-  padding: 0 1.5rem 3rem 1.5rem;
+  padding: 11.62rem 1.5rem 3rem 1.5rem;
   max-width: 23.75rem;
   max-height: 24.625rem;
   border-radius: 16px;
@@ -16,7 +16,12 @@ const Card = styled.div`
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
 
   @media (max-width: ${getMedias('mobile')}) {
-    padding: 0 1.25rem 2rem 1.25rem;
+    padding: 11.62rem 1.25rem 2rem 1.25rem;
+    max-width: 20.4rem;
+  }
+
+  @media (max-width: 800px) {
+    margin: 5em 0 3em 0;
   }
 
   & > :is(h5, p) {
@@ -24,7 +29,6 @@ const Card = styled.div`
   }
 
   & > h5 {
-    margin-top: 11.62rem;
     margin-bottom: 1rem;
   }
 `;
