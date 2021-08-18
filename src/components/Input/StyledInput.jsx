@@ -8,26 +8,16 @@ import alertLogo from '@assets/alert-triangle.svg';
 
 const Container = styled.div`
   min-height: 48px;
-  display: flex;
   position: relative;
-  flex-direction: column;
-  justify-content: left;
+
   & input {
     margin-right: auto;
   }
   & svg {
-    position: relative;
-    top: -2.3em;
-    left: 12.5em;
-  }
-  /* Condition below is reponsible for positioning icon
-     on the Mozilla browsers
-  */
-  @-moz-document url-prefix() {
-    & svg {
-      top: -2.3em;
-      left: 14em;
-    }
+    position: absolute;
+    top: 55%;
+    right: 0.1em;
+    transform: translate(-50%, -50%);
   }
 `;
 
@@ -45,21 +35,17 @@ const Input = styled.input.attrs((props) => ({
   borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
   focusBorderColor: !props.isInvalid ? getColor('ikksBlue') : getColor('error'),
 }))`
+  width: 100%;
   position: relative;
   border: 1.5px solid ${(props) => props.borderColor};
   padding: 0.5em;
-  box-sizing: border-box;
   border-radius: 4px;
   font-size: 14px;
   line-height: 28px;
   transition: 0.3s;
   letter-spacing: 200%;
   color: ${getColor('steel')};
-  ${(props) =>
-    props.icon &&
-    css`
-      padding-right: 2em;
-    `}
+
   &:focus {
     outline: none !important;
     border-color: ${(props) => props.focusBorderColor};
@@ -72,7 +58,16 @@ const Input = styled.input.attrs((props) => ({
   }
 `;
 
-const StyledInput = ({ type, icon, name, placeholder, required, disabled, className }) => {
+const StyledInput = ({
+  type,
+  icon,
+  name,
+  placeholder,
+  required,
+  disabled,
+  className,
+  labelText,
+}) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
@@ -89,18 +84,22 @@ const StyledInput = ({ type, icon, name, placeholder, required, disabled, classN
 
   return (
     <Container>
-      <Input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={inputValue}
-        required={required}
-        disabled={disabled}
-        icon={icon}
-        isInvalid={isInvalid}
-        className={className}
-      />
+      <label htmlFor={name}>
+        {labelText}
+        <Input
+          id={name}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          onChange={onChange}
+          value={inputValue}
+          required={required}
+          disabled={disabled}
+          icon={icon}
+          isInvalid={isInvalid}
+          className={className}
+        />
+      </label>
       {icon && <InfoIcon as={isInvalid && alertLogo} disabled={disabled} size="" />}
     </Container>
   );
@@ -114,6 +113,7 @@ StyledInput.defaultProps = {
   required: false,
   disabled: false,
   className: null,
+  labelText: null,
 };
 
 StyledInput.propTypes = {
@@ -124,6 +124,7 @@ StyledInput.propTypes = {
   required: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.string,
+  labelText: PropTypes.string,
 };
 
 export default StyledInput;
