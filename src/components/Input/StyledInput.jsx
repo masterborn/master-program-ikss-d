@@ -7,7 +7,6 @@ import infoLogo from '@assets/info.svg';
 import alertLogo from '@assets/alert-triangle.svg';
 
 const Container = styled.div`
-  min-width: 331px;
   min-height: 48px;
   display: flex;
   position: relative;
@@ -46,9 +45,9 @@ const Input = styled.input.attrs((props) => ({
   borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
   focusBorderColor: !props.isInvalid ? getColor('ikksBlue') : getColor('error'),
 }))`
+  position: relative;
   border: 1.5px solid ${(props) => props.borderColor};
   padding: 0.5em;
-  margin: 0.5em;
   box-sizing: border-box;
   border-radius: 4px;
   font-size: 14px;
@@ -73,7 +72,7 @@ const Input = styled.input.attrs((props) => ({
   }
 `;
 
-const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
+const StyledInput = ({ type, icon, name, placeholder, required, disabled, className }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
@@ -100,6 +99,7 @@ const StyledInput = ({ type, icon, name, placeholder, required, disabled }) => {
         disabled={disabled}
         icon={icon}
         isInvalid={isInvalid}
+        className={className}
       />
       {icon && <InfoIcon as={isInvalid && alertLogo} disabled={disabled} size="" />}
     </Container>
@@ -113,6 +113,7 @@ StyledInput.defaultProps = {
   placeholder: '',
   required: false,
   disabled: false,
+  className: null,
 };
 
 StyledInput.propTypes = {
@@ -122,6 +123,7 @@ StyledInput.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default StyledInput;

@@ -6,7 +6,7 @@ import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
-
+import ContactForm from '@root/components/ContactForm/ContactForm';
 
 const homePage = () => (
   <>
@@ -52,6 +52,7 @@ const homePage = () => (
         },
       ]}
     />
+    <ContactForm />
   </>
 );
 
