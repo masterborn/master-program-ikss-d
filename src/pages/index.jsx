@@ -7,8 +7,24 @@ import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
 
-const homePage = ({ heroData }) => {
-  console.log(heroData);
+const homePage = ({
+  heroData,
+  valuesHeaderData,
+  valuesFirstCardData,
+  valuesSecondCardData,
+  valuesThirdCardData,
+  projectsHeaderData,
+  cooperationHeaderData,
+}) => {
+  console.log(
+    heroData,
+    valuesHeaderData,
+    valuesFirstCardData,
+    valuesSecondCardData,
+    valuesThirdCardData,
+    projectsHeaderData,
+    cooperationHeaderData,
+  );
   return (
     <>
       <Navbar
@@ -63,6 +79,8 @@ export const getStaticProps = async () => {
 
   const response = await fetch(basicContentUrl);
 
+  // TODO: Validacja
+
   const homePageBasicContent = await response.json();
 
   // Hero data
@@ -74,16 +92,54 @@ export const getStaticProps = async () => {
   const heroData = heroDataArray[0].fields;
 
   // Values data
-  const Value1Array = homePageBasicContent.items.filter(
+  const valueHeaderDataArray = homePageBasicContent.items.filter(
+    (item) => item.fields.identifier === 'homepage-values',
+  );
+
+  const valuesHeaderData = valueHeaderDataArray[0].fields;
+
+  const value1Array = homePageBasicContent.items.filter(
     (item) => item.fields.identifier === 'homepage-tile-1',
   );
 
-  const Value1 = Value1Array[0].fields;
+  const value1 = value1Array[0].fields;
+
+  const value2Array = homePageBasicContent.items.filter(
+    (item) => item.fields.identifier === 'homepage-tile-2',
+  );
+
+  const value2 = value2Array[0].fields;
+
+  const value3Array = homePageBasicContent.items.filter(
+    (item) => item.fields.identifier === 'homepage-tile-3',
+  );
+
+  const value3 = value3Array[0].fields;
+
+  // Projects data
+
+  const projectsHeaderDataArray = homePageBasicContent.items.filter(
+    (item) => item.fields.identifier === 'homepage-projects-title',
+  );
+
+  const projectsHeaderData = projectsHeaderDataArray[0].fields;
+
+  // Cooperation data
+  const cooperationHeaderDataArray = homePageBasicContent.items.filter(
+    (item) => item.fields.identifier === 'homepage-partners-text',
+  );
+
+  const cooperationHeaderData = cooperationHeaderDataArray[0].fields;
 
   return {
     props: {
       heroData,
-      valuesFirstCardData: Value1,
+      valuesHeaderData,
+      valuesFirstCardData: value1,
+      valuesSecondCardData: value2,
+      valuesThirdCardData: value3,
+      projectsHeaderData,
+      cooperationHeaderData,
     },
   };
 };
