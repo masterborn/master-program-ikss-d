@@ -93,7 +93,7 @@ const SocialMedias = styled(Socials)`
   display: none;
 
   ${(props) =>
-    props.visible > 0.3 &&
+    props.visible &&
     css`
       display: flex;
     `}
@@ -108,7 +108,7 @@ const ContactButton = styled(Button)`
 `;
 
 function Navbar({ urls }) {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
 
@@ -119,7 +119,9 @@ function Navbar({ urls }) {
 
     const scrolled = winScroll / height;
 
-    setScrollPosition(scrolled);
+    if (scrolled > 0.35) {
+      setSocialsVisibility(true);
+    }
   };
 
   const closeMobileMenu = () => {
@@ -127,12 +129,12 @@ function Navbar({ urls }) {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    if (!socialsVisibility) window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [socialsVisibility]);
 
   const handleLinkClick = (event) => {
     if (router.pathname === '/' && window.scrollY < window.innerHeight) {
@@ -167,7 +169,7 @@ function Navbar({ urls }) {
 
         <SMWrapper>
           <SocialMedias
-            visible={scrollPosition}
+            visible={socialsVisibility}
             urls={{
               facebook: urls.fblink,
               instagram: urls.inlink,
