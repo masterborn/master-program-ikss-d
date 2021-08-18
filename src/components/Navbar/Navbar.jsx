@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/dist/client/router';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
