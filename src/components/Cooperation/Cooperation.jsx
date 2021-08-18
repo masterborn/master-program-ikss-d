@@ -47,12 +47,13 @@ const CooperationWrapper = styled.div`
   margin: auto;
   gap: 1.5rem 4.5rem;
 
-  @media (max-width: ${getMedias('tablet')}) {
+  @media (max-width: ${getMedias('laptop')}) {
     width: 100%;
+    gap: 1.5rem 3.5rem;
   }
 
-  @media (max-width: ${getMedias('mobile')}) {
-    gap: 1rem 1.5rem;
+  @media (max-width: ${getMedias('tablet')}) {
+    gap: 1.5rem 2rem;
   }
 `;
 
@@ -63,12 +64,12 @@ const Cooperation = ({ data, cooperationHeader, cooperationText }) => (
       {cooperationText && <p>{cooperationText}</p>}
     </Header>
     <CooperationWrapper>
-      {data.map((cooperation) => (
+      {data.map((singleSponsorData) => (
         <CooperationCard
-          key={cooperation.altText}
-          altText={cooperation.altText}
-          linkUrl={cooperation.linkUrl}
-          logo={cooperation.logo}
+          key={singleSponsorData.altText}
+          altText={singleSponsorData.altText}
+          linkUrl={singleSponsorData.linkUrl}
+          logo={singleSponsorData.logo}
         />
       ))}
     </CooperationWrapper>
