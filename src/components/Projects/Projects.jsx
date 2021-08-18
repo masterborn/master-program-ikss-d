@@ -22,7 +22,7 @@ const tempData = [
   },
   {
     imgSrc: secondImage,
-    videoUrl: 'https://www.youtube.com/embed/ca7R_REZC3Y',
+    videoUrl: 'https://www.youtube.com/watch?v=ca7R_REZC3Y',
     imgAlt: 'Wrocławski Bieg Akademicki',
     title: 'Wrocławski Bieg Akademicki',
     date: '15.11.2020',

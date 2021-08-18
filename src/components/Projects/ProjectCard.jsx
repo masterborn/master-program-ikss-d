@@ -19,12 +19,12 @@ const Wrapper = styled.div`
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
   border-radius: 16px;
   & img {
-    width: 998px;
-    height: 659px;
+    width: auto;
+    height: 579px;
     opacity: 0.6;
   }
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 0 0 2em 0;
+    margin: 0 2em 2em 2em;
     & img {
       max-width: 100%;
       height: auto;
@@ -66,6 +66,7 @@ const Header = styled.header`
     & h4 {
       font-size: 18px;
       line-height: 24px;
+      margin-bottom: 0.4em;
     }
     & h5 {
       font-size: 14px;
@@ -80,6 +81,7 @@ const Text = styled.section`
   @media (max-width: ${getMedias('laptop')}) {
     font-size: 14px;
     line-height: 28px;
+    margin-top: 16px;
   }
 `;
 

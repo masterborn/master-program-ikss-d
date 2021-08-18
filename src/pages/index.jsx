@@ -1,7 +1,11 @@
 import Hero from '@components/Hero/Hero';
 import HeroImagePng from '@assets/heroImage2.jpg';
+import ValuesIcon1 from '@assets/values-1.svg';
+import ValuesIcon2 from '@assets/values-2.svg';
+import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
+import Values from '@components/Values/Values';
 
 const homePage = () => (
   <>
@@ -23,6 +27,28 @@ const homePage = () => (
       instagramLink="https://www.instagram.com"
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
+    />
+    <Values
+      valuesHeader="Wyróżniki, wartości, X-factory organizacji"
+      valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
+      nagłówek."
+      data={[
+        {
+          icon: ValuesIcon1,
+          title: 'Największa organizacja kulturalno-sportowa',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
+        },
+        {
+          icon: ValuesIcon2,
+          title: 'O różnorodności projektów, że każdy znajdzie coś dla siebie',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
+        },
+        {
+          icon: ValuesIcon3,
+          title: 'Coś o tym, że łączycie rozwój z zabawą i poznawaniem nowych ludzi',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
+        },
+      ]}
     />
     <Projects />
   </>
