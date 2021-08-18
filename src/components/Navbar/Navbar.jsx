@@ -113,15 +113,12 @@ function Navbar({ urls }) {
   const router = useRouter();
 
   const handleScroll = () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-    const scrolled = winScroll / height;
-
-    if (scrolled > 0.35) {
+    if (window.scrollY >= window.innerHeight) {
       setSocialsVisibility(true);
+      return;
     }
+
+    setSocialsVisibility(false);
   };
 
   const closeMobileMenu = () => {
@@ -129,24 +126,15 @@ function Navbar({ urls }) {
   };
 
   useEffect(() => {
-    if (!socialsVisibility) window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [socialsVisibility]);
+  }, []);
 
   const handleLinkClick = (event) => {
-    if (router.pathname === '/' && window.scrollY < window.innerHeight) {
-      event.preventDefault();
-      return;
-    }
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+    if (router.pathname === '/') event.preventDefault();
   };
 
   return (
