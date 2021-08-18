@@ -133,17 +133,13 @@ function Navbar({ urls }) {
     };
   }, []);
 
-  const handleLinkClick = (event) => {
-    if (router.pathname === '/') event.preventDefault();
-  };
-
   return (
     <>
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
         <Link href="/">
-          <a role="link" onClick={handleLinkClick} onKeyUp={handleLinkClick} tabIndex={0}>
+          <a>
             <Logo />
           </a>
         </Link>
