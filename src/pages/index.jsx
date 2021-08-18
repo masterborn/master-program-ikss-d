@@ -127,8 +127,6 @@ export const getStaticProps = async () => {
 
   const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
 
-  log;
-
   return {
     props: {
       heroData,

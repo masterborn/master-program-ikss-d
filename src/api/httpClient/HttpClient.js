@@ -8,6 +8,8 @@ class HttpClient {
   }
 
   getData() {
+    // TODO: Work on some error handling
+
     return axios.get(this.api.defaults.baseURL).then((res) => res.data);
   }
 
