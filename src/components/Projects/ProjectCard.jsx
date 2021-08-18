@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     opacity: 0.6;
   }
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 0 2em 2em 2em;
+    margin: 0 1em 2em 1em;
     & img {
       max-width: 100%;
       height: auto;
@@ -35,6 +35,9 @@ const Wrapper = styled.div`
       padding: 0 2em;
     }
   }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    margin: 0 0.4em 2em 0.4em;
 `;
 const Description = styled.article`
   display: flex;
