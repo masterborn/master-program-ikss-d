@@ -110,7 +110,6 @@ const ContactButton = styled(Button)`
 function Navbar({ urls }) {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
-  const router = useRouter();
 
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
