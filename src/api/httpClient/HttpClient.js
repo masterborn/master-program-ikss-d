@@ -8,22 +8,7 @@ class HttpClient {
   }
 
   getData() {
-    return axios
-      .get(this.api.defaults.baseURL)
-      .catch((error) => {
-        // Possible validation
-
-        if (error.response) {
-          // console.log(error.response.data);
-          // console.log(error.response.status);
-          // console.log(error.response.headers);
-        } else if (error.request) {
-          // console.log(error.request);
-        } else {
-          // console.log('Error', error.message);
-        }
-      })
-      .then((res) => res.data);
+    return axios.get(this.api.defaults.baseURL).then((res) => res.data);
   }
 
   getFilteredData(filterCriteria) {

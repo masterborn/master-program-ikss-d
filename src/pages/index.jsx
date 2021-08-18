@@ -7,6 +7,7 @@ import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
 import HttpClient from '@api/httpClient/HttpClient';
+import Cooperation from '@components/Cooperation/Cooperation';
 
 const homePage = () => (
   <>
@@ -52,6 +53,52 @@ const homePage = () => (
       ]}
     />
     <Projects />
+    <Cooperation
+      cooperationHeader="Współpracują z nami"
+      cooperationText="Na pewno powinno się pojawić tu logo UE na pierwszym miejscu. Kilka słów o tym, co można zyskać współpracując z wami jako partnerzy. Jakie to niesie korzyści PR’owe etc."
+      data={[
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+      ]}
+    />
   </>
 );
 
@@ -79,6 +126,8 @@ export const getStaticProps = async () => {
   // Cooperation data
 
   const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
+
+  log;
 
   return {
     props: {
