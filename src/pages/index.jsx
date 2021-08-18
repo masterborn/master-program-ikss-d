@@ -4,8 +4,10 @@ import ValuesIcon1 from '@assets/values-1.svg';
 import ValuesIcon2 from '@assets/values-2.svg';
 import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
+import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
 import Cooperation from '@components/Cooperation/Cooperation';
+
 
 const homePage = () => (
   <>
@@ -28,6 +30,7 @@ const homePage = () => (
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
     />
+    <Projects />
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
