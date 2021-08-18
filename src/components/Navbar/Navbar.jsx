@@ -93,7 +93,7 @@ const SocialMedias = styled(Socials)`
   display: none;
 
   ${(props) =>
-    props.visible &&
+    props.visible > 0.3 &&
     css`
       display: flex;
     `}
@@ -118,6 +118,7 @@ function Navbar({ urls }) {
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
     const scrolled = winScroll / height;
+
     setScrollPosition(scrolled);
   };
 
@@ -134,15 +135,16 @@ function Navbar({ urls }) {
   }, []);
 
   const handleLinkClick = (event) => {
-    if (router.pathname === '/') {
+    if (router.pathname === '/' && window.scrollY < window.innerHeight) {
       event.preventDefault();
-
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
+      return;
     }
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -165,7 +167,7 @@ function Navbar({ urls }) {
 
         <SMWrapper>
           <SocialMedias
-            visible={scrollPosition > 0.35}
+            visible={scrollPosition}
             urls={{
               facebook: urls.fblink,
               instagram: urls.inlink,
