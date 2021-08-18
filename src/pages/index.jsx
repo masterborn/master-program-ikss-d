@@ -6,6 +6,7 @@ import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
+import HttpClient from '@api/httpClient/HttpClient';
 
 const homePage = ({
   heroData,
@@ -74,62 +75,29 @@ const homePage = ({
 };
 
 export const getStaticProps = async () => {
-  const basicContentUrl =
-    'https://cdn.contentful.com/spaces/n21y2i4hkj4h/environments/master/entries?access_token=ClPRdGtunoUrjFBPxqnbNZ2n8xZSoEUdoc11ek4yBzQ&content_type=basicContent&fields.page[in]=homepage';
-
-  const response = await fetch(basicContentUrl);
-
-  // TODO: Validacja
-
-  const homePageBasicContent = await response.json();
+  const basicContentClient = new HttpClient(
+    `access_token=${process.env.CONTENTFUL_ACCESS_KEY}&content_type=basicContent&fields.page[in]=homepage`,
+  );
 
   // Hero data
 
-  const heroDataArray = homePageBasicContent.items.filter(
-    (item) => item.fields.identifier === 'homepage-top-section',
-  );
-
-  const heroData = heroDataArray[0].fields;
+  const heroData = await basicContentClient.getFilteredData('homepage-top-section');
 
   // Values data
-  const valueHeaderDataArray = homePageBasicContent.items.filter(
-    (item) => item.fields.identifier === 'homepage-values',
-  );
 
-  const valuesHeaderData = valueHeaderDataArray[0].fields;
+  const valuesHeaderData = await basicContentClient.getFilteredData('homepage-values');
 
-  const value1Array = homePageBasicContent.items.filter(
-    (item) => item.fields.identifier === 'homepage-tile-1',
-  );
-
-  const value1 = value1Array[0].fields;
-
-  const value2Array = homePageBasicContent.items.filter(
-    (item) => item.fields.identifier === 'homepage-tile-2',
-  );
-
-  const value2 = value2Array[0].fields;
-
-  const value3Array = homePageBasicContent.items.filter(
-    (item) => item.fields.identifier === 'homepage-tile-3',
-  );
-
-  const value3 = value3Array[0].fields;
+  const value1 = await basicContentClient.getFilteredData('homepage-tile-1');
+  const value2 = await basicContentClient.getFilteredData('homepage-tile-2');
+  const value3 = await basicContentClient.getFilteredData('homepage-tile-3');
 
   // Projects data
 
-  const projectsHeaderDataArray = homePageBasicContent.items.filter(
-    (item) => item.fields.identifier === 'homepage-projects-title',
-  );
-
-  const projectsHeaderData = projectsHeaderDataArray[0].fields;
+  const projectsHeaderData = await basicContentClient.getFilteredData('homepage-projects-title');
 
   // Cooperation data
-  const cooperationHeaderDataArray = homePageBasicContent.items.filter(
-    (item) => item.fields.identifier === 'homepage-partners-text',
-  );
 
-  const cooperationHeaderData = cooperationHeaderDataArray[0].fields;
+  const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
 
   return {
     props: {
