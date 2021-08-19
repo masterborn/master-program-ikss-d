@@ -22,6 +22,7 @@ const tempData = [
   },
   {
     imgSrc: secondImage,
+    videoUrl: 'https://www.youtube.com/watch?v=ca7R_REZC3Y',
     imgAlt: 'Wrocławski Bieg Akademicki',
     title: 'Wrocławski Bieg Akademicki',
     date: '15.11.2020',
@@ -46,12 +47,12 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2em auto;
+  margin: 2em auto 148px;
   & a {
     text-decoration: none;
   }
   @media (max-width: ${getMedias('tablet')}) {
-    margin: 2em 24px;
+    margin: 2em 24px 80px;
     & > h3 {
       font-size: 24px;
       line-height: 32px;
@@ -65,13 +66,6 @@ const Carousel = styled.div`
   background: ${getColor('blue_10')};
   border-radius: 26px;
   @media (max-width: ${getMedias('tablet')}) {
-    /*
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 3em;
-    grid-row-gap: 1em;
-    */
     background: none;
     align-items: center;
     gap: 12px;
@@ -131,6 +125,7 @@ const StyledProjects = () => {
       <ProjectCard
         imgSrc={tempData[activeCard].imgSrc}
         imgAlt={tempData[activeCard].imgAlt}
+        videoUrl={tempData[activeCard].videoUrl !== 'undefined' && tempData[activeCard].videoUrl}
         title={tempData[activeCard].title}
         date={tempData[activeCard].date}
         description={tempData[activeCard].description}
