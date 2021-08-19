@@ -6,16 +6,45 @@ import { getColor } from '@styles/utils';
 import infoLogo from '@assets/info.svg';
 import alertLogo from '@assets/alert-triangle.svg';
 
-const Container = styled.div`
+const Container = styled.div.attrs((props) => ({
+  borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
+  focusBorderColor: !props.isInvalid ? getColor('ikksBlue') : getColor('error'),
+}))`
   min-height: 48px;
   position: relative;
 
   & input {
-    margin-right: auto;
+    width: 100%;
+    position: relative;
+    border: 1.5px solid ${(props) => props.borderColor};
+    padding: 0.5em;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 28px;
+    transition: 0.3s;
+    letter-spacing: 200%;
+    color: ${getColor('steel')};
+    margin-top: 5px;
+
+    &:focus {
+      outline: none !important;
+      border-color: ${(props) => props.focusBorderColor};
+    }
+    &:invalid {
+      outline: none !important;
+    }
+    &::placeholder {
+      color: ${getColor('steel_60')};
+    }
   }
+
+  & span {
+    position: relative;
+  }
+
   & svg {
     position: absolute;
-    top: 55%;
+    top: 50%;
     right: 0.1em;
     transform: translate(-50%, -50%);
   }
@@ -29,33 +58,6 @@ const InfoIcon = styled(infoLogo)`
     css`
       filter: grayscale(100%) contrast(10%);
     `}
-`;
-
-const Input = styled.input.attrs((props) => ({
-  borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
-  focusBorderColor: !props.isInvalid ? getColor('ikksBlue') : getColor('error'),
-}))`
-  width: 100%;
-  position: relative;
-  border: 1.5px solid ${(props) => props.borderColor};
-  padding: 0.5em;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 28px;
-  transition: 0.3s;
-  letter-spacing: 200%;
-  color: ${getColor('steel')};
-
-  &:focus {
-    outline: none !important;
-    border-color: ${(props) => props.focusBorderColor};
-  }
-  &:invalid {
-    outline: none !important;
-  }
-  &::placeholder {
-    color: ${getColor('steel_60')};
-  }
 `;
 
 const StyledInput = ({
@@ -83,24 +85,23 @@ const StyledInput = ({
   };
 
   return (
-    <Container>
+    <Container className={className} isInvalid={isInvalid}>
       <label htmlFor={name}>
         {labelText}
-        <Input
-          id={name}
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          onChange={onChange}
-          value={inputValue}
-          required={required}
-          disabled={disabled}
-          icon={icon}
-          isInvalid={isInvalid}
-          className={className}
-        />
+        <span>
+          <input
+            id={name}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            onChange={onChange}
+            value={inputValue}
+            required={required}
+            disabled={disabled}
+          />
+          {icon && <InfoIcon as={isInvalid && alertLogo} disabled={disabled} size="" />}
+        </span>
       </label>
-      {icon && <InfoIcon as={isInvalid && alertLogo} disabled={disabled} size="" />}
     </Container>
   );
 };
