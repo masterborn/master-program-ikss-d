@@ -38,6 +38,7 @@ const Wrapper = styled.div`
 
   @media (max-width: ${getMedias('mobile')}) {
     margin: 0 0.4em 2em 0.4em;
+  }
 `;
 const Description = styled.article`
   display: flex;
@@ -48,6 +49,7 @@ const Description = styled.article`
   & a {
     text-decoration: none;
   }
+
   @media (max-width: ${getMedias('laptop')}) {
     & a {
       display: inline-block;
@@ -80,7 +82,7 @@ const Header = styled.header`
 `;
 const Text = styled.section`
   color: ${getColor('steel')};
-  margin: 32px 0px;
+  margin: 32px 0;
   @media (max-width: ${getMedias('laptop')}) {
     font-size: 14px;
     line-height: 28px;
@@ -88,7 +90,7 @@ const Text = styled.section`
   }
 `;
 
-const styledCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, buttonLabel }) => (
+const ProjectCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, buttonLabel }) => (
   <Wrapper>
     {videoUrl ? (
       <CardVideo videoUrl={videoUrl} title={title} />
@@ -111,8 +113,6 @@ const styledCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, b
     </Description>
   </Wrapper>
 );
-
-const ProjectCard = styled(styledCard)``;
 
 export default ProjectCard;
 

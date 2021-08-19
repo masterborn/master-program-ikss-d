@@ -47,12 +47,12 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2em auto;
+  margin: 2em auto 148px;
   & a {
     text-decoration: none;
   }
   @media (max-width: ${getMedias('tablet')}) {
-    margin: 2em 24px;
+    margin: 2em 24px 80px;
     & > h3 {
       font-size: 24px;
       line-height: 32px;
