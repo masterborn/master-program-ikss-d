@@ -23,14 +23,26 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
   margin-right: 10%;
   position: relative !important;
-  bottom: 8% !important;
+  bottom: ${(props) => (props.contact ? '5%' : '8%')};
 
   @media (max-width: ${getMedias('tablet')}) {
     margin-right: 5%;
   }
   @media (max-width: 650px) {
-    justify-content: center;
+    justify-content: ${(props) => (props.contact ? 'flex-end' : 'center')};
+    margin-right: ${(props) => (props.contact ? '5%' : '0')};
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
     margin: 0;
+    justify-content: center;
+
+    ${(props) =>
+      props.contact &&
+      css`
+        bottom: 0;
+        top: 18%;
+      `};
   }
 `;
 
@@ -38,8 +50,20 @@ const Menu = styled.div`
   display: flex;
   justify-content: center;
 
+  ${(props) =>
+    props.contact &&
+    css`
+      padding-top: 18em;
+    `};
+
   @media (max-width: ${getMedias('mobile')}) {
     flex-direction: column;
+
+    ${(props) =>
+      props.contact &&
+      css`
+        padding-top: 10em;
+      `};
   }
 `;
 
@@ -104,10 +128,10 @@ const SocialMedias = styled(Socials)`
 
 const Footer = ({ contact, urls }) => (
   <Wrapper contact={contact}>
-    <ButtonWrapper>
+    <ButtonWrapper contact={contact}>
       <ScrollButton />
     </ButtonWrapper>
-    <Menu>
+    <Menu contact={contact}>
       <MenuLink url="/" linkLabel="Strona główna" />
       <MenuLink url="/projects" linkLabel="Projekty" />
       <MenuLink url="/about" linkLabel="O nas" />
