@@ -124,4 +124,11 @@ ProjectCard.propTypes = {
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   url: PropTypes.string,
+  buttonLabel: PropTypes.string,
+};
+
+ProjectCard.defaultProps = {
+  videoUrl: '',
+  buttonLabel: '',
+  url: '',
 };
