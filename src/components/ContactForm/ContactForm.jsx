@@ -172,12 +172,23 @@ const ContactForm = ({ modal, toolTipText }) => {
       </p>
 
       <Form>
-        <StyledInput name="name" placeholder="Wpisz swoje imię" labelText="Imię" />
-        <StyledInput name="surname" placeholder="Wpisz swoje nazwisko" labelText="Nazwisko" />
-        <StyledInput name="email" placeholder="Wpisz swój adres e-mail" labelText="Adres email" />
-        <StyledInput name="topic" placeholder="Temat wiadomości" labelText="Temat" />
+        <StyledInput required name="name" placeholder="Wpisz swoje imię" labelText="Imię" />
+        <StyledInput
+          required
+          name="surname"
+          placeholder="Wpisz swoje nazwisko"
+          labelText="Nazwisko"
+        />
+        <StyledInput
+          required
+          name="email"
+          placeholder="Wpisz swój adres e-mail"
+          labelText="Adres email"
+        />
+        <StyledInput required name="topic" placeholder="Temat wiadomości" labelText="Temat" />
 
         <TextArea
+          required
           name="content"
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"

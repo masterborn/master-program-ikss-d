@@ -2,8 +2,7 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { getColor } from '@styles/utils';
-import infoLogo from '@assets/info.svg';
+import { getColor, getFontWeight } from '@styles/utils';
 import alertLogo from '@assets/alert-triangle.svg';
 
 const Container = styled.div.attrs((props) => ({
@@ -38,10 +37,6 @@ const Container = styled.div.attrs((props) => ({
     }
   }
 
-  & span {
-    position: relative;
-  }
-
   & svg {
     position: absolute;
     top: 50%;
@@ -50,7 +45,7 @@ const Container = styled.div.attrs((props) => ({
   }
 `;
 
-const InfoIcon = styled(infoLogo)`
+const InfoIcon = styled(alertLogo)`
   height: 16.67px;
   width: 16.67px;
   ${(props) =>
@@ -60,18 +55,41 @@ const InfoIcon = styled(infoLogo)`
     `}
 `;
 
-const StyledInput = ({
-  type,
-  icon,
-  name,
-  placeholder,
-  required,
-  disabled,
-  className,
-  labelText,
-}) => {
+const Wrapper = styled.div`
+  position: relative;
+`;
+
+const ToolTip = styled.span`
+  position: absolute;
+  z-index: 100;
+  bottom: 100%;
+  right: 1rem;
+  transform: translate(-50%, -50%);
+  width: 25em;
+  background: ${getColor('blue_10')};
+  border-radius: 4px;
+  font-size: 10px;
+  color: ${getColor('steel')};
+  line-height: 18px;
+  font-weight: ${getFontWeight('regular')};
+  letter-spacing: -0.015em;
+  padding: 13px 17px;
+`;
+
+const StyledInput = ({ type, name, placeholder, required, disabled, className, labelText }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [showToolTip, setShowToolTip] = useState(false);
+
+  const displayToolTip = showToolTip && (
+    <ToolTip>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</ToolTip>
+  );
+
+  const displayIcon = isInvalid && (
+    <span onMouseEnter={() => setShowToolTip(true)} onMouseLeave={() => setShowToolTip(false)}>
+      <InfoIcon disabled={disabled} />
+    </span>
+  );
 
   const onChange = (event) => {
     setInputValue(event.target.value);
@@ -88,7 +106,7 @@ const StyledInput = ({
     <Container className={className} isInvalid={isInvalid}>
       <label htmlFor={name}>
         {labelText}
-        <span>
+        <Wrapper>
           <input
             id={name}
             type={type}
@@ -99,8 +117,9 @@ const StyledInput = ({
             required={required}
             disabled={disabled}
           />
-          {icon && <InfoIcon as={isInvalid && alertLogo} disabled={disabled} size="" />}
-        </span>
+          {displayToolTip}
+          {displayIcon}
+        </Wrapper>
       </label>
     </Container>
   );
@@ -108,7 +127,6 @@ const StyledInput = ({
 
 StyledInput.defaultProps = {
   type: 'text',
-  icon: false,
   name: '',
   placeholder: '',
   required: false,
@@ -119,7 +137,6 @@ StyledInput.defaultProps = {
 
 StyledInput.propTypes = {
   type: PropTypes.string,
-  icon: PropTypes.bool,
   name: PropTypes.string,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
