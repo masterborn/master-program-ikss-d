@@ -16,7 +16,7 @@ const styledHero = ({
   youTubeLink,
   linkedInLink,
 }) => (
-  <>
+  <HeroWrapper>
     <Wrapper>
       <HeroText headerText={headerText} smallText={smallText} />
       <HeroImage imageSrc={imageSrc} imageAlt={imageAlt} />
@@ -27,15 +27,15 @@ const styledHero = ({
       youTubeLink={youTubeLink}
       linkedInLink={linkedInLink}
     />
-  </>
+  </HeroWrapper>
 );
 
-const Hero = styled(styledHero)`
+const HeroWrapper = styled.section`
   background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%), #ffffff;
   width: 100vw;
 `;
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,7 +61,7 @@ const Wrapper = styled.section`
   }
 `;
 
-Hero.propTypes = {
+styledHero.propTypes = {
   headerText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
   imageSrc: PropTypes.shape({}).isRequired,
@@ -72,4 +72,4 @@ Hero.propTypes = {
   linkedInLink: PropTypes.string.isRequired,
 };
 
-export default Hero;
+export default styledHero;
