@@ -5,6 +5,10 @@ import LinkedInIcon from '@assets/icons/linkedIN-circle-icon.svg';
 import FacebookIcon from '@assets/icons/facebook-circle-icon.svg';
 import InstagramIcon from '@assets/icons/instagram-circle-icon.svg';
 import YouTubeIcon from '@assets/icons/youTube-circle-icon.svg';
+import LinkedInIconFooter from '@assets/icons/linkedIn-icon.svg';
+import FacebookIconFooter from '@assets/icons/facebook-icon.svg';
+import InstagramIconFooter from '@assets/icons/instagram-icon.svg';
+import YouTubeIconFooter from '@assets/icons/youTube-icon.svg';
 import Icon from '@components/Icon/Icon';
 
 const SocialsWrapper = styled.div`
@@ -18,12 +22,12 @@ const Link = ({ url, icon, size }) => (
   </a>
 );
 
-const Socials = ({ urls, size, className }) => (
+const Socials = ({ urls, size, className, footer }) => (
   <SocialsWrapper className={className}>
-    <Link url={urls.facebook} icon={FacebookIcon} size={size} />
-    <Link url={urls.instagram} icon={InstagramIcon} size={size} />
-    <Link url={urls.youTube} icon={YouTubeIcon} size={size} />
-    <Link url={urls.linkedIn} icon={LinkedInIcon} size={size} />
+    <Link url={urls.facebook} icon={!footer ? FacebookIcon : FacebookIconFooter} size={size} />
+    <Link url={urls.instagram} icon={!footer ? InstagramIcon : InstagramIconFooter} size={size} />
+    <Link url={urls.youTube} icon={!footer ? YouTubeIcon : YouTubeIconFooter} size={size} />
+    <Link url={urls.linkedIn} icon={!footer ? LinkedInIcon : LinkedInIconFooter} size={size} />
   </SocialsWrapper>
 );
 
@@ -46,11 +50,13 @@ Socials.propTypes = {
   }).isRequired,
   size: PropTypes.string,
   className: PropTypes.string,
+  footer: PropTypes.bool,
 };
 
 Socials.defaultProps = {
   size: '24px',
   className: null,
+  footer: false,
 };
 
 export default Socials;

@@ -7,7 +7,7 @@ import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
 import Cooperation from '@components/Cooperation/Cooperation';
-
+import Footer from '@components/Footer/Footer';
 
 const homePage = () => (
   <>
@@ -30,7 +30,7 @@ const homePage = () => (
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
     />
-    <Projects />
+
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
@@ -53,6 +53,7 @@ const homePage = () => (
         },
       ]}
     />
+    <Projects />
     <Cooperation
       cooperationHeader="Współpracują z nami"
       cooperationText="Na pewno powinno się pojawić tu logo UE na pierwszym miejscu. Kilka słów o tym, co można zyskać współpracując z wami jako partnerzy. Jakie to niesie korzyści PR’owe etc."
@@ -98,6 +99,15 @@ const homePage = () => (
           altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
         },
       ]}
+    />
+    <Footer
+      contact
+      urls={{
+        fblink: 'https://pl-pl.facebook.com',
+        inlink: 'https://www.instagram.com',
+        ytlink: 'https://www.youtube.com',
+        lnlink: 'https://pl.linkedin.com',
+      }}
     />
   </>
 );
