@@ -106,9 +106,13 @@ const ProjectCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, 
         <p>{description}</p>
       </Text>
       {url && (
-        <a href={url} target="_blank" rel="noopener noreferrer">
-          <Button withIcon={url.includes('facebook')} buttonLabel={buttonLabel} />
-        </a>
+        <Button
+          withIcon={url.includes('facebook')}
+          buttonLabel={buttonLabel}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        />
       )}
     </Description>
   </Wrapper>

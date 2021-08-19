@@ -132,10 +132,8 @@ const StyledProjects = () => {
         url={tempData[activeCard].url}
         buttonLabel={tempData[activeCard].buttonLabel}
       />
-      <Link href="/projects">
-        <a>
-          <Button secondary buttonLabel="Zobacz wszystkie projekty" />
-        </a>
+      <Link href="/projects" passHref>
+        <Button secondary buttonLabel="Zobacz wszystkie projekty" />
       </Link>
     </Wrapper>
   );

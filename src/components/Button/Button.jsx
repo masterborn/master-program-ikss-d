@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -10,13 +11,21 @@ import FacebookIcon from '@assets/icons/facebook-icon.svg';
 // withIcon - display button with icon and it takes boolean,
 // secondary - display secondary version of button and it takes boolean.
 
-const styledButton = ({ className, buttonLabel, withIcon, disabled }) => (
-  <>
-    <button type="button" disabled={disabled} className={className}>
+const styledButton = React.forwardRef(
+  ({ className, buttonLabel, withIcon, href, onClick, target, rel }, ref) => (
+    <a
+      href={href}
+      type="button"
+      className={className}
+      ref={ref}
+      onClick={onClick}
+      target={target}
+      rel={rel}
+    >
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {buttonLabel}
-    </button>
-  </>
+    </a>
+  ),
 );
 
 const Button = styled(styledButton)`
@@ -34,6 +43,7 @@ const Button = styled(styledButton)`
   font-weight: ${getFontWeight('buttonWeight')};
   font-size: 16px;
   cursor: pointer;
+  text-decoration: none;
 
   & ${Icon} {
     margin-right: 8px;
@@ -104,11 +114,30 @@ const Button = styled(styledButton)`
   }
 `;
 
-Button.propTypes = {
+styledButton.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   withIcon: PropTypes.bool,
+  className: PropTypes.string,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  target: PropTypes.string,
+  rel: PropTypes.string,
+};
+
+Button.propTypes = {
   secondary: PropTypes.bool,
-  disabled: PropTypes.bool,
+  buttonLabel: PropTypes.string.isRequired,
+  withIcon: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+styledButton.defaultProps = {
+  withIcon: false,
+  className: '',
+  href: null,
+  onClick: () => {},
+  target: null,
+  rel: null,
 };
 
 export default Button;
