@@ -66,13 +66,6 @@ const Carousel = styled.div`
   background: ${getColor('blue_10')};
   border-radius: 26px;
   @media (max-width: ${getMedias('tablet')}) {
-    /*z
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 3em;
-    grid-row-gap: 1em;
-    */
     background: none;
     align-items: center;
     gap: 12px;
@@ -89,6 +82,10 @@ const CarouselButton = styled(Button)`
       & :hover {
         background: ${getColor('blue_20')};
         color: ${getColor('white')};
+      }
+
+      @media (max-width: ${getMedias('mobile')}) {
+        font-size: 10px;
       }
     `}
 `;

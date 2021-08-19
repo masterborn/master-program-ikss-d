@@ -20,6 +20,8 @@ const GlobalStyles = createGlobalStyle`
 
     color: ${getColor('steel')};
     font-family: ${getFontFamily('Mulish')};
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
 
