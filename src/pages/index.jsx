@@ -6,11 +6,7 @@ import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
-<<<<<<< HEAD
-=======
 import Cooperation from '@components/Cooperation/Cooperation';
-
->>>>>>> main
 
 const homePage = () => (
   <>
@@ -33,6 +29,7 @@ const homePage = () => (
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
     />
+
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
@@ -56,28 +53,6 @@ const homePage = () => (
       ]}
     />
     <Projects />
-    <Values
-      valuesHeader="Wyróżniki, wartości, X-factory organizacji"
-      valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
-      nagłówek."
-      data={[
-        {
-          icon: ValuesIcon1,
-          title: 'Największa organizacja kulturalno-sportowa',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
-        },
-        {
-          icon: ValuesIcon2,
-          title: 'O różnorodności projektów, że każdy znajdzie coś dla siebie',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
-        },
-        {
-          icon: ValuesIcon3,
-          title: 'Coś o tym, że łączycie rozwój z zabawą i poznawaniem nowych ludzi',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
-        },
-      ]}
-    />
     <Cooperation
       cooperationHeader="Współpracują z nami"
       cooperationText="Na pewno powinno się pojawić tu logo UE na pierwszym miejscu. Kilka słów o tym, co można zyskać współpracując z wami jako partnerzy. Jakie to niesie korzyści PR’owe etc."
