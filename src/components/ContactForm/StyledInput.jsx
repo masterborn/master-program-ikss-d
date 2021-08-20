@@ -2,28 +2,33 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { getColor, getFontWeight } from '@styles/utils';
+import { getColor, getFontFamily } from '@styles/utils';
 import alertLogo from '@assets/alert-triangle.svg';
+import ToolTip from '@components/ContactForm/ToolTip';
 
 const Container = styled.div.attrs((props) => ({
   borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
   focusBorderColor: !props.isInvalid ? getColor('ikksBlue') : getColor('error'),
 }))`
-  min-height: 48px;
-  position: relative;
-
-  & input {
+  & input,
+  & textarea {
     width: 100%;
     position: relative;
     border: 1.5px solid ${(props) => props.borderColor};
-    padding: 0.5em;
     border-radius: 4px;
+    padding: 0.5em;
+    font-family: ${getFontFamily('Mulish')};
     font-size: 14px;
-    line-height: 28px;
-    transition: 0.3s;
-    letter-spacing: 200%;
     color: ${getColor('steel')};
-    margin-top: 5px;
+    line-height: 28px;
+    letter-spacing: 200%;
+    transition: 0.3s;
+
+    ${({ textarea }) =>
+      textarea &&
+      css`
+        resize: none;
+      `}
 
     &:focus {
       outline: none !important;
@@ -39,7 +44,7 @@ const Container = styled.div.attrs((props) => ({
 
   & svg {
     position: absolute;
-    top: 50%;
+    top: ${({ textarea }) => (textarea ? '22px' : '50%')};
     right: 0.1em;
     transform: translate(-50%, -50%);
   }
@@ -48,8 +53,8 @@ const Container = styled.div.attrs((props) => ({
 const InfoIcon = styled(alertLogo)`
   height: 16.67px;
   width: 16.67px;
-  ${(props) =>
-    props.disabled &&
+  ${({ disabled }) =>
+    disabled &&
     css`
       filter: grayscale(100%) contrast(10%);
     `}
@@ -57,32 +62,31 @@ const InfoIcon = styled(alertLogo)`
 
 const Wrapper = styled.div`
   position: relative;
+  margin-top: 5px;
 `;
 
-const ToolTip = styled.span`
-  position: absolute;
-  z-index: 100;
-  bottom: 100%;
-  right: 1rem;
-  transform: translate(-50%, -50%);
-  width: 25em;
-  background: ${getColor('blue_10')};
-  border-radius: 4px;
-  font-size: 10px;
-  color: ${getColor('steel')};
-  line-height: 18px;
-  font-weight: ${getFontWeight('regular')};
-  letter-spacing: -0.015em;
-  padding: 13px 17px;
+const WarningToolTip = styled(ToolTip)`
+  right: 0;
+  max-width: 20em;
+  bottom: 110%;
 `;
 
-const StyledInput = ({ type, name, placeholder, required, disabled, className, labelText }) => {
+const StyledInput = ({
+  type,
+  name,
+  placeholder,
+  required,
+  disabled,
+  className,
+  labelText,
+  textarea,
+}) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [showToolTip, setShowToolTip] = useState(false);
 
   const displayToolTip = showToolTip && (
-    <ToolTip>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</ToolTip>
+    <WarningToolTip toolTipText="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
   );
 
   const displayIcon = isInvalid && (
@@ -103,20 +107,32 @@ const StyledInput = ({ type, name, placeholder, required, disabled, className, l
   };
 
   return (
-    <Container className={className} isInvalid={isInvalid}>
+    <Container className={className} isInvalid={isInvalid} textarea>
       <label htmlFor={name}>
         {labelText}
         <Wrapper>
-          <input
-            id={name}
-            type={type}
-            name={name}
-            placeholder={placeholder}
-            onChange={onChange}
-            value={inputValue}
-            required={required}
-            disabled={disabled}
-          />
+          {textarea ? (
+            <textarea
+              id={name}
+              name={name}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={inputValue}
+              required={required}
+              disabled={disabled}
+            />
+          ) : (
+            <input
+              id={name}
+              name={name}
+              type={type}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={inputValue}
+              required={required}
+              disabled={disabled}
+            />
+          )}
           {displayToolTip}
           {displayIcon}
         </Wrapper>
@@ -133,6 +149,7 @@ StyledInput.defaultProps = {
   disabled: false,
   className: null,
   labelText: null,
+  textarea: false,
 };
 
 StyledInput.propTypes = {
@@ -143,6 +160,7 @@ StyledInput.propTypes = {
   disabled: PropTypes.bool,
   className: PropTypes.string,
   labelText: PropTypes.string,
+  textarea: PropTypes.bool,
 };
 
 export default StyledInput;

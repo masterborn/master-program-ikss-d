@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 import Input from '@components/ContactForm/StyledInput';
 import StyledCheckbox from '@components/ContactForm/StyledCheckbox';
-import StyledTextArea from '@components/ContactForm/StyledTextArea';
 import Icon from '@components/Icon/Icon';
+import ToolTip from '@components/ContactForm/ToolTip';
 import Button from '@components/Button/Button';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
@@ -74,8 +74,16 @@ const StyledInput = styled(Input)`
   width: 100%;
   grid-column: span ${({ name }) => (name === 'name' || name === 'surname' ? 1 : 2)};
 
+  & textarea {
+    height: 230px;
+  }
+
   @media (max-width: ${getMedias('mobile')}) {
     grid-column: 1;
+
+    & textarea {
+      height: 125px;
+    }
   }
 `;
 
@@ -92,28 +100,21 @@ const InfoWrapper = styled.div`
   & > p {
     position: relative;
     margin-left: 1rem;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     @media (max-width: ${getMedias('mobile')}) {
       font-size: 12px;
+      line-height: 15px;
     }
 
     & a {
       font-weight: ${getFontWeight('buttonWeight')};
       color: ${getColor('steel_70')};
       text-decoration: none;
-
-      & > span {
-        position: absolute;
-        bottom: 100%;
-        padding: 13px 17px;
-        background: ${getColor('blue_10')};
-        border-radius: 4px;
-        font-size: 10px;
-        color: ${getColor('steel')};
-        line-height: 18px;
-        font-weight: ${getFontWeight('regular')};
-        letter-spacing: -0.015em;
-      }
 
       &:hover {
         text-decoration: underline;
@@ -122,15 +123,14 @@ const InfoWrapper = styled.div`
   }
 `;
 
-const TextArea = styled(StyledTextArea)`
-  grid-column: span 2;
-
-  @media (max-width: ${getMedias('mobile')}) {
-    grid-column: 1;
+const InfoToolTip = styled(ToolTip)`
+  bottom: 100%;
+  @media (max-width: ${getMedias('tablet')}) {
+    display: none;
   }
 `;
 
-const StyledButton = styled(Button)`
+const SubmitButton = styled(Button)`
   grid-column: 2;
   margin-left: auto;
   margin-top: 28px;
@@ -151,7 +151,7 @@ const StyledCloseIcon = styled(Icon)`
 const ContactForm = ({ modal, toolTipText }) => {
   const [toolTip, setToolTip] = useState(false);
 
-  const Modal = (
+  const CloseModalButton = (
     <button type="button">
       <StyledCloseIcon icon={CloseIcon} media="16px" />
     </button>
@@ -159,7 +159,7 @@ const ContactForm = ({ modal, toolTipText }) => {
 
   return (
     <Wrapper>
-      {modal && Modal}
+      {modal && CloseModalButton}
 
       <Header>
         <h3>Skontaktuj się z nami</h3>
@@ -173,21 +173,25 @@ const ContactForm = ({ modal, toolTipText }) => {
 
       <Form>
         <StyledInput required name="name" placeholder="Wpisz swoje imię" labelText="Imię" />
+
         <StyledInput
           required
           name="surname"
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
         />
+
         <StyledInput
           required
           name="email"
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
         />
+
         <StyledInput required name="topic" placeholder="Temat wiadomości" labelText="Temat" />
 
-        <TextArea
+        <StyledInput
+          textarea
           required
           name="content"
           placeholder="O czym chcesz z nami porozmawiać?"
@@ -200,13 +204,14 @@ const ContactForm = ({ modal, toolTipText }) => {
             Zapoznałem się z{' '}
             <Link href="/">
               <a onMouseEnter={() => setToolTip(true)} onMouseLeave={() => setToolTip(false)}>
-                {toolTip && <span>{toolTipText}</span>}
+                {toolTip && <InfoToolTip toolTipText={toolTipText} />}
                 informacją o administratorze i przetwarzaniu danych.
               </a>
             </Link>
           </p>
         </InfoWrapper>
-        <StyledButton buttonLabel="Wyślij wiadomość" />
+
+        <SubmitButton buttonLabel="Wyślij wiadomość" />
       </Form>
     </Wrapper>
   );
