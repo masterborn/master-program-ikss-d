@@ -9,6 +9,7 @@ import Values from '@components/Values/Values';
 import HttpClient from '@api/httpClient/HttpClient';
 import Cooperation from '@components/Cooperation/Cooperation';
 
+
 const homePage = () => (
   <>
     <Navbar
@@ -53,6 +54,7 @@ const homePage = () => (
         },
       ]}
     />
+
     <Projects />
     <Cooperation
       cooperationHeader="Współpracują z nami"
