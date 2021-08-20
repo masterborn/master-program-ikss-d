@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 class HttpClient {
   constructor(path) {
@@ -19,7 +20,15 @@ class HttpClient {
   getFilteredData(filterCriteria) {
     return this.getData()
       .then((res) => res.items.filter((item) => item.fields.identifier === filterCriteria))
-      .then((res) => res[0].fields);
+      .then((res) => {
+        const resObject = res[0].fields;
+        if (resObject.text1) {
+          const text = documentToHtmlString(resObject.text1);
+          delete resObject.text1;
+          return { ...resObject, text };
+        }
+        return resObject;
+      });
   }
 }
 
