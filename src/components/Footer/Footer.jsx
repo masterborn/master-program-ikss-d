@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import LogoFooter from '@assets/logoFooter.svg';
 import Heart from '@assets/Heart.svg';
 import ScrollButton from '@components/Footer/ScrollButton';
 import NavLink from '@components/Navbar/NavLink';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Socials from '@components/Navbar/Socials';
+import LogoAdditional from '@components/Logos/LogoAdditional';
 
 const Wrapper = styled.footer`
   width: 100%;
@@ -14,7 +14,7 @@ const Wrapper = styled.footer`
   background: ${getColor('ikksBlue')};
 
   @media (max-width: ${getMedias('mobile')}) {
-    height: ${(props) => (props.contact ? '726px' : '536px')};
+    height: ${(props) => (props.contact ? '726px' : '566px')};
   }
 `;
 
@@ -85,7 +85,11 @@ const TextLogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 1em;
+  margin: 2em;
+
+  & * {
+    fill: white;
+  }
 
   & svg {
     align-self: center;
@@ -103,7 +107,7 @@ const TextLogoWrapper = styled.div`
   }
 `;
 
-const Logo = styled(LogoFooter)`
+const LogoFooter = styled(LogoAdditional)`
   width: 84px;
   height: 84px;
   margin: 1em 0 2em 0;
@@ -114,16 +118,12 @@ const Logo = styled(LogoFooter)`
   }
 `;
 
-const SMWrapper = styled.div`
+const SocialMedias = styled(Socials)`
   display: flex;
   justify-content: center;
   margin-top: 2em;
-`;
-
-const SocialMedias = styled(Socials)`
   align-items: center;
   gap: 24px;
-  display: flex;
 `;
 
 const Footer = ({ contact, urls }) => (
@@ -137,19 +137,17 @@ const Footer = ({ contact, urls }) => (
       <MenuLink url="/about" linkLabel="O nas" />
       <MenuLink url="/cooperation" linkLabel="Współpraca" />
     </Menu>
-    <SMWrapper>
-      <SocialMedias
-        footer
-        urls={{
-          facebook: urls.fblink,
-          instagram: urls.inlink,
-          youTube: urls.ytlink,
-          linkedIn: urls.lnlink,
-        }}
-      />
-    </SMWrapper>
+    <SocialMedias
+      footer
+      urls={{
+        facebook: urls.fblink,
+        instagram: urls.inlink,
+        youTube: urls.ytlink,
+        linkedIn: urls.lnlink,
+      }}
+    />
     <TextLogoWrapper>
-      <Logo />
+      <LogoFooter />
       <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
       <p>
         Made with <Heart /> by{' '}

@@ -2,14 +2,24 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import ScrollButtonVector from '@assets/ScrollButtonVector.svg';
-import { getColor } from '@styles/utils';
+import { getColor, getMedias } from '@styles/utils';
 
 const Eclipse = styled.div`
   width: 64px;
   height: 64px;
 
+  @media (max-width: ${getMedias('mobile')}) {
+    width: 40px;
+    height: 40px;
+
+    & svg {
+      transform: scale(85%);
+    }
+  }
+
   display: flex;
   justify-content: center;
+  cursor: pointer;
 
   & svg {
     align-self: center;
