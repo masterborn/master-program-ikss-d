@@ -30,6 +30,7 @@ const homePage = () => (
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
     />
+
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
