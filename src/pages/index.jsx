@@ -6,7 +6,9 @@ import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
-import ContactForm from '@root/components/ContactForm/ContactForm';
+import HttpClient from '@api/httpClient/HttpClient';
+import Cooperation from '@components/Cooperation/Cooperation';
+
 
 const homePage = () => (
   <>
@@ -29,7 +31,7 @@ const homePage = () => (
       youTubeLink="https://www.youtube.com"
       linkedInLink="https://pl.linkedin.com"
     />
-    <Projects />
+
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
@@ -52,13 +54,93 @@ const homePage = () => (
         },
       ]}
     />
-    <ContactForm
-      toolTipText="Gravida convallis risus adipiscing non enim. Consectetur quam facilisis
-      tincidunt vitae. Sed id a vestibulum est. A malesuada massa ultrices proin
-      tempor tempus vestibulum. At eros, lacus viverra lacinia eget suspendisse
-      habitasse."
+
+    <Projects />
+    <Cooperation
+      cooperationHeader="Współpracują z nami"
+      cooperationText="Na pewno powinno się pojawić tu logo UE na pierwszym miejscu. Kilka słów o tym, co można zyskać współpracując z wami jako partnerzy. Jakie to niesie korzyści PR’owe etc."
+      data={[
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+        {
+          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
+          linkUrl: 'https://www.ue.wroc.pl/',
+          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
+        },
+      ]}
     />
   </>
 );
+
+export const getStaticProps = async () => {
+  const basicContentClient = new HttpClient(
+    `access_token=${process.env.CONTENTFUL_ACCESS_KEY}&content_type=basicContent&fields.page[in]=homepage`,
+  );
+
+  // Hero data
+
+  const heroData = await basicContentClient.getFilteredData('homepage-top-section');
+
+  // Values data
+
+  const valuesHeaderData = await basicContentClient.getFilteredData('homepage-values');
+
+  const value1 = await basicContentClient.getFilteredData('homepage-tile-1');
+  const value2 = await basicContentClient.getFilteredData('homepage-tile-2');
+  const value3 = await basicContentClient.getFilteredData('homepage-tile-3');
+
+  // Projects data
+
+  const projectsHeaderData = await basicContentClient.getFilteredData('homepage-projects-title');
+
+  // Cooperation data
+
+  const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
+
+  return {
+    props: {
+      heroData,
+      valuesHeaderData,
+      valuesFirstCardData: value1,
+      valuesSecondCardData: value2,
+      valuesThirdCardData: value3,
+      projectsHeaderData,
+      cooperationHeaderData,
+    },
+  };
+};
 
 export default homePage;

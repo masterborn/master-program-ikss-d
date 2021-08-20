@@ -87,14 +87,14 @@ const SMWrapper = styled.div`
 `;
 
 const SocialMedias = styled(Socials)`
-  opacity: 0;
   align-items: center;
   gap: 24px;
+  display: none;
 
   ${(props) =>
     props.visible &&
     css`
-      opacity: 1;
+      display: flex;
     `}
 `;
 
@@ -107,16 +107,16 @@ const ContactButton = styled(Button)`
 `;
 
 function Navbar({ urls }) {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleScroll = () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    if (window.scrollY >= window.innerHeight) {
+      setSocialsVisibility(true);
+      return;
+    }
 
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-    const scrolled = winScroll / height;
-    setScrollPosition(scrolled);
+    setSocialsVisibility(false);
   };
 
   const closeMobileMenu = () => {
@@ -151,7 +151,7 @@ function Navbar({ urls }) {
 
         <SMWrapper>
           <SocialMedias
-            visible={scrollPosition > 0.25}
+            visible={socialsVisibility}
             urls={{
               facebook: urls.fblink,
               instagram: urls.inlink,
