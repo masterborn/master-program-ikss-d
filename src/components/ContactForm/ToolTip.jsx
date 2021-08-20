@@ -1,7 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight } from '@styles/utils';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
 
 const StyledToolTip = styled.span`
   position: absolute;
@@ -13,6 +23,7 @@ const StyledToolTip = styled.span`
   line-height: 18px;
   font-weight: ${getFontWeight('regular')};
   letter-spacing: -0.015em;
+  animation: ${fadeIn} 0.4s linear;
 `;
 
 const ToolTip = ({ className, toolTipText }) => (

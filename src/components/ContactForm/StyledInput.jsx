@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { getColor, getFontFamily } from '@styles/utils';
+import { getColor, getFontFamily, getMedias } from '@styles/utils';
 import alertLogo from '@assets/alert-triangle.svg';
 import ToolTip from '@components/ContactForm/ToolTip';
 
@@ -24,12 +24,6 @@ const Container = styled.div.attrs((props) => ({
     letter-spacing: 200%;
     transition: 0.3s;
 
-    ${({ textarea }) =>
-      textarea &&
-      css`
-        resize: none;
-      `}
-
     &:focus {
       outline: none !important;
       border-color: ${(props) => props.focusBorderColor};
@@ -41,18 +35,12 @@ const Container = styled.div.attrs((props) => ({
       color: ${getColor('steel_60')};
     }
   }
-
-  & svg {
-    position: absolute;
-    top: ${({ textarea }) => (textarea ? '22px' : '50%')};
-    right: 0.1em;
-    transform: translate(-50%, -50%);
-  }
 `;
 
 const InfoIcon = styled(alertLogo)`
   height: 16.67px;
   width: 16.67px;
+
   ${({ disabled }) =>
     disabled &&
     css`
@@ -63,6 +51,35 @@ const InfoIcon = styled(alertLogo)`
 const Wrapper = styled.div`
   position: relative;
   margin-top: 5px;
+
+  & > div {
+    position: absolute;
+    top: ${({ textarea }) => (textarea ? '24px' : '50%')};
+    right: -5px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    max-height: 30px;
+    padding: 0 5px;
+    cursor: pointer;
+
+    @media (max-width: ${getMedias('mobile')}) {
+      top: ${({ textarea }) => (textarea ? '24px' : '49%')};
+    }
+  }
+
+  ${({ textarea }) =>
+    textarea &&
+    css`
+      textarea {
+        resize: none;
+      }
+    `}
+
+  & > span {
+    bottom: 105%;
+  }
 `;
 
 const WarningToolTip = styled(ToolTip)`
@@ -90,9 +107,9 @@ const StyledInput = ({
   );
 
   const displayIcon = isInvalid && (
-    <span onMouseEnter={() => setShowToolTip(true)} onMouseLeave={() => setShowToolTip(false)}>
+    <div onMouseEnter={() => setShowToolTip(true)} onMouseLeave={() => setShowToolTip(false)}>
       <InfoIcon disabled={disabled} />
-    </span>
+    </div>
   );
 
   const onChange = (event) => {
@@ -107,10 +124,10 @@ const StyledInput = ({
   };
 
   return (
-    <Container className={className} isInvalid={isInvalid} textarea>
+    <Container className={className} isInvalid={isInvalid}>
       <label htmlFor={name}>
         {labelText}
-        <Wrapper>
+        <Wrapper textarea={textarea}>
           {textarea ? (
             <textarea
               id={name}
