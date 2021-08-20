@@ -50,18 +50,18 @@ class HttpClient {
   }
 
   getConnectedData() {
-    return this.getData().then((res) => {
-      const assets = res.includes.Asset;
-
-      return res.items.map((item) =>
+    return this.getData().then((res) =>
+      res.items.map((item) =>
         item.fields.image1
           ? {
               ...item,
-              image1: assets.find((asset) => asset.sys.id === item.fields.image1.sys.id),
+              image1: res.includes.Asset.find(
+                (asset) => asset.sys.id === item.fields.image1.sys.id,
+              ),
             }
           : item,
-      );
-    });
+      ),
+    );
   }
 }
 
