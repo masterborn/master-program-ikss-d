@@ -30,6 +30,23 @@ class HttpClient {
         return resObject;
       });
   }
+
+  getConnectedData() {
+    return this.getData().then((res) => {
+      const assets = res.includes.Asset;
+
+      const connected = res.items.map((item) =>
+        item.fields.image1
+          ? {
+              ...item,
+              image1: assets.find((asset) => asset.sys.id === item.fields.image1.sys.id),
+            }
+          : item,
+      );
+
+      return connected;
+    });
+  }
 }
 
 export default HttpClient;

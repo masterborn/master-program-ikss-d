@@ -125,6 +125,10 @@ export const getStaticProps = async () => {
 
   const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
 
+  // Connected Data
+
+  const connectedData = await basicContentClient.getConnectedData();
+
   return {
     props: {
       heroData,
@@ -134,6 +138,7 @@ export const getStaticProps = async () => {
       valuesThirdCardData: value3,
       projectsHeaderData,
       cooperationHeaderData,
+      connectedData,
     },
   };
 };
