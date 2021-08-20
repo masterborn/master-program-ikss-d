@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { getColor, getFontFamily, getMedias } from '@styles/utils';
+import { getColor, getFontFamily } from '@styles/utils';
 import alertLogo from '@assets/alert-triangle.svg';
 import ToolTip from '@components/ContactForm/ToolTip';
 
@@ -63,10 +63,6 @@ const Wrapper = styled.div`
     max-height: 30px;
     padding: 0 5px;
     cursor: pointer;
-
-    @media (max-width: ${getMedias('mobile')}) {
-      top: ${({ textarea }) => (textarea ? '24px' : '49%')};
-    }
   }
 
   ${({ textarea }) =>
