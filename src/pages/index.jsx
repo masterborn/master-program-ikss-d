@@ -101,7 +101,6 @@ const homePage = () => (
       ]}
     />
     <Footer
-      contact
       urls={{
         fblink: 'https://pl-pl.facebook.com',
         inlink: 'https://www.instagram.com',

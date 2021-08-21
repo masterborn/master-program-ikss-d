@@ -10,7 +10,7 @@ import LogoAdditional from '@components/Logos/LogoAdditional';
 
 const Wrapper = styled.footer`
   width: 100%;
-  height: ${(props) => (props.contact ? '728px' : '436px')};
+  height: ${(props) => (props.contact ? '728px' : '466px')};
   background: ${getColor('ikksBlue')};
 
   @media (max-width: ${getMedias('mobile')}) {
@@ -22,7 +22,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-right: 10%;
-  position: relative !important;
+  position: relative;
   bottom: ${(props) => (props.contact ? '5%' : '8%')};
 
   @media (max-width: ${getMedias('tablet')}) {
@@ -36,6 +36,7 @@ const ButtonWrapper = styled.div`
   @media (max-width: ${getMedias('mobile')}) {
     margin: 0;
     justify-content: center;
+    bottom: 4%;
 
     ${(props) =>
       props.contact &&
@@ -110,7 +111,7 @@ const TextLogoWrapper = styled.div`
 const LogoFooter = styled(LogoAdditional)`
   width: 84px;
   height: 84px;
-  margin: 1em 0 2em 0;
+  margin-bottom: 2em;
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 66px;
