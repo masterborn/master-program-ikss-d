@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/dist/client/router';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
@@ -110,18 +109,14 @@ const ContactButton = styled(Button)`
 function Navbar({ urls }) {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
-  const router = useRouter();
 
   const handleScroll = () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-    const scrolled = winScroll / height;
-
-    if (scrolled > 0.35) {
+    if (window.scrollY >= window.innerHeight) {
       setSocialsVisibility(true);
+      return;
     }
+
+    setSocialsVisibility(false);
   };
 
   const closeMobileMenu = () => {
@@ -129,25 +124,12 @@ function Navbar({ urls }) {
   };
 
   useEffect(() => {
-    if (!socialsVisibility) window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [socialsVisibility]);
-
-  const handleLinkClick = (event) => {
-    if (router.pathname === '/' && window.scrollY < window.innerHeight) {
-      event.preventDefault();
-      return;
-    }
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
-  };
+  }, []);
 
   return (
     <>
@@ -155,7 +137,7 @@ function Navbar({ urls }) {
 
       <Nav>
         <Link href="/">
-          <a role="link" onClick={handleLinkClick} onKeyUp={handleLinkClick} tabIndex={0}>
+          <a>
             <Logo />
           </a>
         </Link>

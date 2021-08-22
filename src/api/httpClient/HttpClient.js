@@ -1,26 +1,22 @@
 import axios from 'axios';
 
-import ApiError from './models/ApiError';
-
 class HttpClient {
-  constructor(baseUrl, path) {
-    this.api = axios.create({ baseURL: `${baseUrl}${path}` });
-    this.api.interceptors.response.use(HttpClient.afterResponse, HttpClient.responseError);
+  constructor(path) {
+    this.api = axios.create({
+      baseURL: `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master/entries?${path}`,
+    });
   }
 
-  setAuthToken(token) {
-    this.api.defaults.headers.Authorization = `Bearer ${token}`;
+  getData() {
+    // TODO: Work on some error handling
+
+    return axios.get(this.api.defaults.baseURL).then((res) => res.data);
   }
 
-  static afterResponse(resp) {
-    return {
-      ...resp,
-      data: resp.data.data,
-    };
-  }
-
-  static responseError(error) {
-    throw new ApiError(error);
+  getFilteredData(filterCriteria) {
+    return this.getData()
+      .then((res) => res.items.filter((item) => item.fields.identifier === filterCriteria))
+      .then((res) => res[0].fields);
   }
 }
 

@@ -7,14 +7,28 @@ import NavLink from '@components/Navbar/NavLink';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Socials from '@components/Navbar/Socials';
 import LogoAdditional from '@components/Logos/LogoAdditional';
+import ContactForm from '@components/ContactForm/ContactForm';
 
 const Wrapper = styled.footer`
   width: 100%;
   height: ${(props) => (props.contact ? '728px' : '466px')};
   background: ${getColor('ikksBlue')};
+  position: relative;
+
+  ${(props) =>
+    props.contact &&
+    css`
+      margin-top: 50em;
+
+      @media (max-width: 1200px) {
+        padding-top: 8em;
+        height: 880px;
+        margin-top: 45em;
+      }
+    `};
 
   @media (max-width: ${getMedias('mobile')}) {
-    height: ${(props) => (props.contact ? '726px' : '566px')};
+    height: ${(props) => (props.contact ? '780px' : '566px')};
   }
 `;
 
@@ -41,10 +55,23 @@ const ButtonWrapper = styled.div`
     ${(props) =>
       props.contact &&
       css`
-        bottom: 0;
         top: 18%;
       `};
   }
+
+  ${(props) =>
+    props.contact &&
+    css`
+      @media (max-width: 1200px) {
+        margin: 0;
+        justify-content: center;
+        top: 32%;
+      }
+
+      @media (max-width: ${getMedias('mobile')}) {
+        top: 10%;
+      }
+    `};
 `;
 
 const Menu = styled.div`
@@ -63,7 +90,7 @@ const Menu = styled.div`
     ${(props) =>
       props.contact &&
       css`
-        padding-top: 10em;
+        padding-top: 7em;
       `};
   }
 `;
@@ -127,8 +154,27 @@ const SocialMedias = styled(Socials)`
   gap: 24px;
 `;
 
+const ContactFormWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const FooterContactForm = styled(ContactForm)`
+  position: absolute;
+  bottom: 60%;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    bottom: 80%;
+  }
+`;
+
 const Footer = ({ contact, urls }) => (
   <Wrapper contact={contact}>
+    {contact && (
+      <ContactFormWrapper>
+        <FooterContactForm />
+      </ContactFormWrapper>
+    )}
     <ButtonWrapper contact={contact}>
       <ScrollButton />
     </ButtonWrapper>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import CardVideo from '@components/Projects/CardVideo';
 import CardImage from '@components/Projects/CardImage';
 import Button from '@components/Button/Button';
 import { getColor, getMedias } from '@styles/utils';
@@ -18,12 +19,12 @@ const Wrapper = styled.div`
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
   border-radius: 16px;
   & img {
-    width: 998px;
-    height: 659px;
+    width: auto;
+    height: 579px;
     opacity: 0.6;
   }
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 0 0 2em 0;
+    margin: 0 1em 2em 1em;
     & img {
       max-width: 100%;
       height: auto;
@@ -35,8 +36,8 @@ const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: 1100px) {
-    margin: 2em 2em;
+  @media (max-width: ${getMedias('mobile')}) {
+    margin: 0 0.4em 2em 0.4em;
   }
 `;
 const Description = styled.article`
@@ -48,6 +49,7 @@ const Description = styled.article`
   & a {
     text-decoration: none;
   }
+
   @media (max-width: ${getMedias('laptop')}) {
     & a {
       display: inline-block;
@@ -80,16 +82,21 @@ const Header = styled.header`
 `;
 const Text = styled.section`
   color: ${getColor('steel')};
-  margin: 32px 0px;
+  margin: 32px 0;
   @media (max-width: ${getMedias('laptop')}) {
     font-size: 14px;
     line-height: 28px;
+    margin-top: 16px;
   }
 `;
 
-const styledCard = ({ imgSrc, imgAlt, title, date, description, url, buttonLabel }) => (
+const ProjectCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, buttonLabel }) => (
   <Wrapper>
-    <CardImage imageSrc={imgSrc} imageAlt={imgAlt} />
+    {videoUrl ? (
+      <CardVideo videoUrl={videoUrl} title={title} />
+    ) : (
+      <CardImage imageSrc={imgSrc} imageAlt={imgAlt} />
+    )}
     <Description>
       <Header>
         <h4>{title}</h4>
@@ -107,8 +114,6 @@ const styledCard = ({ imgSrc, imgAlt, title, date, description, url, buttonLabel
   </Wrapper>
 );
 
-const ProjectCard = styled(styledCard)``;
-
 export default ProjectCard;
 
 ProjectCard.propTypes = {
@@ -119,4 +124,11 @@ ProjectCard.propTypes = {
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   url: PropTypes.string,
+  buttonLabel: PropTypes.string,
+};
+
+ProjectCard.defaultProps = {
+  videoUrl: '',
+  buttonLabel: '',
+  url: '',
 };

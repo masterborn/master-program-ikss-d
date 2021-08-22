@@ -6,6 +6,7 @@ import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
+import HttpClient from '@api/httpClient/HttpClient';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 
@@ -101,6 +102,7 @@ const homePage = () => (
       ]}
     />
     <Footer
+      contact
       urls={{
         fblink: 'https://pl-pl.facebook.com',
         inlink: 'https://www.instagram.com',
@@ -110,5 +112,43 @@ const homePage = () => (
     />
   </>
 );
+
+export const getStaticProps = async () => {
+  const basicContentClient = new HttpClient(
+    `access_token=${process.env.CONTENTFUL_ACCESS_KEY}&content_type=basicContent&fields.page[in]=homepage`,
+  );
+
+  // Hero data
+
+  const heroData = await basicContentClient.getFilteredData('homepage-top-section');
+
+  // Values data
+
+  const valuesHeaderData = await basicContentClient.getFilteredData('homepage-values');
+
+  const value1 = await basicContentClient.getFilteredData('homepage-tile-1');
+  const value2 = await basicContentClient.getFilteredData('homepage-tile-2');
+  const value3 = await basicContentClient.getFilteredData('homepage-tile-3');
+
+  // Projects data
+
+  const projectsHeaderData = await basicContentClient.getFilteredData('homepage-projects-title');
+
+  // Cooperation data
+
+  const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
+
+  return {
+    props: {
+      heroData,
+      valuesHeaderData,
+      valuesFirstCardData: value1,
+      valuesSecondCardData: value2,
+      valuesThirdCardData: value3,
+      projectsHeaderData,
+      cooperationHeaderData,
+    },
+  };
+};
 
 export default homePage;
