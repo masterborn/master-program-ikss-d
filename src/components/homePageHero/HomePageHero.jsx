@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import HeroText from '@components/Hero/HeroText';
-import HeroImage from '@components/Hero/HeroImage';
-import HeroSM from '@components/Hero/HeroSM';
+import HomePageHeroText from '@components/homePageHero/HomePageHeroText';
+import HomePageHeroImage from '@components/homePageHero/HomePageHeroImage';
+import HeroSM from '@components/homePageHero/HomePageHeroSM';
 import { getMedias } from '@styles/utils';
 
 const styledHero = ({
@@ -15,22 +15,26 @@ const styledHero = ({
   instagramLink,
   youTubeLink,
   linkedInLink,
-}) => (
-  <>
-    <Wrapper>
-      <HeroText headerText={headerText} smallText={smallText} />
-      <HeroImage imageSrc={imageSrc} imageAlt={imageAlt} />
-    </Wrapper>
-    <HeroSM
-      facebookLink={facebookLink}
-      instagramLink={instagramLink}
-      youTubeLink={youTubeLink}
-      linkedInLink={linkedInLink}
-    />
-  </>
-);
+  data,
+}) => {
+  console.log(data);
+  return (
+    <>
+      <Wrapper>
+        <HomePageHeroText headerText={headerText} smallText={smallText} />
+        <HomePageHeroImage imageSrc={imageSrc} imageAlt={imageAlt} />
+      </Wrapper>
+      <HeroSM
+        facebookLink={facebookLink}
+        instagramLink={instagramLink}
+        youTubeLink={youTubeLink}
+        linkedInLink={linkedInLink}
+      />
+    </>
+  );
+};
 
-const Hero = styled(styledHero)`
+const HomePageHero = styled(styledHero)`
   background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%), #ffffff;
   width: 100vw;
 `;
@@ -61,7 +65,7 @@ const Wrapper = styled.section`
   }
 `;
 
-Hero.propTypes = {
+HomePageHero.propTypes = {
   headerText: PropTypes.string.isRequired,
   smallText: PropTypes.string.isRequired,
   imageSrc: PropTypes.shape({}).isRequired,
@@ -70,6 +74,9 @@ Hero.propTypes = {
   instagramLink: PropTypes.string.isRequired,
   youTubeLink: PropTypes.string.isRequired,
   linkedInLink: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    identifier: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-export default Hero;
+export default HomePageHero;

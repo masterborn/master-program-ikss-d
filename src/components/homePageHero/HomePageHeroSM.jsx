@@ -6,20 +6,24 @@ import CircleInstagram from '@assets/icons/instagram-circle-icon.svg';
 import CircleYouTube from '@assets/icons/youTube-circle-icon.svg';
 import CircleLinkedIn from '@assets/icons/linkedIN-circle-icon.svg';
 import { getMedias } from '@styles/utils';
-import HeroSMLink from '@components/Hero/HeroSMLink';
+import HomePageHeroSMLink from '@components/homePageHero/HomePageHeroSMLink';
 
 const styledHeroSM = ({ facebookLink, instagramLink, youTubeLink, linkedInLink }) => (
   <Wrapper>
     <div>
-      <HeroSMLink linkText="Facebook" hrefLink={facebookLink} linkIcon={CircleFacebook} />
-      <HeroSMLink linkText="Instagram" hrefLink={instagramLink} linkIcon={CircleInstagram} />
-      <HeroSMLink linkText="YouTube" hrefLink={youTubeLink} linkIcon={CircleYouTube} />
-      <HeroSMLink linkText="LinkedIn" hrefLink={linkedInLink} linkIcon={CircleLinkedIn} />
+      <HomePageHeroSMLink linkText="Facebook" hrefLink={facebookLink} linkIcon={CircleFacebook} />
+      <HomePageHeroSMLink
+        linkText="Instagram"
+        hrefLink={instagramLink}
+        linkIcon={CircleInstagram}
+      />
+      <HomePageHeroSMLink linkText="YouTube" hrefLink={youTubeLink} linkIcon={CircleYouTube} />
+      <HomePageHeroSMLink linkText="LinkedIn" hrefLink={linkedInLink} linkIcon={CircleLinkedIn} />
     </div>
   </Wrapper>
 );
 
-const HeroSm = styled(styledHeroSM)``;
+const HomePageHeroSM = styled(styledHeroSM)``;
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -51,11 +55,11 @@ const Wrapper = styled.div`
   }
 `;
 
-HeroSm.propTypes = {
+HomePageHeroSM.propTypes = {
   facebookLink: PropTypes.string.isRequired,
   instagramLink: PropTypes.string.isRequired,
   youTubeLink: PropTypes.string.isRequired,
   linkedInLink: PropTypes.string.isRequired,
 };
 
-export default HeroSm;
+export default HomePageHeroSM;

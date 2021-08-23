@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 const styledHeroImage = ({ imageSrc, imageAlt }) => <Image src={imageSrc} alt={imageAlt} />;
 
-const HeroImage = styled(styledHeroImage)``;
+const HomePageHeroImage = styled(styledHeroImage)``;
 
-HeroImage.propTypes = {
+HomePageHeroImage.propTypes = {
   imageSrc: PropTypes.shape({}).isRequired,
   imageAlt: PropTypes.string.isRequired,
 };
 
-export default HeroImage;
+export default HomePageHeroImage;

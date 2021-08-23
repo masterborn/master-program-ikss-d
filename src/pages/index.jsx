@@ -1,4 +1,4 @@
-import Hero from '@components/Hero/Hero';
+import HomePageHero from '@components/homePageHero/HomePageHero';
 import HeroImagePng from '@assets/heroImage2.jpg';
 import ValuesIcon1 from '@assets/values-1.svg';
 import ValuesIcon2 from '@assets/values-2.svg';
@@ -9,8 +9,7 @@ import Values from '@components/Values/Values';
 import HttpClient from '@api/httpClient/HttpClient';
 import Cooperation from '@components/Cooperation/Cooperation';
 
-
-const homePage = () => (
+const homePage = ({ heroData }) => (
   <>
     <Navbar
       urls={{
@@ -21,7 +20,8 @@ const homePage = () => (
       }}
     />
 
-    <Hero
+    <HomePageHero
+      data={heroData}
       headerText="Przykładowy nagłówek IKSS"
       smallText="Urna, mi condimentum amet, consectetur mauris tincidunt gravida aenean. Dignissim in sit arcu nam. Ultrices integer odio feugiat vulputate."
       imageSrc={HeroImagePng}
@@ -108,7 +108,7 @@ const homePage = () => (
 export const getStaticProps = async () => {
   const basicContentClient = new HttpClient(`&content_type=basicContent&fields.page[in]=homepage`);
 
-  // Hero data
+  // homePageHero data
 
   const heroData = await basicContentClient.getFilteredData('homepage-top-section');
 
