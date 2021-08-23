@@ -8,9 +8,7 @@ const styledHeroText = ({ headerText, smallText }) => (
   <Wrapper>
     <h1>{headerText}</h1>
     <p>{smallText}</p>
-    <Button secondary type="submit">
-      Skontaktuj się
-    </Button>
+    <Button secondary>Skontaktuj się</Button>
   </Wrapper>
 );
 

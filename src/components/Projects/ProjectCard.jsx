@@ -46,14 +46,10 @@ const Description = styled.article`
   align-items: flex-start;
   max-width: 792px;
   padding: 0 102px 4.1em 102px;
-  & a {
-    text-decoration: none;
-  }
 
   @media (max-width: ${getMedias('laptop')}) {
     & a {
-      display: inline-block;
-      margin: 0 auto 1em auto;
+      margin: 0 auto 2.25em auto;
     }
   }
 `;

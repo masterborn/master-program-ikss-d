@@ -7,17 +7,7 @@ import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Icon from '@components/Icon/Icon';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
-const styledButton = ({
-  className,
-  withIcon,
-  href,
-  onClick,
-  target,
-  rel,
-  children,
-  link,
-  isTypSubmit,
-}) => {
+const styledButton = ({ className, withIcon, href, onClick, children, link, isTypeSubmit }) => {
   if (href && link) {
     return (
       <Link href={href}>
@@ -31,7 +21,7 @@ const styledButton = ({
 
   if (href && !link) {
     return (
-      <a href={href} className={className} target={target} rel={rel}>
+      <a href={href} className={className} target="_blank" rel="noopener noreferrer">
         {withIcon && <Icon icon={FacebookIcon} media="18px" />}
         {children}
       </a>
@@ -39,7 +29,7 @@ const styledButton = ({
   }
 
   return (
-    <button className={className} onClick={onClick} type={isTypSubmit ? 'submit' : 'button'}>
+    <button className={className} onClick={onClick} type={isTypeSubmit ? 'submit' : 'button'}>
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {children}
     </button>
@@ -137,8 +127,6 @@ Button.propTypes = {
   withIcon: PropTypes.bool,
   href: PropTypes.string,
   onClick: PropTypes.func,
-  target: PropTypes.string,
-  rel: PropTypes.string,
   link: PropTypes.bool,
   isTypSubmit: PropTypes.bool,
 };
@@ -147,10 +135,8 @@ Button.defaultProps = {
   secondary: false,
   withIcon: false,
   href: null,
-  target: null,
-  rel: null,
   link: false,
-  isTypSubmit: false,
+  isTypeSubmit: false,
 };
 
 export default Button;
