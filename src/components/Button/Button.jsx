@@ -7,7 +7,17 @@ import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Icon from '@components/Icon/Icon';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
-const styledButton = ({ className, withIcon, href, onClick, target, rel, children, link }) => {
+const styledButton = ({
+  className,
+  withIcon,
+  href,
+  onClick,
+  target,
+  rel,
+  children,
+  link,
+  type,
+}) => {
   if (href && link) {
     return (
       <Link href={href}>
@@ -29,7 +39,7 @@ const styledButton = ({ className, withIcon, href, onClick, target, rel, childre
   }
 
   return (
-    <button className={className} onClick={onClick} type="button">
+    <button className={className} onClick={onClick} type={type}>
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {children}
     </button>
@@ -130,6 +140,17 @@ Button.propTypes = {
   target: PropTypes.string,
   rel: PropTypes.string,
   link: PropTypes.bool,
+  type: PropTypes.string,
+};
+
+Button.defaultProps = {
+  secondary: false,
+  withIcon: false,
+  href: null,
+  target: null,
+  rel: null,
+  link: false,
+  type: 'button',
 };
 
 export default Button;
