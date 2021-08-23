@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -93,13 +94,15 @@ const StyledInput = ({
   className,
   labelText,
   textarea,
+  inputRef,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [showToolTip, setShowToolTip] = useState(false);
+  const [toolTipText, setToolTipText] = useState('');
 
   const displayToolTip = showToolTip && (
-    <WarningToolTip toolTipText="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+    <WarningToolTip toolTipText={toolTipText || 'Proszę wpisać minimum 3 znaki.'} />
   );
 
   const displayIcon = isInvalid && (
@@ -109,13 +112,55 @@ const StyledInput = ({
   );
 
   const onChange = (event) => {
+    const inputVal = event.target.value;
+
+    setToolTipText('');
+    setIsInvalid(false);
+
     setInputValue(event.target.value);
-    if (required) {
-      if (event.target.value.length === 0) {
+
+    const lettersRegex = /[^a-zA-Z]/g;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    switch (true) {
+      case inputVal.length < 3:
         setIsInvalid(true);
-      } else {
+        break;
+      case name === 'name' && inputVal.length > 30:
+        setToolTipText('Limit znaków: 30');
+        setIsInvalid(true);
+        break;
+      case name === 'surname' && inputVal.length > 50:
+        setToolTipText('Limit znaków: 50');
+        setIsInvalid(true);
+        break;
+      case name === 'email' && inputVal.length > 254:
+        setToolTipText('Limit znaków: 254');
+        setIsInvalid(true);
+        break;
+      case name === 'topic' && inputVal.length > 200:
+        setToolTipText('Limit znaków: 200');
+        setIsInvalid(true);
+        break;
+      case name === 'content' && inputVal.length > 2000:
+        setToolTipText('Limit znaków: 2000');
+        setIsInvalid(true);
+        break;
+      case name === 'name' && lettersRegex.test(inputVal):
+        setToolTipText('Proszę używać tylko liter');
+        setIsInvalid(true);
+        break;
+      case name === 'surname' && lettersRegex.test(inputVal):
+        setToolTipText('Proszę używać tylko liter');
+        setIsInvalid(true);
+        break;
+      case name === 'email' && !emailRegex.test(inputVal):
+        setToolTipText('Proszę wpisać poprawny adres email.');
+        setIsInvalid(true);
+        break;
+      default:
+        setToolTipText('');
         setIsInvalid(false);
-      }
     }
   };
 
@@ -133,6 +178,7 @@ const StyledInput = ({
               value={inputValue}
               required={required}
               disabled={disabled}
+              ref={inputRef}
             />
           ) : (
             <input
@@ -144,6 +190,7 @@ const StyledInput = ({
               value={inputValue}
               required={required}
               disabled={disabled}
+              ref={inputRef}
             />
           )}
           {displayToolTip}
@@ -163,6 +210,7 @@ StyledInput.defaultProps = {
   className: null,
   labelText: null,
   textarea: false,
+  inputRef: null,
 };
 
 StyledInput.propTypes = {
@@ -174,6 +222,7 @@ StyledInput.propTypes = {
   className: PropTypes.string,
   labelText: PropTypes.string,
   textarea: PropTypes.bool,
+  inputRef: PropTypes.shape({ currrent: PropTypes.func }),
 };
 
 export default StyledInput;

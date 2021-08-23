@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -155,6 +155,18 @@ const ContactForm = ({ modal, toolTipText, className }) => {
     </button>
   );
 
+  const nameInput = useRef();
+  const surnameInput = useRef();
+  const emailInput = useRef();
+  const topicInput = useRef();
+  const contentInput = useRef();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(nameInput.current?.value);
+  };
+
   return (
     <Wrapper className={className}>
       {modal && CloseModalButton}
@@ -169,14 +181,21 @@ const ContactForm = ({ modal, toolTipText, className }) => {
         dictumst neque neque molestie parturient.
       </p>
 
-      <Form>
-        <StyledInput required name="name" placeholder="Wpisz swoje imię" labelText="Imię" />
+      <Form onSubmit={handleSubmit}>
+        <StyledInput
+          required
+          name="name"
+          placeholder="Wpisz swoje imię"
+          labelText="Imię"
+          inputRef={nameInput}
+        />
 
         <StyledInput
           required
           name="surname"
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
+          inputRef={surnameInput}
         />
 
         <StyledInput
@@ -184,9 +203,16 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="email"
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
+          inputRef={emailInput}
         />
 
-        <StyledInput required name="topic" placeholder="Temat wiadomości" labelText="Temat" />
+        <StyledInput
+          required
+          name="topic"
+          placeholder="Temat wiadomości"
+          labelText="Temat"
+          inputRef={topicInput}
+        />
 
         <StyledInput
           textarea
@@ -194,6 +220,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="content"
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"
+          inputRef={contentInput}
         />
 
         <InfoWrapper>
@@ -209,7 +236,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           </p>
         </InfoWrapper>
 
-        <SubmitButton buttonLabel="Wyślij wiadomość" />
+        <SubmitButton formNoValidate type="submit" buttonLabel="Wyślij wiadomość" />
       </Form>
     </Wrapper>
   );

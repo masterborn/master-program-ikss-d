@@ -9,7 +9,7 @@ const Wrapper = styled.label`
   visibility: none;
 `;
 
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+const HiddenCheckbox = styled.input.attrs({ type: 'checkbox', required: true })`
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
