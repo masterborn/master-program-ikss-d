@@ -72,6 +72,7 @@ const errorPage = () => (
         ytlink: 'https://www.youtube.com',
         lnlink: 'https://pl.linkedin.com',
       }}
+      areSmAlwaysDisabled
     />
     <Wrapper>
       <Logo404 />

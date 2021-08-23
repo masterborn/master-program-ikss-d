@@ -106,7 +106,7 @@ const ContactButton = styled(Button)`
   }
 `;
 
-function Navbar({ urls }) {
+function Navbar({ urls, areSmAlwaysDisabled }) {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -124,12 +124,16 @@ function Navbar({ urls }) {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    if (!areSmAlwaysDisabled) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    } else {
+      setSocialsVisibility(true);
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [areSmAlwaysDisabled]);
 
   return (
     <>
@@ -182,4 +186,9 @@ Navbar.propTypes = {
     ytlink: PropTypes.string,
     lnlink: PropTypes.string,
   }).isRequired,
+  areSmAlwaysDisabled: PropTypes.bool,
+};
+
+Navbar.defaultProps = {
+  areSmAlwaysDisabled: false,
 };
