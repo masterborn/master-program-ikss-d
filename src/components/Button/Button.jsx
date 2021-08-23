@@ -1,32 +1,40 @@
 import styled, { css } from 'styled-components';
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Icon from '@components/Icon/Icon';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
-// Button props legend:
-// buttonLabel - set label shown on button and it takes string,
-// withIcon - display button with icon and it takes boolean,
-// secondary - display secondary version of button and it takes boolean.
+const styledButton = ({ className, withIcon, href, onClick, target, rel, children, link }) => {
+  if (href && link) {
+    return (
+      <Link href={href}>
+        <a className={className}>
+          {withIcon && <Icon icon={FacebookIcon} media="18px" />}
+          {children}
+        </a>
+      </Link>
+    );
+  }
 
-const styledButton = React.forwardRef(
-  ({ className, buttonLabel, withIcon, href, onClick, target, rel }, ref) => (
-    <a
-      href={href}
-      type="button"
-      className={className}
-      ref={ref}
-      onClick={onClick}
-      target={target}
-      rel={rel}
-    >
+  if (href && !link) {
+    return (
+      <a href={href} className={className} target={target} rel={rel}>
+        {withIcon && <Icon icon={FacebookIcon} media="18px" />}
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <button className={className} onClick={onClick} type="button">
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
-      {buttonLabel}
-    </a>
-  ),
-);
+      {children}
+    </button>
+  );
+};
 
 const Button = styled(styledButton)`
   display: flex;
@@ -114,30 +122,14 @@ const Button = styled(styledButton)`
   }
 `;
 
-styledButton.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
+Button.propTypes = {
+  secondary: PropTypes.bool,
   withIcon: PropTypes.bool,
-  className: PropTypes.string,
   href: PropTypes.string,
   onClick: PropTypes.func,
   target: PropTypes.string,
   rel: PropTypes.string,
-};
-
-Button.propTypes = {
-  secondary: PropTypes.bool,
-  buttonLabel: PropTypes.string.isRequired,
-  withIcon: PropTypes.bool,
-  className: PropTypes.string,
-};
-
-styledButton.defaultProps = {
-  withIcon: false,
-  className: '',
-  href: null,
-  onClick: () => {},
-  target: null,
-  rel: null,
+  link: PropTypes.bool,
 };
 
 export default Button;

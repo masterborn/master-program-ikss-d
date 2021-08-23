@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
-import Link from 'next/link';
 
 import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
@@ -103,7 +102,7 @@ const StyledProjects = () => {
           role="button"
           tabIndex={0}
         >
-          <CarouselButton active={activeCard === 0} buttonLabel={tempData[0].title} />
+          <CarouselButton active={activeCard === 0}>{tempData[0].title}</CarouselButton>
         </div>
         <div
           onClick={() => setActiveCard(1)}
@@ -111,7 +110,7 @@ const StyledProjects = () => {
           role="button"
           tabIndex={-1}
         >
-          <CarouselButton active={activeCard === 1} buttonLabel={tempData[1].title} />
+          <CarouselButton active={activeCard === 1}>{tempData[1].title}</CarouselButton>
         </div>
         <div
           onClick={() => setActiveCard(2)}
@@ -119,7 +118,7 @@ const StyledProjects = () => {
           role="button"
           tabIndex={-1}
         >
-          <CarouselButton active={activeCard === 2} buttonLabel={tempData[2].title} />
+          <CarouselButton active={activeCard === 2}>{tempData[2].title}</CarouselButton>
         </div>
       </Carousel>
       <ProjectCard
@@ -132,9 +131,9 @@ const StyledProjects = () => {
         url={tempData[activeCard].url}
         buttonLabel={tempData[activeCard].buttonLabel}
       />
-      <Link href="/projects" passHref>
-        <Button secondary buttonLabel="Zobacz wszystkie projekty" />
-      </Link>
+      <Button href="/projects" link secondary>
+        Zobacz wszystkie projekty
+      </Button>
     </Wrapper>
   );
 };

@@ -8,7 +8,7 @@ const styledHeroText = ({ headerText, smallText }) => (
   <Wrapper>
     <h1>{headerText}</h1>
     <p>{smallText}</p>
-    <Button buttonLabel="Skontaktuj się" secondary />
+    <Button secondary>Skontaktuj się</Button>
   </Wrapper>
 );
 

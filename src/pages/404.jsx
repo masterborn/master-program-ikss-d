@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Link from 'next/link';
 
 import Logo404 from '@assets/404-background.svg';
 import Button from '@components/Button/Button';
@@ -7,12 +6,14 @@ import Navbar from '@components/Navbar/Navbar';
 import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.section`
-  margin: 116px auto 132px;
+  padding: 116px 0 132px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   width: 100%;
+  height: auto;
+  background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
   & svg {
     margin-bottom: 57px;
@@ -75,10 +76,13 @@ const errorPage = () => (
     <Wrapper>
       <Logo404 />
       <h1>ups, 404</h1>
-      <p>Za każdym razem kiedy trafiasz na tę stronę, ktoś wymawia „i-ka-ka-es” zamiast „ikss”.</p>
-      <Link href="/" passHref>
-        <Button buttonLabel="Uciekam stąd" />
-      </Link>
+      <p>
+        Za każdym razem kiedy trafiasz na tę stronę, ktoś wymawia „i-ka-ka-es” zamiast{' '}
+        <strong>„ikss”</strong>.
+      </p>
+      <Button href="/" link>
+        Uciekam stąd
+      </Button>
     </Wrapper>
   </>
 );
