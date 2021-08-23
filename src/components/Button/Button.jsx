@@ -16,7 +16,7 @@ const styledButton = ({
   rel,
   children,
   link,
-  type,
+  isTypSubmit,
 }) => {
   if (href && link) {
     return (
@@ -39,7 +39,7 @@ const styledButton = ({
   }
 
   return (
-    <button className={className} onClick={onClick} type={type}>
+    <button className={className} onClick={onClick} type={isTypSubmit ? 'submit' : 'button'}>
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {children}
     </button>
@@ -140,7 +140,7 @@ Button.propTypes = {
   target: PropTypes.string,
   rel: PropTypes.string,
   link: PropTypes.bool,
-  type: PropTypes.string,
+  isTypSubmit: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -150,7 +150,7 @@ Button.defaultProps = {
   target: null,
   rel: null,
   link: false,
-  type: 'button',
+  isTypSubmit: false,
 };
 
 export default Button;
