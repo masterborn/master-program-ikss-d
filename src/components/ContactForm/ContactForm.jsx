@@ -101,9 +101,6 @@ const InfoWrapper = styled.div`
     position: relative;
     margin-left: 1rem;
     -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 
     @media (max-width: ${getMedias('mobile')}) {
