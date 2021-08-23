@@ -10,9 +10,14 @@ import FacebookIcon from '@assets/icons/facebook-icon.svg';
 // withIcon - display button with icon and it takes boolean,
 // secondary - display secondary version of button and it takes boolean.
 
-const styledButton = ({ className, type, buttonLabel, withIcon, disabled, formNoValidate }) => (
+const styledButton = ({ className, submit, buttonLabel, withIcon, disabled, formNoValidate }) => (
   <>
-    <button formNoValidate={formNoValidate} type={type} disabled={disabled} className={className}>
+    <button
+      formNoValidate={formNoValidate}
+      type={submit ? 'submit' : 'button'}
+      disabled={disabled}
+      className={className}
+    >
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {buttonLabel}
     </button>
@@ -105,13 +110,13 @@ const Button = styled(styledButton)`
 `;
 
 Button.defaultProps = {
-  type: 'button',
+  submit: false,
   formNoValidate: false,
 };
 
 Button.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
-  type: PropTypes.string,
+  submit: PropTypes.bool,
   withIcon: PropTypes.bool,
   secondary: PropTypes.bool,
   disabled: PropTypes.bool,
