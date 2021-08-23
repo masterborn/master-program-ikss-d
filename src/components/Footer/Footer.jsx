@@ -69,7 +69,7 @@ const ButtonWrapper = styled.div`
       }
 
       @media (max-width: ${getMedias('mobile')}) {
-        top: 10%;
+        top: 12%;
       }
     `};
 `;
@@ -164,7 +164,7 @@ const FooterContactForm = styled(ContactForm)`
   bottom: 60%;
 
   @media (max-width: ${getMedias('mobile')}) {
-    bottom: 80%;
+    bottom: 75%;
   }
 `;
 
