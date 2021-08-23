@@ -51,12 +51,6 @@ const ButtonWrapper = styled.div`
     margin: 0;
     justify-content: center;
     bottom: 4%;
-
-    ${(props) =>
-      props.contact &&
-      css`
-        top: 18%;
-      `};
   }
 
   ${(props) =>
