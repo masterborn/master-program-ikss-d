@@ -25,14 +25,18 @@ class HttpClient {
         );
 
         if (filteredArrayWithSingleData[0].image1) {
-          const imageTitle = filteredArrayWithSingleData[0].image1.fields.title;
-          const imageURL = filteredArrayWithSingleData[0].image1.fields.file.url;
+          const imageOrVideoTitle = filteredArrayWithSingleData[0].image1.fields.title;
+          const imageOrVideoURL = filteredArrayWithSingleData[0].image1.fields.file.url;
+          const { contentType } = filteredArrayWithSingleData[0].image1.fields.file;
+
+          const contentTypeArray = contentType.split('/');
 
           delete filteredArrayWithSingleData[0].fields.image1;
 
           return {
-            imageURL,
-            imageTitle,
+            imageOrVideoURL,
+            imageOrVideoTitle,
+            contentType: contentTypeArray[0],
             ...filteredArrayWithSingleData[0].fields,
           };
         }
