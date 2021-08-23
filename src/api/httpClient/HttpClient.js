@@ -47,6 +47,8 @@ class HttpClient {
         if (res.text1) {
           const text = documentToHtmlString(res.text1);
           delete res.text1;
+          delete res.identifier;
+          delete res.page;
           return { ...res, text };
         }
         return res;
