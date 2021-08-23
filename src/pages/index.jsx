@@ -106,9 +106,7 @@ const homePage = () => (
 );
 
 export const getStaticProps = async () => {
-  const basicContentClient = new HttpClient(
-    `access_token=${process.env.CONTENTFUL_ACCESS_KEY}&content_type=basicContent&fields.page[in]=homepage`,
-  );
+  const basicContentClient = new HttpClient(`&content_type=basicContent&fields.page[in]=homepage`);
 
   // Hero data
 
