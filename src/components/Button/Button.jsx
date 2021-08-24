@@ -7,7 +7,16 @@ import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Icon from '@components/Icon/Icon';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
-const styledButton = ({ className, withIcon, href, onClick, children, link, isTypeSubmit }) => {
+const styledButton = ({
+  className,
+  withIcon,
+  href,
+  onClick,
+  children,
+  link,
+  isTypeSubmit,
+  onKeyUp,
+}) => {
   if (href && link) {
     return (
       <Link href={href}>
@@ -29,7 +38,12 @@ const styledButton = ({ className, withIcon, href, onClick, children, link, isTy
   }
 
   return (
-    <button className={className} onClick={onClick} type={isTypeSubmit ? 'submit' : 'button'}>
+    <button
+      className={className}
+      onClick={onClick}
+      onKeyUp={onKeyUp}
+      type={isTypeSubmit ? 'submit' : 'button'}
+    >
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {children}
     </button>
@@ -127,6 +141,7 @@ Button.propTypes = {
   withIcon: PropTypes.bool,
   href: PropTypes.string,
   onClick: PropTypes.func,
+  onKeyUp: PropTypes.func,
   link: PropTypes.bool,
   isTypSubmit: PropTypes.bool,
 };
