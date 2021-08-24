@@ -22,6 +22,7 @@ const Wrapper = styled.div`
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
   margin: 2em auto;
   border-radius: 16px;
+  background: ${getColor('white')};
 
   & > :is(p, h3) {
     text-align: center;
@@ -145,7 +146,7 @@ const StyledCloseIcon = styled(Icon)`
   cursor: pointer;
 `;
 
-const ContactForm = ({ modal, toolTipText }) => {
+const ContactForm = ({ modal, toolTipText, className }) => {
   const [toolTip, setToolTip] = useState(false);
 
   const CloseModalButton = (
@@ -155,7 +156,7 @@ const ContactForm = ({ modal, toolTipText }) => {
   );
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {modal && CloseModalButton}
 
       <Header>
@@ -217,11 +218,13 @@ const ContactForm = ({ modal, toolTipText }) => {
 ContactForm.defaultProps = {
   modal: false,
   toolTipText: '',
+  className: null,
 };
 
 ContactForm.propTypes = {
   modal: PropTypes.bool,
   toolTipText: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default ContactForm;

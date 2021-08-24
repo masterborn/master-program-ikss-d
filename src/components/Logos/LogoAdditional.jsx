@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import IkksLogoAdditional from '@assets/ikks-logo-additional.svg';
 
@@ -11,6 +12,14 @@ const StyledLogoAdditional = styled(IkksLogoAdditional)`
   }
 `;
 
-const LogoAdditional = () => <StyledLogoAdditional />;
+const LogoAdditional = ({ className }) => <StyledLogoAdditional className={className} />;
 
 export default LogoAdditional;
+
+LogoAdditional.propTypes = {
+  className: PropTypes.string,
+};
+
+LogoAdditional.defaultProps = {
+  className: null,
+};

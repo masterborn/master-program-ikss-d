@@ -6,41 +6,38 @@ import HomePageHeroImage from '@components/homePageHero/HomePageHeroImage';
 import HeroSM from '@components/homePageHero/HomePageHeroSM';
 import HomePageHeroVideo from '@components/homePageHero/HomePageHeroVideo';
 import { getMedias } from '@styles/utils';
+import HomePageHeroYouTubeVideo from '@components/homePageHero/HomePageHeroYouTubeVideo';
 
 const styledHero = ({ data }) => {
-  const {
-    contentType,
-    headerText,
-    smallText,
-    imageSrc,
-    imageOrVideoURL,
-    imageOrVideoTitle,
-    linkURL,
-    linkCaption,
-    facebookLink,
-    instagramLink,
-    youTubeLink,
-    linkedInLink,
-  } = data;
   let imageOrVideoBlock;
 
-  if (contentType && contentType === 'video') {
-    imageOrVideoBlock = <HomePageHeroVideo videoSrc={imageOrVideoURL} videoTitle={imageOrVideoTitle} />;
+  if (data.contentType && data.contentType === 'video/mp4') {
+    imageOrVideoBlock = (
+      <HomePageHeroVideo videoSrc={data.imageOrVideoURL} videoTitle={data.imageOrVideoTitle} />
+    );
   }
 
-  if (linkURL)
+  if (data.imageOrVideoURL) {
+    imageOrVideoBlock = (
+      <HomePageHeroImage imageSrc={data.imageOrVideoURL} imageAlt={data.imageOrVideoTitle} />
+    );
+  }
+
+  if (data.link_url) {
+    imageOrVideoBlock = <HomePageHeroYouTubeVideo videoUrl={data.link_url} />;
+  }
 
   return (
     <>
       <Wrapper>
-        <HomePageHeroText headerText={headerText} smallText={smallText} />
-        <HomePageHeroImage imageSrc={imageSrc.HeroImagePng} imageAlt={imageOrVideoTitle} />
+        <HomePageHeroText headerText={data.title} smallText={data.text} />
+        {imageOrVideoBlock}
       </Wrapper>
       <HeroSM
-        facebookLink={facebookLink}
-        instagramLink={instagramLink}
-        youTubeLink={youTubeLink}
-        linkedInLink={linkedInLink}
+        facebookLink={data.facebookLink}
+        instagramLink={data.instagramLink}
+        youTubeLink={data.youTubeLink}
+        linkedInLink={data.linkedInLink}
       />
     </>
   );
@@ -90,7 +87,7 @@ HomePageHero.propTypes = {
     instagramLink: PropTypes.string.isRequired,
     youTubeLink: PropTypes.string.isRequired,
     linkedInLink: PropTypes.string.isRequired,
-    imageSrc: PropTypes.shape({}).isRequired,
+    imageSrc: PropTypes.string.isRequired,
   }).isRequired,
 };
 

@@ -1,13 +1,19 @@
 import styled from 'styled-components';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-const styledHeroImage = ({ imageSrc, imageAlt }) => <Image src={imageSrc} alt={imageAlt} />;
+const HomePageHeroImage = ({ imageSrc, imageAlt }) => (
+  <div>
+    <StyledImage src={imageSrc} alt={imageAlt} />
+  </div>
+);
 
-const HomePageHeroImage = styled(styledHeroImage)``;
+const StyledImage = styled.img`
+  width: 100%;
+  object-fit: scale-down;
+`;
 
 HomePageHeroImage.propTypes = {
-  imageSrc: PropTypes.shape({}).isRequired,
+  imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string.isRequired,
 };
 
