@@ -1,5 +1,4 @@
 import HomePageHero from '@components/homePageHero/HomePageHero';
-import HeroImagePng from '@assets/heroImage2.jpg';
 import ValuesIcon1 from '@assets/values-1.svg';
 import ValuesIcon2 from '@assets/values-2.svg';
 import ValuesIcon3 from '@assets/values-3.svg';
@@ -8,6 +7,13 @@ import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
 import HttpClient from '@api/httpClient/HttpClient';
 import Cooperation from '@components/Cooperation/Cooperation';
+
+const heroTempData = {
+  title: 'Przykładowy nagłówek IKSS',
+  text: 'Urna, mi condimentum amet, consectetur mauris tincidunt gravida aenean. Dignissim in sit arcu nam. Ultrices integer odio feugiat vulputate.',
+  imageOrVideoURL: 'https://picsum.photos/1920/1080',
+  imageOrVideoTitle: 'na stronę ikss',
+};
 
 const homePage = ({ heroData }) => (
   <>
@@ -25,7 +31,6 @@ const homePage = ({ heroData }) => (
         headerText: 'Przykładowy nagłówek IKSS',
         smallText:
           'Urna, mi condimentum amet, consectetur mauris tincidunt gravida aenean. Dignissim in sit arcu nam. Ultrices integer odio feugiat vulputate.',
-        imageSrc: { HeroImagePng },
         imageOrVideoTitle: 'Przykładowy nagłówek IKSS',
         facebookLink: 'https://pl-pl.facebook.com',
         instagramLink: 'https://www.instagram.com',
