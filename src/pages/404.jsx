@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import Logo404 from '@assets/404-background.svg';
+import Logo404part1 from '@assets/404part1.svg';
+import Logo404part2 from '@assets/404part2.svg';
 import Button from '@components/Button/Button';
 import Navbar from '@components/Navbar/Navbar';
 import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.section`
-  padding: 116px 0 132px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -15,8 +15,11 @@ const Wrapper = styled.section`
   height: auto;
   background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
-  & svg {
+  & div {
+    position: relative;
     margin-bottom: 57px;
+    width: 100%;
+    height: 464px;
   }
 
   & h1,
@@ -38,16 +41,16 @@ const Wrapper = styled.section`
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    & svg {
+    & div {
       transform: scale(0.6);
+      height: 300px;
+      margin-top: 50px;
     }
   }
 
   @media (max-width: ${getMedias('mobile')}) {
-    margin-top: 50px;
-
-    & svg {
-      transform: scale(0.5);
+    & div {
+      transform: scale(0.47);
       margin-bottom: 0;
     }
 
@@ -60,7 +63,25 @@ const Wrapper = styled.section`
       font-size: 14px;
       line-height: 28px;
     }
+
+    & a {
+      margin-bottom: 50px;
+    }
   }
+`;
+
+const StyledLogoPart1 = styled(Logo404part1)`
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const StyledLogoPart2 = styled(Logo404part2)`
+  position: absolute;
+  top: 74%;
+  left: 49%;
+  transform: translate(-50%, -50%);
 `;
 
 const errorPage = () => (
@@ -74,7 +95,10 @@ const errorPage = () => (
       }}
     />
     <Wrapper>
-      <Logo404 />
+      <div>
+        <StyledLogoPart1 />
+        <StyledLogoPart2 />
+      </div>
       <h1>ups, 404</h1>
       <p>
         Za każdym razem kiedy trafiasz na tę stronę, ktoś wymawia „i-ka-ka-es” zamiast{' '}
