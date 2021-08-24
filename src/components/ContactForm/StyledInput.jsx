@@ -101,9 +101,7 @@ const StyledInput = ({
   const [showToolTip, setShowToolTip] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
 
-  const displayToolTip = showToolTip && (
-    <WarningToolTip toolTipText={toolTipText || 'Proszę wpisać minimum 3 znaki.'} />
-  );
+  const displayToolTip = showToolTip && <WarningToolTip toolTipText={toolTipText} />;
 
   const displayIcon = isInvalid && (
     <div onMouseEnter={() => setShowToolTip(true)} onMouseLeave={() => setShowToolTip(false)}>
@@ -116,6 +114,7 @@ const StyledInput = ({
 
     setToolTipText('');
     setIsInvalid(false);
+    event.target.setCustomValidity('');
 
     setInputValue(event.target.value);
 
@@ -124,38 +123,48 @@ const StyledInput = ({
 
     switch (true) {
       case inputVal.length < 3:
+        setToolTipText('Proszę wpisać minimum 3 znaki.');
         setIsInvalid(true);
+        event.target.setCustomValidity(toolTipText);
         break;
       case name === 'name' && inputVal.length > 30:
         setToolTipText('Limit znaków: 30');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       case name === 'surname' && inputVal.length > 50:
         setToolTipText('Limit znaków: 50');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       case name === 'email' && inputVal.length > 254:
         setToolTipText('Limit znaków: 254');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       case name === 'topic' && inputVal.length > 200:
         setToolTipText('Limit znaków: 200');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       case name === 'content' && inputVal.length > 2000:
         setToolTipText('Limit znaków: 2000');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       case name === 'name' && lettersRegex.test(inputVal):
         setToolTipText('Proszę używać tylko liter');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       case name === 'surname' && lettersRegex.test(inputVal):
         setToolTipText('Proszę używać tylko liter');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       case name === 'email' && !emailRegex.test(inputVal):
         setToolTipText('Proszę wpisać poprawny adres email.');
+        event.target.setCustomValidity(toolTipText);
         setIsInvalid(true);
         break;
       default:

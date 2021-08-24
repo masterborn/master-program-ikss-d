@@ -163,6 +163,8 @@ const ContactForm = ({ modal, toolTipText, className }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    console.log(nameInput);
   };
 
   return (
@@ -234,7 +236,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           </p>
         </InfoWrapper>
 
-        <SubmitButton formNoValidate submit buttonLabel="Wyślij wiadomość" />
+        <SubmitButton submit buttonLabel="Wyślij wiadomość" />
       </Form>
     </Wrapper>
   );
