@@ -18,6 +18,7 @@ const homePage = ({
   projectsHeaderData,
   cooperationHeaderData,
   projectsData,
+  boardMembersData,
 }) => {
   console.log(
     heroData,
@@ -28,6 +29,7 @@ const homePage = ({
     projectsHeaderData,
     cooperationHeaderData,
     projectsData,
+    boardMembersData,
   );
   return (
     <>
@@ -126,6 +128,7 @@ const homePage = ({
 export const getStaticProps = async () => {
   const basicContentClient = new HttpClient(`&content_type=basicContent&fields.page[in]=homepage`);
   const projectsClient = new HttpClient('&content_type=projects&select=fields');
+  const boardMembersClient = new HttpClient('&content_type=boardMembers&select=fields');
 
   // Hero data
 
@@ -148,6 +151,10 @@ export const getStaticProps = async () => {
 
   const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
 
+  // Board Members data
+
+  const boardMembersData = await boardMembersClient.getFilteredMembersData();
+
   return {
     props: {
       heroData,
@@ -158,6 +165,7 @@ export const getStaticProps = async () => {
       projectsHeaderData,
       cooperationHeaderData,
       projectsData,
+      boardMembersData,
     },
   };
 };

@@ -87,6 +87,32 @@ class HttpClient {
       });
   }
 
+  getFilteredMembersData() {
+    return this.getData().then((res) =>
+      res.items.map((item) => {
+        const { fields } = item;
+
+        let imageUrl = '';
+
+        if (fields.image) {
+          imageUrl = res.includes.Asset.find((asset) => asset.sys.id === fields.image.sys.id).fields
+            .file.url;
+        }
+
+        const tempObject = {
+          imgSrc: imageUrl,
+          name: fields.name,
+          role: fields.role,
+          phone: fields.phone,
+          email: fields.email,
+          linkedinUrl: fields.linkedinUrl,
+        };
+
+        return tempObject;
+      }),
+    );
+  }
+
   getConnectedData() {
     return this.getData().then((res) =>
       res.items.map((item) =>
