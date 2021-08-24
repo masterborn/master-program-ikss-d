@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.div`
@@ -29,8 +30,8 @@ const styledYouTubeVideo = ({ videoUrl, title }) => {
       <VideoFrame
         title={title}
         src={`https://www.youtube.com/embed/${videoId[1]}?autoplay=0&controls=0`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; controls=07"
+        frameBorder='0'
+        allow='accelerometer; autoplay; encrypted-media; gyroscope; controls=07'
         allowFullScreen
       />
     </Wrapper>
