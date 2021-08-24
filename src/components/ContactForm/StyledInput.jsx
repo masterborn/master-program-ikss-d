@@ -94,7 +94,7 @@ const StyledInput = ({
   className,
   labelText,
   textarea,
-  inputRef,
+  validateCallback,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -109,68 +109,79 @@ const StyledInput = ({
     </div>
   );
 
+  // const onChange = (event) => {
+  //   const inputVal = event.target.value;
+
+  //   setToolTipText('');
+  //   setIsInvalid(false);
+  //   event.target.setCustomValidity('');
+
+  //   setInputValue(event.target.value);
+
+  //   const lettersRegex = /[^a-zA-Z]/g;
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  //   switch (true) {
+  //     case inputVal.length < 3:
+  //       setToolTipText('Proszę wpisać minimum 3 znaki.');
+  //       setIsInvalid(true);
+  //       event.target.setCustomValidity(toolTipText);
+  //       break;
+  //     case name === 'name' && inputVal.length > 30:
+  //       setToolTipText('Limit znaków: 30');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     case name === 'surname' && inputVal.length > 50:
+  //       setToolTipText('Limit znaków: 50');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     case name === 'email' && inputVal.length > 254:
+  //       setToolTipText('Limit znaków: 254');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     case name === 'topic' && inputVal.length > 200:
+  //       setToolTipText('Limit znaków: 200');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     case name === 'content' && inputVal.length > 2000:
+  //       setToolTipText('Limit znaków: 2000');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     case name === 'name' && lettersRegex.test(inputVal):
+  //       setToolTipText('Proszę używać tylko liter');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     case name === 'surname' && lettersRegex.test(inputVal):
+  //       setToolTipText('Proszę używać tylko liter');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     case name === 'email' && !emailRegex.test(inputVal):
+  //       setToolTipText('Proszę wpisać poprawny adres email.');
+  //       event.target.setCustomValidity(toolTipText);
+  //       setIsInvalid(true);
+  //       break;
+  //     default:
+  //       setToolTipText('');
+  //       setIsInvalid(false);
+  //   }
+  // };
+
   const onChange = (event) => {
-    const inputVal = event.target.value;
-
-    setToolTipText('');
-    setIsInvalid(false);
-    event.target.setCustomValidity('');
-
     setInputValue(event.target.value);
 
-    const lettersRegex = /[^a-zA-Z]/g;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const info = validateCallback(event);
 
-    switch (true) {
-      case inputVal.length < 3:
-        setToolTipText('Proszę wpisać minimum 3 znaki.');
-        setIsInvalid(true);
-        event.target.setCustomValidity(toolTipText);
-        break;
-      case name === 'name' && inputVal.length > 30:
-        setToolTipText('Limit znaków: 30');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      case name === 'surname' && inputVal.length > 50:
-        setToolTipText('Limit znaków: 50');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      case name === 'email' && inputVal.length > 254:
-        setToolTipText('Limit znaków: 254');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      case name === 'topic' && inputVal.length > 200:
-        setToolTipText('Limit znaków: 200');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      case name === 'content' && inputVal.length > 2000:
-        setToolTipText('Limit znaków: 2000');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      case name === 'name' && lettersRegex.test(inputVal):
-        setToolTipText('Proszę używać tylko liter');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      case name === 'surname' && lettersRegex.test(inputVal):
-        setToolTipText('Proszę używać tylko liter');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      case name === 'email' && !emailRegex.test(inputVal):
-        setToolTipText('Proszę wpisać poprawny adres email.');
-        event.target.setCustomValidity(toolTipText);
-        setIsInvalid(true);
-        break;
-      default:
-        setToolTipText('');
-        setIsInvalid(false);
-    }
+    setToolTipText(info.message);
+    setIsInvalid(info.invalid);
+    event.target.setCustomValidity(info.message);
+    if (showToolTip && info.message === '') setShowToolTip(false);
   };
 
   return (
@@ -187,7 +198,6 @@ const StyledInput = ({
               value={inputValue}
               required={required}
               disabled={disabled}
-              ref={inputRef}
             />
           ) : (
             <input
@@ -199,7 +209,6 @@ const StyledInput = ({
               value={inputValue}
               required={required}
               disabled={disabled}
-              ref={inputRef}
             />
           )}
           {displayToolTip}
@@ -220,6 +229,7 @@ StyledInput.defaultProps = {
   labelText: null,
   textarea: false,
   inputRef: null,
+  validateCallback: () => {},
 };
 
 StyledInput.propTypes = {
@@ -232,6 +242,7 @@ StyledInput.propTypes = {
   labelText: PropTypes.string,
   textarea: PropTypes.bool,
   inputRef: PropTypes.shape({ currrent: PropTypes.func }),
+  validateCallback: PropTypes.func,
 };
 
 export default StyledInput;
