@@ -15,8 +15,6 @@ const Wrapper = styled.footer`
   background: ${getColor('ikksBlue')};
   position: relative;
 
-  box-shadow: 0px -18px 16px rgba(97, 121, 139, 0.1);
-
   ${(props) =>
     props.contact &&
     css`
