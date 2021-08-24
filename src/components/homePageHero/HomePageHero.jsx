@@ -4,25 +4,37 @@ import PropTypes from 'prop-types';
 import HomePageHeroText from '@components/homePageHero/HomePageHeroText';
 import HomePageHeroImage from '@components/homePageHero/HomePageHeroImage';
 import HeroSM from '@components/homePageHero/HomePageHeroSM';
+import HomePageHeroVideo from '@components/homePageHero/HomePageHeroVideo';
 import { getMedias } from '@styles/utils';
 
-const styledHero = ({
-  headerText,
-  smallText,
-  imageSrc,
-  imageAlt,
-  facebookLink,
-  instagramLink,
-  youTubeLink,
-  linkedInLink,
-  data,
-}) => {
-  console.log(data);
+const styledHero = ({ data }) => {
+  const {
+    contentType,
+    headerText,
+    smallText,
+    imageSrc,
+    imageOrVideoURL,
+    imageOrVideoTitle,
+    linkURL,
+    linkCaption,
+    facebookLink,
+    instagramLink,
+    youTubeLink,
+    linkedInLink,
+  } = data;
+  let imageOrVideoBlock;
+
+  if (contentType && contentType === 'video') {
+    imageOrVideoBlock = <HomePageHeroVideo videoSrc={imageOrVideoURL} videoTitle={imageOrVideoTitle} />;
+  }
+
+  if (linkURL)
+
   return (
     <>
       <Wrapper>
         <HomePageHeroText headerText={headerText} smallText={smallText} />
-        <HomePageHeroImage imageSrc={imageSrc} imageAlt={imageAlt} />
+        <HomePageHeroImage imageSrc={imageSrc.HeroImagePng} imageAlt={imageOrVideoTitle} />
       </Wrapper>
       <HeroSM
         facebookLink={facebookLink}
@@ -66,16 +78,19 @@ const Wrapper = styled.section`
 `;
 
 HomePageHero.propTypes = {
-  headerText: PropTypes.string.isRequired,
-  smallText: PropTypes.string.isRequired,
-  imageSrc: PropTypes.shape({}).isRequired,
-  imageAlt: PropTypes.string.isRequired,
-  facebookLink: PropTypes.string.isRequired,
-  instagramLink: PropTypes.string.isRequired,
-  youTubeLink: PropTypes.string.isRequired,
-  linkedInLink: PropTypes.string.isRequired,
   data: PropTypes.shape({
-    identifier: PropTypes.string.isRequired,
+    contentType: PropTypes.string,
+    imageOrVideoTitle: PropTypes.string,
+    imageOrVideoURL: PropTypes.string,
+    smallText: PropTypes.string.isRequired,
+    headerText: PropTypes.string.isRequired,
+    link_url: PropTypes.string,
+    link_caption: PropTypes.string,
+    facebookLink: PropTypes.string.isRequired,
+    instagramLink: PropTypes.string.isRequired,
+    youTubeLink: PropTypes.string.isRequired,
+    linkedInLink: PropTypes.string.isRequired,
+    imageSrc: PropTypes.shape({}).isRequired,
   }).isRequired,
 };
 
