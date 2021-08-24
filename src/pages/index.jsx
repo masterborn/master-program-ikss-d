@@ -17,6 +17,7 @@ const homePage = ({
   valuesThirdCardData,
   projectsHeaderData,
   cooperationHeaderData,
+  projectsData,
 }) => {
   console.log(
     heroData,
@@ -26,6 +27,7 @@ const homePage = ({
     valuesThirdCardData,
     projectsHeaderData,
     cooperationHeaderData,
+    projectsData,
   );
   return (
     <>
@@ -123,6 +125,7 @@ const homePage = ({
 };
 export const getStaticProps = async () => {
   const basicContentClient = new HttpClient(`&content_type=basicContent&fields.page[in]=homepage`);
+  const projectsClient = new HttpClient('&content_type=projects&select=fields');
 
   // Hero data
 
@@ -139,6 +142,7 @@ export const getStaticProps = async () => {
   // Projects data
 
   const projectsHeaderData = await basicContentClient.getFilteredData('homepage-projects-title');
+  const projectsData = await projectsClient.getFilteredProjectsData('homepage');
 
   // Cooperation data
 
@@ -153,6 +157,7 @@ export const getStaticProps = async () => {
       valuesThirdCardData: value3,
       projectsHeaderData,
       cooperationHeaderData,
+      projectsData,
     },
   };
 };

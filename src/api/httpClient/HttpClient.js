@@ -55,6 +55,38 @@ class HttpClient {
       });
   }
 
+  getFilteredProjectsData(page = 'projects') {
+    return this.getData()
+      .then((res) =>
+        res.items.map((item) => {
+          const { fields } = item;
+
+          const imageUrl = res.includes.Asset.find((asset) => asset.sys.id === fields.image.sys.id);
+
+          const tempObject = {
+            imgSrc: imageUrl.fields.file.url ? imageUrl.fields.file.url : '',
+            imgAlt: fields.title,
+            videoUrl: fields.videoUrl ? fields.videoUrl : '',
+            title: fields.title,
+            date: fields.date,
+            description: fields.description.content[0].content[0].value,
+            url: fields.linkUrl,
+            buttonLabel: fields.linkCaption,
+            showOnHomepage: fields.showOnHomepage ? true : null,
+            order: fields.order ? fields.order : null,
+          };
+
+          return tempObject;
+        }),
+      )
+      .then((data) => {
+        if (page === 'homepage') {
+          return data.filter((item) => item.showOnHomepage).sort((a, b) => a.order - b.order);
+        }
+        return data;
+      });
+  }
+
   getConnectedData() {
     return this.getData().then((res) =>
       res.items.map((item) =>
