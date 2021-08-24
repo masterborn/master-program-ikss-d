@@ -8,7 +8,7 @@ import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
 import HttpClient from '@api/httpClient/HttpClient';
 import Cooperation from '@components/Cooperation/Cooperation';
-
+import Footer from '@components/Footer/Footer';
 
 const homePage = () => (
   <>
@@ -54,7 +54,6 @@ const homePage = () => (
         },
       ]}
     />
-
     <Projects />
     <Cooperation
       cooperationHeader="Współpracują z nami"
@@ -101,6 +100,15 @@ const homePage = () => (
           altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
         },
       ]}
+    />
+    <Footer
+      contact
+      urls={{
+        fblink: 'https://pl-pl.facebook.com',
+        inlink: 'https://www.instagram.com',
+        ytlink: 'https://www.youtube.com',
+        lnlink: 'https://pl.linkedin.com',
+      }}
     />
   </>
 );
