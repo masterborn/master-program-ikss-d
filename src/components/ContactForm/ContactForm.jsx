@@ -164,10 +164,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   );
 
   const handleSubmit = (event) => {
-    if (!formValidated) {
-      event.preventDefault();
-      return;
-    }
+    if (!formValidated) return;
 
     setFormValues({
       name: '',

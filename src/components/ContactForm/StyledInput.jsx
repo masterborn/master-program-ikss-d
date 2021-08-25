@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
