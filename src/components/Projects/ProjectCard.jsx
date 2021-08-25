@@ -46,14 +46,10 @@ const Description = styled.article`
   align-items: flex-start;
   max-width: 792px;
   padding: 0 102px 4.1em 102px;
-  & a {
-    text-decoration: none;
-  }
 
   @media (max-width: ${getMedias('laptop')}) {
     & a {
-      display: inline-block;
-      margin: 0 auto 1em auto;
+      margin: 0 auto 2.25em auto;
     }
   }
 `;
@@ -106,9 +102,14 @@ const ProjectCard = ({ imgSrc, videoUrl, imgAlt, title, date, description, url, 
         <p>{description}</p>
       </Text>
       {url && (
-        <a href={url} target="_blank" rel="noopener noreferrer">
-          <Button withIcon={url.includes('facebook')} buttonLabel={buttonLabel} />
-        </a>
+        <Button
+          withIcon={url.includes('facebook')}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {buttonLabel}
+        </Button>
       )}
     </Description>
   </Wrapper>
