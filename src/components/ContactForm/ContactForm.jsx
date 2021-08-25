@@ -164,7 +164,10 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   );
 
   const handleSubmit = (event) => {
-    if (!formValidated) event.preventDefault();
+    if (!formValidated) {
+      event.preventDefault();
+      return;
+    }
 
     setFormValues({
       name: '',
@@ -173,19 +176,23 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       topic: '',
       content: '',
     });
+
+    event.preventDefault();
   };
 
   const conditionChecks = (name, nameVal, length, inputVal, regex = false) => {
+    if (name !== nameVal) return false;
+
     const lettersRegex = /[^a-zA-Z]/g;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (regex) {
-      return nameVal === 'surname' || nameVal === 'name'
+      return name === 'surname' || name === 'name'
         ? lettersRegex.test(inputVal)
         : !emailRegex.test(inputVal);
     }
 
-    return name === nameVal && inputVal.length > length;
+    return inputVal.length > length;
   };
 
   const validateInput = (event) => {
@@ -248,10 +255,6 @@ const ContactForm = ({ modal, toolTipText, className }) => {
     return isInvalid;
   };
 
-  const clearInput = (callback) => {
-    callback('');
-  };
-
   return (
     <Wrapper className={className}>
       {modal && CloseModalButton}
@@ -273,7 +276,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Wpisz swoje imię"
           labelText="Imię"
           validateCallback={validateInput}
-          clearInput={clearInput}
+          defaultValue={formValues.name}
         />
 
         <StyledInput
@@ -282,6 +285,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
           validateCallback={validateInput}
+          defaultValue={formValues.surname}
         />
 
         <StyledInput
@@ -290,6 +294,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
           validateCallback={validateInput}
+          defaultValue={formValues.email}
         />
 
         <StyledInput
@@ -298,6 +303,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Temat wiadomości"
           labelText="Temat"
           validateCallback={validateInput}
+          defaultValue={formValues.topic}
         />
 
         <StyledInput
@@ -307,6 +313,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"
           validateCallback={validateInput}
+          defaultValue={formValues.content}
         />
 
         <InfoWrapper>

@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontFamily } from '@styles/utils';
@@ -17,7 +17,7 @@ const Container = styled.div.attrs((props) => ({
     position: relative;
     border: 1.5px solid ${(props) => props.borderColor};
     border-radius: 4px;
-    padding: 0.5em;
+    padding: 0.5em 3em 0.5em 0.5em;
     font-family: ${getFontFamily('Mulish')};
     font-size: 14px;
     color: ${getColor('steel')};
@@ -95,9 +95,10 @@ const StyledInput = ({
   labelText,
   textarea,
   validateCallback,
+  defaultValue,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(defaultValue);
   const [showToolTip, setShowToolTip] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
 
@@ -109,69 +110,9 @@ const StyledInput = ({
     </div>
   );
 
-  // const onChange = (event) => {
-  //   const inputVal = event.target.value;
-
-  //   setToolTipText('');
-  //   setIsInvalid(false);
-  //   event.target.setCustomValidity('');
-
-  //   setInputValue(event.target.value);
-
-  //   const lettersRegex = /[^a-zA-Z]/g;
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  //   switch (true) {
-  //     case inputVal.length < 3:
-  //       setToolTipText('Proszę wpisać minimum 3 znaki.');
-  //       setIsInvalid(true);
-  //       event.target.setCustomValidity(toolTipText);
-  //       break;
-  //     case name === 'name' && inputVal.length > 30:
-  //       setToolTipText('Limit znaków: 30');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     case name === 'surname' && inputVal.length > 50:
-  //       setToolTipText('Limit znaków: 50');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     case name === 'email' && inputVal.length > 254:
-  //       setToolTipText('Limit znaków: 254');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     case name === 'topic' && inputVal.length > 200:
-  //       setToolTipText('Limit znaków: 200');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     case name === 'content' && inputVal.length > 2000:
-  //       setToolTipText('Limit znaków: 2000');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     case name === 'name' && lettersRegex.test(inputVal):
-  //       setToolTipText('Proszę używać tylko liter');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     case name === 'surname' && lettersRegex.test(inputVal):
-  //       setToolTipText('Proszę używać tylko liter');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     case name === 'email' && !emailRegex.test(inputVal):
-  //       setToolTipText('Proszę wpisać poprawny adres email.');
-  //       event.target.setCustomValidity(toolTipText);
-  //       setIsInvalid(true);
-  //       break;
-  //     default:
-  //       setToolTipText('');
-  //       setIsInvalid(false);
-  //   }
-  // };
+  useEffect(() => {
+    if (defaultValue === '') setInputValue(defaultValue);
+  }, [defaultValue]);
 
   const onChange = (event) => {
     setInputValue(event.target.value);
@@ -182,6 +123,14 @@ const StyledInput = ({
     setIsInvalid(info.invalid);
     event.target.setCustomValidity(info.message);
     if (showToolTip && info.message === '') setShowToolTip(false);
+  };
+
+  const onInvalid = (event) => {
+    const info = validateCallback(event);
+
+    setToolTipText(info.message);
+    setIsInvalid(info.invalid);
+    event.target.setCustomValidity(info.message);
   };
 
   return (
@@ -196,6 +145,7 @@ const StyledInput = ({
               placeholder={placeholder}
               onChange={onChange}
               value={inputValue}
+              onInvalid={onInvalid}
               required={required}
               disabled={disabled}
             />
@@ -207,6 +157,7 @@ const StyledInput = ({
               placeholder={placeholder}
               onChange={onChange}
               value={inputValue}
+              onInvalid={onInvalid}
               required={required}
               disabled={disabled}
             />
@@ -243,6 +194,7 @@ StyledInput.propTypes = {
   textarea: PropTypes.bool,
   inputRef: PropTypes.shape({ currrent: PropTypes.func }),
   validateCallback: PropTypes.func,
+  defaultValue: PropTypes.string.isRequired,
 };
 
 export default StyledInput;

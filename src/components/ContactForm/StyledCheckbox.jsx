@@ -6,6 +6,7 @@ import Checked from '@assets/checked.svg';
 import Icon from '@components/Icon/Icon';
 
 const Wrapper = styled.label`
+  position: relative;
   visibility: none;
 `;
 
@@ -17,6 +18,8 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox', required: true })`
   overflow: hidden;
   padding: 0;
   position: absolute;
+  bottom: 0;
+  right: 50%;
   white-space: nowrap;
   width: 1px;
 `;
