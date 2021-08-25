@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import parse from 'html-react-parser';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Button from '@components/Button/Button';
 import { getMedias } from '@styles/utils';
@@ -8,7 +8,7 @@ import { getMedias } from '@styles/utils';
 const styledHeroText = ({ headerText, smallText }) => (
   <Wrapper>
     <h1>{headerText}</h1>
-    {parse(smallText)}
+    {documentToReactComponents(smallText)}
     <Button secondary>Skontaktuj się</Button>
   </Wrapper>
 );

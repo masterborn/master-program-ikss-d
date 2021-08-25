@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 class HttpClient {
   constructor(path) {
@@ -45,11 +44,9 @@ class HttpClient {
       })
       .then((res) => {
         if (res.text1) {
-          const text = documentToHtmlString(res.text1);
-          delete res.text1;
           delete res.identifier;
           delete res.page;
-          return { ...res, text };
+          return { ...res, text: res.text1 };
         }
         return res;
       });

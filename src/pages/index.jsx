@@ -10,7 +10,7 @@ import HttpClient from '@api/httpClient/HttpClient';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 
-const homePage = () => (
+const homePage = ({ heroData }) => (
   <>
     <Navbar
       urls={{
@@ -23,7 +23,7 @@ const homePage = () => (
 
     <Hero
       headerText="Przykładowy nagłówek IKSS"
-      smallText="Urna, mi condimentum amet, consectetur mauris tincidunt gravida aenean. Dignissim in sit arcu nam. Ultrices integer odio feugiat vulputate."
+      smallText={heroData.text}
       imageSrc={HeroImagePng}
       imageAlt="Przykładowy nagłówek IKSS"
       facebookLink="https://pl-pl.facebook.com"
