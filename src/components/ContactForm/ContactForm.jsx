@@ -277,8 +277,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           </p>
         </InfoWrapper>
 
-       <SubmitButton>Wyślij wiadomość</SubmitButton>
-
+        <SubmitButton isTypeSubmit>Wyślij wiadomość</SubmitButton>
       </Form>
     </Wrapper>
   );
