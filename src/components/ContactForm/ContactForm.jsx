@@ -148,7 +148,8 @@ const StyledCloseIcon = styled(Icon)`
 `;
 
 const ContactForm = ({ modal, toolTipText, className }) => {
-  const [toolTip, setToolTip] = useState(false);
+  const [isToolTipShown, setIsToolTipShown] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [formValues, setFormValues] = useState({
     name: '',
     surname: '',
@@ -157,7 +158,6 @@ const ContactForm = ({ modal, toolTipText, className }) => {
     content: '',
     conditions: false,
   });
-  const [formValidated, setFormValidated] = useState(false);
 
   const CloseModalButton = (
     <button type="button">
@@ -166,7 +166,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   );
 
   const handleSubmit = (event) => {
-    if (!formValidated) {
+    if (!isFormValid) {
       event.preventDefault();
       return;
     }
@@ -196,13 +196,13 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   const onValidateInput = (event) => {
     getDataFromInputs(event);
 
-    return validateInput(event, setFormValidated);
+    return validateInput(event, setIsFormValid);
   };
 
   const onValidateCheckbox = (event) => {
     getDataFromInputs(event);
 
-    return validateCheckbox(event, setFormValidated);
+    return validateCheckbox(event, setIsFormValid);
   };
 
   return (
@@ -269,8 +269,11 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           <p>
             Zapoznałem się z{' '}
             <Link href="/">
-              <a onMouseEnter={() => setToolTip(true)} onMouseLeave={() => setToolTip(false)}>
-                {toolTip && <InfoToolTip toolTipText={toolTipText} />}
+              <a
+                onMouseEnter={() => setIsToolTipShown(true)}
+                onMouseLeave={() => setIsToolTipShown(false)}
+              >
+                {isToolTipShown && <InfoToolTip toolTipText={toolTipText} />}
                 informacją o administratorze i przetwarzaniu danych.
               </a>
             </Link>

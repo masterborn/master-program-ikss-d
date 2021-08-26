@@ -96,13 +96,13 @@ const StyledInput = ({
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [inputValue, setInputValue] = useState(defaultValue);
-  const [showToolTip, setShowToolTip] = useState(false);
+  const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
 
-  const displayToolTip = showToolTip && <WarningToolTip toolTipText={toolTipText} />;
+  const displayToolTip = isToolTipShown && <WarningToolTip toolTipText={toolTipText} />;
 
   const displayIcon = isInvalid && (
-    <div onMouseEnter={() => setShowToolTip(true)} onMouseLeave={() => setShowToolTip(false)}>
+    <div onMouseEnter={() => setIsToolTipShown(true)} onMouseLeave={() => setIsToolTipShown(false)}>
       <InfoIcon disabled={disabled} />
     </div>
   );
@@ -126,7 +126,7 @@ const StyledInput = ({
 
     const info = setValidationErrors(event);
 
-    if (showToolTip && info.message === '') setShowToolTip(false);
+    if (isToolTipShown && info.message === '') setIsToolTipShown(false);
   };
 
   return (

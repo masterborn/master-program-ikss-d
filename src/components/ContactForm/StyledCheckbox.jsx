@@ -8,7 +8,6 @@ import Icon from '@components/Icon/Icon';
 
 const Wrapper = styled.label`
   position: relative;
-  visibility: none;
 `;
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox', required: true })`
