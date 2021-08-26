@@ -119,7 +119,7 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
               <StyledLink linkLabel="Współpraca" url="/cooperation" />
             </LinksWrapper>
 
-            <ContactButton buttonLabel="Skontaktuj się" />
+            <ContactButton>Skontaktuj się</ContactButton>
 
             <Socials
               urls={{

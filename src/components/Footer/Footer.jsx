@@ -59,6 +59,7 @@ const ButtonWrapper = styled.div`
       @media (max-width: 1200px) {
         justify-content: center;
         top: 32%;
+        margin-right: 0;
       }
 
       @media (max-width: ${getMedias('mobile')}) {

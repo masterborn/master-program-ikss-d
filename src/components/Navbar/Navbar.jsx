@@ -167,7 +167,7 @@ function Navbar({ urls }) {
           <span />
         </Hamburger>
 
-        <Button as={ContactButton} buttonLabel="Skontaktuj się" />
+        <Button as={ContactButton}>Skontaktuj się</Button>
       </Nav>
     </>
   );

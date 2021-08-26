@@ -209,7 +209,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           </p>
         </InfoWrapper>
 
-        <SubmitButton buttonLabel="Wyślij wiadomość" />
+        <SubmitButton>Wyślij wiadomość</SubmitButton>
       </Form>
     </Wrapper>
   );
