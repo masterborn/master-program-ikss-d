@@ -6,7 +6,7 @@ import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
-import HttpClient from '@api/httpClient/HttpClient';
+import ContentfulClient from '@api/clients/ContentfulAPI';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 
@@ -114,9 +114,9 @@ const homePage = ({ heroData }) => (
 );
 
 export const getStaticProps = async () => {
-  const basicContentClient = new HttpClient(`&content_type=basicContent&fields.page[in]=homepage`);
-  const projectsClient = new HttpClient('&content_type=projects&select=fields');
-  const boardMembersClient = new HttpClient('&content_type=boardMembers&select=fields');
+  const basicContentClient = new ContentfulClient();
+  const projectsClient = new ContentfulClient();
+  const boardMembersClient = new ContentfulClient();
 
   // Hero data
 

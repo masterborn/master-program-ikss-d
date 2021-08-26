@@ -1,15 +1,13 @@
 import axios from 'axios';
 
-class HttpClient {
-  constructor(path) {
-    this.api = axios.create({
-      baseURL: `https://cdn.contentful.com/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/master/entries?access_token=${process.env.NEXT_PUBLIC_CONTENTFUL_API_TOKEN}${path}`,
-    });
-  }
+class ContentfulClient {
+  api = axios.create({
+    baseURL: `https://cdn.contentful.com/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/master/entries?access_token=${process.env.NEXT_PUBLIC_CONTENTFUL_API_TOKEN}`,
+  });
 
-  getData() {
+  getData(path) {
     return axios
-      .get(this.api.defaults.baseURL)
+      .get(`${this.api.defaults.baseURL}${path}`)
       .catch((err) => {
         throw err;
       })
@@ -53,7 +51,7 @@ class HttpClient {
   }
 
   getFilteredProjectsData(page = 'projects') {
-    return this.getData()
+    return this.getData('&content_type=projects&select=fields')
       .then((res) =>
         res.items.map((item) => {
           const { fields } = item;
@@ -85,7 +83,7 @@ class HttpClient {
   }
 
   getFilteredMembersData() {
-    return this.getData().then((res) =>
+    return this.getData('&content_type=boardMembers&select=fields').then((res) =>
       res.items.map((item) => {
         const { fields } = item;
 
@@ -111,7 +109,7 @@ class HttpClient {
   }
 
   getConnectedData() {
-    return this.getData().then((res) =>
+    return this.getData('&content_type=basicContent&fields.page[in]=homepage').then((res) =>
       res.items.map((item) =>
         item.fields.image1
           ? {
@@ -126,4 +124,4 @@ class HttpClient {
   }
 }
 
-export default HttpClient;
+export default ContentfulClient;
