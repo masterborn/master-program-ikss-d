@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { getColor } from '@styles/utils';
 import Checked from '@assets/checked.svg';
@@ -33,10 +34,11 @@ const Checkbox = styled.div`
   border: 1.5px solid ${getColor('steel_40')};
   border-radius: 4px;
   transition: all 150ms;
-  ${HiddenCheckbox}:hover + & {
+  input:hover + & {
     border-color: ${getColor('ikksBlue')};
+    cursor: pointer;
   }
-  ${HiddenCheckbox}:checked + & {
+  input:checked + & {
     border: none;
   }
   ${Icon} {
@@ -44,19 +46,37 @@ const Checkbox = styled.div`
   }
 `;
 
-const StyledCheckbox = () => {
-  const [isChecked, setIsChecked] = useState(false);
+const StyledCheckbox = ({ defaultValue, validateCallback }) => {
+  const [isChecked, setIsChecked] = useState(defaultValue);
+
+  useEffect(() => {
+    if (defaultValue === false) setIsChecked(defaultValue);
+  }, [defaultValue]);
+
+  const onChange = (event) => {
+    setIsChecked(event.target.checked);
+    const info = validateCallback(event);
+    event.target.setCustomValidity(info);
+  };
+
   return (
     <Wrapper>
       <HiddenCheckbox
         checked={isChecked}
-        onChange={(event) => setIsChecked(event.target.checked)}
+        onChange={onChange}
+        name="conditions"
+        onInvalid={onChange}
       />
       <Checkbox checked={isChecked}>
         <Icon icon={Checked} />
       </Checkbox>
     </Wrapper>
   );
+};
+
+StyledCheckbox.propTypes = {
+  defaultValue: PropTypes.bool.isRequired,
+  validateCallback: PropTypes.func.isRequired,
 };
 
 export default StyledCheckbox;

@@ -85,10 +85,8 @@ const WarningToolTip = styled(ToolTip)`
 `;
 
 const StyledInput = ({
-  type,
   name,
   placeholder,
-  required,
   disabled,
   className,
   labelText,
@@ -113,23 +111,22 @@ const StyledInput = ({
     if (defaultValue === '') setInputValue(defaultValue);
   }, [defaultValue]);
 
+  const setValidationErrors = (event) => {
+    const info = validateCallback(event);
+
+    setToolTipText(info.message);
+    setIsInvalid(info.invalid);
+    event.target.setCustomValidity(info.message);
+
+    return info;
+  };
+
   const onChange = (event) => {
     setInputValue(event.target.value);
 
-    const info = validateCallback(event);
+    const info = setValidationErrors(event);
 
-    setToolTipText(info.message);
-    setIsInvalid(info.invalid);
-    event.target.setCustomValidity(info.message);
     if (showToolTip && info.message === '') setShowToolTip(false);
-  };
-
-  const onInvalid = (event) => {
-    const info = validateCallback(event);
-
-    setToolTipText(info.message);
-    setIsInvalid(info.invalid);
-    event.target.setCustomValidity(info.message);
   };
 
   return (
@@ -144,20 +141,19 @@ const StyledInput = ({
               placeholder={placeholder}
               onChange={onChange}
               value={inputValue}
-              onInvalid={onInvalid}
-              required={required}
+              onInvalid={setValidationErrors}
+              required
               disabled={disabled}
             />
           ) : (
             <input
               id={name}
               name={name}
-              type={type}
               placeholder={placeholder}
               onChange={onChange}
               value={inputValue}
-              onInvalid={onInvalid}
-              required={required}
+              onInvalid={setValidationErrors}
+              required
               disabled={disabled}
             />
           )}
@@ -170,10 +166,8 @@ const StyledInput = ({
 };
 
 StyledInput.defaultProps = {
-  type: 'text',
   name: '',
   placeholder: '',
-  required: false,
   disabled: false,
   className: null,
   labelText: null,
@@ -183,10 +177,8 @@ StyledInput.defaultProps = {
 };
 
 StyledInput.propTypes = {
-  type: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
-  required: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.string,
   labelText: PropTypes.string,

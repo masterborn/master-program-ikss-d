@@ -11,6 +11,7 @@ import Button from '@components/Button/Button';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import { validateInput, validateCheckbox } from '@utils/validation';
 
 const Wrapper = styled.div`
   position: relative;
@@ -154,6 +155,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
     email: '',
     topic: '',
     content: '',
+    conditions: false,
   });
   const [formValidated, setFormValidated] = useState(false);
 
@@ -164,7 +166,10 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   );
 
   const handleSubmit = (event) => {
-    if (!formValidated) return;
+    if (!formValidated) {
+      event.preventDefault();
+      return;
+    }
 
     setFormValues({
       name: '',
@@ -172,84 +177,32 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       email: '',
       topic: '',
       content: '',
+      conditions: false,
     });
 
     event.preventDefault();
   };
 
-  const conditionChecks = (name, nameVal, length, inputVal, regex = false) => {
-    if (name !== nameVal) return false;
-
-    const lettersRegex = /[^a-zA-Z]/g;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (regex) {
-      return name === 'surname' || name === 'name'
-        ? lettersRegex.test(inputVal)
-        : !emailRegex.test(inputVal);
-    }
-
-    return inputVal.length > length;
-  };
-
-  const validateInput = (event) => {
-    const inputVal = event.target.value;
+  const getDataFromInputs = (event) => {
+    const inputVal = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     const { name } = event.target;
 
     setFormValues({
       ...formValues,
       [name]: inputVal,
     });
+  };
 
-    const isInvalid = {
-      message: '',
-      invalid: true,
-    };
+  const onValidateInput = (event) => {
+    getDataFromInputs(event);
 
-    switch (true) {
-      case inputVal.length < 3:
-        isInvalid.message = 'Proszę wpisać minimum 3 znaki.';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'name', 30, inputVal):
-        isInvalid.message = 'Limit znaków: 30';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'surname', 50, inputVal):
-        isInvalid.message = 'Limit znaków: 50';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'email', 254, inputVal):
-        isInvalid.message = 'Limit znaków: 254';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'topic', 200, inputVal):
-        isInvalid.message = 'Limit znaków: 200';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'content', 2000, inputVal):
-        isInvalid.message = 'Limit znaków: 2000';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'name', null, inputVal, true):
-        isInvalid.message = 'Proszę używać tylko liter';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'surname', null, inputVal, true):
-        isInvalid.message = 'Proszę używać tylko liter';
-        setFormValidated(false);
-        break;
-      case conditionChecks(name, 'email', null, inputVal, true):
-        isInvalid.message = 'Proszę wpisać poprawny adres email.';
-        setFormValidated(false);
-        break;
-      default:
-        isInvalid.message = '';
-        isInvalid.invalid = false;
-        setFormValidated(true);
-    }
+    return validateInput(event, setFormValidated);
+  };
 
-    return isInvalid;
+  const onValidateCheckbox = (event) => {
+    getDataFromInputs(event);
+
+    return validateCheckbox(event, setFormValidated);
   };
 
   return (
@@ -268,53 +221,51 @@ const ContactForm = ({ modal, toolTipText, className }) => {
 
       <Form onSubmit={handleSubmit}>
         <StyledInput
-          required
           name="name"
           placeholder="Wpisz swoje imię"
           labelText="Imię"
-          validateCallback={validateInput}
+          validateCallback={onValidateInput}
           defaultValue={formValues.name}
         />
 
         <StyledInput
-          required
           name="surname"
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
-          validateCallback={validateInput}
+          validateCallback={onValidateInput}
           defaultValue={formValues.surname}
         />
 
         <StyledInput
-          required
           name="email"
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
-          validateCallback={validateInput}
+          validateCallback={onValidateInput}
           defaultValue={formValues.email}
         />
 
         <StyledInput
-          required
           name="topic"
           placeholder="Temat wiadomości"
           labelText="Temat"
-          validateCallback={validateInput}
+          validateCallback={onValidateInput}
           defaultValue={formValues.topic}
         />
 
         <StyledInput
           textarea
-          required
           name="content"
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"
-          validateCallback={validateInput}
+          validateCallback={onValidateInput}
           defaultValue={formValues.content}
         />
 
         <InfoWrapper>
-          <StyledCheckbox />
+          <StyledCheckbox
+            defaultValue={formValues.conditions}
+            validateCallback={onValidateCheckbox}
+          />
           <p>
             Zapoznałem się z{' '}
             <Link href="/">
