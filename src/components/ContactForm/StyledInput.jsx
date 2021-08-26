@@ -172,7 +172,6 @@ StyledInput.defaultProps = {
   className: null,
   labelText: null,
   textarea: false,
-  inputRef: null,
   validateCallback: () => {},
 };
 
@@ -183,7 +182,6 @@ StyledInput.propTypes = {
   className: PropTypes.string,
   labelText: PropTypes.string,
   textarea: PropTypes.bool,
-  inputRef: PropTypes.shape({ currrent: PropTypes.func }),
   validateCallback: PropTypes.func,
   defaultValue: PropTypes.string.isRequired,
 };
