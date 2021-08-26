@@ -57,9 +57,9 @@ const ButtonWrapper = styled.div`
     props.contact &&
     css`
       @media (max-width: 1200px) {
-        margin: 0;
         justify-content: center;
         top: 32%;
+        margin-right: 0;
       }
 
       @media (max-width: ${getMedias('mobile')}) {

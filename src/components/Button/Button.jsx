@@ -1,28 +1,54 @@
 import styled, { css } from 'styled-components';
+import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Icon from '@components/Icon/Icon';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
-// Button props legend:
-// buttonLabel - set label shown on button and it takes string,
-// withIcon - display button with icon and it takes boolean,
-// secondary - display secondary version of button and it takes boolean.
+const styledButton = ({
+  className,
+  withIcon,
+  href,
+  onClick,
+  children,
+  link,
+  isTypeSubmit,
+  onKeyUp,
+}) => {
+  if (href && link) {
+    return (
+      <Link href={href}>
+        <a className={className}>
+          {withIcon && <Icon icon={FacebookIcon} media="18px" />}
+          {children}
+        </a>
+      </Link>
+    );
+  }
 
-const styledButton = ({ className, submit, buttonLabel, withIcon, disabled, formNoValidate }) => (
-  <>
+  if (href && !link) {
+    return (
+      <a href={href} className={className} target="_blank" rel="noopener noreferrer">
+        {withIcon && <Icon icon={FacebookIcon} media="18px" />}
+        {children}
+      </a>
+    );
+  }
+  return (
     <button
-      formNoValidate={formNoValidate}
-      type={submit ? 'submit' : 'button'}
-      disabled={disabled}
       className={className}
+      onClick={onClick}
+      onKeyUp={onKeyUp}
+      type={isTypeSubmit ? 'submit' : 'button'}
+
     >
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
-      {buttonLabel}
+      {children}
     </button>
-  </>
-);
+  );
+};
 
 const Button = styled(styledButton)`
   display: flex;
@@ -39,6 +65,7 @@ const Button = styled(styledButton)`
   font-weight: ${getFontWeight('buttonWeight')};
   font-size: 16px;
   cursor: pointer;
+  text-decoration: none;
 
   & ${Icon} {
     margin-right: 8px;
@@ -109,18 +136,22 @@ const Button = styled(styledButton)`
   }
 `;
 
-Button.defaultProps = {
-  submit: false,
-  formNoValidate: false,
+Button.propTypes = {
+  secondary: PropTypes.bool,
+  withIcon: PropTypes.bool,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  link: PropTypes.bool,
+  isTypSubmit: PropTypes.bool,
 };
 
-Button.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
-  submit: PropTypes.bool,
-  withIcon: PropTypes.bool,
-  secondary: PropTypes.bool,
-  disabled: PropTypes.bool,
-  formNoValidate: PropTypes.bool,
+Button.defaultProps = {
+  secondary: false,
+  withIcon: false,
+  href: null,
+  link: false,
+  isTypeSubmit: false,
 };
 
 export default Button;
