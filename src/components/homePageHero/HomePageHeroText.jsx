@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 
 HomePageHeroText.propTypes = {
   headerText: PropTypes.string.isRequired,
-  smallText: PropTypes.string.isRequired,
+  smallText: PropTypes.shape({}).isRequired,
 };
 
 export default HomePageHeroText;

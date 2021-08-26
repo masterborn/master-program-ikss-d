@@ -6,25 +6,20 @@ import HomePageHeroImage from '@components/homePageHero/HomePageHeroImage';
 import HeroSM from '@components/homePageHero/HomePageHeroSM';
 import HomePageHeroVideo from '@components/homePageHero/HomePageHeroVideo';
 import { getMedias } from '@styles/utils';
-import HomePageHeroYouTubeVideo from '@components/homePageHero/HomePageHeroYouTubeVideo';
 
 const styledHero = ({ data }) => {
   let imageOrVideoBlock;
 
-  if (data.contentType && data.contentType === 'video/mp4') {
+  if (data.contentType && data.contentType === 'video') {
     imageOrVideoBlock = (
       <HomePageHeroVideo videoSrc={data.imageOrVideoURL} videoTitle={data.imageOrVideoTitle} />
     );
   }
 
-  if (data.imageOrVideoURL) {
+  if (data.imageOrVideoURL && data.contentType === 'image') {
     imageOrVideoBlock = (
       <HomePageHeroImage imageSrc={data.imageOrVideoURL} imageAlt={data.imageOrVideoTitle} />
     );
-  }
-
-  if (data.link_url) {
-    imageOrVideoBlock = <HomePageHeroYouTubeVideo videoUrl={data.link_url} />;
   }
 
   return (
@@ -76,18 +71,17 @@ const Wrapper = styled.section`
 
 HomePageHero.propTypes = {
   data: PropTypes.shape({
-    contentType: PropTypes.string,
-    imageOrVideoTitle: PropTypes.string,
-    imageOrVideoURL: PropTypes.string,
-    smallText: PropTypes.string.isRequired,
-    headerText: PropTypes.string.isRequired,
+    contentType: PropTypes.string.isRequired,
+    imageOrVideoTitle: PropTypes.string.isRequired,
+    imageOrVideoURL: PropTypes.string.isRequired,
+    text: PropTypes.shape({}).isRequired,
+    title: PropTypes.string.isRequired,
     link_url: PropTypes.string,
     link_caption: PropTypes.string,
     facebookLink: PropTypes.string.isRequired,
     instagramLink: PropTypes.string.isRequired,
     youTubeLink: PropTypes.string.isRequired,
     linkedInLink: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
   }).isRequired,
 };
 

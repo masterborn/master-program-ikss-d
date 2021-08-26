@@ -1,10 +1,18 @@
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+const StyledVideo = styled.video`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+`;
 
 const HomePageHeroVideo = ({ videoSrc }) => (
   <div>
-    <video src={videoSrc}>
+    <StyledVideo controls autoPlay>
       <track kind="captions" />
-    </video>
+      <source src={`https:${videoSrc}`} />
+    </StyledVideo>
   </div>
 );
 

@@ -9,18 +9,6 @@ import ContentfulClient from '@api/clients/ContentfulAPI';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 
-const heroTempData = {
-  title: 'Przykładowy nagłówek IKSS',
-  text: 'Urna, mi condimentum amet, consectetur mauris tincidunt gravida aenean. Dignissim in sit arcu nam. Ultrices integer odio feugiat vulputate.',
-  imageOrVideoURL: 'https://picsum.photos/1920/1080',
-  link_url: 'https://www.youtube.com/watch?v=nTeuhbP7wdE',
-  imageOrVideoTitle: 'na stronę ikss',
-  facebookLink: 'https://pl-pl.facebook.com',
-  instagramLink: 'https://www.instagram.com',
-  youTubeLink: 'https://www.youtube.com',
-  linkedInLink: 'https://pl.linkedin.com',
-};
-
 const homePage = ({ heroData }) => (
   <>
     <Navbar
@@ -31,7 +19,15 @@ const homePage = ({ heroData }) => (
         lnlink: 'https://pl.linkedin.com',
       }}
     />
-    <HomePageHero data={heroTempData} />
+    <HomePageHero
+      data={{
+        ...heroData,
+        facebookLink: 'https://pl-pl.facebook.com',
+        instagramLink: 'https://www.instagram.com',
+        youTubeLink: 'https://www.youtube.com',
+        linkedInLink: 'https://pl.linkedin.com',
+      }}
+    />
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
