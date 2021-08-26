@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const HomePageHeroImage = ({ imageSrc, imageAlt }) => (
   <div>
-    <StyledImage src={imageSrc} alt={imageAlt} />
+    <StyledImage src={`https:${imageSrc}`} alt={imageAlt} />
   </div>
 );
 
