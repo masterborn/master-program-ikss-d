@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 import Input from '@components/ContactForm/StyledInput';
-import StyledCheckbox from '@components/ContactForm/StyledCheckbox';
+import Checkbox from '@root/components/ContactForm/CheckboxField';
 import Icon from '@components/Icon/Icon';
 import ToolTip from '@components/ContactForm/ToolTip';
 import Button from '@components/Button/Button';
@@ -262,10 +262,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
         />
 
         <InfoWrapper>
-          <StyledCheckbox
-            defaultValue={formValues.conditions}
-            validateCallback={onValidateCheckbox}
-          />
+          <Checkbox defaultValue={formValues.conditions} validateCallback={onValidateCheckbox} />
           <p>
             Zapoznałem się z{' '}
             <Link href="/">

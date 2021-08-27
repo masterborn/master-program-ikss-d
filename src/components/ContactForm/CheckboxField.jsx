@@ -24,7 +24,7 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox', required: true })`
   width: 1px;
 `;
 
-const Checkbox = styled.div`
+const CheckboxField = styled.div`
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -45,7 +45,7 @@ const Checkbox = styled.div`
   }
 `;
 
-const StyledCheckbox = ({ defaultValue, validateCallback }) => {
+const Checkbox = ({ defaultValue, validateCallback }) => {
   const [isChecked, setIsChecked] = useState(defaultValue);
 
   useEffect(() => {
@@ -66,16 +66,16 @@ const StyledCheckbox = ({ defaultValue, validateCallback }) => {
         name="conditions"
         onInvalid={onChange}
       />
-      <Checkbox checked={isChecked}>
+      <CheckboxField checked={isChecked}>
         <Icon icon={Checked} />
-      </Checkbox>
+      </CheckboxField>
     </Wrapper>
   );
 };
 
-StyledCheckbox.propTypes = {
+Checkbox.propTypes = {
   defaultValue: PropTypes.bool.isRequired,
   validateCallback: PropTypes.func.isRequired,
 };
 
-export default StyledCheckbox;
+export default Checkbox;
