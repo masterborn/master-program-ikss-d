@@ -6,11 +6,11 @@ import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
-import HttpClient from '@api/httpClient/HttpClient';
+import ContentfulClient from '@api/clients/ContentfulAPI';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 
-const homePage = () => (
+const homePage = ({ heroData }) => (
   <>
     <Navbar
       urls={{
@@ -23,7 +23,7 @@ const homePage = () => (
 
     <Hero
       headerText="Przykładowy nagłówek IKSS"
-      smallText="Urna, mi condimentum amet, consectetur mauris tincidunt gravida aenean. Dignissim in sit arcu nam. Ultrices integer odio feugiat vulputate."
+      smallText={heroData.text}
       imageSrc={HeroImagePng}
       imageAlt="Przykładowy nagłówek IKSS"
       facebookLink="https://pl-pl.facebook.com"
@@ -114,7 +114,9 @@ const homePage = () => (
 );
 
 export const getStaticProps = async () => {
-  const basicContentClient = new HttpClient(`&content_type=basicContent&fields.page[in]=homepage`);
+  const basicContentClient = new ContentfulClient();
+  const projectsClient = new ContentfulClient();
+  const boardMembersClient = new ContentfulClient();
 
   // Hero data
 
@@ -131,10 +133,15 @@ export const getStaticProps = async () => {
   // Projects data
 
   const projectsHeaderData = await basicContentClient.getFilteredData('homepage-projects-title');
+  const projectsData = await projectsClient.getFilteredProjectsData('homepage');
 
   // Cooperation data
 
   const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
+
+  // Board Members data
+
+  const boardMembersData = await boardMembersClient.getFilteredMembersData();
 
   return {
     props: {
@@ -145,6 +152,8 @@ export const getStaticProps = async () => {
       valuesThirdCardData: value3,
       projectsHeaderData,
       cooperationHeaderData,
+      projectsData,
+      boardMembersData,
     },
   };
 };
