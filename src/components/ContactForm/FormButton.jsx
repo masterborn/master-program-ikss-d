@@ -17,7 +17,7 @@ const rotateSpinner = keyframes`
     }
 `;
 
-const NormalButton = styled(Button)`
+const SubmitButton = styled(Button)`
   grid-column: 2;
   margin-left: auto;
   margin-top: 28px;
@@ -28,15 +28,19 @@ const NormalButton = styled(Button)`
   }
 `;
 
-const SpinnerButton = styled(NormalButton)`
+const LoadingButton = styled(SubmitButton)`
   padding: 16px 70px;
 
   & > svg {
     animation: ${rotateSpinner} 5s linear infinite;
+
+    @media (max-width: ${getMedias('tablet')}) {
+      transform: scale(0.83);
+    }
   }
 `;
 
-const SuccessButton = styled(NormalButton)`
+const SuccessButton = styled(SubmitButton)`
   width: 100%;
   grid-column: span 2;
   justify-content: center;
@@ -51,6 +55,14 @@ const SuccessButton = styled(NormalButton)`
 
   &:hover {
     background: ${getColor('success')};
+  }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    gap: 6px;
+
+    & > svg {
+      transform: scale(0.83);
+    }
   }
 
   @media (max-width: ${getMedias('mobile')}) {
@@ -91,39 +103,41 @@ const ErrorButton = styled(SuccessButton)`
   }
 `;
 
-const SubmitButton = ({ buttonName }) => {
-  switch (buttonName) {
+const FormButton = ({ buttonStatus, closeModal }) => {
+  switch (buttonStatus) {
     case 'primary':
-      return <NormalButton isTypeSubmit>Wyślij wiadomość</NormalButton>;
+      return <SubmitButton isTypeSubmit>Wyślij wiadomość</SubmitButton>;
     case 'loading':
       return (
-        <SpinnerButton>
+        <LoadingButton>
           <Loader />
-        </SpinnerButton>
+        </LoadingButton>
       );
     case 'success':
       return (
-        <SuccessButton>
+        <SuccessButton onClick={() => closeModal()}>
           <Success />
         </SuccessButton>
       );
     case 'error':
       return (
-        <ErrorButton>
+        <ErrorButton isTypeSubmit>
           <Error />
         </ErrorButton>
       );
     default:
-      return <NormalButton isTypeSubmit>Wyślij wiadomość</NormalButton>;
+      return <SubmitButton isTypeSubmit>Wyślij wiadomość</SubmitButton>;
   }
 };
 
-SubmitButton.defaultProps = {
-  buttonName: 'primary',
+FormButton.defaultProps = {
+  buttonStatus: 'primary',
+  closeModal: () => {},
 };
 
-SubmitButton.propTypes = {
-  buttonName: PropTypes.string,
+FormButton.propTypes = {
+  buttonStatus: PropTypes.string,
+  closeModal: PropTypes.func,
 };
 
-export default SubmitButton;
+export default FormButton;

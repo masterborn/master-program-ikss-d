@@ -7,7 +7,7 @@ import Input from '@components/ContactForm/StyledInput';
 import Checkbox from '@root/components/ContactForm/CheckboxField';
 import Icon from '@components/Icon/Icon';
 import ToolTip from '@components/ContactForm/ToolTip';
-import SubmitButton from '@components/ContactForm/SubmitButton';
+import FormButton from '@root/components/ContactForm/FormButton';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -139,6 +139,7 @@ const StyledCloseIcon = styled(Icon)`
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [buttonStatus, setButtonStatus] = useState('primary');
   const [formValues, setFormValues] = useState({
     name: '',
     surname: '',
@@ -159,6 +160,12 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       event.preventDefault();
       return;
     }
+
+    setButtonStatus('loading');
+
+    setTimeout(() => {
+      setButtonStatus('error');
+    }, 3000);
 
     setFormValues({
       name: '',
@@ -266,7 +273,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           </p>
         </InfoWrapper>
 
-        <SubmitButton buttonName="loading" />
+        <FormButton buttonStatus={buttonStatus} />
       </Form>
     </Wrapper>
   );
