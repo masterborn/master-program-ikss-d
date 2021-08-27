@@ -7,7 +7,7 @@ import Input from '@components/ContactForm/StyledInput';
 import StyledCheckbox from '@components/ContactForm/StyledCheckbox';
 import Icon from '@components/Icon/Icon';
 import ToolTip from '@components/ContactForm/ToolTip';
-import Button from '@components/Button/Button';
+import SubmitButton from '@components/ContactForm/SubmitButton';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -128,17 +128,6 @@ const InfoToolTip = styled(ToolTip)`
   }
 `;
 
-const SubmitButton = styled(Button)`
-  grid-column: 2;
-  margin-left: auto;
-  margin-top: 28px;
-
-  @media (max-width: ${getMedias('mobile')}) {
-    grid-column: 1;
-    margin: 28px auto 0 auto;
-  }
-`;
-
 const StyledCloseIcon = styled(Icon)`
   position: absolute;
   top: 2em;
@@ -209,7 +198,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           </p>
         </InfoWrapper>
 
-        <SubmitButton>Wyślij wiadomość</SubmitButton>
+        <SubmitButton buttonName="loading" />
       </Form>
     </Wrapper>
   );
