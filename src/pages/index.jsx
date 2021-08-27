@@ -9,6 +9,7 @@ import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/ContentfulAPI';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
+import { filterBasicContentData } from '@utils/filterData';
 
 const homePage = ({ heroData }) => (
   <>
@@ -114,34 +115,32 @@ const homePage = ({ heroData }) => (
 );
 
 export const getStaticProps = async () => {
-  const basicContentClient = new ContentfulClient();
-  const projectsClient = new ContentfulClient();
-  const boardMembersClient = new ContentfulClient();
-
   // Hero data
 
-  const heroData = await basicContentClient.getFilteredData('homepage-top-section');
+  const basicContent = await ContentfulClient.getBasicContentData('homepage');
+
+  const heroData = filterBasicContentData(basicContent, 'homepage-top-section');
 
   // Values data
 
-  const valuesHeaderData = await basicContentClient.getFilteredData('homepage-values');
+  const valuesHeaderData = filterBasicContentData(basicContent, 'homepage-values');
 
-  const value1 = await basicContentClient.getFilteredData('homepage-tile-1');
-  const value2 = await basicContentClient.getFilteredData('homepage-tile-2');
-  const value3 = await basicContentClient.getFilteredData('homepage-tile-3');
+  const value1 = filterBasicContentData(basicContent, 'homepage-tile-1');
+  const value2 = filterBasicContentData(basicContent, 'homepage-tile-2');
+  const value3 = filterBasicContentData(basicContent, 'homepage-tile-3');
 
   // Projects data
 
-  const projectsHeaderData = await basicContentClient.getFilteredData('homepage-projects-title');
-  const projectsData = await projectsClient.getFilteredProjectsData('homepage');
+  const projectsHeaderData = filterBasicContentData(basicContent, 'homepage-projects-title');
+  const projectsData = await ContentfulClient.getFilteredFieldsData('projects', 'homepage');
 
   // Cooperation data
 
-  const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
+  const cooperationHeaderData = filterBasicContentData(basicContent, 'homepage-partners-text');
 
   // Board Members data
 
-  const boardMembersData = await boardMembersClient.getFilteredMembersData();
+  const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
 
   return {
     props: {

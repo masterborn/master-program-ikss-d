@@ -50,16 +50,16 @@ export function filterData(response, section, page = null) {
   return responseObject;
 }
 
-export function filterBasicContent(data, filterCriteria) {
+export function filterBasicContentData(data, filterCriteria) {
   const filteredArrayWithSingleData = data.filter(
     (item) => item.fields.identifier === filterCriteria,
   );
 
-  let responseObject;
+  let responseObject = filteredArrayWithSingleData[0].fields;
 
   if (filteredArrayWithSingleData[0].image1) {
     const imageOrVideoTitle = filteredArrayWithSingleData[0].image1.fields.title;
-    const imageOrVideoURL = filteredArrayWithSingleData[0].image1.fields.file.url;
+    const imageOrVideoURL = `https:${filteredArrayWithSingleData[0].image1.fields.file.url}`;
     const { contentType } = filteredArrayWithSingleData[0].image1.fields.file;
 
     const contentTypeArray = contentType.split('/');
@@ -73,8 +73,6 @@ export function filterBasicContent(data, filterCriteria) {
       ...filteredArrayWithSingleData[0].fields,
     };
   }
-
-  responseObject = { ...filteredArrayWithSingleData[0].fields };
 
   if (responseObject.text1) {
     delete responseObject.identifier;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { filterBasicContent, filterData } from '@utils/filterData';
+import { filterData } from '@utils/filterData';
 import getAssets from '@utils/getAssets';
 
 class ContentfulClient {
@@ -9,7 +9,7 @@ class ContentfulClient {
   });
 
   getData(path) {
-    return axios
+    return this.api
       .get(`${this.api.defaults.baseURL}${path}`)
       .catch((err) => {
         throw err;
@@ -17,32 +17,24 @@ class ContentfulClient {
       .then((res) => res.data);
   }
 
-  getFilteredData(filterCriteria) {
-    return this.getAssetsPrivate()
-      .then((res) => filterBasicContent(res, filterCriteria))
+  getBasicContentData(page) {
+    return this.getAssetsPrivate(page)
+      .then((res) => res)
       .catch((err) => {
         throw err;
       });
   }
 
-  getFilteredProjectsData(page = 'projects') {
-    return this.getData('&content_type=projects&select=fields')
-      .then((res) => filterData(res, 'projects', page))
+  getFilteredFieldsData(section = 'projects', page = null) {
+    return this.getData(`&content_type=${section}&select=fields`)
+      .then((res) => filterData(res, section, page))
       .catch((err) => {
         throw err;
       });
   }
 
-  getFilteredMembersData() {
-    return this.getData('&content_type=boardMembers&select=fields')
-      .then((res) => filterData(res, 'boardMembers'))
-      .catch((err) => {
-        throw err;
-      });
-  }
-
-  getAssetsPrivate() {
-    return this.getData('&content_type=basicContent&fields.page[in]=homepage')
+  getAssetsPrivate(page) {
+    return this.getData(`&content_type=basicContent&fields.page[in]=${page}`)
       .then((res) => getAssets(res))
       .catch((err) => {
         throw err;
@@ -50,4 +42,6 @@ class ContentfulClient {
   }
 }
 
-export default ContentfulClient;
+const ContentfulAPI = new ContentfulClient();
+
+export default ContentfulAPI;
