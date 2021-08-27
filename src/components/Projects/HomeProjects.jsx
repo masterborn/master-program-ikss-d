@@ -10,7 +10,7 @@ import thirdImage from '@assets/cardImage3.jpg';
 
 const tempData = [
   {
-    imgSrc: firstImage,
+    imgSrc: 'https://picsum.photos/1920/1080',
     imgAlt: 'Nocne Kino Akademickie',
     title: 'Nocne Kino Akademickie',
     date: '15.11.2020',
@@ -20,7 +20,7 @@ const tempData = [
     buttonLabel: 'Dołącz do wydarzenia',
   },
   {
-    imgSrc: secondImage,
+    imgSrc: 'https://picsum.photos/1920/1080',
     videoUrl: 'https://www.youtube.com/watch?v=ca7R_REZC3Y',
     imgAlt: 'Wrocławski Bieg Akademicki',
     title: 'Wrocławski Bieg Akademicki',
@@ -31,7 +31,7 @@ const tempData = [
     buttonLabel: 'Podsumowanie wydarzenia',
   },
   {
-    imgSrc: thirdImage,
+    imgSrc: 'https://picsum.photos/1920/1080',
     imgAlt: 'Pracownia Teatralna',
     title: 'Pracownia Teatralna',
     date: '15.11.2020',
@@ -130,6 +130,7 @@ const StyledProjects = () => {
         description={tempData[activeCard].description}
         url={tempData[activeCard].url}
         buttonLabel={tempData[activeCard].buttonLabel}
+        isOnHomePage
       />
       <Button href="/projects" link secondary>
         Zobacz wszystkie projekty
@@ -138,9 +139,9 @@ const StyledProjects = () => {
   );
 };
 
-const Projects = styled(StyledProjects)`
+const HomeProjects = styled(StyledProjects)`
   background: #e5e5e5;
   width: 100vw;
 `;
 
-export default Projects;
+export default HomeProjects;

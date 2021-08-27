@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-const styledCardImage = ({ imageSrc, imageAlt }) => <Image src={imageSrc} alt={imageAlt} />;
+const styledCardImage = ({ imageSrc, imageAlt }) => <img src={imageSrc} alt={imageAlt} />;
 
 const CardImage = styled(styledCardImage)`
   max-width: 100%;
@@ -12,7 +11,7 @@ const CardImage = styled(styledCardImage)`
 `;
 
 CardImage.propTypes = {
-  imageSrc: PropTypes.shape({}).isRequired,
+  imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string.isRequired,
 };
 
