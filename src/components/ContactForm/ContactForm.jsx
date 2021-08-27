@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 import Input from '@components/ContactForm/StyledInput';
-import StyledCheckbox from '@components/ContactForm/StyledCheckbox';
+import Checkbox from '@root/components/ContactForm/CheckboxField';
 import Icon from '@components/Icon/Icon';
 import ToolTip from '@components/ContactForm/ToolTip';
 import SubmitButton from '@components/ContactForm/SubmitButton';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import { validateInput, validateCheckbox } from '@utils/validation';
 
 const Wrapper = styled.div`
   position: relative;
@@ -136,13 +137,62 @@ const StyledCloseIcon = styled(Icon)`
 `;
 
 const ContactForm = ({ modal, toolTipText, className }) => {
-  const [toolTip, setToolTip] = useState(false);
+  const [isToolTipShown, setIsToolTipShown] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [formValues, setFormValues] = useState({
+    name: '',
+    surname: '',
+    email: '',
+    topic: '',
+    content: '',
+    conditions: false,
+  });
 
   const CloseModalButton = (
     <button type="button">
       <StyledCloseIcon icon={CloseIcon} media="16px" />
     </button>
   );
+
+  const handleSubmit = (event) => {
+    if (!isFormValid) {
+      event.preventDefault();
+      return;
+    }
+
+    setFormValues({
+      name: '',
+      surname: '',
+      email: '',
+      topic: '',
+      content: '',
+      conditions: false,
+    });
+
+    event.preventDefault();
+  };
+
+  const getDataFromInputs = (event) => {
+    const inputVal = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    const { name } = event.target;
+
+    setFormValues({
+      ...formValues,
+      [name]: inputVal,
+    });
+  };
+
+  const onValidateInput = (event) => {
+    getDataFromInputs(event);
+
+    return validateInput(event, setIsFormValid);
+  };
+
+  const onValidateCheckbox = (event) => {
+    getDataFromInputs(event);
+
+    return validateCheckbox(event, setIsFormValid);
+  };
 
   return (
     <Wrapper className={className}>
@@ -158,40 +208,58 @@ const ContactForm = ({ modal, toolTipText, className }) => {
         dictumst neque neque molestie parturient.
       </p>
 
-      <Form>
-        <StyledInput required name="name" placeholder="Wpisz swoje imię" labelText="Imię" />
+      <Form onSubmit={handleSubmit}>
+        <StyledInput
+          name="name"
+          placeholder="Wpisz swoje imię"
+          labelText="Imię"
+          validateCallback={onValidateInput}
+          defaultValue={formValues.name}
+        />
 
         <StyledInput
-          required
           name="surname"
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
+          validateCallback={onValidateInput}
+          defaultValue={formValues.surname}
         />
 
         <StyledInput
-          required
           name="email"
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
+          validateCallback={onValidateInput}
+          defaultValue={formValues.email}
         />
 
-        <StyledInput required name="topic" placeholder="Temat wiadomości" labelText="Temat" />
+        <StyledInput
+          name="topic"
+          placeholder="Temat wiadomości"
+          labelText="Temat"
+          validateCallback={onValidateInput}
+          defaultValue={formValues.topic}
+        />
 
         <StyledInput
           textarea
-          required
           name="content"
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"
+          validateCallback={onValidateInput}
+          defaultValue={formValues.content}
         />
 
         <InfoWrapper>
-          <StyledCheckbox />
+          <Checkbox defaultValue={formValues.conditions} validateCallback={onValidateCheckbox} />
           <p>
             Zapoznałem się z{' '}
             <Link href="/">
-              <a onMouseEnter={() => setToolTip(true)} onMouseLeave={() => setToolTip(false)}>
-                {toolTip && <InfoToolTip toolTipText={toolTipText} />}
+              <a
+                onMouseEnter={() => setIsToolTipShown(true)}
+                onMouseLeave={() => setIsToolTipShown(false)}
+              >
+                {isToolTipShown && <InfoToolTip toolTipText={toolTipText} />}
                 informacją o administratorze i przetwarzaniu danych.
               </a>
             </Link>
