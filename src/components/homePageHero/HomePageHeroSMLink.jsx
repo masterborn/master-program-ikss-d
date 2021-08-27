@@ -5,7 +5,7 @@ import Icon from '@components/Icon/Icon';
 import { getMedias } from '@styles/utils';
 
 const HomePageHeroSMLink = ({ hrefLink, linkIcon, linkText }) => (
-  <Wrapper href={hrefLink} target="_blank" rel="noopener noreferrer">
+  <Wrapper href={hrefLink}>
     <Icon icon={linkIcon} size="3em" media="2.3em" />
     <h5>{linkText}</h5>
   </Wrapper>
