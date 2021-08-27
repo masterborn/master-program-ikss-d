@@ -4,9 +4,6 @@ import styled, { css } from 'styled-components';
 import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
 import ProjectCard from '@components/Projects/ProjectCard';
-import firstImage from '@assets/cardImage1.jpg';
-import secondImage from '@assets/cardImage2.jpg';
-import thirdImage from '@assets/cardImage3.jpg';
 
 const tempData = [
   {
