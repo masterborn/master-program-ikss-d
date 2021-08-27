@@ -5,9 +5,9 @@ import HomePageHeroText from '@components/homePageHero/HomePageHeroText';
 import HomePageHeroImage from '@components/homePageHero/HomePageHeroImage';
 import HeroSM from '@components/homePageHero/HomePageHeroSM';
 import HomePageHeroVideo from '@components/homePageHero/HomePageHeroVideo';
-import { getMedias } from '@styles/utils';
+import { getColor, getMedias } from '@styles/utils';
 
-const styledHero = ({ data }) => {
+const HomePageHero = ({ data }) => {
   let imageOrVideoBlock;
 
   if (data.contentType && data.contentType === 'video') {
@@ -23,7 +23,7 @@ const styledHero = ({ data }) => {
   }
 
   return (
-    <>
+    <HeroWrapper>
       <Wrapper>
         <HomePageHeroText headerText={data.title} smallText={data.text} />
         {imageOrVideoBlock}
@@ -34,12 +34,12 @@ const styledHero = ({ data }) => {
         youTubeLink={data.youTubeLink}
         linkedInLink={data.linkedInLink}
       />
-    </>
+    </HeroWrapper>
   );
 };
 
-const HomePageHero = styled(styledHero)`
-  background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%), #ffffff;
+const HeroWrapper = styled.section`
+  background: ${getColor('backgroundGradient')};
   width: 100vw;
 `;
 
