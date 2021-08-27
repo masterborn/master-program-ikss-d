@@ -36,13 +36,13 @@ const styledButton = ({
       </a>
     );
   }
-
   return (
     <button
       className={className}
       onClick={onClick}
       onKeyUp={onKeyUp}
       type={isTypeSubmit ? 'submit' : 'button'}
+
     >
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {children}
