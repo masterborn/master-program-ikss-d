@@ -74,6 +74,23 @@ export function filterBasicContentData(data, filterCriteria) {
     };
   }
 
+  if (filteredArrayWithSingleData[0].image2) {
+    const imageTwoTitle = filteredArrayWithSingleData[0].image2.fields.title;
+    const imageTwoURL = `https:${filteredArrayWithSingleData[0].image2.fields.file.url}`;
+    const { contentType } = filteredArrayWithSingleData[0].image2.fields.file;
+
+    const contentTypeArray = contentType.split('/');
+
+    delete filteredArrayWithSingleData[0].fields.image2;
+
+    responseObject = {
+      imageTwoURL,
+      imageTwoTitle,
+      contentType: contentTypeArray[0],
+      ...filteredArrayWithSingleData[0].fields,
+    };
+  }
+
   if (responseObject.text1) {
     delete responseObject.identifier;
     delete responseObject.page;
