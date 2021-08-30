@@ -1,21 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import Button from '@components/Button/Button';
-import Loader from '@assets/loader.svg';
+import Spinner from '@components/Spinner/Spinner';
 import Success from '@assets/success.svg';
 import Error from '@assets/x-error.svg';
 import { getMedias, getColor } from '@styles/utils';
-
-const rotateSpinner = keyframes`
-    from {
-        transform: rotate(0)
-    }
-    to {
-        transform: rotate(360deg)
-    }
-`;
 
 const SubmitButton = styled(Button)`
   grid-column: 2;
@@ -30,23 +21,14 @@ const SubmitButton = styled(Button)`
 
 const LoadingButton = styled(SubmitButton)`
   padding: 16px 70px;
-
-  & > svg {
-    animation: ${rotateSpinner} 5s linear infinite;
-
-    @media (max-width: ${getMedias('tablet')}) {
-      transform: scale(0.83);
-    }
-  }
 `;
 
-const SuccessButton = styled(SubmitButton)`
+const SuccessButton = styled(Button)`
   width: 100%;
   grid-column: span 2;
   justify-content: center;
   gap: 12px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 28px auto 0 auto;
   background: ${getColor('success')};
 
   & * {
@@ -69,17 +51,10 @@ const SuccessButton = styled(SubmitButton)`
     grid-column: 1;
     margin: 28px auto 0 auto;
   }
-
-  &::after {
-    content: ' Wiadomość wysłana! Odpowiemy wkrótce.';
-
-    @media (max-width: ${getMedias('mobile')}) {
-      content: 'Wiadomość wysłana!';
-    }
-  }
 `;
 
 const ErrorButton = styled(SuccessButton)`
+  grid-column: span 2;
   background: ${getColor('error')};
 
   & * {
@@ -93,14 +68,6 @@ const ErrorButton = styled(SuccessButton)`
   &:hover {
     background: ${getColor('error')};
   }
-
-  &::after {
-    content: 'Coś poszło nie tak. Spróbuj jeszcze raz.';
-
-    @media (max-width: ${getMedias('mobile')}) {
-      content: 'Spróbuj jeszcze raz.';
-    }
-  }
 `;
 
 const FormButton = ({ buttonStatus, closeModal }) => {
@@ -110,19 +77,19 @@ const FormButton = ({ buttonStatus, closeModal }) => {
     case 'loading':
       return (
         <LoadingButton>
-          <Loader />
+          <Spinner />
         </LoadingButton>
       );
     case 'success':
       return (
         <SuccessButton onClick={() => closeModal()}>
-          <Success />
+          <Success /> Wiadomość wysłana!
         </SuccessButton>
       );
     case 'error':
       return (
         <ErrorButton isTypeSubmit>
-          <Error />
+          <Error /> Spróbuj jeszcze raz.
         </ErrorButton>
       );
     default:

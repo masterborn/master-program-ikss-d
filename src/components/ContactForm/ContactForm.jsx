@@ -68,6 +68,7 @@ const Form = styled.form`
   color: ${getColor('navy')};
 
   @media (max-width: ${getMedias('mobile')}) {
+    gap: 9px 0;
     grid-template-columns: 1fr;
   }
 `;
