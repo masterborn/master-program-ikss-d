@@ -51,7 +51,7 @@ const SubpagesHero = ({ data }) => (
   <Wrapper>
     <ImageWrapper>
       <Image
-        src={`https:${data.imageOrVideoURL}`}
+        src={data.imageOrVideoURL}
         alt={data.title}
         height={142}
         width={230}
