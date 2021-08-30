@@ -44,7 +44,7 @@ const Wrapper = styled.section`
 
 const SubpagesHero = ({ data }) => (
   <Wrapper>
-    <img src={`https:${data.imageOrVideoURL}`} alt={data.title} />
+    <img src={data.imageOrVideoURL} alt={data.title} />
     <h1>{data.title}</h1>
     {documentToReactComponents(data.text)}
   </Wrapper>
