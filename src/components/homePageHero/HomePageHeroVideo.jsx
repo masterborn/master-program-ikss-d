@@ -11,7 +11,7 @@ const HomePageHeroVideo = ({ videoSrc }) => (
   <div>
     <StyledVideo autoPlay muted loop>
       <track kind="captions" />
-      <source src={`https:${videoSrc}`} />
+      <source src={videoSrc} />
     </StyledVideo>
   </div>
 );
