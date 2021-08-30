@@ -2,7 +2,24 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 
-const styledCardImage = ({ imageSrc, imageAlt }) => <img src={imageSrc} alt={imageAlt} />;
+import { getMedias } from '@styles/utils';
+
+const styledCardImage = ({ imageSrc, imageAlt, isOnHomePage }) => (
+  <Wrapper isOnHomePage={isOnHomePage}>
+    <Image src={imageSrc} alt={imageAlt} height={320} width={580} layout="responsive" />
+  </Wrapper>
+);
+
+const Wrapper = styled.div`
+  width: ${(props) => {
+    console.log(props.isOnHomePage);
+    return props.isOnHomePage ? '997px' : ' 588px';
+  }};
+
+  @media (max-width: ${getMedias('tablet')}) {
+    width: 100%;
+  }
+`;
 
 const CardImage = styled(styledCardImage)`
   max-width: 100%;

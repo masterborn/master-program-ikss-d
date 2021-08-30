@@ -132,7 +132,7 @@ const ProjectCard = ({
       {videoUrl ? (
         <CardVideo videoUrl={videoUrl} title={title} />
       ) : (
-        <CardImage imageSrc={imgSrc} imageAlt={imgAlt} />
+        <CardImage imageSrc={imgSrc} imageAlt={imgAlt} isOnHomePage={isOnHomePage} />
       )}
       <Description isOnHomePage={isOnHomePage}>
         <Header isOnHomePage={isOnHomePage}>
