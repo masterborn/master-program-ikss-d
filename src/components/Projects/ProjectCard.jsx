@@ -32,7 +32,6 @@ const Wrapper = styled.div`
     `};
   & img {
     width: auto;
-    //height: 579px;
     background: linear-gradient(360deg, #66757f -0.09%, rgba(102, 117, 127, 0) 100%);
     height: ${(props) => (props.isOnHomePage ? '579px' : '330px')};
     opacity: 0.6;
@@ -59,7 +58,6 @@ const Description = styled.article`
   flex-direction: column;
   align-items: flex-start;
   max-width: ${(props) => (props.isOnHomePage ? '792px' : '90%')};
-  //padding: 0 102px 4.1em 102px;
   padding: ${(props) => (props.isOnHomePage ? '0 102px 4.1em 102px' : '0 0 40px')};
 
   @media (max-width: ${getMedias('desktop')}) {

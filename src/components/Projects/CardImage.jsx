@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 
 const styledCardImage = ({ imageSrc, imageAlt }) => <img src={imageSrc} alt={imageAlt} />;
 
