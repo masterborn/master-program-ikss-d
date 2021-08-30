@@ -109,7 +109,7 @@ class ContentfulClient {
   }
 
   getConnectedData() {
-    return this.getData('&content_type=basicContent&fields.page[in]=homepage').then((res) =>
+    return this.getData('&content_type=basicContent&fields.page[in]=projects').then((res) =>
       res.items.map((item) =>
         item.fields.image1
           ? {

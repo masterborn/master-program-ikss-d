@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
@@ -42,9 +43,21 @@ const Wrapper = styled.section`
   }
 `;
 
+const ImageWrapper = styled.div`
+  width: 229.89px;
+`;
+
 const SubpagesHero = ({ data }) => (
   <Wrapper>
-    <img src={data.imageOrVideoURL} alt={data.title} />
+    <ImageWrapper>
+      <Image
+        src={`https:${data.imageOrVideoURL}`}
+        alt={data.title}
+        height={142}
+        width={230}
+        layout="responsive"
+      />
+    </ImageWrapper>
     <h1>{data.title}</h1>
     {documentToReactComponents(data.text)}
   </Wrapper>
