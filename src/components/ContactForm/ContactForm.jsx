@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 import Input from '@components/ContactForm/StyledInput';
-import Checkbox from '@root/components/ContactForm/CheckboxField';
+import Checkbox from '@components/ContactForm/CheckboxField';
 import Icon from '@components/Icon/Icon';
 import ToolTip from '@components/ContactForm/ToolTip';
-import FormButton from '@root/components/ContactForm/FormButton';
+import FormButton from '@components/ContactForm/FormButton';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
