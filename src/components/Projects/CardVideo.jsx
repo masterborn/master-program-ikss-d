@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { getMedias } from '@styles/utils';
+
 const Wrapper = styled.div`
   position: relative;
-  width: 100%;
+  width: 966px;
   height: 0;
-  padding-bottom: 56.25%;
+  padding-bottom: 43.25%;
   overflow: hidden;
   display: inline-flex;
+
+  @media (max-width: ${getMedias('laptop')}) {
+    width: 100%;
+    padding-bottom: 56.25%;
+  }
 `;
 
 const VideoFrame = styled.iframe`

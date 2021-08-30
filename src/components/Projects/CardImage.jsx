@@ -11,12 +11,9 @@ const styledCardImage = ({ imageSrc, imageAlt, isOnHomePage }) => (
 );
 
 const Wrapper = styled.div`
-  width: ${(props) => {
-    console.log(props.isOnHomePage);
-    return props.isOnHomePage ? '997px' : ' 588px';
-  }};
+  width: ${(props) => (props.isOnHomePage ? '997px' : ' 588px')};
 
-  @media (max-width: ${getMedias('tablet')}) {
+  @media (max-width: ${getMedias('laptop')}) {
     width: 100%;
   }
 `;

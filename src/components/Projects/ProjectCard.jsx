@@ -45,7 +45,7 @@ const Wrapper = styled.div`
     & article {
       width: auto;
       height: auto;
-      padding: 0 2em;
+      padding: ${(props) => (props.isOnHomePage ? ' 0 2em' : '0 0.3em')};
     }
   }
 
