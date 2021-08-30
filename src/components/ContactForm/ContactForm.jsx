@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    padding: 76.5px 40px;
+    padding: 76.5px 20px;
     margin: 2em 24px;
   }
 
