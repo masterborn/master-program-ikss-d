@@ -6,12 +6,16 @@ const addImages = (data) => {
 
   const imageOrVideoTitle = resultObject.fields.title;
   const imageOrVideoURL = `https:${resultObject.fields.image1.fields.file.url}`;
+  const { contentType } = resultObject.fields.image1.fields.file;
+
+  const contentTypeArray = contentType.split('/');
 
     delete resultObject.fields.image1;
 
     resultObject = {
       imageOrVideoURL,
       imageOrVideoTitle,
+      contentType: contentTypeArray[0],
       ...resultObject.fields,
     };
 
