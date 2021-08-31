@@ -126,24 +126,17 @@ const ProjectCard = ({
     getHeight();
   }, []);
 
-  let cardImageOrVideo;
-  let button;
+  const cardImageOrVideo = videoUrl ? (
+    <CardVideo videoUrl={videoUrl} title={title} />
+  ) : (
+    <CardImage imageSrc={imgSrc} imageAlt={imgAlt} isOnHomePage={isOnHomePage} />
+  );
 
-  if (videoUrl) {
-    cardImageOrVideo = <CardVideo videoUrl={videoUrl} title={title} />;
-  } else {
-    cardImageOrVideo = (
-      <CardImage imageSrc={imgSrc} imageAlt={imgAlt} isOnHomePage={isOnHomePage} />
-    );
-  }
-
-  if (url) {
-    button = (
-      <SocialButton withIcon={url.includes('facebook')} href={url}>
-        {buttonLabel}
-      </SocialButton>
-    );
-  }
+  const button = url && (
+    <SocialButton withIcon={url.includes('facebook')} href={url}>
+      {buttonLabel}
+    </SocialButton>
+  );
 
   return (
     <Wrapper isOnHomePage={isOnHomePage} ref={wrapperRef} rowHeight={cardHeight}>
