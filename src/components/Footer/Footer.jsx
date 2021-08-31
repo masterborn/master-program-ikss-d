@@ -39,6 +39,7 @@ const ButtonWrapper = styled.div`
   @media (max-width: ${getMedias('tablet')}) {
     margin-right: 5%;
   }
+
   @media (max-width: 650px) {
     justify-content: ${(props) => (props.contact ? 'flex-end' : 'center')};
     margin-right: ${(props) => (props.contact ? '5%' : '0')};
@@ -143,6 +144,12 @@ const SocialMedias = styled(Socials)`
   margin-top: 2em;
   align-items: center;
   gap: 24px;
+  & svg * {
+    transition: all 0.3s ease-in;
+  }
+  & svg:hover * {
+    fill: ${getColor('blue_50')};
+  }
 `;
 
 const ContactFormWrapper = styled.div`
