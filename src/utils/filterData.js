@@ -57,36 +57,28 @@ export function filterBasicContentData(data, filterCriteria) {
 
   let responseObject = filteredArrayWithSingleData[0].fields;
 
-  if (filteredArrayWithSingleData[0].image1) {
-    const imageOrVideoTitle = filteredArrayWithSingleData[0].image1.fields.title;
-    const imageOrVideoURL = `https:${filteredArrayWithSingleData[0].image1.fields.file.url}`;
-    const { contentType } = filteredArrayWithSingleData[0].image1.fields.file;
-
-    const contentTypeArray = contentType.split('/');
+  if (filteredArrayWithSingleData[0].fields.image1) {
+    const imageOrVideoTitle = filteredArrayWithSingleData[0].fields.title;
+    const imageOrVideoURL = `https:${filteredArrayWithSingleData[0].fields.image1.fields.file.url}`;
 
     delete filteredArrayWithSingleData[0].fields.image1;
 
     responseObject = {
       imageOrVideoURL,
       imageOrVideoTitle,
-      contentType: contentTypeArray[0],
       ...filteredArrayWithSingleData[0].fields,
     };
   }
 
   if (filteredArrayWithSingleData[0].image2) {
-    const imageTwoTitle = filteredArrayWithSingleData[0].image2.fields.title;
-    const imageTwoURL = `https:${filteredArrayWithSingleData[0].image2.fields.file.url}`;
-    const { contentType } = filteredArrayWithSingleData[0].image2.fields.file;
-
-    const contentTypeArray = contentType.split('/');
+    const imageTwoTitle = filteredArrayWithSingleData[0].fields.title;
+    const imageTwoURL = `https:${filteredArrayWithSingleData[0].fields.image1.fields.file.url}`;
 
     delete filteredArrayWithSingleData[0].fields.image2;
 
     responseObject = {
       imageTwoURL,
       imageTwoTitle,
-      contentType: contentTypeArray[0],
       ...filteredArrayWithSingleData[0].fields,
     };
   }
@@ -96,8 +88,7 @@ export function filterBasicContentData(data, filterCriteria) {
     delete responseObject.page;
     responseObject.text = responseObject.text1;
     delete responseObject.text1;
-    return responseObject;
   }
-
+  
   return responseObject;
 }
