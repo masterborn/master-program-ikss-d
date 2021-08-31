@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import Link from 'next/link';
 
 import Input from '@components/ContactForm/StyledInput';
-import Checkbox from '@root/components/ContactForm/CheckboxField';
+import Checkbox from '@components/ContactForm/CheckboxField';
 import Icon from '@components/Icon/Icon';
 import ToolTip from '@components/ContactForm/ToolTip';
-import Button from '@components/Button/Button';
+import FormButton from '@components/ContactForm/FormButton';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    padding: 76.5px 40px;
+    padding: 76.5px 20px;
     margin: 2em 24px;
   }
 
@@ -68,6 +68,7 @@ const Form = styled.form`
   color: ${getColor('navy')};
 
   @media (max-width: ${getMedias('mobile')}) {
+    gap: 9px 0;
     grid-template-columns: 1fr;
   }
 `;
@@ -129,17 +130,6 @@ const InfoToolTip = styled(ToolTip)`
   }
 `;
 
-const SubmitButton = styled(Button)`
-  grid-column: 2;
-  margin-left: auto;
-  margin-top: 28px;
-
-  @media (max-width: ${getMedias('mobile')}) {
-    grid-column: 1;
-    margin: 28px auto 0 auto;
-  }
-`;
-
 const StyledCloseIcon = styled(Icon)`
   position: absolute;
   top: 2em;
@@ -150,6 +140,7 @@ const StyledCloseIcon = styled(Icon)`
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [buttonStatus, setButtonStatus] = useState('primary');
   const [formValues, setFormValues] = useState({
     name: '',
     surname: '',
@@ -170,6 +161,12 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       event.preventDefault();
       return;
     }
+
+    setButtonStatus('loading');
+
+    setTimeout(() => {
+      setButtonStatus('error');
+    }, 3000);
 
     setFormValues({
       name: '',
@@ -277,7 +274,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           </p>
         </InfoWrapper>
 
-        <SubmitButton isTypeSubmit>Wyślij wiadomość</SubmitButton>
+        <FormButton buttonStatus={buttonStatus} />
       </Form>
     </Wrapper>
   );

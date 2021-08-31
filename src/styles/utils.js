@@ -17,3 +17,8 @@ export const getMedias =
   (mediasName) =>
   ({ theme }) =>
     theme.medias[mediasName];
+
+export const getAnimation =
+  (animationName) =>
+  ({ theme }) =>
+    theme.animations[animationName];
