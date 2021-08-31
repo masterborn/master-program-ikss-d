@@ -1,4 +1,5 @@
 import Navbar from '@components/Navbar/Navbar';
+import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
 import ContentfulClient from '@api/clients/ContentfulAPI';
 
@@ -13,6 +14,7 @@ const projectsPage = ({ projectHero }) => (
       }}
     />
     <SubpagesHero data={projectHero} />
+    <MainProjects />
   </>
 );
 

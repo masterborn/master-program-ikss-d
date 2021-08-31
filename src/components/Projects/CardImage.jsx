@@ -1,8 +1,18 @@
 import styled from 'styled-components';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 
-const styledCardImage = ({ imageSrc, imageAlt }) => <Image src={imageSrc} alt={imageAlt} />;
+const styledCardImage = ({ imageSrc, imageAlt, isOnHomePage }) => (
+  <Wrapper isOnHomePage={isOnHomePage}>
+    <Image src={imageSrc} alt={imageAlt} layout="fill" />
+  </Wrapper>
+);
+
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+`;
 
 const CardImage = styled(styledCardImage)`
   max-width: 100%;
@@ -12,7 +22,7 @@ const CardImage = styled(styledCardImage)`
 `;
 
 CardImage.propTypes = {
-  imageSrc: PropTypes.shape({}).isRequired,
+  imageSrc: PropTypes.string.isRequired,
   imageAlt: PropTypes.string.isRequired,
 };
 
