@@ -1,8 +1,37 @@
-function topProjects(data) {
-  return data.filter((item) => item.showOnHomepage).sort((a, b) => a.order - b.order);
+const topProjects = (data) => data.filter((item) => item.showOnHomepage).sort((a, b) => a.order - b.order);
+
+const addImages = (data) => {
+
+  let resultObject = data;
+
+  const imageOrVideoTitle = resultObject.fields.title;
+  const imageOrVideoURL = `https:${resultObject.fields.image1.fields.file.url}`;
+
+    delete resultObject.fields.image1;
+
+    resultObject = {
+      imageOrVideoURL,
+      imageOrVideoTitle,
+      ...resultObject.fields,
+    };
+
+    if (data.fields.image2) {
+      const imageTwoTitle = resultObject.fields.title;
+      const imageTwoURL = `https:${resultObject.fields.image1.fields.file.url}`;
+  
+      delete resultObject.fields.image2;
+  
+      resultObject = {
+        imageTwoURL,
+        imageTwoTitle,
+        ...resultObject.fields,
+      };
+    }
+
+    return resultObject;
 }
 
-export function filterData(response, section, page = null) {
+export const filterData = (response, section, page = null) => {
   const responseObject = response.items.map((item) => {
     const { fields } = item;
 
@@ -50,7 +79,7 @@ export function filterData(response, section, page = null) {
   return responseObject;
 }
 
-export function filterBasicContentData(data, filterCriteria) {
+export const filterBasicContentData = (data, filterCriteria) => {
   const filteredArrayWithSingleData = data.filter(
     (item) => item.fields.identifier === filterCriteria,
   );
@@ -58,29 +87,7 @@ export function filterBasicContentData(data, filterCriteria) {
   let responseObject = filteredArrayWithSingleData[0].fields;
 
   if (filteredArrayWithSingleData[0].fields.image1) {
-    const imageOrVideoTitle = filteredArrayWithSingleData[0].fields.title;
-    const imageOrVideoURL = `https:${filteredArrayWithSingleData[0].fields.image1.fields.file.url}`;
-
-    delete filteredArrayWithSingleData[0].fields.image1;
-
-    responseObject = {
-      imageOrVideoURL,
-      imageOrVideoTitle,
-      ...filteredArrayWithSingleData[0].fields,
-    };
-  }
-
-  if (filteredArrayWithSingleData[0].fields.image2) {
-    const imageTwoTitle = filteredArrayWithSingleData[0].fields.title;
-    const imageTwoURL = `https:${filteredArrayWithSingleData[0].fields.image1.fields.file.url}`;
-
-    delete filteredArrayWithSingleData[0].fields.image2;
-
-    responseObject = {
-      imageTwoURL,
-      imageTwoTitle,
-      ...filteredArrayWithSingleData[0].fields,
-    };
+    responseObject = addImages(filteredArrayWithSingleData[0]);
   }
 
   delete responseObject.identifier;
