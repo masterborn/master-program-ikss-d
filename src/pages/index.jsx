@@ -1,4 +1,5 @@
 import HomePageHero from '@components/homePageHero/HomePageHero';
+import HeroImagePng from '@assets/heroImage2.jpg';
 import ValuesIcon1 from '@assets/values-1.svg';
 import ValuesIcon2 from '@assets/values-2.svg';
 import ValuesIcon3 from '@assets/values-3.svg';
@@ -8,6 +9,7 @@ import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/ContentfulAPI';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
+import { filterBasicContentData } from '@utils/filterData';
 
 const homePage = ({ heroData }) => (
   <>
@@ -19,15 +21,11 @@ const homePage = ({ heroData }) => (
         lnlink: 'https://pl.linkedin.com',
       }}
     />
+
     <HomePageHero
-      data={{
-        ...heroData,
-        facebookLink: 'https://pl-pl.facebook.com',
-        instagramLink: 'https://www.instagram.com',
-        youTubeLink: 'https://www.youtube.com',
-        linkedInLink: 'https://pl.linkedin.com',
-      }}
+    data={heroData}
     />
+
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
@@ -110,34 +108,32 @@ const homePage = ({ heroData }) => (
 );
 
 export const getStaticProps = async () => {
-  const basicContentClient = new ContentfulClient();
-  const projectsClient = new ContentfulClient();
-  const boardMembersClient = new ContentfulClient();
+  // Hero data
 
-  // homePageHero data
+  const basicContent = await ContentfulClient.getBasicContentData('homepage');
 
-  const heroData = await basicContentClient.getFilteredData('homepage-top-section');
+  const heroData = filterBasicContentData(basicContent, 'homepage-top-section');
 
   // Values data
 
-  const valuesHeaderData = await basicContentClient.getFilteredData('homepage-values');
+  const valuesHeaderData = filterBasicContentData(basicContent, 'homepage-values');
 
-  const value1 = await basicContentClient.getFilteredData('homepage-tile-1');
-  const value2 = await basicContentClient.getFilteredData('homepage-tile-2');
-  const value3 = await basicContentClient.getFilteredData('homepage-tile-3');
+  const value1 = filterBasicContentData(basicContent, 'homepage-tile-1');
+  const value2 = filterBasicContentData(basicContent, 'homepage-tile-2');
+  const value3 = filterBasicContentData(basicContent, 'homepage-tile-3');
 
   // Projects data
 
-  const projectsHeaderData = await basicContentClient.getFilteredData('homepage-projects-title');
-  const projectsData = await projectsClient.getFilteredProjectsData('homepage');
+  const projectsHeaderData = filterBasicContentData(basicContent, 'homepage-projects-title');
+  const projectsData = await ContentfulClient.getFilteredFieldsData('projects', 'homepage');
 
   // Cooperation data
 
-  const cooperationHeaderData = await basicContentClient.getFilteredData('homepage-partners-text');
+  const cooperationHeaderData = filterBasicContentData(basicContent, 'homepage-partners-text');
 
   // Board Members data
 
-  const boardMembersData = await boardMembersClient.getFilteredMembersData();
+  const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
 
   return {
     props: {
