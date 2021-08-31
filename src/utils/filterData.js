@@ -70,7 +70,7 @@ export function filterBasicContentData(data, filterCriteria) {
     };
   }
 
-  if (filteredArrayWithSingleData[0].image2) {
+  if (filteredArrayWithSingleData[0].fields.image2) {
     const imageTwoTitle = filteredArrayWithSingleData[0].fields.title;
     const imageTwoURL = `https:${filteredArrayWithSingleData[0].fields.image1.fields.file.url}`;
 
@@ -83,12 +83,8 @@ export function filterBasicContentData(data, filterCriteria) {
     };
   }
 
-  if (responseObject.text1) {
-    delete responseObject.identifier;
-    delete responseObject.page;
-    responseObject.text = responseObject.text1;
-    delete responseObject.text1;
-  }
-  
+  delete responseObject.identifier;
+  delete responseObject.page;
+
   return responseObject;
 }
