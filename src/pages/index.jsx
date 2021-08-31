@@ -1,5 +1,4 @@
 import HomePageHero from '@components/homePageHero/HomePageHero';
-import HeroImagePng from '@assets/heroImage2.jpg';
 import ValuesIcon1 from '@assets/values-1.svg';
 import ValuesIcon2 from '@assets/values-2.svg';
 import ValuesIcon3 from '@assets/values-3.svg';
