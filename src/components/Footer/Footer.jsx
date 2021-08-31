@@ -18,12 +18,9 @@ const Wrapper = styled.footer`
   ${(props) =>
     props.contact &&
     css`
-      margin-top: 50em;
-
       @media (max-width: 1200px) {
         padding-top: 8em;
         height: 880px;
-        margin-top: 45em;
       }
     `};
 
