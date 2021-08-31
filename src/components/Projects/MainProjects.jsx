@@ -54,7 +54,7 @@ const FlexWrapper = styled.section`
 
 const GridWrapper = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, min-content) minmax(0, min-content);
+  grid-template-columns: repeat(2, max-content);
   justify-items: center;
   grid-auto-rows: 10px;
   margin: 2em auto 148px;
@@ -67,24 +67,27 @@ const GridWrapper = styled.div`
   } ;
 `;
 
-const MainProjects = () => (
-  <FlexWrapper>
-    <GridWrapper>
-      {tempData.map((data) => (
-        <ProjectCard
-          key={data.title}
-          imgSrc={data.imgSrc}
-          imgAlt={data.imgAlt}
-          videoUrl={data.videoUrl !== 'undefined' && data.videoUrl}
-          title={data.title}
-          date={data.date}
-          description={data.description}
-          url={data.url}
-          buttonLabel={data.buttonLabel}
-        />
-      ))}
-    </GridWrapper>
-  </FlexWrapper>
-);
+const MainProjects = () => {
+  const renderProjectCards = () =>
+    tempData.map((data) => (
+      <ProjectCard
+        key={data.title}
+        imgSrc={data.imgSrc}
+        imgAlt={data.imgAlt}
+        videoUrl={data.videoUrl !== 'undefined' && data.videoUrl}
+        title={data.title}
+        date={data.date}
+        description={data.description}
+        url={data.url}
+        buttonLabel={data.buttonLabel}
+      />
+    ));
+
+  return (
+    <FlexWrapper>
+      <GridWrapper>{renderProjectCards()}</GridWrapper>
+    </FlexWrapper>
+  );
+};
 
 export default MainProjects;

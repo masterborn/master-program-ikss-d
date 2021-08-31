@@ -2,20 +2,16 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 
-import { getMedias } from '@styles/utils';
-
 const styledCardImage = ({ imageSrc, imageAlt, isOnHomePage }) => (
   <Wrapper isOnHomePage={isOnHomePage}>
-    <Image src={imageSrc} alt={imageAlt} height={320} width={580} layout="responsive" />
+    <Image src={imageSrc} alt={imageAlt} layout="fill" />
   </Wrapper>
 );
 
 const Wrapper = styled.div`
-  width: ${(props) => (props.isOnHomePage ? '997px' : ' 588px')};
-
-  @media (max-width: ${getMedias('laptop')}) {
-    width: 100%;
-  }
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
 `;
 
 const CardImage = styled(styledCardImage)`

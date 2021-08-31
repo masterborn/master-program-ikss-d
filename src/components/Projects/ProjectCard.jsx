@@ -33,10 +33,9 @@ const Wrapper = styled.div`
   & img {
     width: auto;
     background: linear-gradient(360deg, #66757f -0.09%, rgba(102, 117, 127, 0) 100%);
-    height: ${(props) => (props.isOnHomePage ? '579px' : '330px')};
     opacity: 0.6;
   }
-  @media (max-width: ${getMedias('laptop')}) {
+  @media (max-width: ${getMedias('desktop')}) {
     margin: 0 1em 2em 1em;
     & img {
       max-width: 100%;
@@ -127,13 +126,28 @@ const ProjectCard = ({
     getHeight();
   }, []);
 
+  let cardImageOrVideo;
+  let button;
+
+  if (videoUrl) {
+    cardImageOrVideo = <CardVideo videoUrl={videoUrl} title={title} />;
+  } else {
+    cardImageOrVideo = (
+      <CardImage imageSrc={imgSrc} imageAlt={imgAlt} isOnHomePage={isOnHomePage} />
+    );
+  }
+
+  if (url) {
+    button = (
+      <SocialButton withIcon={url.includes('facebook')} href={url}>
+        {buttonLabel}
+      </SocialButton>
+    );
+  }
+
   return (
     <Wrapper isOnHomePage={isOnHomePage} ref={wrapperRef} rowHeight={cardHeight}>
-      {videoUrl ? (
-        <CardVideo videoUrl={videoUrl} title={title} />
-      ) : (
-        <CardImage imageSrc={imgSrc} imageAlt={imgAlt} isOnHomePage={isOnHomePage} />
-      )}
+      {cardImageOrVideo}
       <Description isOnHomePage={isOnHomePage}>
         <Header isOnHomePage={isOnHomePage}>
           <h4>{title}</h4>
@@ -142,16 +156,7 @@ const ProjectCard = ({
         <Text isOnHomePage={isOnHomePage}>
           <p>{description}</p>
         </Text>
-        {url && (
-          <SocialButton
-            withIcon={url.includes('facebook')}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {buttonLabel}
-          </SocialButton>
-        )}
+        {button}
       </Description>
     </Wrapper>
   );

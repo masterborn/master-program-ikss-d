@@ -5,9 +5,8 @@ import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.div`
   position: relative;
-  width: 966px;
-  height: 0;
-  padding-bottom: 43.25%;
+  width: 100%;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   display: inline-flex;
 
