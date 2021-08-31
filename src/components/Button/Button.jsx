@@ -30,7 +30,7 @@ const styledButton = ({
 
   if (href && !link) {
     return (
-      <a href={href} className={className} target="_blank" rel="noopener noreferrer">
+      <a href={href} className={className}>
         {withIcon && <Icon icon={FacebookIcon} media="18px" />}
         {children}
       </a>
@@ -42,7 +42,6 @@ const styledButton = ({
       onClick={onClick}
       onKeyUp={onKeyUp}
       type={isTypeSubmit ? 'submit' : 'button'}
-
     >
       {withIcon && <Icon icon={FacebookIcon} media="18px" />}
       {children}

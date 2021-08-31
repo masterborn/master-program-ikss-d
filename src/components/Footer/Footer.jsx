@@ -191,10 +191,7 @@ const Footer = ({ contact, urls }) => (
       <LogoFooter />
       <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
       <p>
-        Made with <Heart /> by{' '}
-        <a href="https://masterborn.com/" target="_blank" rel="noopener noreferrer">
-          MasterBorn Software
-        </a>
+        Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
       </p>
     </TextLogoWrapper>
   </Wrapper>
