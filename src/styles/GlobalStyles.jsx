@@ -16,12 +16,7 @@ const GlobalStyles = createGlobalStyle`
     display: none;
 }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-
     color: ${getColor('steel')};
     font-family: ${getFontFamily('Mulish')};
     max-width: 100%;
