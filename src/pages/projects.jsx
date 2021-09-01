@@ -4,7 +4,7 @@ import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
 import ContentfulClient from '@api/clients/ContentfulAPI';
 import { filterBasicContentData } from '@utils/filterData';
 
-const projectsPage = ({ projectHero }) => (
+const projectsPage = ({ projectHero, projects }) => (
   <>
     <Navbar
       urls={{
@@ -15,19 +15,22 @@ const projectsPage = ({ projectHero }) => (
       }}
     />
     <SubpagesHero data={projectHero} />
-    <MainProjects />
+    <MainProjects projects={projects} />
   </>
 );
 
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
 
-
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
+  const projects = await ContentfulClient.getFilteredFieldsData('projects');
 
+  console.log(projects);
+  
   return {
     props: {
       projectHero,
+      projects
     },
   };
 };

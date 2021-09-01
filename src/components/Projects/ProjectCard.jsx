@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import CardVideo from '@components/Projects/CardVideo';
 import CardImage from '@components/Projects/CardImage';
@@ -142,13 +143,7 @@ const ProjectCard = ({
     <Wrapper isOnHomePage={isOnHomePage} ref={wrapperRef} rowHeight={cardHeight}>
       {cardImageOrVideo}
       <Description isOnHomePage={isOnHomePage}>
-        <Header isOnHomePage={isOnHomePage}>
-          <h4>{title}</h4>
-          <h5>{date}</h5>
-        </Header>
-        <Text isOnHomePage={isOnHomePage}>
-          <p>{description}</p>
-        </Text>
+        {documentToReactComponents(description)}
         {button}
       </Description>
     </Wrapper>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import ProjectCard from '@components/Projects/ProjectCard';
 import { getMedias } from '@styles/utils';
@@ -84,9 +85,9 @@ flex-direction: column;
 
 `;
 
-const MainProjects = () => {
+const MainProjects = ({ projects }) => {
   const renderProjectCards = (afterBanner = false) =>
-    tempData.map((data, index) => (
+    projects.map((data, index) => (
       !afterBanner ? index < 4 &&
       <ProjectCard
         key={data.title}
@@ -123,5 +124,17 @@ const MainProjects = () => {
     </FlexWrapper>
   );
 };
+
+MainProjects.propTypes = {
+  projects: PropTypes.shape({
+    imgSrc: PropTypes.string,
+    imgAlt: PropTypes.string,
+    videoUrl: PropTypes.string,
+    date: PropTypes.string,
+    description: PropTypes.shape({}),
+    url: PropTypes.string,
+    buttonLabel: PropTypes.string
+  }).isRequired
+}
 
 export default MainProjects;
