@@ -24,8 +24,6 @@ export const getStaticProps = async () => {
 
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
   const projects = await ContentfulClient.getFilteredFieldsData('projects');
-
-  console.log(projectHero);
   
   return {
     props: {
