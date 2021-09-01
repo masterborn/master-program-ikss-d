@@ -17,7 +17,7 @@ const SocialsWrapper = styled.div`
 `;
 
 const Link = ({ url, icon, size }) => (
-  <a href={url} target="_blank" rel="noreferrer">
+  <a href={url}>
     <Icon icon={icon} size={size} />
   </a>
 );

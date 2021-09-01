@@ -1,4 +1,5 @@
 import Navbar from '@components/Navbar/Navbar';
+import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
 import ContactSection from '@components/CTASection/CTASection';
 import ContentfulClient from '@api/clients/ContentfulAPI';
@@ -14,6 +15,7 @@ const projectsPage = ({ projectHero, CTASection }) => (
       }}
     />
     <SubpagesHero data={projectHero} />
+    <MainProjects />
     <ContactSection data={CTASection} />
   </>
 );

@@ -20,7 +20,7 @@ const Wrapper = styled.a`
 `;
 
 const CooperationCard = ({ linkUrl, logo, altText }) => (
-  <Wrapper href={linkUrl} target="_blank" rel="noopener noreferrer">
+  <Wrapper href={linkUrl}>
     <img src={logo} alt={altText} />
   </Wrapper>
 );

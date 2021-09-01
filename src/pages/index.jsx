@@ -3,11 +3,11 @@ import ValuesIcon1 from '@assets/values-1.svg';
 import ValuesIcon2 from '@assets/values-2.svg';
 import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
-import Projects from '@components/Projects/Projects';
 import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/ContentfulAPI';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
+import HomeProjects from '@components/Projects/HomeProjects';
 
 const homePage = ({ heroData }) => (
   <>
@@ -50,7 +50,7 @@ const homePage = ({ heroData }) => (
         },
       ]}
     />
-    <Projects />
+    <HomeProjects />
     <Cooperation
       cooperationHeader="Współpracują z nami"
       cooperationText="Na pewno powinno się pojawić tu logo UE na pierwszym miejscu. Kilka słów o tym, co można zyskać współpracując z wami jako partnerzy. Jakie to niesie korzyści PR’owe etc."

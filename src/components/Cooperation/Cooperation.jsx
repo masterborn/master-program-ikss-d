@@ -8,11 +8,12 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  margin-bottom: 180px;
   text-align: center;
+  padding-bottom: 58rem;
+  background: linear-gradient(0deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
   @media (max-width: ${getMedias('laptop')}) {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 58rem;
   }
 `;
 

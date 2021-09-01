@@ -3,6 +3,6 @@ const withSvgr = require('next-svgr');
 
 module.exports = withPlugins([withSvgr], {
   images: {
-    domains: ['images.ctfassets.net'],
+    domains: ['picsum.photos', 'images.ctfassets.net'],
   },
 });
