@@ -117,7 +117,7 @@ const MainProjects = ({ projects }) => {
     <FlexWrapper>
       <wrapper>
       <GridWrapper>{renderProjectCards()}</GridWrapper>
-    {tempData.length >= 5 && <><ContactBanner />
+    {projects.length >= 5 && <><ContactBanner />
       <GridWrapper>{renderProjectCards(true)}</GridWrapper>
     </>}
     </wrapper>
@@ -126,15 +126,7 @@ const MainProjects = ({ projects }) => {
 };
 
 MainProjects.propTypes = {
-  projects: PropTypes.shape({
-    imgSrc: PropTypes.string,
-    imgAlt: PropTypes.string,
-    videoUrl: PropTypes.string,
-    date: PropTypes.string,
-    description: PropTypes.shape({}),
-    url: PropTypes.string,
-    buttonLabel: PropTypes.string
-  }).isRequired
+  projects: PropTypes.instanceOf(Array).isRequired
 }
 
 export default MainProjects;
