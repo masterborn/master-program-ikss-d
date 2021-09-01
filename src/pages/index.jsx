@@ -7,11 +7,9 @@ import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/ContentfulAPI';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
-<<<<<<< HEAD
 import HomeProjects from '@components/Projects/HomeProjects';
-=======
 import { filterBasicContentData } from '@utils/filterData';
->>>>>>> ID-52-Contact-Banner
+
 
 const homePage = ({ heroData }) => (
   <>
