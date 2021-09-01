@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import ProjectCard from '@components/Projects/ProjectCard';
 import { getMedias } from '@styles/utils';
+import ContactBanner from '@components/ContactBanner/ContactBanner';
 
 const tempData = [
   {
@@ -45,6 +46,16 @@ const tempData = [
     url: 'http://www.facebook.com',
     buttonLabel: 'Podsumowanie wydarzenia',
   },
+  {
+    imgSrc: 'https://picsum.photos/1920/1080',
+    imgAlt: 'Pracownia Teatralna',
+    title: 'Pracownia Teatralna',
+    date: '15.11.2020',
+    description:
+      'Kurtyna w górę… Przed Państwem cykl warsztatów teatralnych i aktorskich prowadzonych przez profesjonalistów dla studentów naszego Uniwersytetu. Wieczorem projekt zwieńczony jest na scenie, gdzie nasi uczestnicy zasiadają na widowni, skąd mogą być świadkami wyjątkowego spektaklu teatralnego.',
+    url: 'http://www.facebook.com',
+    buttonLabel: 'Podsumowanie wydarzenia',
+  },
 ];
 
 const FlexWrapper = styled.section`
@@ -57,7 +68,7 @@ const GridWrapper = styled.div`
   grid-template-columns: repeat(2, max-content);
   justify-items: center;
   grid-auto-rows: 10px;
-  margin: 2em auto 148px;
+  margin: 4em auto 4em;
   gap: 0 24px;
 
   @media (max-width: ${getMedias('desktop')}) {
@@ -67,9 +78,27 @@ const GridWrapper = styled.div`
   } ;
 `;
 
+const wrapper = styled.div`
+display: flex;
+flex-direction: column;
+
+`;
+
 const MainProjects = () => {
-  const renderProjectCards = () =>
-    tempData.map((data) => (
+  const renderProjectCards = (afterBanner = false) =>
+    tempData.map((data, index) => (
+      !afterBanner ? index < 4 &&
+      <ProjectCard
+        key={data.title}
+        imgSrc={data.imgSrc}
+        imgAlt={data.imgAlt}
+        videoUrl={data.videoUrl !== 'undefined' && data.videoUrl}
+        title={data.title}
+        date={data.date}
+        description={data.description}
+        url={data.url}
+        buttonLabel={data.buttonLabel}
+      /> : index >= 4 &&
       <ProjectCard
         key={data.title}
         imgSrc={data.imgSrc}
@@ -85,7 +114,12 @@ const MainProjects = () => {
 
   return (
     <FlexWrapper>
+      <wrapper>
       <GridWrapper>{renderProjectCards()}</GridWrapper>
+    {tempData.length >= 5 && <><ContactBanner />
+      <GridWrapper>{renderProjectCards(true)}</GridWrapper>
+    </>}
+    </wrapper>
     </FlexWrapper>
   );
 };
