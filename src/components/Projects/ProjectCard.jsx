@@ -143,7 +143,14 @@ const ProjectCard = ({
     <Wrapper isOnHomePage={isOnHomePage} ref={wrapperRef} rowHeight={cardHeight}>
       {cardImageOrVideo}
       <Description isOnHomePage={isOnHomePage}>
+      <Header isOnHomePage={isOnHomePage}>
+          <h4>{title}</h4>
+          <h5>{date}</h5>
+        </Header>
+        <Text isOnHomePage={isOnHomePage}>
         {documentToReactComponents(description)}
+        </Text>
+        
         {button}
       </Description>
     </Wrapper>
@@ -158,7 +165,7 @@ ProjectCard.propTypes = {
   imgAlt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.instanceOf(Array).isRequired,
   url: PropTypes.string,
   buttonLabel: PropTypes.string,
   isOnHomePage: PropTypes.bool,

@@ -59,7 +59,7 @@ const SubpagesHero = ({ data }) => (
       />
     </ImageWrapper>
     <h1>{data.title}</h1>
-    {documentToReactComponents(data.text)}
+    {documentToReactComponents(data.text1)}
   </Wrapper>
 );
 
@@ -67,7 +67,7 @@ SubpagesHero.propTypes = {
   data: PropTypes.shape({
     imageOrVideoURL: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.objectOf.isRequired,
+    text1: PropTypes.objectOf.isRequired,
   }).isRequired,
 };
 
