@@ -12,6 +12,8 @@ import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { validateInput, validateCheckbox } from '@utils/validation';
+import { useDispatch, useSelector } from 'react-redux';
+import { formActions } from '@root/store/formSlice';
 
 const Wrapper = styled.div`
   position: relative;
@@ -140,7 +142,8 @@ const StyledCloseIcon = styled(Icon)`
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-  const [buttonStatus, setButtonStatus] = useState('primary');
+  const buttonStatus = useSelector((state) => state.form.buttonStatus);
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
     name: '',
     surname: '',
@@ -162,10 +165,10 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       return;
     }
 
-    setButtonStatus('loading');
+    dispatch(formActions.setButtonToLoading());
 
     setTimeout(() => {
-      setButtonStatus('error');
+      dispatch(formActions.setButtonToError());
     }, 3000);
 
     setFormValues({

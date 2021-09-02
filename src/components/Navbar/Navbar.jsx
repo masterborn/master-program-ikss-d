@@ -15,7 +15,7 @@ import MobileMenu from './MobileMenu';
 const Nav = styled.div`
   padding: 1.25rem 7.5rem;
   display: flex;
-  z-index: 9999;
+  z-index: 2;
   align-items: center;
   background: ${getColor('white')};
   box-shadow: 0 4px 16px rgba(97, 121, 139, 0.1);
