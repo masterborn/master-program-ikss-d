@@ -1,8 +1,8 @@
 import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
-import ContentfulClient from '@api/clients/ContentfulAPI';
-import { filterBasicContentData } from '@utils/filterData';
+import ContentfulClient from '@api/clients/contentfulApi';
+import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
 const projectsPage = ({ projectHero, projects }) => (
   <>
@@ -24,8 +24,6 @@ export const getStaticProps = async () => {
 
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
   const projects = await ContentfulClient.getFilteredFieldsData('projects');
-
-  console.log(projectHero);
   
   return {
     props: {

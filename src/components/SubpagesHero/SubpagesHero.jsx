@@ -51,8 +51,8 @@ const SubpagesHero = ({ data }) => (
   <Wrapper>
     <ImageWrapper>
       <Image
-        src={data.imageOrVideoURL}
-        alt={data.title}
+        src={data.image1.url}
+        alt={data.image1.title}
         height={142}
         width={230}
         layout="responsive"
@@ -65,7 +65,10 @@ const SubpagesHero = ({ data }) => (
 
 SubpagesHero.propTypes = {
   data: PropTypes.shape({
-    imageOrVideoURL: PropTypes.string.isRequired,
+    image1: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    }).isRequired,
     title: PropTypes.string.isRequired,
     text1: PropTypes.objectOf.isRequired,
   }).isRequired,

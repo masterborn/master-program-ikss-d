@@ -15,7 +15,7 @@ const GridWrapper = styled.div`
   grid-template-columns: repeat(2, max-content);
   justify-items: center;
   grid-auto-rows: 10px;
-  margin: 4em auto 4em;
+  margin: 4em auto;
   gap: 0 24px;
 
   @media (max-width: ${getMedias('desktop')}) {
@@ -25,7 +25,7 @@ const GridWrapper = styled.div`
   } ;
 `;
 
-const wrapper = styled.div`
+const ProjectsWrapper = styled.div`
 display: flex;
 flex-direction: column;
 
@@ -61,12 +61,12 @@ const MainProjects = ({ projects }) => {
 
   return (
     <FlexWrapper>
-      <wrapper>
+      <ProjectsWrapper>
       <GridWrapper>{renderProjectCards()}</GridWrapper>
     {projects.length >= 5 && <><ContactBanner />
       <GridWrapper>{renderProjectCards(true)}</GridWrapper>
     </>}
-    </wrapper>
+    </ProjectsWrapper>
     </FlexWrapper>
   );
 };

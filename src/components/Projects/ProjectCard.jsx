@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   ${(props) =>
     props.isOnHomePage &&
     css`
-      margin: 2em;
+      margin-bottom: 56px;
     `};
   overflow: hidden;
   background: ${getColor('white')};
@@ -36,6 +36,7 @@ const Wrapper = styled.div`
     background: linear-gradient(360deg, #66757f -0.09%, rgba(102, 117, 127, 0) 100%);
     opacity: 0.6;
   }
+
   @media (max-width: ${getMedias('desktop')}) {
     margin: 0 1em 2em 1em;
     & img {
@@ -58,7 +59,7 @@ const Description = styled.article`
   flex-direction: column;
   align-items: flex-start;
   max-width: ${(props) => (props.isOnHomePage ? '792px' : '90%')};
-  padding: ${(props) => (props.isOnHomePage ? '0 102px 4.1em 102px' : '0 0 40px')};
+  padding: ${(props) => (props.isOnHomePage ? '0 96px 4.1em' : '0 0 40px')};
 
   @media (max-width: ${getMedias('desktop')}) {
     & a {
@@ -75,10 +76,12 @@ const Header = styled.header`
     color: ${getColor('steel')};
     margin: ${(props) => (props.isOnHomePage ? '4.375rem 0 2.125rem' : '2.4rem 1.5rem 1.5rem 0')};
   }
+
   @media (max-width: ${getMedias('tablet')}) {
     flex-direction: column;
     align-items: flex-start;
     padding: 0;
+
     & h4 {
       font-size: 18px;
       line-height: 24px;
@@ -94,6 +97,7 @@ const Header = styled.header`
 const Text = styled.section`
   color: ${getColor('steel')};
   margin-bottom: ${(props) => (props.isOnHomePage ? '2rem' : '1.5rem')};
+
   @media (max-width: ${getMedias('laptop')}) {
     font-size: 14px;
     line-height: 28px;
