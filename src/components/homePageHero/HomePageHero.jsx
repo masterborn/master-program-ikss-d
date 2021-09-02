@@ -10,22 +10,22 @@ import { getColor, getMedias } from '@styles/utils';
 const HomePageHero = ({ data }) => {
   let imageOrVideoBlock;
 
-  if (data.contentType && data.contentType === 'video') {
+  if (data.image1.contentType && data.image1.contentType === 'video') {
     imageOrVideoBlock = (
-      <HomePageHeroVideo videoSrc={data.imageOrVideoURL} videoTitle={data.imageOrVideoTitle} />
+      <HomePageHeroVideo videoSrc={data.image1.url} videoTitle={data.image1.title} />
     );
   }
 
-  if (data.imageOrVideoURL && data.contentType === 'image') {
+  if (data.image1.url && data.image1.contentType === 'image') {
     imageOrVideoBlock = (
-      <HomePageHeroImage imageSrc={data.imageOrVideoURL} imageAlt={data.imageOrVideoTitle} />
+      <HomePageHeroImage imageSrc={data.image1.url} imageAlt={data.image1.title} />
     );
   }
 
   return (
     <HeroWrapper>
       <Wrapper>
-        <HomePageHeroText headerText={data.title} smallText={data.text} />
+        <HomePageHeroText headerText={data.title} smallText={data.text1} />
         {imageOrVideoBlock}
       </Wrapper>
       <HeroSM
@@ -71,10 +71,12 @@ const Wrapper = styled.section`
 
 HomePageHero.propTypes = {
   data: PropTypes.shape({
-    contentType: PropTypes.string.isRequired,
-    imageOrVideoTitle: PropTypes.string.isRequired,
-    imageOrVideoURL: PropTypes.string.isRequired,
-    text: PropTypes.shape({}).isRequired,
+    image1: PropTypes.shape({
+      contentType: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+    }).isRequired,
+    text1: PropTypes.shape({}).isRequired,
     title: PropTypes.string.isRequired,
     link_url: PropTypes.string,
     link_caption: PropTypes.string,
