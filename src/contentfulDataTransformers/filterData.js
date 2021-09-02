@@ -1,41 +1,24 @@
-const topProjects = (data) => data.filter((item) => item.showOnHomepage).sort((a, b) => a.order - b.order);
+const topProjects = (data) =>
+  data.filter((item) => item.showOnHomepage).sort((a, b) => a.order - b.order);
 
-const addImages = (data) => {
+const addImages = (data, field) => {
+  const resultObject = data;
 
-  let resultObject = data;
-
-  const imageOrVideoTitle = resultObject.fields.title;
-  const imageOrVideoURL = `https:${resultObject.fields.image1.fields.file.url}`;
-  const { contentType } = resultObject.fields.image1.fields.file;
-
-  
+  const { contentType } = resultObject[field].fields.file;
+  const { title } = resultObject[field].fields;
 
   const contentTypeArray = contentType.split('/');
 
-    delete resultObject.fields.image1;
+  const url = `https:${resultObject[field].fields.file.url}`;
 
-    resultObject = {
-      imageOrVideoURL,
-      imageOrVideoTitle,
-      contentType: contentTypeArray[0],
-      ...resultObject.fields,
-    };
+  delete resultObject[field];
 
-    if (data.fields.image2) {
-      const imageTwoTitle = resultObject.fields.title;
-      const imageTwoURL = `https:${resultObject.fields.image1.fields.file.url}`;
-  
-      delete resultObject.fields.image2;
-  
-      resultObject = {
-        imageTwoURL,
-        imageTwoTitle,
-        ...resultObject.fields,
-      };
-    }
-
-    return resultObject;
-}
+  return {
+    url,
+    title,
+    contentType: contentTypeArray[0],
+  };
+};
 
 export const filterData = (response, section, page = null) => {
   const responseObject = response.items.map((item) => {
@@ -83,21 +66,20 @@ export const filterData = (response, section, page = null) => {
     return topProjects(responseObject);
   }
   return responseObject;
-}
+};
 
 export const filterBasicContentData = (data, filterCriteria) => {
   const filteredArrayWithSingleData = data.filter(
     (item) => item.fields.identifier === filterCriteria,
   );
 
-  let responseObject = filteredArrayWithSingleData[0].fields;
+  const responseObject = filteredArrayWithSingleData[0].fields;
 
-  if (filteredArrayWithSingleData[0].fields.image1) {
-    responseObject = addImages(filteredArrayWithSingleData[0]);
-  }
+  if (responseObject.image1) responseObject.image1 = addImages(responseObject, 'image1');
+  if (responseObject.image2) responseObject.image2 = addImages(responseObject, 'image2');
 
   delete responseObject.identifier;
   delete responseObject.page;
 
   return responseObject;
-}
+};

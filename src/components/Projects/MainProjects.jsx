@@ -56,6 +56,26 @@ const tempData = [
     url: 'http://www.facebook.com',
     buttonLabel: 'Podsumowanie wydarzenia',
   },
+  {
+    imgSrc: 'https://picsum.photos/1920/1080',
+    imgAlt: 'Pracownia Teatralna',
+    title: 'Pracownia Teatralna',
+    date: '15.11.2020',
+    description:
+      'Kurtyna w górę… Przed Państwem cykl warsztatów teatralnych i aktorskich prowadzonych przez profesjonalistów dla studentów naszego Uniwersytetu. Wieczorem projekt zwieńczony jest na scenie, gdzie nasi uczestnicy zasiadają na widowni, skąd mogą być świadkami wyjątkowego spektaklu teatralnego.',
+    url: 'http://www.facebook.com',
+    buttonLabel: 'Podsumowanie wydarzenia',
+  },
+  {
+    imgSrc: 'https://picsum.photos/1920/1080',
+    imgAlt: 'Pracownia Teatralna',
+    title: 'Pracownia Teatralna',
+    date: '15.11.2020',
+    description:
+      'Kurtyna w górę… Przed Państwem cykl warsztatów teatralnych i aktorskich prowadzonych przez profesjonalistów dla studentów naszego Uniwersytetu. Wieczorem projekt zwieńczony jest na scenie, gdzie nasi uczestnicy zasiadają na widowni, skąd mogą być świadkami wyjątkowego spektaklu teatralnego.',
+    url: 'http://www.facebook.com',
+    buttonLabel: 'Podsumowanie wydarzenia',
+  },
 ];
 
 const FlexWrapper = styled.section`
@@ -68,7 +88,7 @@ const GridWrapper = styled.div`
   grid-template-columns: repeat(2, max-content);
   justify-items: center;
   grid-auto-rows: 10px;
-  margin: 4em auto 4em;
+  margin: 4em auto;
   gap: 0 24px;
 
   @media (max-width: ${getMedias('desktop')}) {
@@ -78,7 +98,7 @@ const GridWrapper = styled.div`
   } ;
 `;
 
-const wrapper = styled.div`
+const ProjectsWrapper = styled.div`
 display: flex;
 flex-direction: column;
 
@@ -114,12 +134,12 @@ const MainProjects = () => {
 
   return (
     <FlexWrapper>
-      <wrapper>
+      <ProjectsWrapper>
       <GridWrapper>{renderProjectCards()}</GridWrapper>
-    {tempData.length >= 5 && <><ContactBanner />
+    {tempData.length >= 7 && <><ContactBanner />
       <GridWrapper>{renderProjectCards(true)}</GridWrapper>
     </>}
-    </wrapper>
+    </ProjectsWrapper>
     </FlexWrapper>
   );
 };

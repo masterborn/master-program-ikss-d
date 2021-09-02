@@ -21,7 +21,7 @@ const Container = styled.div.attrs((props) => ({
     font-size: 14px;
     color: ${getColor('steel')};
     line-height: 28px;
-    letter-spacing: 200%;
+    letter-spacing: -0.015em;
     transition: 0.3s;
 
     &:focus {

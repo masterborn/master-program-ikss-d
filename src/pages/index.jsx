@@ -4,12 +4,11 @@ import ValuesIcon2 from '@assets/values-2.svg';
 import ValuesIcon3 from '@assets/values-3.svg';
 import Navbar from '@components/Navbar/Navbar';
 import Values from '@components/Values/Values';
-import ContentfulClient from '@api/clients/ContentfulAPI';
+import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
-import { filterBasicContentData } from '@utils/filterData';
-
+import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
 const homePage = ({ heroData }) => (
   <>
@@ -109,7 +108,6 @@ const homePage = ({ heroData }) => (
 
 export const getStaticProps = async () => {
   // Hero data
-
   const basicContent = await ContentfulClient.getBasicContentData('homepage');
 
   const heroData = filterBasicContentData(basicContent, 'homepage-top-section');
