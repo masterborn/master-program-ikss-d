@@ -51,15 +51,15 @@ const SubpagesHero = ({ data }) => (
   <Wrapper>
     <ImageWrapper>
       <Image
-        src={data.imageOrVideoURL}
-        alt={data.title}
+        src={data.image1.url}
+        alt={data.image1.title}
         height={142}
         width={230}
         layout="responsive"
       />
     </ImageWrapper>
     <h1>{data.title}</h1>
-    {documentToReactComponents(data.text)}
+    {documentToReactComponents(data.text1)}
   </Wrapper>
 );
 
