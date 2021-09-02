@@ -9,7 +9,7 @@ import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
-import { filterBasicContentData } from '@utils/filterData';
+import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
 const homePage = ({ heroData }) => (
   <>

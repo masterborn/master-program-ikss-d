@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { filterData } from '@utils/filterData';
-import getAssets from '@utils/getAssets';
+import { filterData } from '@root/contentfulDataTransformers/filterData';
+import getAssets from '@root/contentfulDataTransformers/getAssets';
 
 class ContentfulClient {
   api = axios.create({
