@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const modalSlice = createSlice({
   name: 'modal',
-  initialState: { isModalOpen: false },
+  initialState: { isModalOpen: true },
   reducers: {
     closeModal(state) {
       // eslint-disable-next-line no-param-reassign

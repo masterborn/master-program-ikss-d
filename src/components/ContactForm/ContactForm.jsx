@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Input from '@components/ContactForm/StyledInput';
 import Checkbox from '@components/ContactForm/CheckboxField';
@@ -12,7 +13,6 @@ import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { validateInput, validateCheckbox } from '@utils/validation';
-import { useDispatch, useSelector } from 'react-redux';
 import { formActions } from '@root/store/formSlice';
 
 const Wrapper = styled.div`
@@ -141,17 +141,10 @@ const StyledCloseIcon = styled(Icon)`
 
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+  const isFormValid = useSelector((state) => state.form.isFormValid);
   const buttonStatus = useSelector((state) => state.form.buttonStatus);
+  const formValues = useSelector((state) => state.form.formValues);
   const dispatch = useDispatch();
-  const [formValues, setFormValues] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    topic: '',
-    content: '',
-    conditions: false,
-  });
 
   const CloseModalButton = (
     <button type="button">
@@ -171,14 +164,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       dispatch(formActions.setButtonToError());
     }, 3000);
 
-    setFormValues({
-      name: '',
-      surname: '',
-      email: '',
-      topic: '',
-      content: '',
-      conditions: false,
-    });
+    dispatch(formActions.clearFormFields());
 
     event.preventDefault();
   };
@@ -187,22 +173,23 @@ const ContactForm = ({ modal, toolTipText, className }) => {
     const inputVal = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     const { name } = event.target;
 
-    setFormValues({
-      ...formValues,
-      [name]: inputVal,
-    });
+    dispatch(
+      formActions.updateFormFields({
+        [name]: inputVal,
+      }),
+    );
   };
 
   const onValidateInput = (event) => {
     getDataFromInputs(event);
 
-    return validateInput(event, setIsFormValid);
+    return validateInput(event, dispatch);
   };
 
   const onValidateCheckbox = (event) => {
     getDataFromInputs(event);
 
-    return validateCheckbox(event, setIsFormValid);
+    return validateCheckbox(event, dispatch);
   };
 
   return (

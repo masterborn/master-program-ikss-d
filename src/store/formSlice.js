@@ -31,6 +31,18 @@ const formSlice = createSlice({
         conditions: false,
       };
     },
+    updateFormFields(state, action) {
+      // eslint-disable-next-line no-param-reassign
+      state.formValues = { ...state.formValues, ...action.payload };
+    },
+    formIsInvalid(state) {
+      // eslint-disable-next-line no-param-reassign
+      state.isFormValid = false;
+    },
+    formIsValid(state) {
+      // eslint-disable-next-line no-param-reassign
+      state.isFormValid = true;
+    },
   },
 });
 
