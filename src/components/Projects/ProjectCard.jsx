@@ -169,7 +169,7 @@ ProjectCard.propTypes = {
   imgAlt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  description: PropTypes.instanceOf(Array).isRequired,
+  description: PropTypes.instanceOf(Object).isRequired,
   url: PropTypes.string,
   buttonLabel: PropTypes.string,
   isOnHomePage: PropTypes.bool,
