@@ -18,12 +18,9 @@ const Wrapper = styled.footer`
   ${(props) =>
     props.contact &&
     css`
-      margin-top: 50em;
-
       @media (max-width: 1200px) {
         padding-top: 8em;
         height: 880px;
-        margin-top: 45em;
       }
     `};
 
@@ -42,6 +39,7 @@ const ButtonWrapper = styled.div`
   @media (max-width: ${getMedias('tablet')}) {
     margin-right: 5%;
   }
+
   @media (max-width: 650px) {
     justify-content: ${(props) => (props.contact ? 'flex-end' : 'center')};
     margin-right: ${(props) => (props.contact ? '5%' : '0')};
@@ -146,6 +144,12 @@ const SocialMedias = styled(Socials)`
   margin-top: 2em;
   align-items: center;
   gap: 24px;
+  & svg * {
+    transition: all 0.3s ease-in;
+  }
+  & svg:hover * {
+    fill: ${getColor('blue_50')};
+  }
 `;
 
 const ContactFormWrapper = styled.div`
@@ -191,10 +195,7 @@ const Footer = ({ contact, urls }) => (
       <LogoFooter />
       <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
       <p>
-        Made with <Heart /> by{' '}
-        <a href="https://masterborn.com/" target="_blank" rel="noopener noreferrer">
-          MasterBorn Software
-        </a>
+        Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
       </p>
     </TextLogoWrapper>
   </Wrapper>

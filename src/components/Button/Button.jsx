@@ -30,13 +30,12 @@ const styledButton = ({
 
   if (href && !link) {
     return (
-      <a href={href} className={className} target="_blank" rel="noopener noreferrer">
+      <a href={href} className={className}>
         {withIcon && <Icon icon={FacebookIcon} media="18px" />}
         {children}
       </a>
     );
   }
-
   return (
     <button
       className={className}
@@ -59,7 +58,7 @@ const Button = styled(styledButton)`
   padding: ${(props) => (props.withIcon ? '12px 24px 12px 18px' : '14px 24px')};
   border-radius: 26px;
   border: ${(props) => (props.secondary ? `2px solid #1A2847` : 'none')};
-  background: ${(props) => (props.secondary ? getColor('white') : getColor('ikksBlue'))};
+  background: ${(props) => (props.secondary ? 'transparent' : getColor('ikksBlue'))};
   color: ${(props) => (props.secondary ? getColor('navy') : getColor('white'))};
   line-height: 20px;
   font-weight: ${getFontWeight('buttonWeight')};

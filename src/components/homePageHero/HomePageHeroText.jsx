@@ -13,7 +13,7 @@ const styledHeroText = ({ headerText, smallText }) => (
   </Wrapper>
 );
 
-const HeroText = styled(styledHeroText)``;
+const HomePageHeroText = styled(styledHeroText)``;
 
 const Wrapper = styled.div`
   margin: 77px 7vw 0 10vw;
@@ -27,13 +27,13 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 40.75px 0 40px 24px;
+    margin: 40.75px 24px 40px 24px;
   }
 `;
 
-HeroText.propTypes = {
+HomePageHeroText.propTypes = {
   headerText: PropTypes.string.isRequired,
-  smallText: PropTypes.string.isRequired,
+  smallText: PropTypes.shape({}).isRequired,
 };
 
-export default HeroText;
+export default HomePageHeroText;

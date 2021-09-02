@@ -101,6 +101,8 @@ const SocialMedias = styled(Socials)`
 
 const ContactButton = styled(Button)`
   height: 36px;
+  font-size: 14px;
+  padding: 9px 16px;
 
   @media (max-width: 1100px) {
     display: none;

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontFamily } from '@styles/utils';
@@ -16,12 +16,12 @@ const Container = styled.div.attrs((props) => ({
     position: relative;
     border: 1.5px solid ${(props) => props.borderColor};
     border-radius: 4px;
-    padding: 0.5em;
+    padding: 0.5em 3em 0.5em 0.5em;
     font-family: ${getFontFamily('Mulish')};
     font-size: 14px;
     color: ${getColor('steel')};
     line-height: 28px;
-    letter-spacing: 200%;
+    letter-spacing: -0.015em;
     transition: 0.3s;
 
     &:focus {
@@ -85,38 +85,48 @@ const WarningToolTip = styled(ToolTip)`
 `;
 
 const StyledInput = ({
-  type,
   name,
   placeholder,
-  required,
   disabled,
   className,
   labelText,
   textarea,
+  validateCallback,
+  defaultValue,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [showToolTip, setShowToolTip] = useState(false);
+  const [inputValue, setInputValue] = useState(defaultValue);
+  const [isToolTipShown, setIsToolTipShown] = useState(false);
+  const [toolTipText, setToolTipText] = useState('');
 
-  const displayToolTip = showToolTip && (
-    <WarningToolTip toolTipText="Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
-  );
+  const displayToolTip = isToolTipShown && <WarningToolTip toolTipText={toolTipText} />;
 
   const displayIcon = isInvalid && (
-    <div onMouseEnter={() => setShowToolTip(true)} onMouseLeave={() => setShowToolTip(false)}>
+    <div onMouseEnter={() => setIsToolTipShown(true)} onMouseLeave={() => setIsToolTipShown(false)}>
       <InfoIcon disabled={disabled} />
     </div>
   );
 
+  useEffect(() => {
+    if (defaultValue === '') setInputValue(defaultValue);
+  }, [defaultValue]);
+
+  const setValidationErrors = (event) => {
+    const info = validateCallback(event);
+
+    setToolTipText(info.message);
+    setIsInvalid(info.invalid);
+    event.target.setCustomValidity(info.message);
+
+    return info;
+  };
+
   const onChange = (event) => {
     setInputValue(event.target.value);
-    if (required) {
-      if (event.target.value.length === 0) {
-        setIsInvalid(true);
-      } else {
-        setIsInvalid(false);
-      }
-    }
+
+    const info = setValidationErrors(event);
+
+    if (isToolTipShown && info.message === '') setIsToolTipShown(false);
   };
 
   return (
@@ -131,18 +141,19 @@ const StyledInput = ({
               placeholder={placeholder}
               onChange={onChange}
               value={inputValue}
-              required={required}
+              onInvalid={setValidationErrors}
+              required
               disabled={disabled}
             />
           ) : (
             <input
               id={name}
               name={name}
-              type={type}
               placeholder={placeholder}
               onChange={onChange}
               value={inputValue}
-              required={required}
+              onInvalid={setValidationErrors}
+              required
               disabled={disabled}
             />
           )}
@@ -155,25 +166,24 @@ const StyledInput = ({
 };
 
 StyledInput.defaultProps = {
-  type: 'text',
   name: '',
   placeholder: '',
-  required: false,
   disabled: false,
   className: null,
   labelText: null,
   textarea: false,
+  validateCallback: () => {},
 };
 
 StyledInput.propTypes = {
-  type: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
-  required: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.string,
   labelText: PropTypes.string,
   textarea: PropTypes.bool,
+  validateCallback: PropTypes.func,
+  defaultValue: PropTypes.string.isRequired,
 };
 
 export default StyledInput;

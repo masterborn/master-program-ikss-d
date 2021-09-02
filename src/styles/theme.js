@@ -1,3 +1,5 @@
+import { keyframes } from 'styled-components';
+
 export const fontFamily = {
   Mulish: 'Mulish, sans-serif;',
 };
@@ -50,11 +52,23 @@ export const medias = {
   desktop: '1200px',
 };
 
+export const animations = {
+  rotateSpinner: keyframes`
+    from {
+        transform: rotate(0)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+`,
+};
+
 const theme = {
   fontFamily,
   fontWeight,
   color,
   medias,
+  animations,
 };
 
 export default theme;
