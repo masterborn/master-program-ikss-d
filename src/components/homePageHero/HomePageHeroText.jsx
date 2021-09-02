@@ -4,12 +4,15 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import Button from '@components/Button/Button';
 import { getMedias } from '@styles/utils';
+import { scrollOnHomepage } from '@utils/formVisibility';
 
 const styledHeroText = ({ headerText, smallText }) => (
   <Wrapper>
     <h1>{headerText}</h1>
     {documentToReactComponents(smallText)}
-    <Button secondary>Skontaktuj się</Button>
+    <Button secondary onClick={scrollOnHomepage}>
+      Skontaktuj się
+    </Button>
   </Wrapper>
 );
 

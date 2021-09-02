@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/dist/client/router';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -8,6 +9,7 @@ import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
 import NavLink from '@components/Navbar/NavLink';
+import { openContactForm } from '@utils/formVisibility';
 
 import MobileMenu from './MobileMenu';
 
@@ -109,6 +111,7 @@ const ContactButton = styled(Button)`
 function Navbar({ urls }) {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
+  const router = useRouter();
 
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
@@ -167,7 +170,9 @@ function Navbar({ urls }) {
           <span />
         </Hamburger>
 
-        <Button as={ContactButton}>Skontaktuj się</Button>
+        <Button as={ContactButton} onClick={() => openContactForm(router)}>
+          Skontaktuj się
+        </Button>
       </Nav>
     </>
   );
