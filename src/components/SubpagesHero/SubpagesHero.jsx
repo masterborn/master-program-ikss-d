@@ -65,9 +65,12 @@ const SubpagesHero = ({ data }) => (
 
 SubpagesHero.propTypes = {
   data: PropTypes.shape({
-    imageOrVideoURL: PropTypes.string.isRequired,
+    image1: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    }).isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.objectOf.isRequired,
+    text1: PropTypes.objectOf.isRequired,
   }).isRequired,
 };
 
