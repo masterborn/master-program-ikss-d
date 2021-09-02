@@ -1,7 +1,7 @@
 import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
-import ContentfulClient from '@api/clients/ContentfulAPI';
+import ContentfulClient from '@api/clients/contentfulApi';
 
 const projectsPage = ({ projectHero }) => (
   <>
