@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -17,7 +18,7 @@ const Nav = styled.div`
   z-index: 9999;
   align-items: center;
   background: ${getColor('white')};
-  box-shadow: 0px 4px 16px rgba(97, 121, 139, 0.1);
+  box-shadow: 0 4px 16px rgba(97, 121, 139, 0.1);
   position: sticky;
   top: 0;
   left: 0;
@@ -108,9 +109,12 @@ const ContactButton = styled(Button)`
   }
 `;
 
-function Navbar({ urls }) {
+const Navbar = ({ urls }) => {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
+  const router = useRouter();
+
+  const areSmAlwaysDisabled = router.pathname === '/404';
 
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
@@ -126,12 +130,16 @@ function Navbar({ urls }) {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    if (!areSmAlwaysDisabled) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    } else {
+      setSocialsVisibility(true);
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [areSmAlwaysDisabled]);
 
   return (
     <>
@@ -173,7 +181,7 @@ function Navbar({ urls }) {
       </Nav>
     </>
   );
-}
+};
 
 export default Navbar;
 
