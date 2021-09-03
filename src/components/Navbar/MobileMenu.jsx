@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Icon from '@components/Icon/Icon';
 import Button from '@components/Button/Button';
+import { openContactForm } from '@utils/formVisibility';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
@@ -80,6 +82,7 @@ const LinksWrapper = styled.div`
 
 const MobileMenu = ({ show, urls, closeMobileMenu }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
 
   const handleChange = (event) => {
     if (event.matches) setIsVisible(true);
@@ -88,6 +91,11 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
 
   const handleClick = () => {
     closeMobileMenu();
+  };
+
+  const handleMobileContact = () => {
+    closeMobileMenu();
+    openContactForm(router);
   };
 
   useEffect(() => {
@@ -119,7 +127,7 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
               <StyledLink linkLabel="Współpraca" url="/cooperation" />
             </LinksWrapper>
 
-            <ContactButton>Skontaktuj się</ContactButton>
+            <ContactButton onClick={handleMobileContact}>Skontaktuj się</ContactButton>
 
             <Socials
               urls={{
