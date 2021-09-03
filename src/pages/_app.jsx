@@ -6,8 +6,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import Head from 'next/head';
-import store from '@root/store/store';
 
+import store from '@root/store/store';
 import GlobalStyles from '@styles/GlobalStyles';
 import theme from '@styles/theme';
 

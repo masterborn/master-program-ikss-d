@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { getColor, getMedias } from '@styles/utils';
 import ContactForm from '@components/ContactForm/ContactForm';
-import { useDispatch } from 'react-redux';
 import { modalActions } from '@root/store/modalSlice';
 
 const Backdrop = styled.div`
@@ -62,10 +62,6 @@ const Modal = () => {
       <ModalForm modal />
     </>
   );
-};
-
-Modal.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };
 
 export default Modal;

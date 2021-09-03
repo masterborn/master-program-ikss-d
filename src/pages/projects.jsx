@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
@@ -31,6 +32,10 @@ const ProjectsPage = ({ projectHero }) => {
       )}
     </>
   );
+};
+
+ProjectsPage.propTypes = {
+  projectHero: PropTypes.shape({}).isRequired,
 };
 
 export const getStaticProps = async () => {
