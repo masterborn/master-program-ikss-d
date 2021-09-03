@@ -1,20 +1,10 @@
-import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
-import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
+import SubPagesLayout from '@components/Layouts/SubPagesLayout';
 import ContentfulClient from '@api/clients/contentfulApi';
 import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
-const projectsPage = ({ projectHero }) => (
+const projectsPage = () => (
   <>
-    <Navbar
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
-    <SubpagesHero data={projectHero} />
     <MainProjects />
   </>
 );
@@ -22,15 +12,17 @@ const projectsPage = ({ projectHero }) => (
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
 
-  const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
-
-  console.log(projectHero);
+  const SubPageHero = filterBasicContentData(basicContent, 'projects-top-section');
 
   return {
     props: {
-      projectHero,
+      SubPageHero,
     },
   };
+};
+
+projectsPage.getLayout = function getLayout(page) {
+  return <SubPagesLayout>{page}</SubPagesLayout>;
 };
 
 export default projectsPage;

@@ -2,24 +2,15 @@ import HomePageHero from '@components/homePageHero/HomePageHero';
 import ValuesIcon1 from '@assets/values-1.svg';
 import ValuesIcon2 from '@assets/values-2.svg';
 import ValuesIcon3 from '@assets/values-3.svg';
-import Navbar from '@components/Navbar/Navbar';
 import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
-import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
+import Layout from '@components/Layouts/Layout';
 import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
 const homePage = ({ heroData }) => (
   <>
-    <Navbar
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
     <HomePageHero
       data={{
         ...heroData,
@@ -98,15 +89,6 @@ const homePage = ({ heroData }) => (
         },
       ]}
     />
-    <Footer
-      contact
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
   </>
 );
 
@@ -150,6 +132,10 @@ export const getStaticProps = async () => {
       boardMembersData,
     },
   };
+};
+
+homePage.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
 };
 
 export default homePage;
