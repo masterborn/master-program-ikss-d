@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
@@ -10,11 +11,10 @@ import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
 import NavLink from '@components/Navbar/NavLink';
 import { openContactForm } from '@utils/formVisibility';
-
-import MobileMenu from './MobileMenu';
-import { useDispatch } from 'react-redux';
 import Modal from '@components/ContactForm/Modal';
 import Portal from '@hoc/Portal';
+
+import MobileMenu from './MobileMenu';
 
 const Nav = styled.div`
   padding: 1.25rem 7.5rem;
@@ -185,6 +185,7 @@ const Navbar = ({ urls }) => {
         <Button as={ContactButton} onClick={() => openContactForm(router, dispatch)}>
           Skontaktuj się
         </Button>
+
         <Portal>
           <Modal />
         </Portal>
