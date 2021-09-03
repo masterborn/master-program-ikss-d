@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 40.75px 0 40px 24px;
+    margin: 40.75px 24px 40px 24px;
   }
 `;
 

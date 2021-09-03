@@ -84,6 +84,10 @@ const CarouselButton = styled(Button)`
         font-size: 10px;
       }
     `}
+
+  & :hover {
+    color: ${(props) => (props.active ? getColor('white') : getColor('navy'))};
+  }
 `;
 
 const StyledProjects = () => {
