@@ -4,12 +4,15 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import Button from '@components/Button/Button';
 import { getMedias } from '@styles/utils';
+import { scrollOnHomepage } from '@utils/formVisibility';
 
 const styledHeroText = ({ headerText, smallText }) => (
   <Wrapper>
     <h1>{headerText}</h1>
     {documentToReactComponents(smallText)}
-    <Button secondary>Skontaktuj się</Button>
+    <Button secondary onClick={scrollOnHomepage}>
+      Skontaktuj się
+    </Button>
   </Wrapper>
 );
 
@@ -27,7 +30,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 40.75px 0 40px 24px;
+    margin: 40.75px 24px 40px 24px;
   }
 `;
 
