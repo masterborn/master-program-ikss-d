@@ -14,6 +14,7 @@ import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { validateInput, validateCheckbox } from '@utils/validation';
 import { formActions } from '@root/store/formSlice';
+import { modalActions } from '@root/store/modalSlice';
 
 const Wrapper = styled.div`
   position: relative;
@@ -146,8 +147,8 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   const formValues = useSelector((state) => state.form.formValues);
   const dispatch = useDispatch();
 
-  const CloseModalButton = (
-    <button type="button">
+  const closeModalButton = (
+    <button type="button" onClick={() => dispatch(modalActions.closeModal())}>
       <StyledCloseIcon icon={CloseIcon} media="16px" />
     </button>
   );
@@ -194,7 +195,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
 
   return (
     <Wrapper className={className} name="contactForm">
-      {modal && CloseModalButton}
+      {modal && closeModalButton}
 
       <Header>
         <h3>Skontaktuj się z nami</h3>

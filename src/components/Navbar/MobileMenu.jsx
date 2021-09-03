@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
@@ -62,7 +63,7 @@ const StyledLink = styled(NavLink)`
   font-weight: ${getFontWeight('buttonWeight')};
   width: 100%;
   padding: 24px;
-  box-shadow: inset 0px 1.5px 0px #eaf5ff, inset 0px -1.5px 0px #eaf5ff;
+  box-shadow: inset 0 1.5px 0 #eaf5ff, inset 0px -1.5px 0px #eaf5ff;
 `;
 
 const ContactButton = styled(Button)`
@@ -73,7 +74,7 @@ const LinksWrapper = styled.div`
   width: 100%;
   display: inherit;
   flex-direction: column;
-  box-shadow: 0px 1.5px 0px #eaf5ff, 0px -1.5px 0px #eaf5ff;
+  box-shadow: 0 1.5px 0 #eaf5ff, 0px -1.5px 0px #eaf5ff;
 
   @media (max-width: ${getMedias('mobile')}) {
     font-size: 14px;
@@ -83,6 +84,7 @@ const LinksWrapper = styled.div`
 const MobileMenu = ({ show, urls, closeMobileMenu }) => {
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     if (event.matches) setIsVisible(true);
@@ -95,7 +97,7 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
 
   const handleMobileContact = () => {
     closeMobileMenu();
-    openContactForm(router);
+    openContactForm(router, dispatch);
   };
 
   useEffect(() => {

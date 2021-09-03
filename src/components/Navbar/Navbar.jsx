@@ -12,6 +12,9 @@ import NavLink from '@components/Navbar/NavLink';
 import { openContactForm } from '@utils/formVisibility';
 
 import MobileMenu from './MobileMenu';
+import { useDispatch } from 'react-redux';
+import Modal from '@components/ContactForm/Modal';
+import Portal from '@hoc/Portal';
 
 const Nav = styled.div`
   padding: 1.25rem 7.5rem;
@@ -114,7 +117,8 @@ const Navbar = ({ urls }) => {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
-  
+  const dispatch = useDispatch();
+
   const areSmAlwaysDisabled = router.pathname === '/404';
 
   const handleScroll = () => {
@@ -178,9 +182,12 @@ const Navbar = ({ urls }) => {
           <span />
         </Hamburger>
 
-        <Button as={ContactButton} onClick={() => openContactForm(router)}>
+        <Button as={ContactButton} onClick={() => openContactForm(router, dispatch)}>
           Skontaktuj się
         </Button>
+        <Portal>
+          <Modal />
+        </Portal>
       </Nav>
     </>
   );
