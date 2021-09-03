@@ -5,11 +5,9 @@ const modalSlice = createSlice({
   initialState: { isModalOpen: true },
   reducers: {
     closeModal(state) {
-      // eslint-disable-next-line no-param-reassign
       state.isModalOpen = false;
     },
     openModal(state) {
-      // eslint-disable-next-line no-param-reassign
       state.isModalOpen = true;
     },
   },

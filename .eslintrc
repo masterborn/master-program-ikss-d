@@ -2,7 +2,8 @@
   "extends": ["@masterborn/eslint-config/frontend", "prettier"],
   "rules": {
     "react/jsx-one-expression-per-line": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }]
   },
   "overrides": [
     {
