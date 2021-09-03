@@ -193,7 +193,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   };
 
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} name="contactForm">
       {modal && CloseModalButton}
 
       <Header>

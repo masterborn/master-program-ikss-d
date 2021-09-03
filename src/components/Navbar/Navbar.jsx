@@ -9,6 +9,7 @@ import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
 import NavLink from '@components/Navbar/NavLink';
+import { openContactForm } from '@utils/formVisibility';
 
 import MobileMenu from './MobileMenu';
 
@@ -113,7 +114,7 @@ const Navbar = ({ urls }) => {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
-
+  
   const areSmAlwaysDisabled = router.pathname === '/404';
 
   const handleScroll = () => {
@@ -177,7 +178,9 @@ const Navbar = ({ urls }) => {
           <span />
         </Hamburger>
 
-        <Button as={ContactButton}>Skontaktuj się</Button>
+        <Button as={ContactButton} onClick={() => openContactForm(router)}>
+          Skontaktuj się
+        </Button>
       </Nav>
     </>
   );
