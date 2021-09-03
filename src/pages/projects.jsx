@@ -26,9 +26,7 @@ export const getStaticProps = async () => {
 
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
 
-  console.log(projectHero);
-
-  const CTASection = await basicContentClient.getFilteredData('projects-bottom-cta-text');
+  const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
 
   return {
     props: {
