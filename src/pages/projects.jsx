@@ -1,10 +1,11 @@
 import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
+import ContactSection from '@components/CTASection/CTASection';
 import ContentfulClient from '@api/clients/contentfulApi';
 import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
-const projectsPage = ({ projectHero }) => (
+const projectsPage = ({ projectHero, CTASection }) => (
   <>
     <Navbar
       urls={{
@@ -16,6 +17,7 @@ const projectsPage = ({ projectHero }) => (
     />
     <SubpagesHero data={projectHero} />
     <MainProjects />
+    <ContactSection data={CTASection} />
   </>
 );
 
@@ -24,11 +26,12 @@ export const getStaticProps = async () => {
 
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
 
-  console.log(projectHero);
+  const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
 
   return {
     props: {
       projectHero,
+      CTASection,
     },
   };
 };

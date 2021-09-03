@@ -64,7 +64,7 @@ const GridWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 24px;
-  } ;
+  }
 `;
 
 const MainProjects = () => {
