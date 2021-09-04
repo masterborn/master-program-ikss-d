@@ -4,53 +4,40 @@ import Button from "@components/Button/Button";
 import { getColor, getMedias } from '@styles/utils';
 
 const Wrapper = styled.div`
-background: ${getColor('blue_10')};
-border-radius: 16px;
-width: 1200px;
-height: 352px;
-margin-bottom: 1em;
-
-& h3 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: ${getColor('blue_10')};
+  border-radius: 16px;
+  min-height: 352px;
+  & h3 {
     text-align: center;
-    letter-spacing: -0.015em;
-    margin: 0 auto 2em;
-    padding-top: 3em;
-}
-
-& button {
-    margin: auto;
-}
-
-@media (max-width: ${getMedias('desktop')}) { 
+    margin: 0 auto 2rem;
+  }
+  & button {
+    margin: 0 auto;
+  }
+  @media (max-width: ${getMedias('desktop')}) {
     width: auto;
-    height: 220px;
+    min-height: 220px;
     padding: 56px 31px;
-    margin: 0 2em 2em;
-
+    margin: 0 2rem 2rem;
     & h3 {
-        font-size: 18px;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        letter-spacing: -0.015em;
-        padding-top: 0;
+      font-size: 18px;
+      line-height: 24px;
     }
-
     & button {
-        width: 175px;
-        height: 36px;
-        padding: 9px 16px;
-
-        & * {
-            font-size: 14px;
-            line-height: 18px;
-        }
+      width: 175px;
+      height: 36px;
+      padding: 9px 16px;
+      & * {
+        font-size: 14px;
+        line-height: 18px;
+      }
     }
- }
+  }
 `;
 
 const ContactBanner = () => <Wrapper>

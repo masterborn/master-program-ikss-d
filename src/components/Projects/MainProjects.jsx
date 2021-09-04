@@ -25,7 +25,7 @@ const GridWrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 24px;
-  } ;
+  }
 `;
 
 const ProjectsWrapper = styled.div`
@@ -55,7 +55,6 @@ const CarouselButton = styled(Button)`
       color: ${getColor('navy')};
       & :hover {
         background: ${getColor('blue_20')};
-        color: ${getColor('white')};
       }
 
       @media (max-width: ${getMedias('mobile')}) {
@@ -69,49 +68,45 @@ const MainProjects = ({ projects }) => {
   const years = projects.map((item) => item.date.split("-")[0]);
   const buttonYears = [ ...new Set(years)].sort((a, b) => b - a).slice(0,3);
 
-  const [activeYear, setActiveYear] = useState(buttonYears[2])
+  const [activeYear, setActiveYear] = useState(buttonYears[2]);
 
-  
-
-  const renderProjectCards = (afterBanner = false) =>
-    projects.filter((item) => item.date.split("-")[0] === activeYear).map((data, index) => (
-      !afterBanner ? index < 4 &&
+  const renderProjectCards = (afterBanner = false) => {
+    const tempData = projects.filter((item) => item.date.split("-")[0] === activeYear)
+    
+    if (tempData.length < 7) {
+    return tempData.map((data) => (
       <ProjectCard
         key={data.title}
-        imgSrc={data.imgSrc}
-        imgAlt={data.imgAlt}
-        videoUrl={data.videoUrl !== 'undefined' && data.videoUrl}
-        title={data.title}
-        date={data.date}
-        description={data.description}
-        url={data.url}
-        buttonLabel={data.buttonLabel}
-      /> : index >= 4 &&
-      <ProjectCard
-        key={data.title}
-        imgSrc={data.imgSrc}
-        imgAlt={data.imgAlt}
-        videoUrl={data.videoUrl !== 'undefined' && data.videoUrl}
-        title={data.title}
-        date={data.date}
-        description={data.description}
-        url={data.url}
-        buttonLabel={data.buttonLabel}
+        projects={data}
       />
     ));
+    }
+
+    return tempData.map((data, index) =>
+        !afterBanner ? index < 4 &&
+      <ProjectCard
+        key={data.title}
+        projects={data}
+      /> : index >= 4 && 
+      <ProjectCard
+        key={data.title}
+        projects={data}
+      />
+    );
+  };
+
+  const renderContact = () => projects.filter((item) => item.date.split("-")[0] === activeYear).length >= 7 && <><ContactBanner />
+  <GridWrapper>{renderProjectCards(true)}</GridWrapper>
+</>;
 
   return (<>
-<Carousel>
-          <CarouselButton active={activeYear === buttonYears[2]} onClick={() => setActiveYear(buttonYears[2])}>{buttonYears[2]}</CarouselButton>
-          <CarouselButton active={activeYear === buttonYears[1]} onClick={() => setActiveYear(buttonYears[1])}>{buttonYears[1]}</CarouselButton>
-          <CarouselButton active={activeYear === buttonYears[0]} onClick={() => setActiveYear(buttonYears[0])}>{buttonYears[0]}</CarouselButton>
+      <Carousel>
+  {new Array(3).fill(0).map((_, index) => <CarouselButton active={activeYear === buttonYears[2-index]} onClick={() => setActiveYear(buttonYears[2-index])}>{buttonYears[2-index]}</CarouselButton> )}
       </Carousel>
     <FlexWrapper>
       <ProjectsWrapper>
       <GridWrapper>{renderProjectCards()}</GridWrapper>
-    {projects.filter((item) => item.date.split("-")[0] === activeYear).length >= 5 && <><ContactBanner />
-      <GridWrapper>{renderProjectCards(true)}</GridWrapper>
-    </>}
+    {renderContact()}
     </ProjectsWrapper>
     </FlexWrapper>
     </>

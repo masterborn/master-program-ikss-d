@@ -110,14 +110,7 @@ const SocialButton = styled(Button)`
 `;
 
 const ProjectCard = ({
-  imgSrc,
-  videoUrl,
-  imgAlt,
-  title,
-  date,
-  description,
-  url,
-  buttonLabel,
+  projects,
   isOnHomePage,
 }) => {
   const [cardHeight, setCardHeight] = useState(0);
@@ -131,15 +124,15 @@ const ProjectCard = ({
     getHeight();
   }, []);
 
-  const cardImageOrVideo = videoUrl ? (
-    <CardVideo videoUrl={videoUrl} title={title} />
+  const cardImageOrVideo = projects.videoUrl ? (
+    <CardVideo videoUrl={projects.videoUrl} title={projects.title} />
   ) : (
-    <CardImage imageSrc={imgSrc} imageAlt={imgAlt} isOnHomePage={isOnHomePage} />
+    <CardImage imageSrc={projects.imgSrc} imageAlt={projects.imgAlt} isOnHomePage={isOnHomePage} />
   );
 
-  const button = url && (
-    <SocialButton withIcon={url.includes('facebook')} href={url}>
-      {buttonLabel}
+  const button = projects.url && (
+    <SocialButton withIcon={projects.url.includes('facebook')} href={projects.url}>
+      {projects.buttonLabel}
     </SocialButton>
   );
 
@@ -148,11 +141,11 @@ const ProjectCard = ({
       {cardImageOrVideo}
       <Description isOnHomePage={isOnHomePage}>
       <Header isOnHomePage={isOnHomePage}>
-          <h4>{title}</h4>
-          <h5>{date}</h5>
+          <h4>{projects.title}</h4>
+          <h5>{projects.date}</h5>
         </Header>
         <Text isOnHomePage={isOnHomePage}>
-        {documentToReactComponents(description)}
+        {documentToReactComponents(projects.description)}
         </Text>
         
         {button}
@@ -164,20 +157,19 @@ const ProjectCard = ({
 export default ProjectCard;
 
 ProjectCard.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
-  videoUrl: PropTypes.string,
-  imgAlt: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  description: PropTypes.instanceOf(Object).isRequired,
-  url: PropTypes.string,
-  buttonLabel: PropTypes.string,
-  isOnHomePage: PropTypes.bool,
+  projects: PropTypes.shape({
+    imgSrc: PropTypes.string.isRequired,
+    videoUrl: PropTypes.string,
+    imgAlt: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    description: PropTypes.instanceOf(Object).isRequired,
+    url: PropTypes.string,
+    buttonLabel: PropTypes.string,
+  }).isRequired,
+  isOnHomePage: PropTypes.bool
 };
 
 ProjectCard.defaultProps = {
-  videoUrl: '',
-  buttonLabel: '',
-  url: '',
   isOnHomePage: false,
-};
+}
