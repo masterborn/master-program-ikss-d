@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
 import CooperationCard from '@components/Cooperation/CooperationCard';
@@ -62,7 +63,7 @@ const Cooperation = ({ data, cooperationHeader, cooperationText }) => (
   <Wrapper>
     <Header>
       <h3>{cooperationHeader}</h3>
-      {cooperationText && <p>{cooperationText}</p>}
+      {cooperationText && <p>{documentToReactComponents(cooperationText)}</p>}
     </Header>
     <CooperationWrapper>
       {data.map((singleSponsorData) => (
@@ -80,7 +81,7 @@ const Cooperation = ({ data, cooperationHeader, cooperationText }) => (
 Cooperation.propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,
   cooperationHeader: PropTypes.string.isRequired,
-  cooperationText: PropTypes.string.isRequired,
+  cooperationText: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Cooperation;

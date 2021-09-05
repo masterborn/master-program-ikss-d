@@ -14,6 +14,12 @@ export default function getAssets(response) {
       );
     }
 
+    if (responseObject.fields.logo) {
+      responseObject.fields.logo = response.includes.Asset.find(
+        (asset) => asset.sys.id === item.fields.logo.sys.id,
+      );
+    }
+
     return responseObject;
   });
 }

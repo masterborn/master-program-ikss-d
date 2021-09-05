@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { filterData } from '@root/contentfulDataTransformers/filterData';
+import { filterData, filterLogos } from '@root/contentfulDataTransformers/filterData';
 import getAssets from '@root/contentfulDataTransformers/getAssets';
 
 class ContentfulClient {
@@ -23,6 +23,16 @@ class ContentfulClient {
       .catch((err) => {
         throw err;
       });
+  }
+
+  getPartnerLogos() {
+    return this.api
+    .get('', { params: { content_type: 'partnerLogos'} })
+    .then((res) => getAssets(res.data))
+    .then((data) => filterLogos(data))
+    .catch((err) => {
+      throw err;
+    })
   }
 
   getAssetsPrivate(page) {

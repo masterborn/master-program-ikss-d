@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import Input from '@components/ContactForm/StyledInput';
 import Checkbox from '@components/ContactForm/CheckboxField';
-import Icon from '@components/Icon/Icon';
+import IconSM from '@components/Icon/IconSM';
 import ToolTip from '@components/ContactForm/ToolTip';
 import FormButton from '@components/ContactForm/FormButton';
 import FormIcon from '@assets/form-emoji.svg';
@@ -130,7 +130,7 @@ const InfoToolTip = styled(ToolTip)`
   }
 `;
 
-const StyledCloseIcon = styled(Icon)`
+const StyledCloseIcon = styled(IconSM)`
   position: absolute;
   top: 2em;
   right: 2em;
@@ -208,7 +208,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
 
       <Header>
         <h3>Skontaktuj się z nami</h3>
-        <Icon icon={FormIcon} size="40px" media="24px" />
+        <IconSM icon={FormIcon} size="40px" media="24px" />
       </Header>
 
       <p>

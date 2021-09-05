@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
 import ValuesCard from '@components/Values/ValuesCard';
@@ -76,7 +77,7 @@ const Values = ({ data, valuesHeader, valuesText }) => {
     <Wrapper>
       <Header>
         <h3>{valuesHeader}</h3>
-        {valuesText && <p>{valuesText}</p>}
+        {valuesText && <p>{documentToReactComponents(valuesText)}</p>}
       </Header>
       {isVisible ? <Slider data={data} /> : <Cards>{renderCards()}</Cards>}
     </Wrapper>
@@ -86,7 +87,7 @@ const Values = ({ data, valuesHeader, valuesText }) => {
 Values.propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,
   valuesHeader: PropTypes.string.isRequired,
-  valuesText: PropTypes.string.isRequired,
+  valuesText: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Values;
