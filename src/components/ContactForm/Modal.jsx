@@ -15,9 +15,6 @@ const Wrapper = styled(motion.section)`
   left: 0;
   top: 0;
   overflow-y: scroll;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Backdrop = styled(motion.div)`
@@ -30,6 +27,11 @@ const Backdrop = styled(motion.div)`
 
 const ModalWrapper = styled(motion.div)`
   height: max-content;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  left: 0;
+  margin: auto;
 `;
 
 const ModalForm = styled(ContactForm)`
