@@ -53,9 +53,9 @@ export const filterData = (response, section, page = null) => {
         imgSrc: imageUrl ? `https:${imageUrl}` : '',
         name: fields.name,
         role: fields.role || "Członek Zarządu",
-        phone: fields.phone,
-        email: fields.email,
-        linkedinUrl: fields.linkedinUrl,
+        phone: fields.phone || "",
+        email: fields.email || "",
+        linkedinUrl: fields.linkedinUrl || "",
       };
     }
 
