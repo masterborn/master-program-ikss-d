@@ -120,14 +120,7 @@ const StyledProjects = () => {
         </CarouselButton>
       </Carousel>
       <ProjectCard
-        imgSrc={tempData[activeCard].imgSrc}
-        imgAlt={tempData[activeCard].imgAlt}
-        videoUrl={tempData[activeCard].videoUrl !== 'undefined' && tempData[activeCard].videoUrl}
-        title={tempData[activeCard].title}
-        date={tempData[activeCard].date}
-        description={tempData[activeCard].description}
-        url={tempData[activeCard].url}
-        buttonLabel={tempData[activeCard].buttonLabel}
+        projects={tempData[activeCard]}
         isOnHomePage
       />
       <Button href="/projects" link secondary>

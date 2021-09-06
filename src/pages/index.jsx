@@ -20,15 +20,11 @@ const homePage = ({ heroData }) => (
         lnlink: 'https://pl.linkedin.com',
       }}
     />
+
     <HomePageHero
-      data={{
-        ...heroData,
-        facebookLink: 'https://pl-pl.facebook.com',
-        instagramLink: 'https://www.instagram.com',
-        youTubeLink: 'https://www.youtube.com',
-        linkedInLink: 'https://pl.linkedin.com',
-      }}
+    data={heroData}
     />
+
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
       valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
