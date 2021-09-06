@@ -1,38 +1,40 @@
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { getColor, getMedias } from '@styles/utils';
+import { getMedias } from '@styles/utils';
 import ContactForm from '@components/ContactForm/ContactForm';
 import { modalActions } from '@root/store/modalSlice';
 
-const Backdrop = styled(motion.div)`
-  background: ${getColor('navy')};
+const Wrapper = styled(motion.section)`
+  background: rgb(26 40 71 / 60%);
+  z-index: 3;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 3;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Backdrop = styled(motion.div)`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
 `;
 
 const ModalWrapper = styled(motion.div)`
-  position: fixed;
-  width: 100%;
-  z-index: 4;
-  top: 5%;
+  height: max-content;
 `;
 
 const ModalForm = styled(ContactForm)`
-  position: fixed;
-  margin: 0;
   padding: 40px 80px;
-  width: 70%;
-  left: 50%;
-  top: 5%;
-  z-index: 5;
   overflow: hidden;
-  transform: translateX(-50%);
 
   @media (max-width: 1037px) {
     width: 90%;
@@ -55,6 +57,12 @@ const ModalForm = styled(ContactForm)`
   }
 `;
 
+const GlobalStyles = createGlobalStyle`
+  body {
+    overflow-y: hidden;
+  }
+`;
+
 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
 const Modal = () => {
   const dispatch = useDispatch();
@@ -67,23 +75,22 @@ const Modal = () => {
   return (
     <AnimatePresence>
       {isModalOpen && (
-        <>
-          <Backdrop
-            onClick={closeModal}
-            onKeyUp={closeModal}
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 0.6,
-              transition: {
-                duration: 0.5,
-              },
-            }}
-            exit={{
-              opacity: 0,
-            }}
-          />
+        <Wrapper
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: {
+              duration: 0.5,
+            },
+          }}
+          exit={{
+            opacity: 0,
+          }}
+        >
+          <GlobalStyles />
+          <Backdrop onClick={closeModal} onKeyUp={closeModal} />
           <ModalWrapper
             initial={{
               y: -1000,
@@ -100,7 +107,7 @@ const Modal = () => {
           >
             <ModalForm modal />
           </ModalWrapper>
-        </>
+        </Wrapper>
       )}
     </AnimatePresence>
   );
