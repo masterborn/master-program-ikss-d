@@ -101,7 +101,7 @@ const MainProjects = ({ projects }) => {
 
   return (<>
       <Carousel>
-  {new Array(3).fill(0).map((_, index) => <CarouselButton active={activeYear === buttonYears[2-index]} onClick={() => setActiveYear(buttonYears[2-index])}>{buttonYears[2-index]}</CarouselButton> )}
+  {buttonYears.reverse().map((button) => ( <CarouselButton active={activeYear === button} onClick={() => setActiveYear(button)}> {button} </CarouselButton> ))}
       </Carousel>
     <FlexWrapper>
       <ProjectsWrapper>
