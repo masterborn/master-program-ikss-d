@@ -32,7 +32,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       projectHero,
-      projects
+      projects,
       CTASection,
     },
   };
