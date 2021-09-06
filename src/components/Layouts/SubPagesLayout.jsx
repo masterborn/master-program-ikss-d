@@ -18,7 +18,6 @@ const SubPagesLayout = ({ children, pageProps }) => {
 
 SubPagesLayout.defaultProps = {
   children: null,
-  pageProps: {},
 };
 
 SubPagesLayout.propTypes = {
@@ -26,7 +25,7 @@ SubPagesLayout.propTypes = {
   pageProps: PropTypes.shape({
     SubPageHero: PropTypes.shape({}),
     CTASection: PropTypes.shape({}),
-  }),
+  }).isRequired,
 };
 
 export default SubPagesLayout;
