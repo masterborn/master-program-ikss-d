@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    font-family: ${getFontFamily('Mulish')};
   }
 
   *::-webkit-scrollbar {
@@ -18,12 +19,10 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     color: ${getColor('steel')};
-    font-family: ${getFontFamily('Mulish')};
     max-width: 100%;
     overflow-x: hidden;
   }
   
-
   h1,h2,h3,h4,h5 {
     color: ${getColor('navy')};
     letter-spacing: -0.015em;

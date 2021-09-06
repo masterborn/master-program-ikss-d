@@ -51,23 +51,26 @@ const SubpagesHero = ({ data }) => (
   <Wrapper>
     <ImageWrapper>
       <Image
-        src={data.imageOrVideoURL}
-        alt={data.title}
+        src={data.image1.url}
+        alt={data.image1.title}
         height={142}
         width={230}
         layout="responsive"
       />
     </ImageWrapper>
     <h1>{data.title}</h1>
-    {documentToReactComponents(data.text)}
+    {documentToReactComponents(data.text1)}
   </Wrapper>
 );
 
 SubpagesHero.propTypes = {
   data: PropTypes.shape({
-    imageOrVideoURL: PropTypes.string.isRequired,
+    image1: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    }).isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.objectOf.isRequired,
+    text1: PropTypes.objectOf.isRequired,
   }).isRequired,
 };
 
