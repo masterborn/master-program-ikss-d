@@ -34,7 +34,7 @@ const App = (props) => {
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClientRef.current}>
           <Hydrate state={pageProps.dehydratedState}>
-            {getLayout(<Component {...pageProps} />)}
+            {getLayout(<Component {...pageProps} />, pageProps)}
           </Hydrate>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

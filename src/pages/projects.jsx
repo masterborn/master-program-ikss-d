@@ -23,8 +23,8 @@ export const getStaticProps = async () => {
   };
 };
 
-projectsPage.getLayout = function getLayout(page) {
-  return <SubPagesLayout>{page}</SubPagesLayout>;
+projectsPage.getLayout = function getLayout(page, props) {
+  return <SubPagesLayout pageProps={props}>{page}</SubPagesLayout>;
 };
 
 export default projectsPage;
