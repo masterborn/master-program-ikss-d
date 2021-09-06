@@ -13,10 +13,12 @@ export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
 
   const SubPageHero = filterBasicContentData(basicContent, 'projects-top-section');
+  const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
 
   return {
     props: {
       SubPageHero,
+      CTASection,
     },
   };
 };
