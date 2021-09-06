@@ -97,30 +97,27 @@ const StyledProjects = () => {
     <Wrapper>
       <h3>Najnowsze projekty</h3>
       <Carousel>
-        <div
+        <CarouselButton
+          active={activeCard === 0}
           onClick={() => setActiveCard(0)}
           onKeyUp={() => setActiveCard(0)}
-          role="button"
-          tabIndex={0}
         >
-          <CarouselButton active={activeCard === 0}>{tempData[0].title}</CarouselButton>
-        </div>
-        <div
+          {tempData[0].title}
+        </CarouselButton>
+        <CarouselButton
+          active={activeCard === 1}
           onClick={() => setActiveCard(1)}
           onKeyUp={() => setActiveCard(1)}
-          role="button"
-          tabIndex={-1}
         >
-          <CarouselButton active={activeCard === 1}>{tempData[1].title}</CarouselButton>
-        </div>
-        <div
+          {tempData[1].title}
+        </CarouselButton>
+        <CarouselButton
+          active={activeCard === 2}
           onClick={() => setActiveCard(2)}
           onKeyUp={() => setActiveCard(2)}
-          role="button"
-          tabIndex={-1}
         >
-          <CarouselButton active={activeCard === 2}>{tempData[2].title}</CarouselButton>
-        </div>
+          {tempData[2].title}
+        </CarouselButton>
       </Carousel>
       <ProjectCard
         projects={tempData[activeCard]}
