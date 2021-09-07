@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { getColor } from '@styles/utils';
 import Checked from '@assets/checked.svg';
-import Icon from '@components/Icon/Icon';
+import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.label`
   position: relative;
@@ -40,7 +40,7 @@ const CheckboxField = styled.div`
   input:checked + & {
     border: none;
   }
-  ${Icon} {
+  ${IconSM} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }
 `;
@@ -67,7 +67,7 @@ const Checkbox = ({ defaultValue, validateCallback }) => {
         onInvalid={onChange}
       />
       <CheckboxField checked={isChecked}>
-        <Icon icon={Checked} />
+        <IconSM icon={Checked} />
       </CheckboxField>
     </Wrapper>
   );

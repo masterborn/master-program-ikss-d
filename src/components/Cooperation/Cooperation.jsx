@@ -59,24 +59,28 @@ const CooperationWrapper = styled.div`
   }
 `;
 
-const Cooperation = ({ data, cooperationHeader, cooperationText }) => (
+const Cooperation = ({ data, cooperationHeader, cooperationText }) => {
+  
+  const renderSponsors = () => data.map((singleSponsorData) => (
+    <CooperationCard
+      key={singleSponsorData.altText}
+      altText={singleSponsorData.altText}
+      linkUrl={singleSponsorData.linkUrl}
+      logo={singleSponsorData.logo}
+    />
+  ));
+
+  return (
   <Wrapper>
     <Header>
       <h3>{cooperationHeader}</h3>
-      {cooperationText && <p>{documentToReactComponents(cooperationText)}</p>}
+      {cooperationText && documentToReactComponents(cooperationText)}
     </Header>
     <CooperationWrapper>
-      {data.map((singleSponsorData) => (
-        <CooperationCard
-          key={singleSponsorData.altText}
-          altText={singleSponsorData.altText}
-          linkUrl={singleSponsorData.linkUrl}
-          logo={singleSponsorData.logo}
-        />
-      ))}
+      {renderSponsors()}
     </CooperationWrapper>
   </Wrapper>
-);
+)};
 
 Cooperation.propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,

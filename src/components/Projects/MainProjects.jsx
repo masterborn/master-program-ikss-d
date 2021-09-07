@@ -63,7 +63,7 @@ const CarouselButton = styled(Button)`
     `}
 `;
 
-const MainProjects = ({ projects }) => {
+const MainProjects = ({ projects, contactBanner }) => {
 
   const years = projects.map((item) => item.date.split("-")[0]);
   const buttonYears = [ ...new Set(years)].sort((a, b) => b - a).slice(0,3);
@@ -95,13 +95,13 @@ const MainProjects = ({ projects }) => {
     );
   };
 
-  const renderContact = () => projects.filter((item) => item.date.split("-")[0] === activeYear).length >= 7 && <><ContactBanner />
+  const renderContact = () => projects.filter((item) => item.date.split("-")[0] === activeYear).length >= 7 && <><ContactBanner contactBanner={contactBanner} />
   <GridWrapper>{renderProjectCards(true)}</GridWrapper>
 </>;
 
   return (<>
       <Carousel>
-  {new Array(3).fill(0).map((_, index) => <CarouselButton active={activeYear === buttonYears[2-index]} onClick={() => setActiveYear(buttonYears[2-index])}>{buttonYears[2-index]}</CarouselButton> )}
+  {new Array(3).fill(0).map((_, index) => <CarouselButton key={buttonYears[index]} active={activeYear === buttonYears[2-index]} onClick={() => setActiveYear(buttonYears[2-index])}>{buttonYears[2-index]}</CarouselButton> )}
       </Carousel>
     <FlexWrapper>
       <ProjectsWrapper>
@@ -114,7 +114,8 @@ const MainProjects = ({ projects }) => {
 };
 
 MainProjects.propTypes = {
-  projects: PropTypes.instanceOf(Array).isRequired
+  projects: PropTypes.instanceOf(Array).isRequired,
+  contactBanner: PropTypes.instanceOf(Object).isRequired
 }
 
 export default MainProjects;

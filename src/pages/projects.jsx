@@ -2,16 +2,16 @@ import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
 import ContentfulClient from '@api/clients/contentfulApi';
-import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
+import { filterData, filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 import Footer from '@components/Footer/Footer';
 
-const projectsPage = ({ projectHero, projects, socialUrls }) => (
+const projectsPage = ({ projectHero, projectsData, socialUrls, contactBanner }) => (
   <>
     <Navbar
       urls={socialUrls}
     />
     <SubpagesHero data={projectHero} />
-    <MainProjects projects={projects} />
+    <MainProjects projects={projectsData} contactBanner={contactBanner} />
     <Footer
       urls={socialUrls}
     />
@@ -31,13 +31,17 @@ export const getStaticProps = async () => {
   };
 
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
-  const projects = await ContentfulClient.getFilteredFieldsData('projects');
+  const projects = await ContentfulClient.getFieldsData('projects');
+  const projectsData = filterData(projects, 'projects');
+
+  const contactBanner = filterBasicContentData(basicContent, 'projects-middle-cta-text');
   
   return {
     props: {
       projectHero,
-      projects,
-      socialUrls
+      projectsData,
+      socialUrls,
+      contactBanner
     },
   };
 };

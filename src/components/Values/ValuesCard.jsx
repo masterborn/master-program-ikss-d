@@ -45,7 +45,7 @@ const ValuesCard = ({ card }) => (
   <Card>
     <CardIcon icon={card.image1.url} alt={card.title} size="232px" media="201px" />
     <h5>{card.title}</h5>
-    <p>{documentToReactComponents(card.text1)}</p>
+    {documentToReactComponents(card.text1)}
   </Card>
 );
 

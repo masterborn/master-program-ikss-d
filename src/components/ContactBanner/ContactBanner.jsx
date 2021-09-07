@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import Button from "@components/Button/Button";
 import { getColor, getMedias } from '@styles/utils';
@@ -40,11 +41,15 @@ const Wrapper = styled.div`
   }
 `;
 
-const ContactBanner = () => <Wrapper>
-<h3>Chcesz zorganizować z nami podobny projekt?</h3>
+const ContactBanner = ({ contactBanner }) => <Wrapper>
+<h3>{contactBanner.title}</h3>
 <Button>
-    <span>Skontaktuj się z nami</span>
+    <span>{contactBanner.linkCaption}</span>
 </Button>
 </Wrapper>
 
 export default ContactBanner;
+
+ContactBanner.propTypes = {
+  contactBanner: PropTypes.instanceOf(Object).isRequired
+}

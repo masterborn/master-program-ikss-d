@@ -5,7 +5,7 @@ import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
-import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
+import { filterData, filterBasicContentData, filterLogos } from '@root/contentfulDataTransformers/filterData';
 
 const homePage = ({ heroData, projectsData, socialUrls, valuesHeaderData, cardValues, cooperationHeaderData, partnersData }) => (
   <>
@@ -60,12 +60,14 @@ export const getStaticProps = async () => {
   // Projects data
 
   const projectsHeaderData = filterBasicContentData(basicContent, 'homepage-projects-title');
-  const projectsData = await ContentfulClient.getFilteredFieldsData('projects', 'homepage');
+  const projects = await ContentfulClient.getFieldsData('projects');
+  const projectsData = filterData(projects, 'projects', 'homepage');
 
   // Cooperation data
 
   const cooperationHeaderData = filterBasicContentData(basicContent, 'homepage-partners-text');
-  const partnersData = await ContentfulClient.getPartnerLogos();
+  const partners = await ContentfulClient.getPartnerLogos();
+  const partnersData = filterLogos(partners);
 
   // Board Members data
 
