@@ -119,10 +119,7 @@ const StyledProjects = () => {
           {tempData[2].title}
         </CarouselButton>
       </Carousel>
-      <ProjectCard
-        projects={tempData[activeCard]}
-        isOnHomePage
-      />
+      <ProjectCard projects={tempData[activeCard]} isOnHomePage />
       <Button href="/projects" link secondary>
         Zobacz wszystkie projekty
       </Button>

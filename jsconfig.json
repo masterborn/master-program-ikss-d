@@ -12,7 +12,9 @@
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@hoc/*": ["./src/hoc/*"],
-      "@hooks/*": ["./src/hooks/*"]
+      "@hooks/*": ["./src/hooks/*"],
+      "@store/*": ["./src/store/*"],
+      "@contentfulDataTransformers/*": ["./src/contentfulDataTransformers/*"]
     }
   }
 }
