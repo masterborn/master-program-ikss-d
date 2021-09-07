@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import { animateScroll as scroll } from 'react-scroll';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
@@ -27,6 +27,10 @@ const Nav = styled.div`
   top: 0;
   left: 0;
   right: 0;
+
+  & button {
+    cursor: pointer;
+  }
 
   @media (max-width: ${getMedias('desktop')}) {
     padding: 1rem 1.25rem;
@@ -146,16 +150,22 @@ const Navbar = ({ urls }) => {
     };
   }, [areSmAlwaysDisabled]);
 
+  const scrollToTopOnClick = () => {
+    if (router.pathname === '/') {
+      scroll.scrollToTop();
+    } else {
+      router.push('/');
+    }
+  };
+
   return (
     <>
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
-        <Link href="/">
-          <a>
-            <Logo />
-          </a>
-        </Link>
+        <button type="button" onClick={scrollToTopOnClick}>
+          <Logo />
+        </button>
 
         <Menu>
           <MenuLink url="/" linkLabel="Strona główna" />
