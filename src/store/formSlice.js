@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const formSlice = createSlice({
-  name: 'form',
+const contactFormSlice = createSlice({
+  name: 'contactForm',
   initialState: {
     isFormValid: false,
     buttonStatus: 'primary',
@@ -39,6 +39,6 @@ const formSlice = createSlice({
   },
 });
 
-export const formActions = formSlice.actions;
+export const contactFormActions = contactFormSlice.actions;
 
-export default formSlice;
+export default contactFormSlice;

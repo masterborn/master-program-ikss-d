@@ -8,9 +8,9 @@ import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
-import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
+import { filterBasicContentData } from '@contentfulDataTransformers/filterData';
 
-const homePage = ({ heroData }) => (
+const homePage = ({ heroData, projectsData }) => (
   <>
     <Navbar
       urls={{
@@ -21,9 +21,7 @@ const homePage = ({ heroData }) => (
       }}
     />
 
-    <HomePageHero
-    data={heroData}
-    />
+    <HomePageHero data={heroData} />
 
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
@@ -131,7 +129,7 @@ export const getStaticProps = async () => {
 
   // Board Members data
 
-  const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
+  // const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
 
   return {
     props: {
@@ -143,7 +141,7 @@ export const getStaticProps = async () => {
       projectsHeaderData,
       cooperationHeaderData,
       projectsData,
-      boardMembersData,
+      // boardMembersData,
     },
   };
 };

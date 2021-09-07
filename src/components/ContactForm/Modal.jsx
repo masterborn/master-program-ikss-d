@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { getMedias } from '@styles/utils';
 import ContactForm from '@components/ContactForm/ContactForm';
-import { modalActions } from '@root/store/modalSlice';
+import { modalActions } from '@store/modalSlice';
 
 const Wrapper = styled(motion.section)`
   background: rgb(26 40 71 / 60%);

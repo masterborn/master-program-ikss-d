@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import modalSlice from './modalSlice';
-import formSlice from './formSlice';
+import contactFormSlice from './formSlice';
 
 const store = configureStore({
-  reducer: { modal: modalSlice.reducer, form: formSlice.reducer },
+  reducer: { modal: modalSlice.reducer, contactForm: contactFormSlice.reducer },
 });
 
 export default store;

@@ -13,8 +13,8 @@ import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { validateInput, validateCheckbox } from '@utils/validation';
-import { formActions } from '@root/store/formSlice';
-import { modalActions } from '@root/store/modalSlice';
+import { contactFormActions } from '@store/formSlice';
+import { modalActions } from '@store/modalSlice';
 
 const Wrapper = styled.div`
   position: relative;
@@ -142,9 +142,9 @@ const StyledCloseIcon = styled(Icon)`
 
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const isFormValid = useSelector((state) => state.form.isFormValid);
-  const buttonStatus = useSelector((state) => state.form.buttonStatus);
-  const formValues = useSelector((state) => state.form.formValues);
+  const isFormValid = useSelector((state) => state.contactForm.isFormValid);
+  const buttonStatus = useSelector((state) => state.contactForm.buttonStatus);
+  const formValues = useSelector((state) => state.contactForm.formValues);
   const dispatch = useDispatch();
 
   const closeModalButton = (
@@ -159,13 +159,13 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       return;
     }
 
-    dispatch(formActions.setButtonToLoading());
+    dispatch(contactFormActions.setButtonToLoading());
 
     setTimeout(() => {
-      dispatch(formActions.setButtonToError());
+      dispatch(contactFormActions.setButtonToError());
     }, 3000);
 
-    dispatch(formActions.clearFormFields());
+    dispatch(contactFormActions.clearFormFields());
 
     event.preventDefault();
   };
@@ -175,7 +175,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
     const { name } = event.target;
 
     dispatch(
-      formActions.updateFormFields({
+      contactFormActions.updateFormFields({
         [name]: inputVal,
       }),
     );

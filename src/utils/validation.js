@@ -1,4 +1,4 @@
-import { formActions } from '@root/store/formSlice';
+import { contactFormActions } from '@root/store/formSlice';
 
 const conditionChecks = (name, nameVal, length, inputVal, regex = false) => {
   if (name !== nameVal) return false;
@@ -27,44 +27,44 @@ export const validateInput = (event, dispatch) => {
   switch (true) {
     case inputVal.length < 3:
       inputError.message = 'Proszę wpisać minimum 3 znaki.';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'name', 30, inputVal):
       inputError.message = 'Limit znaków: 30';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'surname', 50, inputVal):
       inputError.message = 'Limit znaków: 50';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'email', 254, inputVal):
       inputError.message = 'Limit znaków: 254';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'topic', 200, inputVal):
       inputError.message = 'Limit znaków: 200';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'content', 2000, inputVal):
       inputError.message = 'Limit znaków: 2000';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'name', null, inputVal, true):
       inputError.message = 'Proszę używać tylko liter';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'surname', null, inputVal, true):
       inputError.message = 'Proszę używać tylko liter';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     case conditionChecks(name, 'email', null, inputVal, true):
       inputError.message = 'Proszę wpisać poprawny adres email.';
-      dispatch(formActions.formIsInvalid());
+      dispatch(contactFormActions.formIsInvalid());
       break;
     default:
       inputError.message = '';
       inputError.invalid = false;
-      dispatch(formActions.formIsValid());
+      dispatch(contactFormActions.formIsValid());
   }
 
   return inputError;
@@ -76,11 +76,11 @@ export const validateCheckbox = (event, dispatch) => {
   let message = '';
 
   if (inputVal) {
-    dispatch(formActions.formIsValid());
+    dispatch(contactFormActions.formIsValid());
     return message;
   }
 
-  dispatch(formActions.formIsInvalid());
+  dispatch(contactFormActions.formIsInvalid());
   message = 'To pole jest wymagane';
 
   return message;
