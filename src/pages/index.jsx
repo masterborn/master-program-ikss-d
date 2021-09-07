@@ -10,7 +10,7 @@ import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
 import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
-const homePage = ({ heroData }) => (
+const homePage = ({ heroData, projectsData }) => (
   <>
     <Navbar
       urls={{
@@ -21,9 +21,7 @@ const homePage = ({ heroData }) => (
       }}
     />
 
-    <HomePageHero
-    data={heroData}
-    />
+    <HomePageHero data={heroData} />
 
     <Values
       valuesHeader="Wyróżniki, wartości, X-factory organizacji"
@@ -47,7 +45,7 @@ const homePage = ({ heroData }) => (
         },
       ]}
     />
-    <HomeProjects />
+    <HomeProjects projects={projectsData} />
     <Cooperation
       cooperationHeader="Współpracują z nami"
       cooperationText="Na pewno powinno się pojawić tu logo UE na pierwszym miejscu. Kilka słów o tym, co można zyskać współpracując z wami jako partnerzy. Jakie to niesie korzyści PR’owe etc."

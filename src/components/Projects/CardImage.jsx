@@ -11,7 +11,8 @@ const styledCardImage = ({ imageSrc, imageAlt, isOnHomePage }) => (
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 2 / 1;
+  height: 0;
+  padding-bottom: 56.25%;
 `;
 
 const CardImage = styled(styledCardImage)`
