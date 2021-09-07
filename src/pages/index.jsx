@@ -10,7 +10,7 @@ import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
 import { filterBasicContentData } from '@contentfulDataTransformers/filterData';
 
-const homePage = ({ heroData, projectsData }) => (
+const homePage = ({ heroData }) => (
   <>
     <Navbar
       urls={{
@@ -129,7 +129,7 @@ export const getStaticProps = async () => {
 
   // Board Members data
 
-  // const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
+  const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
 
   return {
     props: {
@@ -141,7 +141,7 @@ export const getStaticProps = async () => {
       projectsHeaderData,
       cooperationHeaderData,
       projectsData,
-      // boardMembersData,
+      boardMembersData,
     },
   };
 };
