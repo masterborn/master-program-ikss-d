@@ -56,6 +56,7 @@ export const filterData = (response, section, page = null) => {
         phone: fields.phone || "",
         email: fields.email || "",
         linkedinUrl: fields.linkedinUrl || "",
+        order: fields.order ? fields.order : null,
       };
     }
 
