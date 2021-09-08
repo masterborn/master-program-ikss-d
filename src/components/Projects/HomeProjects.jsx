@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
@@ -57,12 +57,13 @@ const CarouselButton = styled(Button)`
   }
 `;
 
-const StyledProjects = ({ projects }) => {
+const StyledProjects = ({ data }) => {
+  const { title, projects } = data;
   const [activeCard, setActiveCard] = useState(0);
 
   return (
     <Wrapper>
-      <h3>Najnowsze projekty</h3>
+      <h3>{title}</h3>
       <Carousel>
         <div
           onClick={() => setActiveCard(0)}
@@ -89,10 +90,7 @@ const StyledProjects = ({ projects }) => {
           <CarouselButton active={activeCard === 2}>{projects[2].title}</CarouselButton>
         </div>
       </Carousel>
-      <ProjectCard
-        projects={projects[activeCard]}
-        isOnHomePage
-      />
+      <ProjectCard projects={projects[activeCard]} isOnHomePage />
       <Button href="/projects" link secondary>
         Zobacz wszystkie projekty
       </Button>
@@ -106,7 +104,10 @@ const HomeProjects = styled(StyledProjects)`
 `;
 
 StyledProjects.propTypes = {
-  projects: PropTypes.instanceOf(Array).isRequired
-}
+  data: PropTypes.shape({
+    title: PropTypes.string,
+    projects: PropTypes.instanceOf(Array),
+  }).isRequired,
+};
 
 export default HomeProjects;

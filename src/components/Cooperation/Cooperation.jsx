@@ -59,33 +59,36 @@ const CooperationWrapper = styled.div`
   }
 `;
 
-const Cooperation = ({ data, cooperationHeader, cooperationText }) => {
-  
-  const renderSponsors = () => data.map((singleSponsorData) => (
-    <CooperationCard
-      key={singleSponsorData.altText}
-      altText={singleSponsorData.altText}
-      linkUrl={singleSponsorData.linkUrl}
-      logo={singleSponsorData.logo}
-    />
-  ));
+const Cooperation = ({ data }) => {
+  const { title, text1, partners } = data;
+
+  const renderSponsors = () =>
+    partners.map((singleSponsorData) => (
+      <CooperationCard
+        key={singleSponsorData.altText}
+        altText={singleSponsorData.altText}
+        linkUrl={singleSponsorData.linkUrl}
+        logo={singleSponsorData.logo}
+      />
+    ));
 
   return (
-  <Wrapper>
-    <Header>
-      <h3>{cooperationHeader}</h3>
-      {cooperationText && documentToReactComponents(cooperationText)}
-    </Header>
-    <CooperationWrapper>
-      {renderSponsors()}
-    </CooperationWrapper>
-  </Wrapper>
-)};
+    <Wrapper>
+      <Header>
+        <h3>{title}</h3>
+        {text1 && documentToReactComponents(text1)}
+      </Header>
+      <CooperationWrapper>{renderSponsors()}</CooperationWrapper>
+    </Wrapper>
+  );
+};
 
 Cooperation.propTypes = {
-  data: PropTypes.instanceOf(Array).isRequired,
-  cooperationHeader: PropTypes.string.isRequired,
-  cooperationText: PropTypes.instanceOf(Object).isRequired,
+  data: PropTypes.shape({
+    partners: PropTypes.instanceOf(Array),
+    title: PropTypes.string.isRequired,
+    text1: PropTypes.instanceOf(Object).isRequired,
+  }).isRequired,
 };
 
 export default Cooperation;

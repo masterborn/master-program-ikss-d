@@ -5,85 +5,76 @@ import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
-import { filterData, filterBasicContentData, filterLogos } from '@root/contentfulDataTransformers/filterData';
+import {
+  filterData,
+  filterBasicContentData,
+  filterLogos,
+  filterSocials,
+} from '@root/contentfulDataTransformers/filterData';
 
-const homePage = ({ heroData, projectsData, socialUrls, valuesHeaderData, cardValues, cooperationHeaderData, partnersData }) => (
+const homePage = ({ heroData, projectsData, socialUrls, valuesData, cooperationData }) => (
   <>
-    <Navbar
-      urls={socialUrls}
-    />
+    <Navbar urls={socialUrls} />
 
-    <HomePageHero
-    data={heroData}
-    />
+    <HomePageHero data={heroData} />
 
-    <Values
-      valuesHeader={valuesHeaderData.title}
-      valuesText={valuesHeaderData.text1}
-      data={cardValues}
-    />
-    <HomeProjects projects={projectsData} />
-    <Cooperation
-      cooperationHeader={cooperationHeaderData.title}
-      cooperationText={cooperationHeaderData.text1}
-      data={partnersData}
-    />
-    <Footer
-      contact
-      urls={socialUrls}
-    />
+    <Values data={valuesData} />
+    <HomeProjects data={projectsData} />
+    <Cooperation data={cooperationData} />
+    <Footer contact urls={socialUrls} />
   </>
 );
 
 export const getStaticProps = async () => {
-
   // Navbar/Footer data
 
   const socials = await ContentfulClient.getBasicContentData('common');
 
-  const socialUrls = {
-    fblink: filterBasicContentData(socials, 'social-facebook').linkUrl,
-    inlink: filterBasicContentData(socials, 'social-instagram').linkUrl,
-    ytlink: filterBasicContentData(socials, 'social-youtube').linkUrl,
-    lnlink: filterBasicContentData(socials, 'social-linkedin').linkUrl,
-  };
+  const socialUrls = filterSocials(socials);
+
   // Hero data
   const basicContent = await ContentfulClient.getBasicContentData('homepage');
-  const heroData = filterBasicContentData(basicContent, 'homepage-top-section');
 
+  const heroData = {
+    ...filterBasicContentData(basicContent, 'homepage-top-section'),
+    socialUrls,
+  };
   // Values data
 
-  const valuesHeaderData = filterBasicContentData(basicContent, 'homepage-values');
-
-  const cardValues = [filterBasicContentData(basicContent, 'homepage-tile-1'), filterBasicContentData(basicContent, 'homepage-tile-2'), filterBasicContentData(basicContent, 'homepage-tile-3')];  
+  const valuesData = {
+    ...filterBasicContentData(basicContent, 'homepage-values'),
+    cards: [
+      filterBasicContentData(basicContent, 'homepage-tile-1'),
+      filterBasicContentData(basicContent, 'homepage-tile-2'),
+      filterBasicContentData(basicContent, 'homepage-tile-3'),
+    ],
+  };
 
   // Projects data
 
-  const projectsHeaderData = filterBasicContentData(basicContent, 'homepage-projects-title');
   const projects = await ContentfulClient.getFieldsData('projects');
-  const projectsData = filterData(projects, 'projects', 'homepage');
+
+  const projectsData = {
+    ...filterBasicContentData(basicContent, 'homepage-projects-title'),
+    projects: filterData(projects, 'projects', 'homepage'),
+  };
 
   // Cooperation data
 
-  const cooperationHeaderData = filterBasicContentData(basicContent, 'homepage-partners-text');
   const partners = await ContentfulClient.getPartnerLogos();
-  const partnersData = filterLogos(partners);
 
-  // Board Members data
-
-  const boardMembersData = await ContentfulClient.getBasicContentData('boardMembers');
+  const cooperationData = {
+    ...filterBasicContentData(basicContent, 'homepage-partners-text'),
+    partners: filterLogos(partners),
+  };
 
   return {
     props: {
       heroData,
       socialUrls,
-      valuesHeaderData,
-      cardValues,
-      projectsHeaderData,
-      cooperationHeaderData,
+      valuesData,
       projectsData,
-      boardMembersData,
-      partnersData
+      cooperationData,
     },
   };
 };

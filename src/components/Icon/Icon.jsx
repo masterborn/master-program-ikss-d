@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import Image from 'next/dist/client/image';
 
 import { getColor, getMedias } from '@styles/utils';
 
-const styledIcon = ({ icon, alt, className }) => <img src={icon} alt={alt} className={className} />;
+const Icon = ({ icon, alt, className, size, color, media }) => (
+  <Wrapper className={className} size={size} color={color} media={media}>
+    <Image src={icon} alt={alt} layout="fill" />
+  </Wrapper>
+);
 
-const Icon = styled(styledIcon)`
+const Wrapper = styled.div`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
 
@@ -23,12 +28,20 @@ const Icon = styled(styledIcon)`
   }
 `;
 
+Icon.defaultProps = {
+  size: '24px',
+  className: null,
+  color: '',
+  media: '24px',
+};
+
 Icon.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.string.isRequired,
   size: PropTypes.string,
   className: PropTypes.string,
   color: PropTypes.string,
   media: PropTypes.string,
+  alt: PropTypes.string.isRequired,
 };
 
 export default Icon;
