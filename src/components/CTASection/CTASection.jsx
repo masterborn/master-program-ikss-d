@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useDispatch } from 'react-redux';
 
 import Button from '@components/Button/Button';
 import { getMedias } from '@styles/utils';
 import { openContactForm } from '@utils/formVisibility';
-import { useDispatch } from 'react-redux';
 
 const CTASection = styled.section`
   --pdg-bottom: 148px;
