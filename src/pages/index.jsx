@@ -9,15 +9,14 @@ import HomeProjects from '@components/Projects/HomeProjects';
 import Layout from '@components/Layouts/Layout';
 import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
 
-const homePage = ({ heroData }) => (
+import getMembers from '../components/lib/cache';
+
+const homePage = ({ heroData, socialUrls }) => (
   <>
     <HomePageHero
       data={{
         ...heroData,
-        facebookLink: 'https://pl-pl.facebook.com',
-        instagramLink: 'https://www.instagram.com',
-        youTubeLink: 'https://www.youtube.com',
-        linkedInLink: 'https://pl.linkedin.com',
+        ...socialUrls,
       }}
     />
     <Values
@@ -117,8 +116,17 @@ export const getStaticProps = async () => {
 
   // Board Members data
 
-  const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
+  ContentfulClient.cache.links = await ContentfulClient.getBasicContentData('common');
 
+  const socialUrls = {
+    fblink: filterBasicContentData(ContentfulClient.cache.links, 'social-facebook').linkUrl,
+    inlink: filterBasicContentData(ContentfulClient.cache.links, 'social-instagram').linkUrl,
+    ytlink: filterBasicContentData(ContentfulClient.cache.links, 'social-youtube').linkUrl,
+    lnlink: filterBasicContentData(ContentfulClient.cache.links, 'social-linkedin').linkUrl,
+  };
+
+  // const boardMembersData = await ContentfulClient.getFilteredFieldsData('boardMembers');
+  getMembers();
   return {
     props: {
       heroData,
@@ -129,13 +137,14 @@ export const getStaticProps = async () => {
       projectsHeaderData,
       cooperationHeaderData,
       projectsData,
-      boardMembersData,
+      // boardMembersData,
+      socialUrls,
     },
   };
 };
 
-homePage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+homePage.getLayout = function getLayout(page, props) {
+  return <Layout pageProps={props}>{page}</Layout>;
 };
 
 export default homePage;

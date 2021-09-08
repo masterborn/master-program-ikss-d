@@ -3,27 +3,16 @@ import PropTypes from 'prop-types';
 import Navbar from '@components/Navbar/Navbar';
 import Footer from '@components/Footer/Footer';
 
-const Layout = ({ children }) => (
-  <>
-    <Navbar
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
-    {children}
-    <Footer
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
-  </>
-);
+const Layout = ({ children, pageProps }) => {
+  const { socialUrls } = pageProps;
+  return (
+    <>
+      <Navbar urls={socialUrls} />
+      {children}
+      <Footer urls={socialUrls} />
+    </>
+  );
+};
 
 Layout.defaultProps = {
   children: null,
@@ -31,6 +20,9 @@ Layout.defaultProps = {
 
 Layout.propTypes = {
   children: PropTypes.node,
+  pageProps: PropTypes.shape({
+    socialUrls: PropTypes.shape({}),
+  }).isRequired,
 };
 
 export default Layout;

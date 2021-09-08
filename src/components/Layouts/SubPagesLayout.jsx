@@ -8,7 +8,7 @@ const SubPagesLayout = ({ children, pageProps }) => {
   const { SubPageHero, CTASection } = pageProps;
 
   return (
-    <Layout>
+    <Layout pageProps={pageProps}>
       <SubpagesHero data={SubPageHero} />
       {children}
       <ContactSection data={CTASection} />

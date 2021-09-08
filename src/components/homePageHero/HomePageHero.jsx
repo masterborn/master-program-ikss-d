@@ -29,10 +29,10 @@ const HomePageHero = ({ data }) => {
         {imageOrVideoBlock}
       </Wrapper>
       <HeroSM
-        facebookLink={data.facebookLink}
-        instagramLink={data.instagramLink}
-        youTubeLink={data.youTubeLink}
-        linkedInLink={data.linkedInLink}
+        facebookLink={data.fblink}
+        instagramLink={data.inlink}
+        youTubeLink={data.ytlink}
+        linkedInLink={data.lnlink}
       />
     </HeroWrapper>
   );
@@ -80,10 +80,10 @@ HomePageHero.propTypes = {
     title: PropTypes.string.isRequired,
     link_url: PropTypes.string,
     link_caption: PropTypes.string,
-    facebookLink: PropTypes.string.isRequired,
-    instagramLink: PropTypes.string.isRequired,
-    youTubeLink: PropTypes.string.isRequired,
-    linkedInLink: PropTypes.string.isRequired,
+    fblink: PropTypes.string.isRequired,
+    inlink: PropTypes.string.isRequired,
+    ytlink: PropTypes.string.isRequired,
+    lnlink: PropTypes.string.isRequired,
   }).isRequired,
 };
 
