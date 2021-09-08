@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import Button from '@components/Button/Button';
 import { getColor, getMedias } from '@styles/utils';
+import { openContactForm } from '@utils/formVisibility';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -47,14 +49,18 @@ const Wrapper = styled.div`
   }
 `;
 
-const ContactBanner = ({ contactBanner }) => (
-  <Wrapper>
-    <h3>{contactBanner.title}</h3>
-    <Button>
-      <span>{contactBanner.linkCaption}</span>
-    </Button>
-  </Wrapper>
-);
+const ContactBanner = ({ contactBanner }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <Wrapper>
+      <h3>{contactBanner.title}</h3>
+      <Button onClick={() => openContactForm(dispatch)}>
+        <span>{contactBanner.linkCaption}</span>
+      </Button>
+    </Wrapper>
+  );
+};
 
 export default ContactBanner;
 

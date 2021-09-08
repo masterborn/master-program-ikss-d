@@ -92,7 +92,7 @@ const Modal = () => {
           }}
         >
           <GlobalStyles />
-          <Backdrop onClick={closeModal} onKeyUp={closeModal} />
+          <Backdrop />
           <ModalWrapper
             initial={{
               y: -1000,
@@ -106,6 +106,8 @@ const Modal = () => {
             exit={{
               y: -1000,
             }}
+            onClick={closeModal}
+            onKeyUp={closeModal}
           >
             <ModalForm modal />
           </ModalWrapper>

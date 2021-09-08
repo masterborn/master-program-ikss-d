@@ -10,7 +10,7 @@ import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
 import NavLink from '@components/Navbar/NavLink';
-import { openContactForm } from '@utils/formVisibility';
+import { openContactFormNavbar } from '@utils/formVisibility';
 import Modal from '@components/ContactForm/Modal';
 import Portal from '@hoc/Portal';
 
@@ -192,7 +192,7 @@ const Navbar = ({ urls }) => {
           <span />
         </Hamburger>
 
-        <Button as={ContactButton} onClick={() => openContactForm(router, dispatch)}>
+        <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
           Skontaktuj się
         </Button>
 

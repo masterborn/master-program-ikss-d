@@ -52,7 +52,7 @@ export const filterData = (response, section, page = null) => {
       tempObject = {
         imgSrc: imageUrl ? `https:${imageUrl}` : '',
         name: fields.name,
-        role: fields.role || 'Członek Zarządu',
+        role: fields.role,
         phone: fields.phone || '',
         email: fields.email || '',
         linkedinUrl: fields.linkedinUrl || '',
@@ -95,6 +95,12 @@ export const filterLogos = (data) =>
       showOnHomepage: item.fields.showOnHomepage || false,
     }))
     .sort((a, b) => b.order - a.order);
+
+export const filterHomePageLogos = (data) => {
+  const sortedLogos = filterLogos(data);
+
+  return sortedLogos.filter((logo) => logo.showOnHomepage);
+};
 
 export const filterSocials = (data) => ({
   fblink: filterBasicContentData(data, 'social-facebook').linkUrl,

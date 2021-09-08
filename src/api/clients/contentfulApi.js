@@ -11,7 +11,7 @@ class ContentfulClient {
     return this.getAssetsPrivate(page)
       .then((res) => res)
       .catch((err) => {
-        throw err;
+        throw new Error(err);
       });
   }
 

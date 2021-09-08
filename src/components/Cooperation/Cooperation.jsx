@@ -55,7 +55,7 @@ const CooperationWrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    gap: 1.5rem 2rem;
+    gap: 1.5rem;
   }
 `;
 

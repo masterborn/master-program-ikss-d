@@ -8,16 +8,14 @@ import HomeProjects from '@components/Projects/HomeProjects';
 import {
   filterData,
   filterBasicContentData,
-  filterLogos,
   filterSocials,
+  filterHomePageLogos,
 } from '@root/contentfulDataTransformers/filterData';
 
 const homePage = ({ heroData, projectsData, socialUrls, valuesData, cooperationData }) => (
   <>
     <Navbar urls={socialUrls} />
-
     <HomePageHero data={heroData} />
-
     <Values data={valuesData} />
     <HomeProjects data={projectsData} />
     <Cooperation data={cooperationData} />
@@ -65,7 +63,7 @@ export const getStaticProps = async () => {
 
   const cooperationData = {
     ...filterBasicContentData(basicContent, 'homepage-partners-text'),
-    partners: filterLogos(partners),
+    partners: filterHomePageLogos(partners),
   };
 
   return {

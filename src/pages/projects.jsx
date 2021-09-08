@@ -16,8 +16,8 @@ const projectsPage = ({ projectHero, projectsData, socialUrls, CTASection }) => 
     <SubpagesHero data={projectHero} />
 
     <MainProjects data={projectsData} />
-    <Footer urls={socialUrls} />
     <ContactSection data={CTASection} />
+    <Footer urls={socialUrls} />
   </>
 );
 

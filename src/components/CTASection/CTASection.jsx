@@ -4,6 +4,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import Button from '@components/Button/Button';
 import { getMedias } from '@styles/utils';
+import { openContactForm } from '@utils/formVisibility';
+import { useDispatch } from 'react-redux';
 
 const CTASection = styled.section`
   --pdg-bottom: 148px;
@@ -44,13 +46,17 @@ const CTASection = styled.section`
   }
 `;
 
-const ContactSection = ({ data }) => (
-  <CTASection>
-    <h3>{data.title}</h3>
-    {documentToReactComponents(data.text1)}
-    <Button>{data.linkCaption}</Button>
-  </CTASection>
-);
+const ContactSection = ({ data }) => {
+  const dispatch = useDispatch();
+
+  return (
+    <CTASection>
+      <h3>{data.title}</h3>
+      {documentToReactComponents(data.text1)}
+      <Button onClick={() => openContactForm(dispatch)}>{data.linkCaption}</Button>
+    </CTASection>
+  );
+};
 
 ContactSection.propTypes = {
   data: PropTypes.instanceOf(Object).isRequired,
