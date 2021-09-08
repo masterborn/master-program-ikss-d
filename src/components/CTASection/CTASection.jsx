@@ -53,11 +53,7 @@ const ContactSection = ({ data }) => (
 );
 
 ContactSection.propTypes = {
-  data: PropTypes.shape({
-    title: PropTypes.string,
-    text1: PropTypes.shape({}),
-    linkCaption: PropTypes.string,
-  }).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default ContactSection;

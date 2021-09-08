@@ -84,11 +84,7 @@ const Cooperation = ({ data }) => {
 };
 
 Cooperation.propTypes = {
-  data: PropTypes.shape({
-    partners: PropTypes.instanceOf(Array),
-    title: PropTypes.string.isRequired,
-    text1: PropTypes.instanceOf(Object).isRequired,
-  }).isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Cooperation;
