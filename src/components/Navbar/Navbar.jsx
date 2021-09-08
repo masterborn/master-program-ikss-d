@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { animateScroll as scroll } from 'react-scroll';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
@@ -10,13 +11,15 @@ import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
 import NavLink from '@components/Navbar/NavLink';
 import { openContactForm } from '@utils/formVisibility';
+import Modal from '@components/ContactForm/Modal';
+import Portal from '@hoc/Portal';
 
 import MobileMenu from './MobileMenu';
 
 const Nav = styled.div`
   padding: 1.25rem 7.5rem;
   display: flex;
-  z-index: 9999;
+  z-index: 2;
   align-items: center;
   background: ${getColor('white')};
   box-shadow: 0 4px 16px rgba(97, 121, 139, 0.1);
@@ -118,6 +121,7 @@ const Navbar = ({ urls }) => {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const areSmAlwaysDisabled = router.pathname === '/404';
 
@@ -188,9 +192,13 @@ const Navbar = ({ urls }) => {
           <span />
         </Hamburger>
 
-        <Button as={ContactButton} onClick={() => openContactForm(router)}>
+        <Button as={ContactButton} onClick={() => openContactForm(router, dispatch)}>
           Skontaktuj się
         </Button>
+
+        <Portal>
+          <Modal />
+        </Portal>
       </Nav>
     </>
   );

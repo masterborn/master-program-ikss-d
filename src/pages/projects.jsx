@@ -3,7 +3,7 @@ import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
 import ContactSection from '@components/CTASection/CTASection';
 import ContentfulClient from '@api/clients/contentfulApi';
-import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
+import { filterBasicContentData } from '@contentfulDataTransformers/filterData';
 
 const projectsPage = ({ projectHero, projects, CTASection }) => (
   <>
@@ -28,7 +28,7 @@ export const getStaticProps = async () => {
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
   const projects = await ContentfulClient.getFilteredFieldsData('projects');
   const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
-  
+
   return {
     props: {
       projectHero,

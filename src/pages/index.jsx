@@ -8,7 +8,7 @@ import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
 import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
-import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
+import { filterBasicContentData } from '@contentfulDataTransformers/filterData';
 
 const homePage = ({ heroData, projectsData }) => (
   <>
