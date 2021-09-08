@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Input from '@components/ContactForm/StyledInput';
 import Checkbox from '@components/ContactForm/CheckboxField';
@@ -12,6 +13,8 @@ import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { validateInput, validateCheckbox } from '@utils/validation';
+import { contactFormActions } from '@store/formSlice';
+import { modalActions } from '@store/modalSlice';
 
 const Wrapper = styled.div`
   position: relative;
@@ -139,19 +142,13 @@ const StyledCloseIcon = styled(IconSM)`
 
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [buttonStatus, setButtonStatus] = useState('primary');
-  const [formValues, setFormValues] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    topic: '',
-    content: '',
-    conditions: false,
-  });
+  const isFormValid = useSelector((state) => state.contactForm.isFormValid);
+  const buttonStatus = useSelector((state) => state.contactForm.buttonStatus);
+  const formValues = useSelector((state) => state.contactForm.formValues);
+  const dispatch = useDispatch();
 
-  const CloseModalButton = (
-    <button type="button">
+  const closeModalButton = (
+    <button type="button" onClick={() => dispatch(modalActions.closeModal())}>
       <StyledCloseIcon icon={CloseIcon} media="16px" />
     </button>
   );
@@ -162,20 +159,13 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       return;
     }
 
-    setButtonStatus('loading');
+    dispatch(contactFormActions.setButtonToLoading());
 
     setTimeout(() => {
-      setButtonStatus('error');
+      dispatch(contactFormActions.setButtonToError());
     }, 3000);
 
-    setFormValues({
-      name: '',
-      surname: '',
-      email: '',
-      topic: '',
-      content: '',
-      conditions: false,
-    });
+    dispatch(contactFormActions.clearFormFields());
 
     event.preventDefault();
   };
@@ -184,27 +174,28 @@ const ContactForm = ({ modal, toolTipText, className }) => {
     const inputVal = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     const { name } = event.target;
 
-    setFormValues({
-      ...formValues,
-      [name]: inputVal,
-    });
+    dispatch(
+      contactFormActions.updateFormFields({
+        [name]: inputVal,
+      }),
+    );
   };
 
   const onValidateInput = (event) => {
     getDataFromInputs(event);
 
-    return validateInput(event, setIsFormValid);
+    return validateInput(event, dispatch);
   };
 
   const onValidateCheckbox = (event) => {
     getDataFromInputs(event);
 
-    return validateCheckbox(event, setIsFormValid);
+    return validateCheckbox(event, dispatch);
   };
 
   return (
-    <Wrapper className={className}>
-      {modal && CloseModalButton}
+    <Wrapper className={className} name="contactForm">
+      {modal && closeModalButton}
 
       <Header>
         <h3>Skontaktuj się z nami</h3>

@@ -70,6 +70,8 @@ const MainProjects = ({ data }) => {
 
   const [activeYear, setActiveYear] = useState(buttonYears[2]);
 
+  const tempData = projects.filter((item) => item.date.split('-')[0] === activeYear);
+
   const renderProjectCards = (afterBanner = false) => {
     const filteredProjects = projects.filter((item) => item.date.split('-')[0] === activeYear);
 
@@ -84,31 +86,30 @@ const MainProjects = ({ data }) => {
     );
   };
 
-  const renderContact = () =>
-    projects.filter((item) => item.date.split('-')[0] === activeYear).length >= 7 && (
-      <>
-        <ContactBanner contactBanner={contactBanner} />
-        <GridWrapper>{renderProjectCards(true)}</GridWrapper>
-      </>
-    );
+  const renderContact = tempData.length >= 7 && (
+    <>
+      <ContactBanner contactBanner={contactBanner} />
+      <GridWrapper>{renderProjectCards(true)}</GridWrapper>
+    </>
+  );
 
   return (
     <>
       <Carousel>
-        {new Array(3).fill(0).map((_, index) => (
+        {buttonYears.reverse().map((button) => (
           <CarouselButton
-            key={buttonYears[index]}
-            active={activeYear === buttonYears[2 - index]}
-            onClick={() => setActiveYear(buttonYears[2 - index])}
+            key={button}
+            active={activeYear === button}
+            onClick={() => setActiveYear(button)}
           >
-            {buttonYears[2 - index]}
+            {button}
           </CarouselButton>
         ))}
       </Carousel>
       <FlexWrapper>
         <ProjectsWrapper>
           <GridWrapper>{renderProjectCards()}</GridWrapper>
-          {renderContact()}
+          {renderContact}
         </ProjectsWrapper>
       </FlexWrapper>
     </>

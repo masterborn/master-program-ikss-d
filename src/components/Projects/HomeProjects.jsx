@@ -65,30 +65,27 @@ const StyledProjects = ({ data }) => {
     <Wrapper>
       <h3>{title}</h3>
       <Carousel>
-        <div
+        <CarouselButton
+          active={activeCard === 0}
           onClick={() => setActiveCard(0)}
           onKeyUp={() => setActiveCard(0)}
-          role="button"
-          tabIndex={0}
         >
-          <CarouselButton active={activeCard === 0}>{projects[0].title}</CarouselButton>
-        </div>
-        <div
+          {projects[0].title}
+        </CarouselButton>
+        <CarouselButton
+          active={activeCard === 1}
           onClick={() => setActiveCard(1)}
           onKeyUp={() => setActiveCard(1)}
-          role="button"
-          tabIndex={-1}
         >
-          <CarouselButton active={activeCard === 1}>{projects[1].title}</CarouselButton>
-        </div>
-        <div
+          {projects[1].title}
+        </CarouselButton>
+        <CarouselButton
+          active={activeCard === 2}
           onClick={() => setActiveCard(2)}
           onKeyUp={() => setActiveCard(2)}
-          role="button"
-          tabIndex={-1}
         >
-          <CarouselButton active={activeCard === 2}>{projects[2].title}</CarouselButton>
-        </div>
+          {projects[2].title}
+        </CarouselButton>
       </Carousel>
       <ProjectCard projects={projects[activeCard]} isOnHomePage />
       <Button href="/projects" link secondary>

@@ -26,11 +26,11 @@ class ContentfulClient {
 
   getPartnerLogos() {
     return this.api
-    .get('', { params: { content_type: 'partnerLogos'} })
-    .then((res) => getAssets(res.data))
-    .catch((err) => {
-      throw err;
-    })
+      .get('', { params: { content_type: 'partnerLogos' } })
+      .then((res) => getAssets(res.data))
+      .catch((err) => {
+        throw err;
+      });
   }
 
   getAssetsPrivate(page) {
