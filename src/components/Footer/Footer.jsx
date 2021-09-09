@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
 
 import Heart from '@assets/Heart.svg';
 import ScrollButton from '@components/Footer/ScrollButton';
