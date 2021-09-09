@@ -6,9 +6,9 @@ import { useRouter } from 'next/router';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
-import Icon from '@components/Icon/Icon';
+import IconSM from '@components/Icon/IconSM';
 import Button from '@components/Button/Button';
-import { openContactForm } from '@utils/formVisibility';
+import { openContactFormNavbar } from '@utils/formVisibility';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
@@ -97,7 +97,7 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
 
   const handleMobileContact = () => {
     closeMobileMenu();
-    openContactForm(router, dispatch);
+    openContactFormNavbar(router, dispatch);
   };
 
   useEffect(() => {
@@ -119,7 +119,7 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
         <Wrapper>
           <Nav>
             <CloseButton type="button" onClick={handleClick}>
-              <Icon icon={CloseIcon} color="steel" />
+              <IconSM icon={CloseIcon} color="steel" />
             </CloseButton>
 
             <LinksWrapper>

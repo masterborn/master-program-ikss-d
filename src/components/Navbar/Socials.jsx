@@ -9,7 +9,7 @@ import LinkedInIconFooter from '@assets/icons/linkedIn-icon.svg';
 import FacebookIconFooter from '@assets/icons/facebook-icon.svg';
 import InstagramIconFooter from '@assets/icons/instagram-icon.svg';
 import YouTubeIconFooter from '@assets/icons/youTube-icon.svg';
-import Icon from '@components/Icon/Icon';
+import IconSM from '@components/Icon/IconSM';
 
 const SocialsWrapper = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const SocialsWrapper = styled.div`
 
 const Link = ({ url, icon, size }) => (
   <a href={url}>
-    <Icon icon={icon} size={size} />
+    <IconSM icon={icon} size={size} />
   </a>
 );
 

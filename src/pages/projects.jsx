@@ -3,36 +3,46 @@ import MainProjects from '@components/Projects/MainProjects';
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
 import ContactSection from '@components/CTASection/CTASection';
 import ContentfulClient from '@api/clients/contentfulApi';
-import { filterBasicContentData } from '@contentfulDataTransformers/filterData';
+import {
+  filterData,
+  filterBasicContentData,
+  filterSocials,
+} from '@root/contentfulDataTransformers/filterData';
+import Footer from '@components/Footer/Footer';
 
-const projectsPage = ({ projectHero, projects, CTASection }) => (
+const projectsPage = ({ projectHero, projectsData, socialUrls, CTASection }) => (
   <>
-    <Navbar
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
+    <Navbar urls={socialUrls} />
     <SubpagesHero data={projectHero} />
-    <MainProjects projects={projects} />
 
+    <MainProjects data={projectsData} />
     <ContactSection data={CTASection} />
+    <Footer urls={socialUrls} />
   </>
 );
 
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
 
+  const socials = await ContentfulClient.getBasicContentData('common');
+
+  const socialUrls = filterSocials(socials);
+
   const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
-  const projects = await ContentfulClient.getFilteredFieldsData('projects');
+  const projects = await ContentfulClient.getFieldsData('projects');
+
+  const projectsData = {
+    projects: filterData(projects, 'projects'),
+    contactBanner: filterBasicContentData(basicContent, 'projects-middle-cta-text'),
+  };
+
   const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
 
   return {
     props: {
       projectHero,
-      projects,
+      projectsData,
+      socialUrls,
       CTASection,
     },
   };
