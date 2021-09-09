@@ -19,24 +19,20 @@ const Wrapper = styled(motion.section)`
 
 const Backdrop = styled(motion.div)`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   left: 0;
   top: 0;
 `;
 
-const ModalWrapper = styled(motion.div)`
-  height: max-content;
-  position: absolute;
-  top: 10px;
-  right: 0;
-  left: 0;
-  margin: auto;
-`;
-
 const ModalForm = styled(ContactForm)`
   padding: 40px 80px;
   overflow: hidden;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  left: 0;
+  margin: auto;
 
   @media (max-width: 1037px) {
     width: 90%;
@@ -92,8 +88,8 @@ const Modal = () => {
           }}
         >
           <GlobalStyles />
-          <Backdrop />
-          <ModalWrapper
+          <Backdrop onClick={closeModal} onKeyUp={closeModal} />
+          <motion.div
             initial={{
               y: -1000,
             }}
@@ -106,11 +102,9 @@ const Modal = () => {
             exit={{
               y: -1000,
             }}
-            onClick={closeModal}
-            onKeyUp={closeModal}
           >
             <ModalForm modal />
-          </ModalWrapper>
+          </motion.div>
         </Wrapper>
       )}
     </AnimatePresence>
