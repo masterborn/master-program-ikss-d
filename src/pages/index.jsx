@@ -1,139 +1,73 @@
 import HomePageHero from '@components/homePageHero/HomePageHero';
-import ValuesIcon1 from '@assets/values-1.svg';
-import ValuesIcon2 from '@assets/values-2.svg';
-import ValuesIcon3 from '@assets/values-3.svg';
 import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
 import HomeProjects from '@components/Projects/HomeProjects';
 import Layout from '@components/Layouts/Layout';
-import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
+import {
+  filterData,
+  filterBasicContentData,
+  filterSocials,
+  filterHomePageLogos,
+} from '@root/contentfulDataTransformers/filterData';
 
-const homePage = ({ heroData, socialUrls }) => (
+const homePage = ({ heroData, projectsData, valuesData, cooperationData }) => (
   <>
-    <HomePageHero
-      data={{
-        ...heroData,
-        ...socialUrls,
-      }}
-    />
-    <Values
-      valuesHeader="Wyróżniki, wartości, X-factory organizacji"
-      valuesText="Nie koniecznie musimy tu dawać tekst, ale jak jest potrzeba i przestrzeń można rozwinąć
-      nagłówek."
-      data={[
-        {
-          icon: ValuesIcon1,
-          title: 'Największa organizacja kulturalno-sportowa',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
-        },
-        {
-          icon: ValuesIcon2,
-          title: 'O różnorodności projektów, że każdy znajdzie coś dla siebie',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
-        },
-        {
-          icon: ValuesIcon3,
-          title: 'Coś o tym, że łączycie rozwój z zabawą i poznawaniem nowych ludzi',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea tellus nullam vulputate sem suspendisse pellentesque ullamcorper.',
-        },
-      ]}
-    />
-    <HomeProjects />
-    <Cooperation
-      cooperationHeader="Współpracują z nami"
-      cooperationText="Na pewno powinno się pojawić tu logo UE na pierwszym miejscu. Kilka słów o tym, co można zyskać współpracując z wami jako partnerzy. Jakie to niesie korzyści PR’owe etc."
-      data={[
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-        {
-          logo: 'https://www-static.ue.wroc.pl/img/logo.png',
-          linkUrl: 'https://www.ue.wroc.pl/',
-          altText: 'Uniwersytet Ekonomiczny we Wrocławiu',
-        },
-      ]}
-    />
+    <HomePageHero data={heroData} />
+    <Values data={valuesData} />
+    <HomeProjects data={projectsData} />
+    <Cooperation data={cooperationData} />
   </>
 );
 
 export const getStaticProps = async () => {
+  const socials = await ContentfulClient.getBasicContentData('common');
+
+  const socialsUrls = filterSocials(socials);
+
   // Hero data
   const basicContent = await ContentfulClient.getBasicContentData('homepage');
 
-  const heroData = filterBasicContentData(basicContent, 'homepage-top-section');
-
+  const heroData = {
+    ...filterBasicContentData(basicContent, 'homepage-top-section'),
+    socialsUrls,
+  };
   // Values data
 
-  const valuesHeaderData = filterBasicContentData(basicContent, 'homepage-values');
-
-  const value1 = filterBasicContentData(basicContent, 'homepage-tile-1');
-  const value2 = filterBasicContentData(basicContent, 'homepage-tile-2');
-  const value3 = filterBasicContentData(basicContent, 'homepage-tile-3');
+  const valuesData = {
+    ...filterBasicContentData(basicContent, 'homepage-values'),
+    cards: [
+      filterBasicContentData(basicContent, 'homepage-tile-1'),
+      filterBasicContentData(basicContent, 'homepage-tile-2'),
+      filterBasicContentData(basicContent, 'homepage-tile-3'),
+    ],
+  };
 
   // Projects data
 
-  const projectsHeaderData = filterBasicContentData(basicContent, 'homepage-projects-title');
-  const projectsData = await ContentfulClient.getFilteredFieldsData('projects', 'homepage');
+  const projects = await ContentfulClient.getFieldsData('projects');
+
+  const projectsData = {
+    ...filterBasicContentData(basicContent, 'homepage-projects-title'),
+    projects: filterData(projects, 'projects', 'homepage'),
+  };
 
   // Cooperation data
 
-  const cooperationHeaderData = filterBasicContentData(basicContent, 'homepage-partners-text');
+  const partners = await ContentfulClient.getPartnerLogos();
 
-  // Board Members data
-
-  const socials = await ContentfulClient.getBasicContentData('common');
-
-  const socialUrls = {
-    fblink: filterBasicContentData(socials, 'social-facebook').linkUrl,
-    inlink: filterBasicContentData(socials, 'social-instagram').linkUrl,
-    ytlink: filterBasicContentData(socials, 'social-youtube').linkUrl,
-    lnlink: filterBasicContentData(socials, 'social-linkedin').linkUrl,
+  const cooperationData = {
+    ...filterBasicContentData(basicContent, 'homepage-partners-text'),
+    partners: filterHomePageLogos(partners),
   };
 
   return {
     props: {
+      socialsUrls,
       heroData,
-      valuesHeaderData,
-      valuesFirstCardData: value1,
-      valuesSecondCardData: value2,
-      valuesThirdCardData: value3,
-      projectsHeaderData,
-      cooperationHeaderData,
+      valuesData,
       projectsData,
-      socialUrls,
+      cooperationData,
     },
   };
 };

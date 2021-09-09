@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import { filterData } from '@root/contentfulDataTransformers/filterData';
 import getAssets from '@root/contentfulDataTransformers/getAssets';
 
 class ContentfulClient {
@@ -12,14 +11,23 @@ class ContentfulClient {
     return this.getAssetsPrivate(page)
       .then((res) => res)
       .catch((err) => {
+        throw new Error(err);
+      });
+  }
+
+  getFieldsData(section = 'projects') {
+    return this.api
+      .get('', { params: { content_type: section, select: 'fields' } })
+      .then((res) => res.data)
+      .catch((err) => {
         throw err;
       });
   }
 
-  getFilteredFieldsData(section = 'projects', page = null) {
+  getPartnerLogos() {
     return this.api
-      .get('', { params: { content_type: section, select: 'fields' } })
-      .then((res) => filterData(res.data, section, page))
+      .get('', { params: { content_type: 'partnerLogos' } })
+      .then((res) => getAssets(res.data))
       .catch((err) => {
         throw err;
       });

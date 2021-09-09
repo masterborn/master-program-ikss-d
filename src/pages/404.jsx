@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 import Navbar from '@components/Navbar/Navbar';
+import ContentfulClient from '@api/clients/contentfulApi';
 import Logo404part1 from '@assets/404part1.svg';
 import Logo404part2 from '@assets/404part2.svg';
 import Button from '@components/Button/Button';
 import { getMedias } from '@styles/utils';
+import { filterSocials } from '@root/contentfulDataTransformers/filterData';
 
 const Wrapper = styled.section`
   display: flex;
@@ -84,16 +86,9 @@ const StyledLogoPart2 = styled(Logo404part2)`
   transform: translate(-50%, -50%);
 `;
 
-const errorPage = () => (
+const errorPage = ({ socialUrls }) => (
   <>
-    <Navbar
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
+    <Navbar urls={socialUrls} />
     <Wrapper>
       <div>
         <StyledLogoPart1 />
@@ -110,5 +105,17 @@ const errorPage = () => (
     </Wrapper>
   </>
 );
+
+export const getStaticProps = async () => {
+  const socials = await ContentfulClient.getBasicContentData('common');
+
+  const socialUrls = filterSocials(socials);
+
+  return {
+    props: {
+      socialUrls,
+    },
+  };
+};
 
 export default errorPage;

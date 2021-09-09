@@ -1,22 +1,25 @@
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
 import NavLink from '@components/Navbar/NavLink';
-import { openContactForm } from '@utils/formVisibility';
+import { openContactFormNavbar } from '@utils/formVisibility';
+import Modal from '@components/ContactForm/Modal';
+import Portal from '@hoc/Portal';
 
 import MobileMenu from './MobileMenu';
 
 const Nav = styled.nav`
   padding: 1.25rem 7.5rem;
   display: flex;
-  z-index: 9999;
+  z-index: 2;
   align-items: center;
   background: ${getColor('white')};
   box-shadow: 0 4px 16px rgba(97, 121, 139, 0.1);
@@ -24,6 +27,10 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   right: 0;
+
+  & button {
+    cursor: pointer;
+  }
 
   @media (max-width: ${getMedias('desktop')}) {
     padding: 1rem 1.25rem;
@@ -114,6 +121,7 @@ const Navbar = ({ urls }) => {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const areSmAlwaysDisabled = router.pathname === '/404';
 
@@ -142,16 +150,22 @@ const Navbar = ({ urls }) => {
     };
   }, [areSmAlwaysDisabled]);
 
+  const scrollToTopOnClick = () => {
+    if (router.pathname === '/') {
+      scroll.scrollToTop();
+    } else {
+      router.push('/');
+    }
+  };
+
   return (
     <>
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
-        <Link href="/">
-          <a>
-            <Logo />
-          </a>
-        </Link>
+        <button type="button" onClick={scrollToTopOnClick}>
+          <Logo />
+        </button>
 
         <Menu>
           <MenuLink url="/" linkLabel="Strona główna" />
@@ -178,9 +192,13 @@ const Navbar = ({ urls }) => {
           <span />
         </Hamburger>
 
-        <Button as={ContactButton} onClick={() => openContactForm(router)}>
+        <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
           Skontaktuj się
         </Button>
+
+        <Portal>
+          <Modal />
+        </Portal>
       </Nav>
     </>
   );

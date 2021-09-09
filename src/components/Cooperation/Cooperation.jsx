@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
 import CooperationCard from '@components/Cooperation/CooperationCard';
@@ -54,33 +55,36 @@ const CooperationWrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    gap: 1.5rem 2rem;
+    gap: 1.5rem;
   }
 `;
 
-const Cooperation = ({ data, cooperationHeader, cooperationText }) => (
-  <Wrapper>
-    <Header>
-      <h3>{cooperationHeader}</h3>
-      {cooperationText && <p>{cooperationText}</p>}
-    </Header>
-    <CooperationWrapper>
-      {data.map((singleSponsorData) => (
-        <CooperationCard
-          key={singleSponsorData.altText}
-          altText={singleSponsorData.altText}
-          linkUrl={singleSponsorData.linkUrl}
-          logo={singleSponsorData.logo}
-        />
-      ))}
-    </CooperationWrapper>
-  </Wrapper>
-);
+const Cooperation = ({ data }) => {
+  const { title, text1, partners } = data;
+
+  const renderSponsors = () =>
+    partners.map((singleSponsorData) => (
+      <CooperationCard
+        key={singleSponsorData.altText}
+        altText={singleSponsorData.altText}
+        linkUrl={singleSponsorData.linkUrl}
+        logo={singleSponsorData.logo}
+      />
+    ));
+
+  return (
+    <Wrapper>
+      <Header>
+        <h3>{title}</h3>
+        {text1 && documentToReactComponents(text1)}
+      </Header>
+      <CooperationWrapper>{renderSponsors()}</CooperationWrapper>
+    </Wrapper>
+  );
+};
 
 Cooperation.propTypes = {
-  data: PropTypes.instanceOf(Array).isRequired,
-  cooperationHeader: PropTypes.string.isRequired,
-  cooperationText: PropTypes.string.isRequired,
+  data: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Cooperation;

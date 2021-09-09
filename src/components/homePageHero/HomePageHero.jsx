@@ -8,32 +8,25 @@ import HomePageHeroVideo from '@components/homePageHero/HomePageHeroVideo';
 import { getColor, getMedias } from '@styles/utils';
 
 const HomePageHero = ({ data }) => {
+  const { image1, title, text1, socialUrls } = data;
+
   let imageOrVideoBlock;
 
-  if (data.image1.contentType && data.image1.contentType === 'video') {
-    imageOrVideoBlock = (
-      <HomePageHeroVideo videoSrc={data.image1.url} videoTitle={data.image1.title} />
-    );
+  if (image1.contentType && image1.contentType === 'video') {
+    imageOrVideoBlock = <HomePageHeroVideo videoSrc={image1.url} videoTitle={image1.title} />;
   }
 
-  if (data.image1.url && data.image1.contentType === 'image') {
-    imageOrVideoBlock = (
-      <HomePageHeroImage imageSrc={data.image1.url} imageAlt={data.image1.title} />
-    );
+  if (image1.url && image1.contentType === 'image') {
+    imageOrVideoBlock = <HomePageHeroImage imageSrc={image1.url} imageAlt={image1.title} />;
   }
 
   return (
     <HeroWrapper>
       <Wrapper>
-        <HomePageHeroText headerText={data.title} smallText={data.text1} />
+        <HomePageHeroText headerText={title} smallText={text1} />
         {imageOrVideoBlock}
       </Wrapper>
-      <HeroSM
-        facebookLink={data.fblink}
-        instagramLink={data.inlink}
-        youTubeLink={data.ytlink}
-        linkedInLink={data.lnlink}
-      />
+      <HeroSM socialUrls={socialUrls} />
     </HeroWrapper>
   );
 };
@@ -80,10 +73,12 @@ HomePageHero.propTypes = {
     title: PropTypes.string.isRequired,
     link_url: PropTypes.string,
     link_caption: PropTypes.string,
-    fblink: PropTypes.string.isRequired,
-    inlink: PropTypes.string.isRequired,
-    ytlink: PropTypes.string.isRequired,
-    lnlink: PropTypes.string.isRequired,
+    socialUrls: PropTypes.shape({
+      fblink: PropTypes.string,
+      inlink: PropTypes.string,
+      ytlink: PropTypes.string,
+      lnlink: PropTypes.string,
+    }),
   }).isRequired,
 };
 
