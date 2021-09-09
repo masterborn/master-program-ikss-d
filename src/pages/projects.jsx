@@ -29,7 +29,6 @@ export const getStaticProps = async () => {
     contactBanner: filterBasicContentData(basicContent, 'projects-middle-cta-text'),
   };
 
-  console.log(projectsData);
   const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
 
   return {
