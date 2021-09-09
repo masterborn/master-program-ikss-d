@@ -110,7 +110,6 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
       setIsInvalid(info.invalid);
 
       if (isToolTipShown && info.message === '') setIsToolTipShown(false);
-      console.log('validated');
     }
   }, [dispatch, isFormChanged, isToolTipShown, name, value]);
 
