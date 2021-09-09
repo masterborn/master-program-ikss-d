@@ -25,7 +25,11 @@ const Wrapper = styled.footer`
     `};
 
   @media (max-width: ${getMedias('mobile')}) {
-    height: ${(props) => (props.contact ? '780px' : '566px')};
+    ${({ contact }) =>
+      !contact &&
+      css`
+        height: 586px;
+      `}
   }
 `;
 

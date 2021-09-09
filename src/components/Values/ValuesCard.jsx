@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Icon from '@components/Icon/Icon';
 import { getMedias } from '@styles/utils';
@@ -42,17 +43,17 @@ const CardIcon = styled(Icon)`
 
 const ValuesCard = ({ card }) => (
   <Card>
-    <CardIcon icon={card.icon} size="232px" media="201px" />
+    <CardIcon icon={card.image1.url} alt={card.title} size="232px" media="201px" />
     <h5>{card.title}</h5>
-    <p>{card.text}</p>
+    {documentToReactComponents(card.text1)}
   </Card>
 );
 
 ValuesCard.propTypes = {
   card: PropTypes.shape({
-    icon: PropTypes.elementType,
+    image1: PropTypes.instanceOf(Object),
     title: PropTypes.string,
-    text: PropTypes.string,
+    text1: PropTypes.instanceOf(Object),
   }).isRequired,
 };
 

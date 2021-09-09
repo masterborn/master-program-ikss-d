@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
@@ -59,12 +60,13 @@ const CarouselButton = styled(Button)`
   }
 `;
 
-const StyledProjects = ({ projects }) => {
+const StyledProjects = ({ data }) => {
+  const { title, projects } = data;
   const [activeCard, setActiveCard] = useState(0);
 
   return (
     <Wrapper>
-      <h3>Najnowsze projekty</h3>
+      <h3>{title}</h3>
       <Carousel>
         <CarouselButton
           active={activeCard === 0}
@@ -102,7 +104,10 @@ const HomeProjects = styled(StyledProjects)`
 `;
 
 StyledProjects.propTypes = {
-  projects: PropTypes.instanceOf(Array).isRequired,
+  data: PropTypes.shape({
+    title: PropTypes.string,
+    projects: PropTypes.instanceOf(Array),
+  }).isRequired,
 };
 
 export default HomeProjects;
