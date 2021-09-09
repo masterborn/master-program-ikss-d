@@ -92,10 +92,9 @@ const StyledInput = ({
   labelText,
   textarea,
   validateCallback,
-  defaultValue,
+  value,
 }) => {
   const [isInvalid, setIsInvalid] = useState(false);
-  const [inputValue, setInputValue] = useState(defaultValue);
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
 
@@ -106,10 +105,6 @@ const StyledInput = ({
       <InfoIcon disabled={disabled} />
     </div>
   );
-
-  useEffect(() => {
-    if (defaultValue === '') setInputValue(defaultValue);
-  }, [defaultValue]);
 
   const setValidationErrors = (event) => {
     const info = validateCallback(event);
@@ -122,8 +117,6 @@ const StyledInput = ({
   };
 
   const onChange = (event) => {
-    setInputValue(event.target.value);
-
     const info = setValidationErrors(event);
 
     if (isToolTipShown && info.message === '') setIsToolTipShown(false);
@@ -140,7 +133,7 @@ const StyledInput = ({
               name={name}
               placeholder={placeholder}
               onChange={onChange}
-              value={inputValue}
+              value={value}
               onInvalid={setValidationErrors}
               required
               disabled={disabled}
@@ -151,7 +144,7 @@ const StyledInput = ({
               name={name}
               placeholder={placeholder}
               onChange={onChange}
-              value={inputValue}
+              value={value}
               onInvalid={setValidationErrors}
               required
               disabled={disabled}
@@ -183,7 +176,7 @@ StyledInput.propTypes = {
   labelText: PropTypes.string,
   textarea: PropTypes.bool,
   validateCallback: PropTypes.func,
-  defaultValue: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default StyledInput;

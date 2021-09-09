@@ -142,9 +142,9 @@ const StyledCloseIcon = styled(IconSM)`
 
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const isFormValid = useSelector((state) => state.contactForm.isFormValid);
-  const buttonStatus = useSelector((state) => state.contactForm.buttonStatus);
-  const formValues = useSelector((state) => state.contactForm.formValues);
+  const isFormValid = useSelector(({ contactForm }) => contactForm.isFormValid);
+  const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
+  const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
 
   const closeModalButton = (
@@ -213,7 +213,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Wpisz swoje imię"
           labelText="Imię"
           validateCallback={onValidateInput}
-          defaultValue={formValues.name}
+          value={formValues.name}
         />
 
         <StyledInput
@@ -221,7 +221,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
           validateCallback={onValidateInput}
-          defaultValue={formValues.surname}
+          value={formValues.surname}
         />
 
         <StyledInput
@@ -229,7 +229,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
           validateCallback={onValidateInput}
-          defaultValue={formValues.email}
+          value={formValues.email}
         />
 
         <StyledInput
@@ -237,7 +237,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="Temat wiadomości"
           labelText="Temat"
           validateCallback={onValidateInput}
-          defaultValue={formValues.topic}
+          value={formValues.topic}
         />
 
         <StyledInput
@@ -246,7 +246,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"
           validateCallback={onValidateInput}
-          defaultValue={formValues.content}
+          value={formValues.content}
         />
 
         <InfoWrapper>

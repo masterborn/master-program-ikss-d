@@ -15,10 +15,7 @@ const conditionChecks = (name, nameVal, length, inputVal, regex = false) => {
   return inputVal.length > length;
 };
 
-export const validateInput = (event, dispatch) => {
-  const inputVal = event.target.value;
-  const { name } = event.target;
-
+export const validateInput = (inputVal, name, dispatch) => {
   const inputError = {
     message: '',
     invalid: true,
