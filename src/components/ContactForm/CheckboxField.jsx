@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { getColor } from '@styles/utils';
 import Checked from '@assets/checked.svg';
 import IconSM from '@components/Icon/IconSM';
+import { contactFormActions } from '@store/contactFormSlice';
+import { validateCheckbox } from '@utils/validation';
 
 const Wrapper = styled.label`
   position: relative;
@@ -45,28 +47,26 @@ const CheckboxField = styled.div`
   }
 `;
 
-const Checkbox = ({ defaultValue, validateCallback }) => {
-  const [isChecked, setIsChecked] = useState(defaultValue);
-
-  useEffect(() => {
-    if (defaultValue === false) setIsChecked(defaultValue);
-  }, [defaultValue]);
+const Checkbox = ({ value }) => {
+  const dispatch = useDispatch();
 
   const onChange = (event) => {
-    setIsChecked(event.target.checked);
-    const info = validateCallback(event);
+    const inputValue = event.target.checked;
+    const { name } = event.target;
+
+    dispatch(
+      contactFormActions.updateFormFields({
+        [name]: inputValue,
+      }),
+    );
+    const info = validateCheckbox(inputValue, dispatch);
     event.target.setCustomValidity(info);
   };
 
   return (
     <Wrapper>
-      <HiddenCheckbox
-        checked={isChecked}
-        onChange={onChange}
-        name="conditions"
-        onInvalid={onChange}
-      />
-      <CheckboxField checked={isChecked}>
+      <HiddenCheckbox checked={value} onChange={onChange} name="conditions" onInvalid={onChange} />
+      <CheckboxField checked={value}>
         <IconSM icon={Checked} />
       </CheckboxField>
     </Wrapper>
@@ -74,8 +74,7 @@ const Checkbox = ({ defaultValue, validateCallback }) => {
 };
 
 Checkbox.propTypes = {
-  defaultValue: PropTypes.bool.isRequired,
-  validateCallback: PropTypes.func.isRequired,
+  value: PropTypes.bool.isRequired,
 };
 
 export default Checkbox;

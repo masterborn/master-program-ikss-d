@@ -12,8 +12,7 @@ import FormButton from '@components/ContactForm/FormButton';
 import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
-import { validateInput, validateCheckbox } from '@utils/validation';
-import { contactFormActions } from '@store/formSlice';
+import { contactFormActions } from '@store/contactFormSlice';
 import { modalActions } from '@store/modalSlice';
 
 const Wrapper = styled.div`
@@ -142,7 +141,7 @@ const StyledCloseIcon = styled(IconSM)`
 
 const ContactForm = ({ modal, toolTipText, className }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const isFormValid = useSelector(({ contactForm }) => contactForm.isFormValid);
+  const formValidation = useSelector(({ contactForm }) => contactForm.formValidation);
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
@@ -154,6 +153,19 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   );
 
   const handleSubmit = (event) => {
+    let isFormValid = false;
+
+    if (
+      formValidation.name &&
+      formValidation.surname &&
+      formValidation.email &&
+      formValidation.topic &&
+      formValidation.content &&
+      formValidation.conditions
+    ) {
+      isFormValid = true;
+    }
+
     if (!isFormValid) {
       event.preventDefault();
       return;
@@ -165,32 +177,11 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       dispatch(contactFormActions.setButtonToError());
     }, 3000);
 
+    dispatch(contactFormActions.setFormChangedToFalse());
+
     dispatch(contactFormActions.clearFormFields());
 
     event.preventDefault();
-  };
-
-  const getDataFromInputs = (event) => {
-    const inputVal = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-    const { name } = event.target;
-
-    dispatch(
-      contactFormActions.updateFormFields({
-        [name]: inputVal,
-      }),
-    );
-  };
-
-  const onValidateInput = (event) => {
-    getDataFromInputs(event);
-
-    return validateInput(event, dispatch);
-  };
-
-  const onValidateCheckbox = (event) => {
-    getDataFromInputs(event);
-
-    return validateCheckbox(event, dispatch);
   };
 
   return (
@@ -212,7 +203,6 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="name"
           placeholder="Wpisz swoje imię"
           labelText="Imię"
-          validateCallback={onValidateInput}
           value={formValues.name}
         />
 
@@ -220,7 +210,6 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="surname"
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
-          validateCallback={onValidateInput}
           value={formValues.surname}
         />
 
@@ -228,7 +217,6 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="email"
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
-          validateCallback={onValidateInput}
           value={formValues.email}
         />
 
@@ -236,7 +224,6 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="topic"
           placeholder="Temat wiadomości"
           labelText="Temat"
-          validateCallback={onValidateInput}
           value={formValues.topic}
         />
 
@@ -245,12 +232,11 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="content"
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"
-          validateCallback={onValidateInput}
           value={formValues.content}
         />
 
         <InfoWrapper>
-          <Checkbox defaultValue={formValues.conditions} validateCallback={onValidateCheckbox} />
+          <Checkbox value={formValues.conditions} />
           <p>
             Zapoznałem się z{' '}
             <Link href="/">

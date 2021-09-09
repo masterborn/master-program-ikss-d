@@ -1,10 +1,13 @@
 import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { getColor, getFontFamily } from '@styles/utils';
 import alertLogo from '@assets/alert-triangle.svg';
 import ToolTip from '@components/ContactForm/ToolTip';
+import { contactFormActions } from '@store/contactFormSlice';
+import { validateInput } from '@utils/validation';
 
 const Container = styled.div.attrs((props) => ({
   borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
@@ -84,19 +87,12 @@ const WarningToolTip = styled(ToolTip)`
   bottom: 110%;
 `;
 
-const StyledInput = ({
-  name,
-  placeholder,
-  disabled,
-  className,
-  labelText,
-  textarea,
-  validateCallback,
-  value,
-}) => {
+const StyledInput = ({ name, placeholder, disabled, className, labelText, textarea, value }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
+  const isFormChanged = useSelector(({ contactForm }) => contactForm.isFormChanged);
+  const dispatch = useDispatch();
 
   const displayToolTip = isToolTipShown && <WarningToolTip toolTipText={toolTipText} />;
 
@@ -106,20 +102,28 @@ const StyledInput = ({
     </div>
   );
 
-  const setValidationErrors = (event) => {
-    const info = validateCallback(event);
+  useEffect(() => {
+    if (isFormChanged) {
+      const info = validateInput(name, value, dispatch);
 
-    setToolTipText(info.message);
-    setIsInvalid(info.invalid);
-    event.target.setCustomValidity(info.message);
+      setToolTipText(info.message);
+      setIsInvalid(info.invalid);
 
-    return info;
-  };
+      if (isToolTipShown && info.message === '') setIsToolTipShown(false);
+      console.log('validated');
+    }
+  }, [dispatch, isFormChanged, isToolTipShown, name, value]);
 
   const onChange = (event) => {
-    const info = setValidationErrors(event);
+    const inputValue = event.target.value;
 
-    if (isToolTipShown && info.message === '') setIsToolTipShown(false);
+    dispatch(
+      contactFormActions.updateFormFields({
+        [name]: inputValue,
+      }),
+    );
+
+    dispatch(contactFormActions.setFormChangedToTrue());
   };
 
   return (
@@ -133,8 +137,8 @@ const StyledInput = ({
               name={name}
               placeholder={placeholder}
               onChange={onChange}
+              onInvalid={onChange}
               value={value}
-              onInvalid={setValidationErrors}
               required
               disabled={disabled}
             />
@@ -144,8 +148,8 @@ const StyledInput = ({
               name={name}
               placeholder={placeholder}
               onChange={onChange}
+              onInvalid={onChange}
               value={value}
-              onInvalid={setValidationErrors}
               required
               disabled={disabled}
             />
@@ -165,7 +169,6 @@ StyledInput.defaultProps = {
   className: null,
   labelText: null,
   textarea: false,
-  validateCallback: () => {},
 };
 
 StyledInput.propTypes = {
@@ -175,7 +178,6 @@ StyledInput.propTypes = {
   className: PropTypes.string,
   labelText: PropTypes.string,
   textarea: PropTypes.bool,
-  validateCallback: PropTypes.func,
   value: PropTypes.string.isRequired,
 };
 
