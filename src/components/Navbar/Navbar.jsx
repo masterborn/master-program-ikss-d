@@ -13,7 +13,7 @@ import { openContactForm } from '@utils/formVisibility';
 
 import MobileMenu from './MobileMenu';
 
-const Nav = styled.div`
+const Nav = styled.nav`
   padding: 1.25rem 7.5rem;
   display: flex;
   z-index: 9999;
@@ -114,7 +114,7 @@ const Navbar = ({ urls }) => {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
-  
+
   const areSmAlwaysDisabled = router.pathname === '/404';
 
   const handleScroll = () => {

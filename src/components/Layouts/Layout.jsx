@@ -8,7 +8,7 @@ const Layout = ({ children, pageProps }) => {
   return (
     <>
       <Navbar urls={socialUrls} />
-      {children}
+      <main>{children}</main>
       <Footer urls={socialUrls} />
     </>
   );
