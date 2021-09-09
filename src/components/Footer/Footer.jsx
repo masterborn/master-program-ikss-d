@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
 import Heart from '@assets/Heart.svg';
 import ScrollButton from '@components/Footer/ScrollButton';
@@ -11,12 +12,12 @@ import ContactForm from '@components/ContactForm/ContactForm';
 
 const Wrapper = styled.footer`
   width: 100%;
-  height: ${(props) => (props.contact ? '728px' : '466px')};
+  height: ${({ contact }) => (contact === '/' ? '728px' : '466px')};
   background: ${getColor('ikksBlue')};
   position: relative;
 
-  ${(props) =>
-    props.contact &&
+  ${({ contact }) =>
+    contact === '/' &&
     css`
       @media (max-width: 1200px) {
         padding-top: 8em;
@@ -25,7 +26,11 @@ const Wrapper = styled.footer`
     `};
 
   @media (max-width: ${getMedias('mobile')}) {
-    height: ${(props) => (props.contact ? '780px' : '566px')};
+    ${({ contact }) =>
+      !contact === '/' &&
+      css`
+        height: 586px;
+      `}
   }
 `;
 
@@ -34,15 +39,15 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
   margin-right: 10%;
   position: relative;
-  bottom: ${(props) => (props.contact ? '5%' : '8%')};
+  bottom: ${({ contact }) => (contact === '/' ? '5%' : '8%')};
 
   @media (max-width: ${getMedias('tablet')}) {
     margin-right: 5%;
   }
 
   @media (max-width: 650px) {
-    justify-content: ${(props) => (props.contact ? 'flex-end' : 'center')};
-    margin-right: ${(props) => (props.contact ? '5%' : '0')};
+    justify-content: ${({ contact }) => (contact === '/' ? 'flex-end' : 'center')};
+    margin-right: ${({ contact }) => (contact === '/' ? '5%' : '0')};
   }
 
   @media (max-width: ${getMedias('mobile')}) {
@@ -51,8 +56,8 @@ const ButtonWrapper = styled.div`
     bottom: 4%;
   }
 
-  ${(props) =>
-    props.contact &&
+  ${({ contact }) =>
+    contact === '/' &&
     css`
       @media (max-width: 1200px) {
         justify-content: center;
@@ -70,8 +75,8 @@ const Menu = styled.div`
   display: flex;
   justify-content: center;
 
-  ${(props) =>
-    props.contact &&
+  ${({ contact }) =>
+    contact === '/' &&
     css`
       padding-top: 18em;
     `};
@@ -79,8 +84,8 @@ const Menu = styled.div`
   @media (max-width: ${getMedias('mobile')}) {
     flex-direction: column;
 
-    ${(props) =>
-      props.contact &&
+    ${({ contact }) =>
+      contact === '/' &&
       css`
         padding-top: 7em;
       `};
@@ -166,53 +171,51 @@ const FooterContactForm = styled(ContactForm)`
   }
 `;
 
-const Footer = ({ contact, urls }) => (
-  <Wrapper contact={contact}>
-    {contact && (
-      <ContactFormWrapper>
-        <FooterContactForm />
-      </ContactFormWrapper>
-    )}
-    <ButtonWrapper contact={contact}>
-      <ScrollButton />
-    </ButtonWrapper>
-    <Menu contact={contact}>
-      <MenuLink url="/" linkLabel="Strona główna" />
-      <MenuLink url="/projects" linkLabel="Projekty" />
-      <MenuLink url="/about" linkLabel="O nas" />
-      <MenuLink url="/cooperation" linkLabel="Współpraca" />
-    </Menu>
-    <SocialMedias
-      footer
-      urls={{
-        facebook: urls.fblink,
-        instagram: urls.inlink,
-        youTube: urls.ytlink,
-        linkedIn: urls.lnlink,
-      }}
-    />
-    <TextLogoWrapper>
-      <LogoFooter />
-      <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
-      <p>
-        Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
-      </p>
-    </TextLogoWrapper>
-  </Wrapper>
-);
+const Footer = ({ urls }) => {
+  const router = useRouter();
+  return (
+    <Wrapper contact={router.pathname}>
+      {router.pathname === '/' && (
+        <ContactFormWrapper>
+          <FooterContactForm />
+        </ContactFormWrapper>
+      )}
+      <ButtonWrapper contact={router.pathname}>
+        <ScrollButton />
+      </ButtonWrapper>
+      <Menu contact={router.pathname}>
+        <MenuLink url="/" linkLabel="Strona główna" />
+        <MenuLink url="/projects" linkLabel="Projekty" />
+        <MenuLink url="/about" linkLabel="O nas" />
+        <MenuLink url="/cooperation" linkLabel="Współpraca" />
+      </Menu>
+      <SocialMedias
+        footer
+        urls={{
+          facebook: urls.fblink,
+          instagram: urls.inlink,
+          youTube: urls.ytlink,
+          linkedIn: urls.lnlink,
+        }}
+      />
+      <TextLogoWrapper>
+        <LogoFooter />
+        <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
+        <p>
+          Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
+        </p>
+      </TextLogoWrapper>
+    </Wrapper>
+  );
+};
 
 export default Footer;
 
 Footer.propTypes = {
-  contact: PropTypes.bool,
   urls: PropTypes.shape({
     fblink: PropTypes.string,
     inlink: PropTypes.string,
     ytlink: PropTypes.string,
     lnlink: PropTypes.string,
   }).isRequired,
-};
-
-Footer.defaultProps = {
-  contact: false,
 };

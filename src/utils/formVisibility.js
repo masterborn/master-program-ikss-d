@@ -1,12 +1,18 @@
 import { scroller } from 'react-scroll';
 
-export const openContactForm = (router, openModalCallback) => {
+import { modalActions } from '@root/store/modalSlice';
+
+export const openContactFormNavbar = (router, openModalCallback) => {
   if (router.pathname === '/') {
     scroller.scrollTo('contactForm', {
       smooth: true,
       offset: -50,
     });
-  } else openModalCallback();
+  } else openModalCallback(modalActions.openModal());
+};
+
+export const openContactForm = (dispatch) => {
+  dispatch(modalActions.openModal());
 };
 
 export const scrollOnHomepage = () => {

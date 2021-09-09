@@ -62,7 +62,9 @@ const CarouselButton = styled(Button)`
     `}
 `;
 
-const MainProjects = ({ projects }) => {
+const MainProjects = ({ data }) => {
+  const { projects, contactBanner } = data;
+
   const years = projects.map((item) => item.date.split('-')[0]);
   const buttonYears = [...new Set(years)].sort((a, b) => b - a).slice(0, 3);
 
@@ -71,20 +73,22 @@ const MainProjects = ({ projects }) => {
   const tempData = projects.filter((item) => item.date.split('-')[0] === activeYear);
 
   const renderProjectCards = (afterBanner = false) => {
-    if (tempData.length < 7) {
-      return tempData.map((data) => <ProjectCard key={data.title} projects={data} />);
+    const filteredProjects = projects.filter((item) => item.date.split('-')[0] === activeYear);
+
+    if (filteredProjects.length < 7) {
+      return filteredProjects.map((item) => <ProjectCard key={item.title} projects={item} />);
     }
 
-    return tempData.map((data, index) =>
+    return filteredProjects.map((item, index) =>
       !afterBanner
-        ? index < 4 && <ProjectCard key={data.title} projects={data} />
-        : index >= 4 && <ProjectCard key={data.title} projects={data} />,
+        ? index < 4 && <ProjectCard key={item.title} projects={item} />
+        : index >= 4 && <ProjectCard key={item.title} projects={item} />,
     );
   };
 
   const renderContact = tempData.length >= 7 && (
     <>
-      <ContactBanner />
+      <ContactBanner contactBanner={contactBanner} />
       <GridWrapper>{renderProjectCards(true)}</GridWrapper>
     </>
   );
@@ -92,7 +96,15 @@ const MainProjects = ({ projects }) => {
   return (
     <>
       <Carousel>
-  {buttonYears.reverse().map((button) => ( <CarouselButton active={activeYear === button} onClick={() => setActiveYear(button)}> {button} </CarouselButton> ))}
+        {buttonYears.reverse().map((button) => (
+          <CarouselButton
+            key={button}
+            active={activeYear === button}
+            onClick={() => setActiveYear(button)}
+          >
+            {button}
+          </CarouselButton>
+        ))}
       </Carousel>
       <FlexWrapper>
         <ProjectsWrapper>
@@ -105,7 +117,10 @@ const MainProjects = ({ projects }) => {
 };
 
 MainProjects.propTypes = {
-  projects: PropTypes.instanceOf(Array).isRequired,
+  data: PropTypes.shape({
+    projects: PropTypes.instanceOf(Array),
+    contactBanner: PropTypes.instanceOf(Object),
+  }).isRequired,
 };
 
 export default MainProjects;
