@@ -22,7 +22,6 @@ export const getStaticProps = async () => {
 
   const socialUrls = filterSocials(socials);
 
-  const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
   const projects = await ContentfulClient.getFieldsData('projects');
 
   const projectsData = {
@@ -34,7 +33,6 @@ export const getStaticProps = async () => {
   return {
     props: {
       SubPageHero,
-      projectHero,
       projectsData,
       socialUrls,
       CTASection,

@@ -23,14 +23,14 @@ const homePage = ({ heroData, projectsData, valuesData, cooperationData }) => (
 export const getStaticProps = async () => {
   const socials = await ContentfulClient.getBasicContentData('common');
 
-  const socialsUrls = filterSocials(socials);
+  const socialUrls = filterSocials(socials);
 
   // Hero data
   const basicContent = await ContentfulClient.getBasicContentData('homepage');
 
   const heroData = {
     ...filterBasicContentData(basicContent, 'homepage-top-section'),
-    socialsUrls,
+    socialUrls,
   };
   // Values data
 
@@ -63,11 +63,11 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      socialsUrls,
       heroData,
       valuesData,
       projectsData,
       cooperationData,
+      socialUrls,
     },
   };
 };
