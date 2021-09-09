@@ -103,7 +103,7 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
   );
 
   useEffect(() => {
-    if (isFormChanged) {
+    if (isFormChanged && value !== '') {
       const info = validateInput(name, value, dispatch);
 
       setToolTipText(info.message);
