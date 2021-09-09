@@ -16,7 +16,7 @@ import Portal from '@hoc/Portal';
 
 import MobileMenu from './MobileMenu';
 
-const Nav = styled.div`
+const Nav = styled.nav`
   padding: 1.25rem 7.5rem;
   display: flex;
   z-index: 2;

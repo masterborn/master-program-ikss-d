@@ -1,10 +1,9 @@
 import HomePageHero from '@components/homePageHero/HomePageHero';
-import Navbar from '@components/Navbar/Navbar';
 import Values from '@components/Values/Values';
 import ContentfulClient from '@api/clients/contentfulApi';
 import Cooperation from '@components/Cooperation/Cooperation';
-import Footer from '@components/Footer/Footer';
 import HomeProjects from '@components/Projects/HomeProjects';
+import Layout from '@components/Layouts/Layout';
 import {
   filterData,
   filterBasicContentData,
@@ -12,20 +11,16 @@ import {
   filterHomePageLogos,
 } from '@root/contentfulDataTransformers/filterData';
 
-const homePage = ({ heroData, projectsData, socialUrls, valuesData, cooperationData }) => (
+const homePage = ({ heroData, projectsData, valuesData, cooperationData }) => (
   <>
-    <Navbar urls={socialUrls} />
     <HomePageHero data={heroData} />
     <Values data={valuesData} />
     <HomeProjects data={projectsData} />
     <Cooperation data={cooperationData} />
-    <Footer contact urls={socialUrls} />
   </>
 );
 
 export const getStaticProps = async () => {
-  // Navbar/Footer data
-
   const socials = await ContentfulClient.getBasicContentData('common');
 
   const socialUrls = filterSocials(socials);
@@ -69,12 +64,16 @@ export const getStaticProps = async () => {
   return {
     props: {
       heroData,
-      socialUrls,
       valuesData,
       projectsData,
       cooperationData,
+      socialUrls,
     },
   };
+};
+
+homePage.getLayout = function getLayout(page, props) {
+  return <Layout pageProps={props}>{page}</Layout>;
 };
 
 export default homePage;

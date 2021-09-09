@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
+import Navbar from '@components/Navbar/Navbar';
 import ContentfulClient from '@api/clients/contentfulApi';
 import Logo404part1 from '@assets/404part1.svg';
 import Logo404part2 from '@assets/404part2.svg';
 import Button from '@components/Button/Button';
-import Navbar from '@components/Navbar/Navbar';
 import { getMedias } from '@styles/utils';
 import { filterSocials } from '@root/contentfulDataTransformers/filterData';
 

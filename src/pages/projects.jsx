@@ -1,51 +1,47 @@
-import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
-import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
-import ContactSection from '@components/CTASection/CTASection';
+import SubPagesLayout from '@components/Layouts/SubPagesLayout';
 import ContentfulClient from '@api/clients/contentfulApi';
 import {
   filterData,
   filterBasicContentData,
   filterSocials,
 } from '@root/contentfulDataTransformers/filterData';
-import Footer from '@components/Footer/Footer';
 
-const projectsPage = ({ projectHero, projectsData, socialUrls, CTASection }) => (
+const projectsPage = ({ projectsData }) => (
   <>
-    <Navbar urls={socialUrls} />
-    <SubpagesHero data={projectHero} />
-
     <MainProjects data={projectsData} />
-    <ContactSection data={CTASection} />
-    <Footer urls={socialUrls} />
   </>
 );
 
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
 
+  const SubPageHero = filterBasicContentData(basicContent, 'projects-top-section');
+
   const socials = await ContentfulClient.getBasicContentData('common');
 
   const socialUrls = filterSocials(socials);
 
-  const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
   const projects = await ContentfulClient.getFieldsData('projects');
 
   const projectsData = {
     projects: filterData(projects, 'projects'),
     contactBanner: filterBasicContentData(basicContent, 'projects-middle-cta-text'),
   };
-
   const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
 
   return {
     props: {
-      projectHero,
+      SubPageHero,
       projectsData,
       socialUrls,
       CTASection,
     },
   };
+};
+
+projectsPage.getLayout = function getLayout(page, props) {
+  return <SubPagesLayout pageProps={props}>{page}</SubPagesLayout>;
 };
 
 export default projectsPage;
