@@ -7,6 +7,7 @@ export default class MyDocument extends Document {
     const originalRenderPage = ctx.renderPage;
 
     try {
+      // eslint-disable-next-line no-param-reassign
       ctx.renderPage = () =>
         originalRenderPage({
           // eslint-disable-next-line react/jsx-props-no-spreading
@@ -33,6 +34,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head />
         <body>
+          <div id="portal" />
           <Main />
           <NextScript />
         </body>

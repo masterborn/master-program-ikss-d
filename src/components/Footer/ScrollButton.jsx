@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { animateScroll as scroll } from 'react-scroll';
 
 import ScrollButtonVector from '@assets/ScrollButtonVector.svg';
 import { getColor, getMedias } from '@styles/utils';
@@ -35,11 +36,7 @@ const Eclipse = styled.div`
 
 const ScrollButton = ({ className }) => {
   const handleClick = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
+    scroll.scrollToTop();
   };
 
   return (

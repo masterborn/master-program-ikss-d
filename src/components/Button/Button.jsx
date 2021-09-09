@@ -4,7 +4,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
-import Icon from '@components/Icon/Icon';
+import IconSM from '@components/Icon/IconSM';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
 
 const styledButton = ({
@@ -21,7 +21,7 @@ const styledButton = ({
     return (
       <Link href={href}>
         <a className={className}>
-          {withIcon && <Icon icon={FacebookIcon} media="18px" />}
+          {withIcon && <IconSM icon={FacebookIcon} media="18px" />}
           {children}
         </a>
       </Link>
@@ -31,7 +31,7 @@ const styledButton = ({
   if (href && !link) {
     return (
       <a href={href} className={className}>
-        {withIcon && <Icon icon={FacebookIcon} media="18px" />}
+        {withIcon && <IconSM icon={FacebookIcon} media="18px" />}
         {children}
       </a>
     );
@@ -43,7 +43,7 @@ const styledButton = ({
       onKeyUp={onKeyUp}
       type={isTypeSubmit ? 'submit' : 'button'}
     >
-      {withIcon && <Icon icon={FacebookIcon} media="18px" />}
+      {withIcon && <IconSM icon={FacebookIcon} media="18px" />}
       {children}
     </button>
   );
@@ -66,7 +66,7 @@ const Button = styled(styledButton)`
   cursor: pointer;
   text-decoration: none;
 
-  & ${Icon} {
+  & ${IconSM} {
     margin-right: 8px;
   }
 
@@ -129,7 +129,7 @@ const Button = styled(styledButton)`
     height: 36px;
     line-height: 18px;
 
-    & ${Icon} {
+    & ${IconSM} {
       margin-right: 4px;
     }
   }

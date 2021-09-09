@@ -17,10 +17,6 @@ const GlobalStyles = createGlobalStyle`
     display: none;
 }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     color: ${getColor('steel')};
     max-width: 100%;

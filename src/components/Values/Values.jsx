@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
 import ValuesCard from '@components/Values/ValuesCard';
@@ -49,19 +50,21 @@ const Header = styled.header`
   }
 `;
 
-const Values = ({ data, valuesHeader, valuesText }) => {
-  const [isVisible, setIsVisible] = useState(true);
+const Values = ({ data }) => {
+  const { title, text1, cards } = data;
+
+  const [isSliderVisible, setIsSliderVisible] = useState(true);
 
   const handleChange = (event) => {
-    if (event.matches) setIsVisible(true);
-    else setIsVisible(false);
+    if (event.matches) setIsSliderVisible(true);
+    else setIsSliderVisible(false);
   };
 
   useEffect(() => {
     const media = window.matchMedia(`(max-width: 810px)`);
 
-    if (media.matches) setIsVisible(true);
-    else setIsVisible(false);
+    if (media.matches) setIsSliderVisible(true);
+    else setIsSliderVisible(false);
 
     media.addEventListener('change', handleChange);
 
@@ -70,23 +73,28 @@ const Values = ({ data, valuesHeader, valuesText }) => {
     };
   }, []);
 
-  const renderCards = () => data.map((card) => <ValuesCard card={card} key={card.title} />);
+  const renderCards = () => cards.map((card) => <ValuesCard card={card} key={card.title} />);
+
+  const slider = isSliderVisible ? <Slider data={cards} /> : <Cards>{renderCards()}</Cards>;
 
   return (
     <Wrapper>
       <Header>
-        <h3>{valuesHeader}</h3>
-        {valuesText && <p>{valuesText}</p>}
+        <h3>{title}</h3>
+        {text1 && documentToReactComponents(text1)}
       </Header>
-      {isVisible ? <Slider data={data} /> : <Cards>{renderCards()}</Cards>}
+
+      {slider}
     </Wrapper>
   );
 };
 
 Values.propTypes = {
-  data: PropTypes.instanceOf(Array).isRequired,
-  valuesHeader: PropTypes.string.isRequired,
-  valuesText: PropTypes.string.isRequired,
+  data: PropTypes.shape({
+    cards: PropTypes.instanceOf(Array),
+    text1: PropTypes.shape({}),
+    title: PropTypes.string,
+  }).isRequired,
 };
 
 export default Values;

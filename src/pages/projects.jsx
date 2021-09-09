@@ -1,36 +1,47 @@
-import Navbar from '@components/Navbar/Navbar';
 import MainProjects from '@components/Projects/MainProjects';
-import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
+import SubPagesLayout from '@components/Layouts/SubPagesLayout';
 import ContentfulClient from '@api/clients/contentfulApi';
-import { filterBasicContentData } from '@root/contentfulDataTransformers/filterData';
+import {
+  filterData,
+  filterBasicContentData,
+  filterSocials,
+} from '@root/contentfulDataTransformers/filterData';
 
-const projectsPage = ({ projectHero }) => (
+const projectsPage = ({ projectsData }) => (
   <>
-    <Navbar
-      urls={{
-        fblink: 'https://pl-pl.facebook.com',
-        inlink: 'https://www.instagram.com',
-        ytlink: 'https://www.youtube.com',
-        lnlink: 'https://pl.linkedin.com',
-      }}
-    />
-    <SubpagesHero data={projectHero} />
-    <MainProjects />
+    <MainProjects data={projectsData} />
   </>
 );
 
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
 
-  const projectHero = filterBasicContentData(basicContent, 'projects-top-section');
+  const SubPageHero = filterBasicContentData(basicContent, 'projects-top-section');
 
-  console.log(projectHero);
+  const socials = await ContentfulClient.getBasicContentData('common');
+
+  const socialUrls = filterSocials(socials);
+
+  const projects = await ContentfulClient.getFieldsData('projects');
+
+  const projectsData = {
+    projects: filterData(projects, 'projects'),
+    contactBanner: filterBasicContentData(basicContent, 'projects-middle-cta-text'),
+  };
+  const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
 
   return {
     props: {
-      projectHero,
+      SubPageHero,
+      projectsData,
+      socialUrls,
+      CTASection,
     },
   };
+};
+
+projectsPage.getLayout = function getLayout(page, props) {
+  return <SubPagesLayout pageProps={props}>{page}</SubPagesLayout>;
 };
 
 export default projectsPage;

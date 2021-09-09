@@ -53,9 +53,10 @@ export const filterData = (response, section, page = null) => {
         imgSrc: imageUrl ? `https:${imageUrl}` : '',
         name: fields.name,
         role: fields.role,
-        phone: fields.phone,
-        email: fields.email,
-        linkedinUrl: fields.linkedinUrl,
+        phone: fields.phone || '',
+        email: fields.email || '',
+        linkedinUrl: fields.linkedinUrl || '',
+        order: fields.order ? fields.order : null,
       };
     }
 
@@ -83,3 +84,27 @@ export const filterBasicContentData = (data, filterCriteria) => {
 
   return responseObject;
 };
+
+export const filterLogos = (data) =>
+  data
+    .map((item) => ({
+      logo: `https:${item.fields.logo.fields.file.url}`,
+      linkUrl: item.fields.linkUrl || '',
+      altText: item.fields.name,
+      order: item.fields.order || null,
+      showOnHomepage: item.fields.showOnHomepage || false,
+    }))
+    .sort((a, b) => b.order - a.order);
+
+export const filterHomePageLogos = (data) => {
+  const sortedLogos = filterLogos(data);
+
+  return sortedLogos.filter((logo) => logo.showOnHomepage);
+};
+
+export const filterSocials = (data) => ({
+  fblink: filterBasicContentData(data, 'social-facebook').linkUrl,
+  inlink: filterBasicContentData(data, 'social-instagram').linkUrl,
+  ytlink: filterBasicContentData(data, 'social-youtube').linkUrl,
+  lnlink: filterBasicContentData(data, 'social-linkedin').linkUrl,
+});

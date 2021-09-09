@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
-import Icon from '@components/Icon/Icon';
+import IconSM from '@components/Icon/IconSM';
 import Button from '@components/Button/Button';
+import { openContactFormNavbar } from '@utils/formVisibility';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
@@ -60,7 +63,7 @@ const StyledLink = styled(NavLink)`
   font-weight: ${getFontWeight('buttonWeight')};
   width: 100%;
   padding: 24px;
-  box-shadow: inset 0px 1.5px 0px #eaf5ff, inset 0px -1.5px 0px #eaf5ff;
+  box-shadow: inset 0 1.5px 0 #eaf5ff, inset 0px -1.5px 0px #eaf5ff;
 `;
 
 const ContactButton = styled(Button)`
@@ -71,7 +74,7 @@ const LinksWrapper = styled.div`
   width: 100%;
   display: inherit;
   flex-direction: column;
-  box-shadow: 0px 1.5px 0px #eaf5ff, 0px -1.5px 0px #eaf5ff;
+  box-shadow: 0 1.5px 0 #eaf5ff, 0px -1.5px 0px #eaf5ff;
 
   @media (max-width: ${getMedias('mobile')}) {
     font-size: 14px;
@@ -80,6 +83,8 @@ const LinksWrapper = styled.div`
 
 const MobileMenu = ({ show, urls, closeMobileMenu }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     if (event.matches) setIsVisible(true);
@@ -88,6 +93,11 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
 
   const handleClick = () => {
     closeMobileMenu();
+  };
+
+  const handleMobileContact = () => {
+    closeMobileMenu();
+    openContactFormNavbar(router, dispatch);
   };
 
   useEffect(() => {
@@ -109,7 +119,7 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
         <Wrapper>
           <Nav>
             <CloseButton type="button" onClick={handleClick}>
-              <Icon icon={CloseIcon} color="steel" />
+              <IconSM icon={CloseIcon} color="steel" />
             </CloseButton>
 
             <LinksWrapper>
@@ -119,7 +129,7 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
               <StyledLink linkLabel="Współpraca" url="/cooperation" />
             </LinksWrapper>
 
-            <ContactButton>Skontaktuj się</ContactButton>
+            <ContactButton onClick={handleMobileContact}>Skontaktuj się</ContactButton>
 
             <Socials
               urls={{
