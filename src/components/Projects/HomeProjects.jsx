@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 
 import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
@@ -22,6 +22,7 @@ const Wrapper = styled.main`
     }
   }
 `;
+
 const Carousel = styled.div`
   display: flex;
   justify-content: center;
@@ -35,6 +36,7 @@ const Carousel = styled.div`
     flex-wrap: wrap;
   }
 `;
+
 const CarouselButton = styled(Button)`
   transition: all 0.1s ease-in;
   ${(props) =>

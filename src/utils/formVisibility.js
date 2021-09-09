@@ -12,7 +12,6 @@ export const openContactFormNavbar = (router, openModalCallback) => {
 };
 
 export const openContactForm = (dispatch) => {
-  console.log('test');
   dispatch(modalActions.openModal());
 };
 
