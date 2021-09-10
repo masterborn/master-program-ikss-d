@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     -ms-overflow-style: none;
     font-family: ${getFontFamily('Mulish')};
     scrollbar-color: ${getColor('ikksBlue')} ${getColor('steel_20')};
-    scrollbar-width: thin;
+    scrollbar-width: auto;
   }
   
 
