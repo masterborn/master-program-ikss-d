@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Image from 'next/dist/client/image';
+import styled, { css } from 'styled-components';
+import { useState } from 'react';
+import Image from 'next/image';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
 import PhoneIcon from '@assets/icons/tel-icon.svg';
 import EmailIcon from '@assets/icons/email-icon.svg';
+import ChevronIcon from '@assets/icons/chevron-icon.svg';
 import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 384px;
+  width: 380px;
   padding: 32px 24px 40px;
 
   box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
@@ -22,11 +25,11 @@ const Wrapper = styled.div`
   border-radius: 16px;
 
   @media (max-width: ${getMedias('tablet')}) {
-    width: 60%;
+    width: 70%;
+    padding: 20px;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
-    padding: 20px;
     width: 100%;
     margin: 0 24px;
   }
@@ -69,6 +72,12 @@ const InfoWrapper = styled.div`
 
   @media (max-width: ${getMedias('tablet')}) {
     display: none;
+
+    ${({ cardExpanded }) =>
+      cardExpanded &&
+      css`
+        display: flex;
+      `}
   }
 
   & > p > a {
@@ -106,6 +115,12 @@ const Header = styled.header`
     flex-direction: initial;
     gap: 24px;
 
+    ${({ cardExpanded }) =>
+      cardExpanded &&
+      css`
+        flex-direction: column;
+      `}
+
     & > span {
       max-width: 130px;
     }
@@ -122,14 +137,32 @@ const Header = styled.header`
   }
 `;
 
+const ExpandButton = styled.button`
+  display: none;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  @media (max-width: ${getMedias('tablet')}) {
+    display: initial;
+  }
+`;
+
 const MemberCard = ({ member }) => {
+  const [cardExpanded, setCardExpanded] = useState(false);
+
   const { imgSrc, name, role, phone, email, linkedinUrl } = member;
 
   const imageVisibility = imgSrc ? <Image src={imgSrc} layout="fill" /> : <ImagePlaceholder />;
 
   return (
     <Wrapper>
-      <Header>
+      <ExpandButton cardExpanded={cardExpanded} onClick={() => setCardExpanded(!cardExpanded)}>
+        <IconSM icon={ChevronIcon} size="26px" />
+      </ExpandButton>
+
+      <Header cardExpanded={cardExpanded}>
         <ImageWrapper>{imageVisibility}</ImageWrapper>
 
         <span>
@@ -138,9 +171,9 @@ const MemberCard = ({ member }) => {
         </span>
       </Header>
 
-      <InfoWrapper>
+      <InfoWrapper cardExpanded={cardExpanded}>
         <p>
-          <a href={`mailto:${email}`}>
+          <a href={`mailto:${phone}`}>
             <IconSM icon={PhoneIcon} size="16px" />
             {phone}
           </a>
