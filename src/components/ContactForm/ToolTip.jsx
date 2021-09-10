@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import PropTypes from 'prop-types';
+import PropTypes, { instanceOf } from 'prop-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getColor, getFontWeight } from '@styles/utils';
@@ -27,9 +27,15 @@ const StyledToolTip = styled.span`
   animation: ${fadeIn} 0.4s linear;
 `;
 
-const ToolTip = ({ className, toolTipText }) => (
-  <StyledToolTip className={className}>{documentToReactComponents(toolTipText)}</StyledToolTip>
-);
+const ToolTip = ({ className, toolTipText }) => {
+  if (typeof toolTipText === 'object') {
+    return (
+      <StyledToolTip className={className}>{documentToReactComponents(toolTipText)}</StyledToolTip>
+    );
+  }
+
+  return <StyledToolTip className={className}>{toolTipText}</StyledToolTip>;
+};
 
 ToolTip.defaultProps = {
   className: null,

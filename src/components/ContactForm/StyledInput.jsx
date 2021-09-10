@@ -92,7 +92,6 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
   const isFormChanged = useSelector(({ contactForm }) => contactForm.isFormChanged);
-  const isFormSubmitted = useSelector(({ contactForm }) => contactForm.isFormSubmitted);
   const dispatch = useDispatch();
 
   const displayToolTip = isToolTipShown && <WarningToolTip toolTipText={toolTipText} />;
@@ -104,7 +103,7 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
   );
 
   useEffect(() => {
-    if (isFormChanged || isFormSubmitted) {
+    if (isFormChanged && value !== '') {
       const info = validateInput(name, value, dispatch);
 
       setToolTipText(info.message);
@@ -112,7 +111,7 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
 
       if (isToolTipShown && info.message === '') setIsToolTipShown(false);
     }
-  }, [dispatch, isFormChanged, isFormSubmitted, isToolTipShown, name, value]);
+  }, [dispatch, isFormChanged, isToolTipShown, name, value]);
 
   const onChange = (event) => {
     const inputValue = event.target.value;
