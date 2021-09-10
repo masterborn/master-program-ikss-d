@@ -42,7 +42,7 @@ export const filterData = (response, section, page = null) => {
         date: fields.date,
         description: fields.description,
         url: fields.linkUrl,
-        buttonLabel: fields.linkCaption,
+        buttonLabel: fields.linkCaption || '',
         showOnHomepage: fields.showOnHomepage ? true : null,
         order: fields.order ? fields.order : null,
       };
