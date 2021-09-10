@@ -12,6 +12,7 @@ const contactFormSlice = createSlice({
       conditions: false,
     },
     isFormChanged: false,
+    isFormSubmitted: false,
     buttonStatus: 'primary',
     formValues: { name: '', surname: '', email: '', topic: '', content: '', conditions: false },
   },
@@ -44,11 +45,17 @@ const contactFormSlice = createSlice({
         ...action.payload,
       };
     },
-    setFormChangedToFalse(state) {
+    setIsFormChangedToFalse(state) {
       state.isFormChanged = false;
     },
-    setFormChangedToTrue(state) {
+    setIsFormChangedToTrue(state) {
       state.isFormChanged = true;
+    },
+    setIsFormSubmittedToFalse(state) {
+      state.isFormSubmitted = false;
+    },
+    setIsFormSubmittedToTrue(state) {
+      state.isFormSubmitted = true;
     },
   },
 });

@@ -171,13 +171,13 @@ const FooterContactForm = styled(ContactForm)`
   }
 `;
 
-const Footer = ({ urls }) => {
+const Footer = ({ urls, contactFormData, toolTipText }) => {
   const router = useRouter();
   return (
     <Wrapper contact={router.pathname}>
       {router.pathname === '/' && (
         <ContactFormWrapper>
-          <FooterContactForm />
+          <FooterContactForm contactFormData={contactFormData} toolTipText={toolTipText} />
         </ContactFormWrapper>
       )}
       <ButtonWrapper contact={router.pathname}>
@@ -218,4 +218,6 @@ Footer.propTypes = {
     ytlink: PropTypes.string,
     lnlink: PropTypes.string,
   }).isRequired,
+  contactFormData: PropTypes.instanceOf(Object).isRequired,
+  toolTipText: PropTypes.instanceOf(Object).isRequired,
 };

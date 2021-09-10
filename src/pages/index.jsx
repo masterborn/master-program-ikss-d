@@ -21,9 +21,9 @@ const homePage = ({ heroData, projectsData, valuesData, cooperationData }) => (
 );
 
 export const getStaticProps = async () => {
-  const socials = await ContentfulClient.getBasicContentData('common');
+  const common = await ContentfulClient.getBasicContentData('common');
 
-  const socialUrls = filterSocials(socials);
+  const socialUrls = filterSocials(common);
 
   // Hero data
   const basicContent = await ContentfulClient.getBasicContentData('homepage');
@@ -61,6 +61,12 @@ export const getStaticProps = async () => {
     partners: filterHomePageLogos(partners),
   };
 
+  // Contact Form
+
+  const contactFormData = filterBasicContentData(common, 'contact-form-text');
+
+  const toolTipText = filterBasicContentData(common, 'contact-form-tooltip');
+
   return {
     props: {
       heroData,
@@ -68,6 +74,8 @@ export const getStaticProps = async () => {
       projectsData,
       cooperationData,
       socialUrls,
+      contactFormData,
+      toolTipText,
     },
   };
 };

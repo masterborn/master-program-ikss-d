@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Input from '@components/ContactForm/StyledInput';
 import Checkbox from '@components/ContactForm/CheckboxField';
 import IconSM from '@components/Icon/IconSM';
 import ToolTip from '@components/ContactForm/ToolTip';
 import FormButton from '@components/ContactForm/FormButton';
-import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { contactFormActions } from '@store/contactFormSlice';
@@ -139,12 +139,14 @@ const StyledCloseIcon = styled(IconSM)`
   cursor: pointer;
 `;
 
-const ContactForm = ({ modal, toolTipText, className }) => {
+const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const formValidation = useSelector(({ contactForm }) => contactForm.formValidation);
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
+
+  const { title, text1 } = contactFormData;
 
   const closeModalButton = (
     <button type="button" onClick={() => dispatch(modalActions.closeModal())}>
@@ -155,6 +157,8 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   const handleSubmit = (event) => {
     let isFormValid = false;
 
+    dispatch(contactFormActions.setIsFormSubmittedToTrue());
+
     if (
       formValidation.name &&
       formValidation.surname &&
@@ -164,6 +168,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       formValidation.conditions
     ) {
       isFormValid = true;
+      dispatch(contactFormActions.setIsFormSubmittedToFalse());
     }
 
     if (!isFormValid) {
@@ -177,7 +182,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       dispatch(contactFormActions.setButtonToError());
     }, 3000);
 
-    dispatch(contactFormActions.setFormChangedToFalse());
+    dispatch(contactFormActions.setIsFormChangedToFalse());
 
     dispatch(contactFormActions.clearFormFields());
 
@@ -189,14 +194,10 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       {modal && closeModalButton}
 
       <Header>
-        <h3>Skontaktuj się z nami</h3>
-        <IconSM icon={FormIcon} size="40px" media="24px" />
+        <h3>{title}</h3>
       </Header>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ut volutpat tincidunt
-        dictumst neque neque molestie parturient.
-      </p>
+      {documentToReactComponents(text1)}
 
       <Form onSubmit={handleSubmit}>
         <StyledInput
@@ -244,7 +245,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
                 onMouseEnter={() => setIsToolTipShown(true)}
                 onMouseLeave={() => setIsToolTipShown(false)}
               >
-                {isToolTipShown && <InfoToolTip toolTipText={toolTipText} />}
+                {isToolTipShown && <InfoToolTip toolTipText={toolTipText.text1} />}
                 informacją o administratorze i przetwarzaniu danych.
               </a>
             </Link>
@@ -259,13 +260,14 @@ const ContactForm = ({ modal, toolTipText, className }) => {
 
 ContactForm.defaultProps = {
   modal: false,
-  toolTipText: '',
+  toolTipText: {},
   className: null,
 };
 
 ContactForm.propTypes = {
   modal: PropTypes.bool,
-  toolTipText: PropTypes.string,
+  toolTipText: PropTypes.instanceOf(Object),
+  contactFormData: PropTypes.instanceOf(Object).isRequired,
   className: PropTypes.string,
 };
 

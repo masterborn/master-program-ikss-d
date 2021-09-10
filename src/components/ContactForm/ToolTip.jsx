@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getColor, getFontWeight } from '@styles/utils';
 
@@ -27,7 +28,7 @@ const StyledToolTip = styled.span`
 `;
 
 const ToolTip = ({ className, toolTipText }) => (
-  <StyledToolTip className={className}>{toolTipText}</StyledToolTip>
+  <StyledToolTip className={className}>{documentToReactComponents(toolTipText)}</StyledToolTip>
 );
 
 ToolTip.defaultProps = {
