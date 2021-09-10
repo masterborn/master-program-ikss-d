@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
-import PropTypes from 'prop-types';
 
 import { getMedias } from '@styles/utils';
 import ContactForm from '@components/ContactForm/ContactForm';
@@ -66,7 +65,6 @@ const GlobalStyles = createGlobalStyle`
 const Modal = (toolTipText, contactFormData) => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(({ modal }) => modal.isModalOpen);
-  console.log(contactFormData);
 
   const closeModal = () => {
     dispatch(modalActions.closeModal());
@@ -111,11 +109,6 @@ const Modal = (toolTipText, contactFormData) => {
       )}
     </AnimatePresence>
   );
-};
-
-Modal.propTypes = {
-  contactFormData: PropTypes.instanceOf(Object).isRequired,
-  toolTipText: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Modal;
