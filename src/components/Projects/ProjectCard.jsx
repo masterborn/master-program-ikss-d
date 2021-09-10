@@ -139,7 +139,7 @@ const ProjectCard = ({ projects, isOnHomePage }) => {
     <CardImage imageSrc={projects.imgSrc} imageAlt={projects.imgAlt} isOnHomePage={isOnHomePage} />
   );
 
-  const button = projects.url && (
+  const button = projects.buttonLabel && (
     <SocialButton withIcon={projects.url.includes('facebook')} href={projects.url}>
       {projects.buttonLabel}
     </SocialButton>
