@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import MemberCard from '@components/Members/MemberCard';
+import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.section`
   display: grid;
@@ -11,6 +12,20 @@ const Wrapper = styled.section`
 
   & > p {
     max-width: 635px;
+    margin-bottom: 64px;
+
+    @media (max-width: ${getMedias('tablet')}) {
+      max-width: 327px;
+    }
+  }
+
+  & > h3 {
+    margin-bottom: 32px;
+
+    @media (max-width: ${getMedias('tablet')}) {
+      margin-top: 70px;
+      margin-bottom: 16px;
+    }
   }
 `;
 

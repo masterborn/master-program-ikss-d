@@ -2,14 +2,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Image from 'next/dist/client/image';
 
-import { getColor } from '@styles/utils';
+import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
+import PhoneIcon from '@assets/icons/tel-icon.svg';
+import EmailIcon from '@assets/icons/email-icon.svg';
+import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 32px 67px 40px;
+  padding: 32px 24px 40px;
 
   box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
     1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
@@ -20,9 +22,12 @@ const Wrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  --size: clamp(80px, 10vw, 164px);
+
   position: relative;
-  width: 164px;
-  padding-top: 164px;
+  width: var(--size);
+  padding-top: var(--size);
+  margin-bottom: 24px;
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -37,7 +42,50 @@ const ImagePlaceholder = styled.div`
 `;
 
 const StyledButton = styled(Button)`
-  margin-top: auto;
+  height: auto;
+  margin-top: 24px;
+  padding: 9px 16px 9px 13.5px;
+  font-size: 14px;
+  line-height: 17.57px;
+`;
+
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  & > p > a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: ${getFontWeight('buttonWeight')};
+    line-height: 17.57px;
+    color: ${getColor('ikksBlue')};
+
+    &:first-child {
+      margin-bottom: 12px;
+    }
+
+    & * {
+      fill: ${getColor('ikksBlue')};
+    }
+  }
+`;
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+
+  & > h5 {
+    margin: 8px 0 24px;
+    color: ${getColor('steel')};
+  }
 `;
 
 const MemberCard = ({ member }) => {
@@ -47,17 +95,34 @@ const MemberCard = ({ member }) => {
 
   return (
     <Wrapper>
-      <ImageWrapper>{imageVisibility}</ImageWrapper>
-      <h4>{name}</h4>
-      <h5>{role}</h5>
-      <p>{phone}</p>
-      <p>{email}</p>
+      <Header>
+        <ImageWrapper>{imageVisibility}</ImageWrapper>
 
-      {linkedinUrl && (
-        <StyledButton withIcon secondary href={linkedinUrl}>
-          LinkedIn
-        </StyledButton>
-      )}
+        <h4>{name}</h4>
+        <h5>{role}</h5>
+      </Header>
+
+      <InfoWrapper>
+        <p>
+          <a href={`mailto:${email}`}>
+            <IconSM icon={PhoneIcon} size="16px" />
+            {phone}
+          </a>
+        </p>
+
+        <p>
+          <a href={`mailto:${email}`}>
+            <IconSM icon={EmailIcon} size="16px" />
+            {email}
+          </a>
+        </p>
+
+        {linkedinUrl && (
+          <StyledButton withIcon secondary href={linkedinUrl}>
+            LinkedIn
+          </StyledButton>
+        )}
+      </InfoWrapper>
     </Wrapper>
   );
 };
