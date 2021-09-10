@@ -10,6 +10,8 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     -ms-overflow-style: none;
     font-family: ${getFontFamily('Mulish')};
+    scrollbar-color: ${getColor('ikksBlue')} ${getColor('steel_20')};
+    scrollbar-width: thin;
   }
   
 
