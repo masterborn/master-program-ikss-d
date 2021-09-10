@@ -11,6 +11,8 @@ import IconSM from '@components/Icon/IconSM';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  text-align: center;
+  width: 384px;
   padding: 32px 24px 40px;
 
   box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
@@ -18,15 +20,24 @@ const Wrapper = styled.div`
     0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
   border-radius: 16px;
-  width: 384px;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    width: 60%;
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    padding: 20px;
+    width: 100%;
+    margin: 0 24px;
+  }
 `;
 
 const ImageWrapper = styled.div`
-  --size: clamp(80px, 10vw, 164px);
+  --imageWidth: clamp(80px, 10vw, 164px);
 
   position: relative;
-  width: var(--size);
-  padding-top: var(--size);
+  width: var(--imageWidth);
+  padding-top: var(--imageWidth);
   margin-bottom: 24px;
   border-radius: 50%;
   overflow: hidden;
@@ -53,8 +64,12 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   height: 100%;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    display: none;
+  }
 
   & > p > a {
     display: flex;
@@ -82,9 +97,28 @@ const Header = styled.header`
   align-items: center;
   height: 100%;
 
-  & > h5 {
+  & > span > h5 {
     margin: 8px 0 24px;
     color: ${getColor('steel')};
+  }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    flex-direction: initial;
+    gap: 24px;
+
+    & > span {
+      max-width: 130px;
+    }
+
+    & > span > h4 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    & > span > h5 {
+      font-size: 14px;
+      line-height: 17.57px;
+    }
   }
 `;
 
@@ -98,8 +132,10 @@ const MemberCard = ({ member }) => {
       <Header>
         <ImageWrapper>{imageVisibility}</ImageWrapper>
 
-        <h4>{name}</h4>
-        <h5>{role}</h5>
+        <span>
+          <h4>{name}</h4>
+          <h5>{role}</h5>
+        </span>
       </Header>
 
       <InfoWrapper>

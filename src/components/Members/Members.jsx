@@ -13,16 +13,18 @@ const Wrapper = styled.section`
   & > p {
     max-width: 635px;
     margin-bottom: 64px;
-
-    @media (max-width: ${getMedias('tablet')}) {
-      max-width: 327px;
-    }
   }
 
   & > h3 {
     margin-bottom: 32px;
+  }
 
-    @media (max-width: ${getMedias('tablet')}) {
+  @media (max-width: ${getMedias('tablet')}) {
+    & > p {
+      max-width: 327px;
+    }
+
+    & > h3 {
       margin-top: 70px;
       margin-bottom: 16px;
     }
@@ -34,6 +36,10 @@ const MembersWrapper = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 24px;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    gap: 24px;
+  }
 `;
 
 const Members = ({ data }) => {
