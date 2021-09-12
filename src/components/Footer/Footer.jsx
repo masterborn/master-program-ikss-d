@@ -27,7 +27,7 @@ const Wrapper = styled.footer`
 
   @media (max-width: ${getMedias('mobile')}) {
     ${({ contact }) =>
-      !contact === '/' &&
+      contact !== '/' &&
       css`
         height: 586px;
       `}

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { useState } from 'react';
+import styled from 'styled-components';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import { getColor, getFontWeight, getMedias, getShadow } from '@styles/utils';
 import Button from '@components/Button/Button';
 import PhoneIcon from '@assets/icons/tel-icon.svg';
 import EmailIcon from '@assets/icons/email-icon.svg';
@@ -11,8 +11,6 @@ import ChevronIcon from '@assets/icons/chevron-icon.svg';
 import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.div`
-  --imageWidth: ${({ cardExpanded }) => (cardExpanded ? '164px' : 'clamp(80px, 10vw, 164px)')};
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -21,10 +19,7 @@ const Wrapper = styled.div`
   border-radius: 16px;
   text-align: center;
 
-  box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
-    1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
-    0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
-    0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
+  box-shadow: ${getShadow('cardShadow')};
 
   @media (max-width: ${getMedias('tablet')}) {
     width: 65%;
@@ -39,6 +34,8 @@ const Wrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  --imageWidth: ${({ cardExpanded }) => (cardExpanded ? '164px' : 'clamp(80px, 10vw, 164px)')};
+
   position: relative;
   width: var(--imageWidth);
   padding-top: var(--imageWidth);
@@ -72,13 +69,7 @@ const InfoWrapper = styled.div`
   height: 100%;
 
   @media (max-width: ${getMedias('tablet')}) {
-    display: none;
-
-    ${({ cardExpanded }) =>
-      cardExpanded &&
-      css`
-        display: flex;
-      `}
+    display: ${({ cardExpanded }) => (cardExpanded ? 'flex' : 'none')};
   }
 
   & > p > a {
@@ -113,14 +104,8 @@ const Header = styled.header`
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    flex-direction: initial;
+    flex-direction: ${({ cardExpanded }) => (cardExpanded ? 'column' : 'initial')};
     gap: 0 24px;
-
-    ${({ cardExpanded }) =>
-      cardExpanded &&
-      css`
-        flex-direction: column;
-      `}
 
     & > span {
       max-width: 130px;
@@ -157,6 +142,24 @@ const ExpandButton = styled.button`
 
 const MemberCard = ({ member }) => {
   const [cardExpanded, setCardExpanded] = useState(false);
+
+  const handleChange = (event) => {
+    if (event.matches) setCardExpanded(false);
+    else setCardExpanded(true);
+  };
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: 768px)`);
+
+    if (media.matches) setCardExpanded(false);
+    else setCardExpanded(true);
+
+    media.addEventListener('change', handleChange);
+
+    return () => {
+      media.removeEventListener('change', handleChange);
+    };
+  }, []);
 
   const { imgSrc, name, role, phone, email, linkedinUrl } = member;
 

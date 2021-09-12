@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Icon from '@components/Icon/Icon';
-import { getMedias } from '@styles/utils';
+import { getMedias, getShadow } from '@styles/utils';
 
 const Card = styled.div`
   position: relative;
@@ -11,10 +11,7 @@ const Card = styled.div`
   max-width: 23.75rem;
   max-height: 24.625rem;
   border-radius: 16px;
-  box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
-    1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
-    0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
-    0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
+  box-shadow: ${getShadow('cardShadow')};
 
   @media (max-width: ${getMedias('mobile')}) {
     padding: 11.62rem 1.25rem 2rem 1.25rem;
