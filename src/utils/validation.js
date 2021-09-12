@@ -67,16 +67,21 @@ export const validateInput = (inputName, inputValue, dispatch) => {
   return inputError;
 };
 
-export const validateCheckbox = (inputValue, dispatch) => {
-  let message = '';
+export const validateCheckbox = (inputName, inputValue, dispatch) => {
+  const inputError = {
+    message: '',
+    invalid: true,
+  };
 
   if (inputValue) {
-    dispatch(contactFormActions.updateFormValidation({ conditions: true }));
-    return message;
+    dispatch(contactFormActions.updateFormValidation({ [inputName]: true }));
+    inputError.invalid = false;
+    inputError.message = '';
+    return inputError;
   }
 
-  dispatch(contactFormActions.updateFormValidation({ conditions: false }));
-  message = 'To pole jest wymagane';
+  dispatch(contactFormActions.updateFormValidation({ [inputName]: false }));
+  inputError.message = 'To pole jest wymagane';
 
-  return message;
+  return inputError;
 };

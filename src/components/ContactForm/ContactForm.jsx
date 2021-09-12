@@ -112,15 +112,26 @@ const InfoWrapper = styled.div`
       font-size: 12px;
       line-height: 15px;
     }
+  }
 
-    & a {
-      font-weight: ${getFontWeight('buttonWeight')};
-      color: ${getColor('steel_70')};
-      text-decoration: none;
+  & a {
+    font-weight: ${getFontWeight('buttonWeight')};
+    color: ${getColor('steel_70')};
+    text-decoration: none;
+    position: relative;
+    -webkit-touch-callout: none;
+    user-select: none;
+    font-size: 16px;
+    margin-left: 0.3rem;
+    display: inline-block;
 
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: ${getMedias('mobile')}) {
+      font-size: 12px;
+      line-height: 15px;
     }
   }
 `;
@@ -185,6 +196,7 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
     dispatch(contactFormActions.setIsFormChangedToFalse());
 
     dispatch(contactFormActions.clearFormFields());
+    dispatch(contactFormActions.setFieldsToInvalid());
 
     event.preventDefault();
   };
@@ -237,19 +249,17 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
         />
 
         <InfoWrapper>
-          <Checkbox value={formValues.conditions} />
-          <p>
-            Zapoznałem się z{' '}
-            <Link href="/">
-              <a
-                onMouseEnter={() => setIsToolTipShown(true)}
-                onMouseLeave={() => setIsToolTipShown(false)}
-              >
-                {isToolTipShown && <InfoToolTip toolTipText={toolTipText.text1} />}
-                informacją o administratorze i przetwarzaniu danych.
-              </a>
-            </Link>
-          </p>
+          <Checkbox value={formValues.conditions} name="conditions" />
+          <p>Zapoznałem się z </p>
+          <Link href="/">
+            <a
+              onMouseEnter={() => setIsToolTipShown(true)}
+              onMouseLeave={() => setIsToolTipShown(false)}
+            >
+              {isToolTipShown && <InfoToolTip toolTipText={toolTipText.text1} />}
+              informacją o administratorze i przetwarzaniu danych.
+            </a>
+          </Link>
         </InfoWrapper>
 
         <FormButton buttonStatus={buttonStatus} />

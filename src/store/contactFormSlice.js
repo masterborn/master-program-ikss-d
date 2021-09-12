@@ -36,6 +36,16 @@ const contactFormSlice = createSlice({
         conditions: false,
       };
     },
+    setFieldsToInvalid(state) {
+      state.formValidation = {
+        name: false,
+        surname: false,
+        email: false,
+        topic: false,
+        content: false,
+        conditions: false,
+      };
+    },
     updateFormFields(state, action) {
       state.formValues = { ...state.formValues, ...action.payload };
     },

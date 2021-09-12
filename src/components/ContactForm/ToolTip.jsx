@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import PropTypes, { instanceOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getColor, getFontWeight } from '@styles/utils';
@@ -43,7 +43,7 @@ ToolTip.defaultProps = {
 
 ToolTip.propTypes = {
   className: PropTypes.string,
-  toolTipText: PropTypes.string.isRequired,
+  toolTipText: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)]).isRequired,
 };
 
 export default ToolTip;

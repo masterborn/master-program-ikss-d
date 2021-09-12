@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
 
 import { getColor } from '@styles/utils';
 import Checked from '@assets/checked.svg';
@@ -12,7 +13,7 @@ const Wrapper = styled.label`
   position: relative;
 `;
 
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox', required: true })`
+const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -26,13 +27,15 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox', required: true })`
   width: 1px;
 `;
 
-const CheckboxField = styled.div`
+const CheckboxField = styled.div.attrs((props) => ({
+  borderColor: !props.isInvalid ? getColor('steel_40') : getColor('error'),
+}))`
   display: inline-block;
   width: 24px;
   height: 24px;
   overflow: hidden;
   background: ${getColor('white')};
-  border: 1.5px solid ${getColor('steel_40')};
+  border: 1.5px solid ${(props) => props.borderColor};
   border-radius: 4px;
   transition: all 150ms;
   input:hover + & {
@@ -47,26 +50,42 @@ const CheckboxField = styled.div`
   }
 `;
 
-const Checkbox = ({ value }) => {
+const Checkbox = ({ value, name }) => {
+  const [isInvalid, setIsInvalid] = useState(false);
+  const checkboxRef = useRef();
+  const isFormChanged = useSelector(({ contactForm }) => contactForm.isFormChanged);
+  const isFormSubmitted = useSelector(({ contactForm }) => contactForm.isFormSubmitted);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if ((isFormChanged && value !== '') || isFormSubmitted) {
+      const info = validateCheckbox(name, value, dispatch);
+
+      checkboxRef.current.setCustomValidity(info.message);
+      setIsInvalid(info.invalid);
+    }
+  }, [dispatch, isFormChanged, isFormSubmitted, name, value]);
 
   const onChange = (event) => {
     const inputValue = event.target.checked;
-    const { name } = event.target;
 
     dispatch(
       contactFormActions.updateFormFields({
         [name]: inputValue,
       }),
     );
-    const info = validateCheckbox(inputValue, dispatch);
-    event.target.setCustomValidity(info);
   };
 
   return (
     <Wrapper>
-      <HiddenCheckbox checked={value} onChange={onChange} name="conditions" onInvalid={onChange} />
-      <CheckboxField checked={value}>
+      <HiddenCheckbox
+        checked={value}
+        onChange={onChange}
+        name={name}
+        onInvalid={onChange}
+        ref={checkboxRef}
+      />
+      <CheckboxField checked={value} isInvalid={isInvalid}>
         <IconSM icon={Checked} />
       </CheckboxField>
     </Wrapper>
@@ -75,6 +94,7 @@ const Checkbox = ({ value }) => {
 
 Checkbox.propTypes = {
   value: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default Checkbox;
