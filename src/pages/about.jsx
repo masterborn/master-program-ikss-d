@@ -1,7 +1,6 @@
 import SubPagesLayout from '@components/Layouts/SubPagesLayout';
 import ContentfulClient from '@api/clients/contentfulApi';
 import {
-  filterData,
   filterBasicContentData,
   filterSocials,
 } from '@root/contentfulDataTransformers/filterData';
