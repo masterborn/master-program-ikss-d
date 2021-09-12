@@ -157,7 +157,7 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
-  const { submitForm } = useFormCarry();
+  const { submitFormMock } = useFormCarry();
 
   const { title, text1 } = contactFormData;
 
@@ -180,8 +180,12 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
       formValidation.conditions
     ) {
       dispatch(contactFormActions.setIsFormSubmittedToFalse());
-      submitForm();
+      submitFormMock(true);
     }
+  };
+
+  const closeModal = () => {
+    dispatch(modalActions.closeModal());
   };
 
   return (
@@ -245,7 +249,7 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
           </Link>
         </InfoWrapper>
 
-        <FormButton buttonStatus={buttonStatus} />
+        <FormButton buttonStatus={buttonStatus} closeModal={closeModal} />
       </Form>
     </Wrapper>
   );
