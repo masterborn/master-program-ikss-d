@@ -53,18 +53,17 @@ const CheckboxField = styled.div.attrs((props) => ({
 const Checkbox = ({ value, name }) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const checkboxRef = useRef();
-  const isFormChanged = useSelector(({ contactForm }) => contactForm.isFormChanged);
   const isFormSubmitted = useSelector(({ contactForm }) => contactForm.isFormSubmitted);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if ((isFormChanged && value !== '') || isFormSubmitted) {
+    if (isFormSubmitted) {
       const info = validateCheckbox(name, value, dispatch);
 
       checkboxRef.current.setCustomValidity(info.message);
       setIsInvalid(info.invalid);
     }
-  }, [dispatch, isFormChanged, isFormSubmitted, name, value]);
+  }, [dispatch, isFormSubmitted, name, value]);
 
   const onChange = (event) => {
     const inputValue = event.target.checked;

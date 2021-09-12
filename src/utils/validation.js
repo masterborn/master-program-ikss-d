@@ -3,7 +3,7 @@ import { contactFormActions } from '@store/contactFormSlice';
 const conditionChecks = (name, nameVal, length, inputVal, regex = false) => {
   if (name !== nameVal) return false;
 
-  const lettersRegex = /[^a-zA-Z]/g;
+  const lettersRegex = /[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (regex) {
