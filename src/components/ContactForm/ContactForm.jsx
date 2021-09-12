@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from '@formcarry/react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Input from '@components/ContactForm/StyledInput';
@@ -156,6 +157,9 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
+  const { state: formcarryState, submit: formcarrySubmit } = useForm({
+    id: 'R7E5lUVhJtZ',
+  });
 
   const { title, text1 } = contactFormData;
 
@@ -187,16 +191,16 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
       return;
     }
 
-    dispatch(contactFormActions.setButtonToLoading());
+    if (formcarryState.submitting) dispatch(contactFormActions.setButtonToLoading());
 
-    setTimeout(() => {
-      dispatch(contactFormActions.setButtonToError());
-    }, 3000);
+    if (formcarryState.error) dispatch(contactFormActions.setButtonToError());
 
-    dispatch(contactFormActions.setIsFormChangedToFalse());
+    if (formcarryState.submitted) {
+      dispatch(contactFormActions.setIsFormChangedToFalse());
 
-    dispatch(contactFormActions.clearFormFields());
-    dispatch(contactFormActions.setFieldsToInvalid());
+      dispatch(contactFormActions.clearFormFields());
+      dispatch(contactFormActions.setFieldsToInvalid());
+    }
 
     event.preventDefault();
   };
