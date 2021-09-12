@@ -4,11 +4,11 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 import { getMedias } from "@styles/utils";
 
-const MissionWrapper = styled.section`
+const HistoryWrapper = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: row;
+        flex-direction: column;
         margin: 6em 2em;
 
         & h2 {
@@ -33,8 +33,9 @@ const MissionWrapper = styled.section`
 const TextWrapper = styled.div`
         display: flex;
         flex-direction: column;
+        justify-content: center;
         width: 658px;
-        margin-left: 3.4em;
+        margin-bottom: 2em;
 
         @media (max-width: 1280px) {
         width: 483px;
@@ -52,20 +53,34 @@ const TextWrapper = styled.div`
 
         @media (max-width: 360px) {
             width: 261px;
-            margin: 0;
+            margin: 2em;
         }
+`;
+
+const TextWrapper2 = styled(TextWrapper)`
+    & * {
+        
+        margin-bottom: 2em;
+        text-indent: 2em;
+    }
 `;
 
 const StyledImage = styled.img`
 width: 483px;
-height: 245px;
+height: 352px;
+margin-left: 3em;
 
 filter: drop-shadow(3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07)) drop-shadow(1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725)) drop-shadow(0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035)) drop-shadow(0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275));
 border-radius: 16px;
 
+@media (max-width: 1280px) {
+        transform: scale(0.9);
+        margin: 0;
+}
+
 @media (max-width: 550px) {
     width: 327px;
-    height: 201px;
+    height: 238px;
     border-radius: 8px;
 }
 
@@ -74,16 +89,44 @@ border-radius: 16px;
 }
 `;
 
-const Mission = ({ data }) => <MissionWrapper>
+const StyledImage2 = styled(StyledImage)`
+width: 483px;
+height: 265px;
+margin-top: 2em;
+
+@media (max-width: 550px) {
+    width: 327px;
+    height: 190px;
+}
+`;
+
+const ArticleWrapper = styled.article`
+    display: flex;
+    flex-direction: row-reverse;
+
+    @media (max-width: ${getMedias('laptop')}) {
+        flex-direction: column;
+    }
+`;
+
+const History = ({ data }) => <HistoryWrapper>
+    <ArticleWrapper>
     <StyledImage src={data.image1.url} alt={data.title} />
     <TextWrapper>
         <h2>{data.title}</h2>
         {documentToReactComponents(data.text1)}
     </TextWrapper>
-</MissionWrapper>
+    </ArticleWrapper>
+    <ArticleWrapper>
+    <StyledImage2 src={data.image2.url} alt={data.title} />
+    <TextWrapper2>
+        {documentToReactComponents(data.text2)}
+    </TextWrapper2>
+    </ArticleWrapper>
+</HistoryWrapper>
 
-export default Mission;
+export default History;
 
-Mission.propTypes = {
+History.propTypes = {
     data: PropTypes.instanceOf(Object).isRequired,
 };
