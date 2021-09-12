@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from '@formcarry/react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Input from '@components/ContactForm/StyledInput';
@@ -15,6 +14,7 @@ import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { contactFormActions } from '@store/contactFormSlice';
 import { modalActions } from '@store/modalSlice';
+import useFormCarry from '@hooks/useFormCarry';
 
 const Wrapper = styled.div`
   position: relative;
@@ -157,9 +157,7 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
-  const { state: formcarryState, submit: formcarrySubmit } = useForm({
-    id: 'R7E5lUVhJtZ',
-  });
+  const { submitForm } = useFormCarry();
 
   const { title, text1 } = contactFormData;
 
@@ -170,8 +168,7 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
   );
 
   const handleSubmit = (event) => {
-    let isFormValid = false;
-
+    event.preventDefault();
     dispatch(contactFormActions.setIsFormSubmittedToTrue());
 
     if (
@@ -182,27 +179,9 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
       formValidation.content &&
       formValidation.conditions
     ) {
-      isFormValid = true;
       dispatch(contactFormActions.setIsFormSubmittedToFalse());
+      submitForm();
     }
-
-    if (!isFormValid) {
-      event.preventDefault();
-      return;
-    }
-
-    if (formcarryState.submitting) dispatch(contactFormActions.setButtonToLoading());
-
-    if (formcarryState.error) dispatch(contactFormActions.setButtonToError());
-
-    if (formcarryState.submitted) {
-      dispatch(contactFormActions.setIsFormChangedToFalse());
-
-      dispatch(contactFormActions.clearFormFields());
-      dispatch(contactFormActions.setFieldsToInvalid());
-    }
-
-    event.preventDefault();
   };
 
   return (
