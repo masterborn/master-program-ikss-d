@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 import { getMedias } from '@styles/utils';
 import ContactForm from '@components/ContactForm/ContactForm';
@@ -62,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-const Modal = (contactFormData) => {
+const Modal = ({ contactFormData }) => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(({ modal }) => modal.isModalOpen);
 
@@ -109,6 +110,10 @@ const Modal = (contactFormData) => {
       )}
     </AnimatePresence>
   );
+};
+
+Modal.propTypes = {
+  contactFormData: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Modal;
