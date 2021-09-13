@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -91,7 +91,6 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
   const [isInvalid, setIsInvalid] = useState(false);
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
-  const inputRef = useRef();
   const isFormChanged = useSelector(({ contactForm }) => contactForm.isFormChanged);
   const isFormSubmitted = useSelector(({ contactForm }) => contactForm.isFormSubmitted);
   const dispatch = useDispatch();
@@ -110,7 +109,6 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
 
       setToolTipText(info.message);
       setIsInvalid(info.invalid);
-      inputRef.current.setCustomValidity(info.message);
 
       if (isToolTipShown && info.message === '') setIsToolTipShown(false);
     }
@@ -139,10 +137,8 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
               name={name}
               placeholder={placeholder}
               onChange={onChange}
-              onInvalid={onChange}
               value={value}
               disabled={disabled}
-              ref={inputRef}
             />
           ) : (
             <input
@@ -150,10 +146,8 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
               name={name}
               placeholder={placeholder}
               onChange={onChange}
-              onInvalid={onChange}
               value={value}
               disabled={disabled}
-              ref={inputRef}
             />
           )}
           {displayToolTip}

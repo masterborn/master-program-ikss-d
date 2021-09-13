@@ -117,7 +117,7 @@ const ContactButton = styled(Button)`
   }
 `;
 
-const Navbar = ({ urls, contactFormData, toolTipText }) => {
+const Navbar = ({ urls, contactFormData }) => {
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
@@ -197,7 +197,7 @@ const Navbar = ({ urls, contactFormData, toolTipText }) => {
         </Button>
 
         <Portal>
-          <Modal contactFormData={contactFormData} toolTipText={toolTipText} />
+          <Modal contactFormData={contactFormData} />
         </Portal>
       </Nav>
     </>
@@ -214,5 +214,4 @@ Navbar.propTypes = {
     lnlink: PropTypes.string,
   }).isRequired,
   contactFormData: PropTypes.instanceOf(Object).isRequired,
-  toolTipText: PropTypes.instanceOf(Object).isRequired,
 };

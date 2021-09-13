@@ -4,12 +4,12 @@ import Navbar from '@components/Navbar/Navbar';
 import Footer from '@components/Footer/Footer';
 
 const Layout = ({ children, pageProps }) => {
-  const { socialUrls, contactFormData, toolTipText } = pageProps;
+  const { socialUrls, contactFormData } = pageProps;
   return (
     <>
-      <Navbar urls={socialUrls} contactFormData={contactFormData} toolTipText={toolTipText} />
+      <Navbar urls={socialUrls} contactFormData={contactFormData} />
       <main>{children}</main>
-      <Footer urls={socialUrls} contactFormData={contactFormData} toolTipText={toolTipText} />
+      <Footer urls={socialUrls} contactFormData={contactFormData} />
     </>
   );
 };
@@ -23,7 +23,6 @@ Layout.propTypes = {
   pageProps: PropTypes.shape({
     socialUrls: PropTypes.shape({}),
     contactFormData: PropTypes.instanceOf(Object),
-    toolTipText: PropTypes.instanceOf(Object),
   }).isRequired,
 };
 

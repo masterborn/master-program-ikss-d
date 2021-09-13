@@ -28,13 +28,10 @@ const StyledToolTip = styled.span`
 `;
 
 const ToolTip = ({ className, toolTipText }) => {
-  if (typeof toolTipText === 'object') {
-    return (
-      <StyledToolTip className={className}>{documentToReactComponents(toolTipText)}</StyledToolTip>
-    );
-  }
+  const text =
+    typeof toolTipText === 'object' ? documentToReactComponents(toolTipText) : toolTipText;
 
-  return <StyledToolTip className={className}>{toolTipText}</StyledToolTip>;
+  return <StyledToolTip className={className}>{text}</StyledToolTip>;
 };
 
 ToolTip.defaultProps = {
