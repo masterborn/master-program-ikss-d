@@ -160,31 +160,10 @@ const ContactForm = ({ modal, className, contactFormData }) => {
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
 
-  const { text, toolTip } = contactFormData;
-
-  let title;
-  let text1;
-  let toolTipText;
-
-  if (!text) {
-    title = 'Skontaktuj się z nami 👋';
-    text1 = (
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ut volutpat tincidunt
-        dictumst neque neque molestie parturient.
-      </p>
-    );
-  } else {
-    title = text.title;
-    text1 = documentToReactComponents(text.text1);
-  }
-
-  if (!toolTip) {
-    toolTipText =
-      'Gravida convallis risus adipiscing non enim. Consectetur quam facilisis tincidunt vitae. Sed id a vestibulum est. A malesuada massa ultrices proin tempor tempus vestibulum. At eros, lacus viverra lacinia eget suspendisse habitasse.';
-  } else {
-    toolTipText = toolTip.text1;
-  }
+  const {
+    text: { title, text1 },
+    toolTip: { text1: toolTipText },
+  } = contactFormData;
 
   const closeModalButton = (
     <button type="button" onClick={() => dispatch(modalActions.closeModal())}>
@@ -220,11 +199,6 @@ const ContactForm = ({ modal, className, contactFormData }) => {
       dispatch(contactFormActions.setButtonToError());
     }, 3000);
 
-    dispatch(contactFormActions.setIsFormChangedToFalse());
-
-    dispatch(contactFormActions.clearFormFields());
-    dispatch(contactFormActions.setFieldsToInvalid());
-
     event.preventDefault();
   };
 
@@ -236,7 +210,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
         <h3>{title}</h3>
       </Header>
 
-      {text1}
+      {documentToReactComponents(text1)}
 
       <Form onSubmit={handleSubmit}>
         <StyledInput
