@@ -31,8 +31,6 @@ export const getStaticProps = async () => {
     members: filterData(boardMembers, 'boardMembers'),
   };
 
-  console.log(boardMembersData);
-
   return {
     props: {
       SubPageHero,

@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 380px;
+  width: 368px;
   padding: 32px 24px 40px;
   border-radius: 16px;
   text-align: center;
@@ -42,54 +42,6 @@ const ImageWrapper = styled.div`
   margin-bottom: ${({ cardExpanded }) => (cardExpanded ? '16px' : '24px')};
   border-radius: 50%;
   overflow: hidden;
-`;
-
-const ImagePlaceholder = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: ${getColor('blue_20')};
-`;
-
-const StyledButton = styled(Button)`
-  height: auto;
-  margin-top: 24px;
-  padding: 9px 16px 9px 13.5px;
-  font-size: 14px;
-  line-height: 17.57px;
-`;
-
-const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: 100%;
-
-  @media (max-width: ${getMedias('tablet')}) {
-    display: ${({ cardExpanded }) => (cardExpanded ? 'flex' : 'none')};
-  }
-
-  & > p > a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: ${getFontWeight('buttonWeight')};
-    line-height: 17.57px;
-    color: ${getColor('ikksBlue')};
-
-    &:first-child {
-      margin-bottom: 12px;
-    }
-
-    & * {
-      fill: ${getColor('ikksBlue')};
-    }
-  }
 `;
 
 const Header = styled.header`
@@ -124,6 +76,54 @@ const Header = styled.header`
 
   @media (max-width: ${getMedias('mobile')}) {
     gap: 0 12px;
+
+    & > span {
+      max-width: ${({ cardExpanded }) => (cardExpanded ? '250px' : '130px')};
+    }
+  }
+`;
+
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    display: ${({ cardExpanded }) => (cardExpanded ? 'flex' : 'none')};
+  }
+
+  & > p > a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: ${getFontWeight('buttonWeight')};
+    line-height: 17.57px;
+    color: ${getColor('ikksBlue')};
+
+    &:first-child {
+      margin-bottom: 12px;
+    }
+
+    & * {
+      fill: ${getColor('ikksBlue')};
+    }
+  }
+`;
+
+const StyledButton = styled(Button)`
+  height: auto;
+  margin-top: 24px;
+  padding: 9px 16px 9px 13.5px;
+  font-size: 14px;
+  line-height: 17.57px;
+
+  & svg {
+    height: 20px;
+    width: 20px;
   }
 `;
 
@@ -138,6 +138,15 @@ const ExpandButton = styled.button`
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
   }
+`;
+
+const ImagePlaceholder = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: ${getColor('blue_20')};
 `;
 
 const MemberCard = ({ member }) => {
@@ -189,14 +198,14 @@ const MemberCard = ({ member }) => {
       <InfoWrapper cardExpanded={cardExpanded}>
         <p>
           <a href={`tel:${phone}`}>
-            <IconSM icon={PhoneIcon} size="16px" />
+            {phone && <IconSM icon={PhoneIcon} size="16px" />}
             {phone}
           </a>
         </p>
 
         <p>
           <a href={`mailto:${email}`}>
-            <IconSM icon={EmailIcon} size="16px" />
+            {email && <IconSM icon={EmailIcon} size="16px" />}
             {email}
           </a>
         </p>
