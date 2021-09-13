@@ -22,3 +22,8 @@ export const getAnimation =
   (animationName) =>
   ({ theme }) =>
     theme.animations[animationName];
+
+export const getShadow =
+  (shadowName) =>
+  ({ theme }) =>
+    theme.shadows[shadowName];
