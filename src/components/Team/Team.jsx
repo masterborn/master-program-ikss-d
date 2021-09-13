@@ -61,6 +61,8 @@ const Wrapper = styled.section`
 
     & > h3 {
       margin-bottom: 16px;
+      font-size: 24px;
+      line-height: 32px;
     }
 
     & > p {
@@ -77,25 +79,31 @@ const ImageWrapper = styled.div`
   padding-bottom: 56.25%;
   margin-bottom: 148px;
   box-shadow: ${getShadow('cardShadow')};
+  border-radius: 16px;
+  overflow: hidden;
 
   @media (max-width: ${getMedias('tablet')}) {
     margin-bottom: 104px;
   }
 `;
 
-const NextImage = styled(Image)`
-  border-radius: 16px;
-`;
+const Team = ({ data }) => {
+  const {
+    title,
+    text1,
+    image1: { url, title: imageTitle },
+  } = data;
 
-const Team = ({ data }) => (
-  <Wrapper>
-    <h3>{data.title}</h3>
-    {documentToReactComponents(data.text1)}
-    <ImageWrapper>
-      <NextImage src={data.image1.url} alt={data.image1.title} layout="fill" />
-    </ImageWrapper>
-  </Wrapper>
-);
+  return (
+    <Wrapper>
+      <h3>{title}</h3>
+      {documentToReactComponents(text1)}
+      <ImageWrapper>
+        <Image src={url} alt={imageTitle} layout="fill" />
+      </ImageWrapper>
+    </Wrapper>
+  );
+};
 
 Team.propTypes = {
   data: PropTypes.instanceOf(Object).isRequired,
