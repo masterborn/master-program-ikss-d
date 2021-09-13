@@ -103,11 +103,15 @@ const InfoWrapper = styled.div`
     grid-column: 1;
   }
 
-  & > p {
+  & > div {
     position: relative;
     margin-left: 1rem;
     -webkit-touch-callout: none;
     user-select: none;
+    letter-spacing: -0.015em;
+    line-height: 32px;
+    font-weight: ${getFontWeight('regular')};
+    font-size: 16px;
 
     @media (max-width: ${getMedias('mobile')}) {
       font-size: 12px;
@@ -123,7 +127,6 @@ const InfoWrapper = styled.div`
     -webkit-touch-callout: none;
     user-select: none;
     font-size: 16px;
-    margin-left: 0.3rem;
     display: inline-block;
 
     &:hover {
@@ -151,7 +154,7 @@ const StyledCloseIcon = styled(IconSM)`
   cursor: pointer;
 `;
 
-const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
+const ContactForm = ({ modal, className, contactFormData }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const formValidation = useSelector(({ contactForm }) => contactForm.formValidation);
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
@@ -159,7 +162,31 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
   const dispatch = useDispatch();
   const { submitFormMock } = useFormCarry();
 
-  const { title, text1 } = contactFormData;
+  const { text, toolTip } = contactFormData;
+
+  let title;
+  let text1;
+  let toolTipText;
+
+  if (!text) {
+    title = 'Skontaktuj się z nami 👋';
+    text1 = (
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ut volutpat tincidunt
+        dictumst neque neque molestie parturient.
+      </p>
+    );
+  } else {
+    title = text.title;
+    text1 = documentToReactComponents(text.text1);
+  }
+
+  if (!toolTip) {
+    toolTipText =
+      'Gravida convallis risus adipiscing non enim. Consectetur quam facilisis tincidunt vitae. Sed id a vestibulum est. A malesuada massa ultrices proin tempor tempus vestibulum. At eros, lacus viverra lacinia eget suspendisse habitasse.';
+  } else {
+    toolTipText = toolTip.text1;
+  }
 
   const closeModalButton = (
     <button type="button" onClick={() => dispatch(modalActions.closeModal())}>
@@ -196,7 +223,7 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
         <h3>{title}</h3>
       </Header>
 
-      {documentToReactComponents(text1)}
+      {text1}
 
       <Form onSubmit={handleSubmit}>
         <StyledInput
@@ -237,16 +264,18 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
 
         <InfoWrapper>
           <Checkbox value={formValues.conditions} name="conditions" />
-          <p>Zapoznałem się z </p>
-          <Link href="/">
-            <a
-              onMouseEnter={() => setIsToolTipShown(true)}
-              onMouseLeave={() => setIsToolTipShown(false)}
-            >
-              {isToolTipShown && <InfoToolTip toolTipText={toolTipText.text1} />}
-              informacją o administratorze i przetwarzaniu danych.
-            </a>
-          </Link>
+          <div>
+            Zapoznałem się z{' '}
+            <Link href="/">
+              <a
+                onMouseEnter={() => setIsToolTipShown(true)}
+                onMouseLeave={() => setIsToolTipShown(false)}
+              >
+                {isToolTipShown && <InfoToolTip toolTipText={toolTipText} />}
+                informacją o administratorze i przetwarzaniu danych.
+              </a>
+            </Link>
+          </div>
         </InfoWrapper>
 
         <FormButton buttonStatus={buttonStatus} closeModal={closeModal} />
@@ -257,13 +286,11 @@ const ContactForm = ({ modal, toolTipText, className, contactFormData }) => {
 
 ContactForm.defaultProps = {
   modal: false,
-  toolTipText: {},
   className: null,
 };
 
 ContactForm.propTypes = {
   modal: PropTypes.bool,
-  toolTipText: PropTypes.instanceOf(Object),
   contactFormData: PropTypes.instanceOf(Object).isRequired,
   className: PropTypes.string,
 };

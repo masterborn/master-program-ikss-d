@@ -33,9 +33,10 @@ export const getStaticProps = async () => {
 
   // Contact Form
 
-  const contactFormData = filterBasicContentData(common, 'contact-form-text');
-
-  const toolTipText = filterBasicContentData(common, 'contact-form-tooltip');
+  const contactFormData = {
+    text: filterBasicContentData(common, 'contact-form-text'),
+    toolTip: filterBasicContentData(common, 'contact-form-tooltip'),
+  };
 
   return {
     props: {
@@ -44,7 +45,6 @@ export const getStaticProps = async () => {
       socialUrls,
       CTASection,
       contactFormData,
-      toolTipText,
     },
   };
 };

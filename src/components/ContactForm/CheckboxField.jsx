@@ -73,6 +73,10 @@ const Checkbox = ({ value, name }) => {
         [name]: inputValue,
       }),
     );
+    const info = validateCheckbox(name, inputValue, dispatch);
+
+    checkboxRef.current.setCustomValidity(info.message);
+    setIsInvalid(info.invalid);
   };
 
   return (

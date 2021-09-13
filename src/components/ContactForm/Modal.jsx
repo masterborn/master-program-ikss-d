@@ -62,7 +62,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-const Modal = (toolTipText, contactFormData) => {
+const Modal = (contactFormData) => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector(({ modal }) => modal.isModalOpen);
 
@@ -103,7 +103,7 @@ const Modal = (toolTipText, contactFormData) => {
               y: -1000,
             }}
           >
-            <ModalForm modal contactFormData={contactFormData} toolTipText={toolTipText} />
+            <ModalForm modal contactFormData={contactFormData} />
           </motion.div>
         </Wrapper>
       )}
