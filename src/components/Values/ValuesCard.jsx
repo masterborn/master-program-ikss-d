@@ -6,16 +6,15 @@ import Icon from '@components/Icon/Icon';
 import { getMedias } from '@styles/utils';
 
 const Card = styled.div`
-  --pdgTop: ${({ isValues }) => (isValues ? '11.62rem' : '12.125rem')};
+  --pdgTop: ${({ isValues }) => (isValues ? '11.62rem' : '12.5rem')};
   --pdgCenter: 1.5rem;
   --pdgBottom: 3rem;
 
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+
   max-width: 23.75rem;
-  max-height: 24.625rem;
-  min-height: 393px;
+
   padding: var(--pdgTop) var(--pdgCenter) var(--pdgBottom) var(--pdgCenter);
   border-radius: 16px;
   box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
@@ -31,7 +30,8 @@ const Card = styled.div`
   }
 
   @media (max-width: 810px) {
-    margin: 5em 0 3em 0;
+    margin: ${({ isValues }) => isValues && '5em 0 3em 0'};
+    min-height: 75%;
   }
 
   & > :is(h5, p) {

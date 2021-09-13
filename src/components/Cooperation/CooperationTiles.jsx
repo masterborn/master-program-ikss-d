@@ -2,9 +2,24 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Card from '@components/Values/ValuesCard';
+import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.section`
   text-align: center;
+  margin: 106px 8%;
+
+  @media (max-width: ${getMedias('laptop')}) {
+    margin: 106px 5%;
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    & > h3 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    margin: 38px 10%;
+  }
 `;
 
 const CardsWrapper = styled.div`
@@ -12,6 +27,11 @@ const CardsWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
+  margin-top: 64px;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    margin-top: 24px;
+  }
 `;
 
 const CooperationTiles = ({ data }) => {
