@@ -186,7 +186,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
       formValidation.conditions
     ) {
       dispatch(contactFormActions.setIsFormSubmittedToFalse());
-      submitFormMock(true);
+      submitFormMock(false);
     }
   };
 
