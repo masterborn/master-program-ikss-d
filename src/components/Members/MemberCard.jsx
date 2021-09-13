@@ -11,9 +11,12 @@ import ChevronIcon from '@assets/icons/chevron-icon.svg';
 import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.div`
+  --paddingActive: 45px 20px 32px;
+
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 368px;
   padding: 32px 24px 40px;
   border-radius: 16px;
@@ -23,13 +26,13 @@ const Wrapper = styled.div`
 
   @media (max-width: ${getMedias('tablet')}) {
     width: 65%;
-    padding: 20px;
+    padding: ${({ cardExpanded }) => (cardExpanded ? 'var(--paddingActive)' : '20px')};
   }
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 100%;
     margin: 0 24px;
-    padding: 15px;
+    padding: ${({ cardExpanded }) => (cardExpanded ? 'var(--paddingActive)' : '15px')};
   }
 `;
 
@@ -39,7 +42,7 @@ const ImageWrapper = styled.div`
   position: relative;
   width: var(--imageWidth);
   padding-top: var(--imageWidth);
-  margin-bottom: ${({ cardExpanded }) => (cardExpanded ? '16px' : '24px')};
+  margin-bottom: ${({ cardExpanded }) => (cardExpanded ? '16px' : '0')};
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -51,13 +54,14 @@ const Header = styled.header`
   height: 100%;
 
   & > span > h5 {
-    margin: 8px 0 24px;
+    margin: ${({ cardExpanded }) => (cardExpanded ? '8px 0 24px' : '8px 0 0px')};
     color: ${getColor('steel')};
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    flex-direction: ${({ cardExpanded }) => (cardExpanded ? 'column' : 'initial')};
+    flex-direction: ${({ cardExpanded }) => (cardExpanded ? 'column' : 'row')};
     gap: 0 24px;
+    text-align: ${({ cardExpanded }) => (cardExpanded ? 'center' : 'left')};
 
     & > span {
       max-width: 130px;
@@ -66,6 +70,7 @@ const Header = styled.header`
     & > span > h4 {
       font-size: 18px;
       line-height: 24px;
+      font-weight: ${getFontWeight('buttonWeight')};
     }
 
     & > span > h5 {
@@ -97,7 +102,7 @@ const InfoWrapper = styled.div`
   & > p > a {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
     text-decoration: none;
     font-size: 14px;
     font-weight: ${getFontWeight('buttonWeight')};
@@ -120,6 +125,10 @@ const StyledButton = styled(Button)`
   padding: 9px 16px 9px 13.5px;
   font-size: 14px;
   line-height: 17.57px;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    margin-top: 16px;
+  }
 
   & svg {
     height: 20px;
@@ -181,7 +190,7 @@ const MemberCard = ({ member }) => {
   );
 
   return (
-    <Wrapper>
+    <Wrapper cardExpanded={cardExpanded}>
       <ExpandButton cardExpanded={cardExpanded} onClick={() => setCardExpanded(!cardExpanded)}>
         <IconSM icon={ChevronIcon} size="26px" />
       </ExpandButton>
