@@ -160,7 +160,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
-  const { submitForm } = useFormCarry();
+  const { submitFormMock } = useFormCarry();
 
   const {
     text: { title, text1 },
@@ -186,7 +186,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
       formValidation.conditions
     ) {
       dispatch(contactFormActions.setIsFormSubmittedToFalse());
-      submitForm();
+      submitFormMock(true);
     }
   };
 
