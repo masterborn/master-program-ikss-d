@@ -113,6 +113,11 @@ const InfoWrapper = styled.div`
     font-weight: ${getFontWeight('regular')};
     font-size: 16px;
 
+    & p {
+      font-size: 10px;
+      line-height: 18px;
+    }
+
     @media (max-width: ${getMedias('mobile')}) {
       font-size: 12px;
       line-height: 15px;

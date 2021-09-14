@@ -114,6 +114,9 @@ const StyledInput = ({
 
   useEffect(() => {
     if ((isFormChanged && value !== '') || isFormSubmitted) {
+      if (name === '_gotcha') {
+        return;
+      }
       const info = validateInput(name, value, dispatch);
 
       setToolTipText(info.message);

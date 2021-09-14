@@ -45,14 +45,6 @@ const ModalForm = styled(ContactForm)`
 
   @media (max-width: ${getMedias('mobile')}) {
     max-width: 330px;
-
-    & header {
-      display: none;
-    }
-
-    & > p {
-      display: none;
-    }
   }
 `;
 
