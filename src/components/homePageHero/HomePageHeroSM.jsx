@@ -26,7 +26,7 @@ const styledHeroSM = ({ socialUrls }) => {
 const HomePageHeroSM = styled(styledHeroSM)``;
 
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
 
   & > div {
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
     margin: 0 0 157px auto;
   }
 
-  @media (max-width: ${getMedias('laptop')}) {
+  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
     & > div {
       width: 90%;
       height: 80px;

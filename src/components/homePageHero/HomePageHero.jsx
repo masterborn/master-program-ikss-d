@@ -5,7 +5,7 @@ import HomePageHeroText from '@components/homePageHero/HomePageHeroText';
 import HomePageHeroImage from '@components/homePageHero/HomePageHeroImage';
 import HeroSM from '@components/homePageHero/HomePageHeroSM';
 import HomePageHeroVideo from '@components/homePageHero/HomePageHeroVideo';
-import { getColor, getMedias } from '@styles/utils';
+import { getMedias } from '@styles/utils';
 
 const HomePageHero = ({ data }) => {
   const { image1, title, text1, socialUrls } = data;
@@ -32,33 +32,16 @@ const HomePageHero = ({ data }) => {
 };
 
 const HeroWrapper = styled.section`
-  background: ${getColor('backgroundGradient')};
-  width: 100vw;
+  width: 100%;
 `;
 
 const Wrapper = styled.section`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
-  & div:nth-child(1) {
-    order: 1;
-  }
-
-  & div:nth-child(2) {
-    order: 2;
-  }
-
-  @media (max-width: ${getMedias('laptop')}) {
-    flex-direction: column;
-
-    & div:nth-child(1) {
-      order: 2;
-    }
-
-    & div:nth-child(2) {
-      order: 1;
-    }
+  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+    flex-direction: column-reverse;
   }
 `;
 

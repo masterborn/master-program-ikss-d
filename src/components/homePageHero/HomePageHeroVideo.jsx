@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { getMedias } from '@styles/utils';
+
 const StyledVideo = styled.video`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  max-width: 56%;
+
+  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+    max-width: 100%;
+  }
 `;
 
 const HomePageHeroVideo = ({ videoSrc }) => (
-  <div>
-    <StyledVideo autoPlay muted loop>
-      <track kind="captions" />
-      <source src={videoSrc} />
-    </StyledVideo>
-  </div>
+  <StyledVideo autoPlay muted loop>
+    <track kind="captions" />
+    <source src={videoSrc} />
+  </StyledVideo>
 );
 
 HomePageHeroVideo.propTypes = {
