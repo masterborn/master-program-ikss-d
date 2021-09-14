@@ -160,7 +160,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
-  const { submitFormMock } = useFormCarry();
+  const { submitForm } = useFormCarry();
 
   const {
     text: { title, text1 },
@@ -186,7 +186,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
       formValidation.conditions
     ) {
       dispatch(contactFormActions.setIsFormSubmittedToFalse());
-      submitFormMock(false);
+      submitForm();
     }
   };
 
@@ -210,6 +210,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Wpisz swoje imię"
           labelText="Imię"
           value={formValues.name}
+          type="text"
         />
 
         <StyledInput
@@ -217,6 +218,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
           value={formValues.surname}
+          type="text"
         />
 
         <StyledInput
@@ -224,6 +226,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
           value={formValues.email}
+          type="email"
         />
 
         <StyledInput
@@ -231,6 +234,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Temat wiadomości"
           labelText="Temat"
           value={formValues.topic}
+          type="text"
         />
 
         <StyledInput
@@ -256,6 +260,9 @@ const ContactForm = ({ modal, className, contactFormData }) => {
             </Link>
           </div>
         </InfoWrapper>
+
+        {/* eslint-disable-next-line no-underscore-dangle */}
+        <StyledInput name="_gotcha" type="hidden" value={formValues._gotcha} />
 
         <FormButton buttonStatus={buttonStatus} closeModal={closeModal} />
       </Form>

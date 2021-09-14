@@ -7,12 +7,28 @@ const useFormCarry = () => {
   const dispatch = useDispatch();
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
 
+  let valuesToSubmit = {};
+
+  // eslint-disable-next-line no-underscore-dangle
+  if (formValues._gotcha === '') {
+    valuesToSubmit = {
+      name: formValues.name,
+      surname: formValues.surname,
+      email: formValues.email,
+      topic: formValues.topic,
+      content: formValues.content,
+      conditions: formValues.conditions,
+    };
+  } else {
+    valuesToSubmit = formValues;
+  }
+
   const submitForm = async () => {
     dispatch(contactFormActions.setButtonToLoading());
     try {
       const response = await axios.post(
         `https://formcarry.com/s/${process.env.NEXT_PUBLIC_FORMCARRY_FORM_ID}`,
-        formValues,
+        valuesToSubmit,
         {
           headers: { Accept: 'application/json' },
         },

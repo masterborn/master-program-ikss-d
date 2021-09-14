@@ -87,7 +87,16 @@ const WarningToolTip = styled(ToolTip)`
   bottom: 110%;
 `;
 
-const StyledInput = ({ name, placeholder, disabled, className, labelText, textarea, value }) => {
+const StyledInput = ({
+  name,
+  placeholder,
+  disabled,
+  className,
+  labelText,
+  textarea,
+  value,
+  type,
+}) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const [toolTipText, setToolTipText] = useState('');
@@ -148,6 +157,7 @@ const StyledInput = ({ name, placeholder, disabled, className, labelText, textar
               onChange={onChange}
               value={value}
               disabled={disabled}
+              type={type}
             />
           )}
           {displayToolTip}
@@ -165,6 +175,7 @@ StyledInput.defaultProps = {
   className: null,
   labelText: null,
   textarea: false,
+  type: 'text',
 };
 
 StyledInput.propTypes = {
@@ -175,6 +186,7 @@ StyledInput.propTypes = {
   labelText: PropTypes.string,
   textarea: PropTypes.bool,
   value: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
 
 export default StyledInput;
