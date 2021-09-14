@@ -39,6 +39,12 @@ const Wrapper = styled.div`
     width: auto;
     background: linear-gradient(360deg, #66757f -0.09%, rgba(102, 117, 127, 0) 100%);
     opacity: 0.6;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover img {
+    background: none;
+    opacity: 1;
   }
 
   @media (max-width: ${getMedias('desktop')}) {
