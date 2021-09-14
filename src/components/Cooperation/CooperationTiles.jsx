@@ -6,10 +6,10 @@ import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.section`
   text-align: center;
-  margin: 106px 8%;
+  margin: 106px 8% 156px;
 
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 106px 5%;
+    margin: 106px 5% 156px;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
@@ -18,7 +18,7 @@ const Wrapper = styled.section`
       line-height: 32px;
     }
 
-    margin: 80px 10%;
+    margin: 80px 10% 100px;
   }
 `;
 
