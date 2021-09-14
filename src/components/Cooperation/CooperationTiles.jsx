@@ -18,7 +18,7 @@ const Wrapper = styled.section`
       line-height: 32px;
     }
 
-    margin: 38px 10%;
+    margin: 80px 10%;
   }
 `;
 
