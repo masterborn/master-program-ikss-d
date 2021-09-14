@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   background: ${getColor('blue_10')};
   border-radius: 16px;
   min-height: 352px;
+  margin: 92px auto;
 
   & h3 {
     text-align: center;

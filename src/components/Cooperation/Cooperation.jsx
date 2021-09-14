@@ -10,10 +10,14 @@ const Wrapper = styled.section`
   flex-direction: column;
   width: 100%;
   text-align: center;
-  padding-bottom: 58rem;
+  padding-bottom: 45rem;
 
   @media (max-width: ${getMedias('laptop')}) {
-    padding: 0 1.5rem 58rem;
+    padding: 0 1.5rem 40rem;
+  }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    padding: 0 1.5rem 45rem;
   }
 `;
 
