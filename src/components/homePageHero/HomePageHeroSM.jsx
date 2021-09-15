@@ -44,7 +44,7 @@ const Wrapper = styled.div`
     margin: 0 0 157px auto;
   }
 
-  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+  @media (max-width: ${getMedias('homeHero')}) {
     & > div {
       width: 90%;
       height: 80px;

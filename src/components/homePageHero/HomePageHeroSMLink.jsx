@@ -17,7 +17,7 @@ const Wrapper = styled.a`
     fill: ${getColor('blue_20')};
   }
 
-  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+  @media (max-width: ${getMedias('homeHero')}) {
     & h5 {
       display: none;
     }

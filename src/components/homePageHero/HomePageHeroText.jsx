@@ -50,7 +50,7 @@ const Wrapper = styled.div`
     }
   }
 
-  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+  @media (max-width: ${getMedias('homeHero')}) {
     margin-bottom: 40px;
   }
 

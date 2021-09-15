@@ -6,7 +6,7 @@ import { getMedias } from '@styles/utils';
 const StyledVideo = styled.video`
   max-width: 56%;
 
-  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+  @media (max-width: ${getMedias('homeHero')}) {
     max-width: 100%;
   }
 `;

@@ -9,7 +9,7 @@ import { openContactForm } from '@utils/formVisibility';
 
 const CTASection = styled.section`
   --pdg-bottom: 148px;
-  --pdg-center: 450px;
+  --pdg-center: 405px;
 
   display: grid;
   place-items: center;
@@ -24,7 +24,11 @@ const CTASection = styled.section`
   }
 
   @media (max-width: 1400px) {
-    --pdg-center: 222px;
+    --pdg-center: 280px;
+  }
+
+  @media (max-width: ${getMedias('desktop')}) {
+    --pdg-center: 200px;
   }
 
   @media (max-width: ${getMedias('laptop')}) {

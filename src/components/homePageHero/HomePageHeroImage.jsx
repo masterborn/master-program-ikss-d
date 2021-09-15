@@ -13,7 +13,7 @@ const HomePageHeroImage = ({ imageSrc, imageAlt }) => (
 const Wrapper = styled.div`
   width: 808px;
 
-  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+  @media (max-width: ${getMedias('homeHero')}) {
     width: 100%;
   }
 `;

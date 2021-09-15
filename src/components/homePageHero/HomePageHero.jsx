@@ -40,7 +40,7 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: ${getMedias('homePageHeroBrakePoint')}) {
+  @media (max-width: ${getMedias('homeHero')}) {
     flex-direction: column-reverse;
   }
 `;
