@@ -19,12 +19,14 @@ import useFormCarry from '@hooks/useFormCarry';
 const Wrapper = styled.div`
   position: relative;
   max-width: 750px;
-  padding: 76.5px 80px;
+  padding: 47px 80px;
   box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
     1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
     0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
-  margin: 2em auto;
+    
+  margin: 2rem auto;
+
   border-radius: 16px;
   background: ${getColor('white')};
 
@@ -34,17 +36,22 @@ const Wrapper = styled.div`
 
   & > p {
     max-width: 580px;
-    margin: 25px 0 35px 0;
+    margin: 25px 0 37px;
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    padding: 76.5px 20px;
+    padding: 32px 16px;
     margin: 2em 24px;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
     max-width: 330px;
     padding: 32px 16px;
+
+    & > p {
+      max-width: 580px;
+      margin: 24px auto;
+    }
   }
 `;
 

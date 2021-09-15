@@ -17,7 +17,7 @@ const GridWrapper = styled.div`
   grid-template-columns: repeat(2, max-content);
   justify-items: center;
   grid-auto-rows: 10px;
-  margin: 4em auto;
+  margin-inline: auto;
   gap: 0 24px;
 
   @media (max-width: ${getMedias('desktop')}) {
@@ -36,13 +36,15 @@ const Carousel = styled.div`
   display: flex;
   width: fit-content;
   justify-content: center;
-  margin: 2em auto;
+  margin: 2.375rem auto 3rem;
   background: ${getColor('blue_10')};
   border-radius: 26px;
+
   @media (max-width: ${getMedias('tablet')}) {
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+    margin: 2.5rem auto 3.75rem;
   }
 `;
 const CarouselButton = styled(Button)`
@@ -68,13 +70,11 @@ const MainProjects = ({ data }) => {
   const years = projects.map((item) => item.date.split('-')[0]);
   const buttonYears = [...new Set(years)].sort((a, b) => b - a).slice(0, 3);
 
-  const [activeYear, setActiveYear] = useState(buttonYears[2]);
+  const [activeYear, setActiveYear] = useState(buttonYears[0]);
 
-  const tempData = projects.filter((item) => item.date.split('-')[0] === activeYear);
+  const filteredProjects = projects.filter((item) => item.date.split('-')[0] === activeYear);
 
   const renderProjectCards = (afterBanner = false) => {
-    const filteredProjects = projects.filter((item) => item.date.split('-')[0] === activeYear);
-
     if (filteredProjects.length < 7) {
       return filteredProjects.map((item) => <ProjectCard key={item.title} projects={item} />);
     }
@@ -86,26 +86,27 @@ const MainProjects = ({ data }) => {
     );
   };
 
-  const renderContact = tempData.length >= 7 && (
+  const renderContact = filteredProjects.length >= 7 && (
     <>
       <ContactBanner contactBanner={contactBanner} />
       <GridWrapper>{renderProjectCards(true)}</GridWrapper>
     </>
   );
 
+  const renderYearButtons = () =>
+    buttonYears.map((button) => (
+      <CarouselButton
+        key={button}
+        active={activeYear === button}
+        onClick={() => setActiveYear(button)}
+      >
+        {button}
+      </CarouselButton>
+    ));
+
   return (
     <>
-      <Carousel>
-        {buttonYears.reverse().map((button) => (
-          <CarouselButton
-            key={button}
-            active={activeYear === button}
-            onClick={() => setActiveYear(button)}
-          >
-            {button}
-          </CarouselButton>
-        ))}
-      </Carousel>
+      <Carousel>{renderYearButtons()}</Carousel>
       <FlexWrapper>
         <ProjectsWrapper>
           <GridWrapper>{renderProjectCards()}</GridWrapper>

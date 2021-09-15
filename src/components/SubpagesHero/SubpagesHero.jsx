@@ -11,19 +11,11 @@ const Wrapper = styled.section`
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 64px 450px 42px;
+  padding: 64px 225px 42px;
   background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
   & h1 {
     margin: 16px auto 32px;
-  }
-
-  @media (max-width: 1600px) {
-    padding: 64px 380px 42px;
-  }
-
-  @media (max-width: 1400px) {
-    padding: 64px 222px 42px;
   }
 
   @media (max-width: ${getMedias('laptop')}) {

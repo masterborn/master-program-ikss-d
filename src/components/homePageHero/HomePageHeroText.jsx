@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Button from '@components/Button/Button';
-import { getMedias } from '@styles/utils';
 import { scrollOnHomepage } from '@utils/formVisibility';
+import { getMedias } from '@styles/utils';
 
 const styledHeroText = ({ headerText, smallText }) => (
   <Wrapper>
@@ -19,18 +19,46 @@ const styledHeroText = ({ headerText, smallText }) => (
 const HomePageHeroText = styled(styledHeroText)``;
 
 const Wrapper = styled.div`
-  margin: 77px 7vw 0 10vw;
   display: flex;
   flex-direction: column;
-  max-width: 420px;
+  max-height: 454px;
+  align-items: flex-start;
+  margin-left: 120px;
 
-  & h1,
-  p {
+  & h1 {
+    margin: 77px 0 32px;
+  }
+
+  & p {
+    max-width: 416px;
     margin-bottom: 32px;
   }
 
-  @media (max-width: ${getMedias('laptop')}) {
-    margin: 40.75px 24px 40px 24px;
+  @media (max-width: 1520px) {
+    margin-left: 56px;
+    max-height: 372px;
+    margin-right: 100px;
+
+    & h1 {
+      margin-top: 36px;
+      font-size: 40px;
+      line-height: 44px;
+    }
+
+    & p {
+      margin-bottom: 23px;
+    }
+  }
+
+  @media (max-width: ${getMedias('homeHero')}) {
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    margin: 0 20px 40px;
+    & h1 {
+      margin-top: 40.75px;
+    }
   }
 `;
 

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+ import PropTypes from 'prop-types';
 
 import SubpagesHero from '@components/SubpagesHero/SubpagesHero';
 import ContactSection from '@components/CTASection/CTASection';
