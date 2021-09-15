@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 import { contactFormActions } from '@store/contactFormSlice';
+import FormCarryApi from '@api/clients/formcarryApi';
 
 const useFormCarry = () => {
   const dispatch = useDispatch();
@@ -26,13 +26,7 @@ const useFormCarry = () => {
   const submitForm = async () => {
     dispatch(contactFormActions.setButtonToLoading());
     try {
-      const response = await axios.post(
-        `https://formcarry.com/s/${process.env.NEXT_PUBLIC_FORMCARRY_FORM_ID}`,
-        valuesToSubmit,
-        {
-          headers: { Accept: 'application/json' },
-        },
-      );
+      const response = await FormCarryApi.sendForm(valuesToSubmit);
 
       if (response.data.code === 200) {
         dispatch(contactFormActions.setIsFormChangedToFalse());
