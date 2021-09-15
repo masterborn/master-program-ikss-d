@@ -22,13 +22,16 @@ const MissionWrapper = styled(CommonWrapper)`
     }
   }
 `;
+
 const ArticleWrapper = styled.article`
   display: flex;
   flex-direction: row-reverse;
+
   @media (max-width: ${getMedias('laptop')}) {
     flex-direction: column;
   }
 `;
+
 const MissionAndHistory = ({ missionData, historyData }) => (
   <CommonWrapper>
     <MissionWrapper>
@@ -59,7 +62,9 @@ const MissionAndHistory = ({ missionData, historyData }) => (
     </ArticleWrapper>
   </CommonWrapper>
 );
+
 export default MissionAndHistory;
+
 MissionAndHistory.propTypes = {
   missionData: PropTypes.instanceOf(Object).isRequired,
   historyData: PropTypes.instanceOf(Object).isRequired,

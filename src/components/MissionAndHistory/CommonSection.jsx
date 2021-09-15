@@ -21,15 +21,18 @@ const StyledImage = styled.div`
   @media (max-width: 1280px) {
     margin: 0;
   }
+
   @media (max-width: 550px) {
     --imageWidth: 327px;
     --imageHeight: ${({ isMission }) => (isMission ? '201px' : '238px')};
     border-radius: 8px;
   }
+
   @media (max-width: 360px) {
     transform: scale(0.8);
   }
 `;
+
 const TextWrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -44,21 +47,26 @@ const TextWrapper = styled.section`
     css`
       text-indent: 3rem;
     `}
+
   @media (max-width: 1280px) {
     width: 483px;
   }
+
   @media (max-width: ${getMedias('laptop')}) {
     width: 483px;
     margin: 2rem 0;
   }
+
   @media (max-width: 550px) {
     width: 327px;
   }
+
   @media (max-width: 360px) {
     width: 261px;
     margin: 2rem;
   }
 `;
+
 const CommonSection = ({ url, alt, title, text, isMission, isIndented }) => (
   <>
     <StyledImage isMission={isMission} isIndented={isIndented}>
@@ -70,11 +78,13 @@ const CommonSection = ({ url, alt, title, text, isMission, isIndented }) => (
     </TextWrapper>
   </>
 );
+
 CommonSection.defaultProps = {
   title: null,
   isMission: false,
   isIndented: false,
 };
+
 CommonSection.propTypes = {
   url: PropTypes.string.isRequired,
   title: PropTypes.string,
@@ -83,4 +93,5 @@ CommonSection.propTypes = {
   isIndented: PropTypes.bool,
   alt: PropTypes.string.isRequired,
 };
+
 export default CommonSection;
