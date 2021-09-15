@@ -8,12 +8,16 @@ import CooperationCard from '@components/Cooperation/CooperationCard';
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   text-align: center;
-  padding-bottom: 10.5rem;
+  padding-bottom: 45rem;
 
   @media (max-width: ${getMedias('laptop')}) {
-    padding: 0 1.5rem 6.875rem;
+    padding: 0 1.5rem 40rem;
+  }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    padding: 0 1.5rem 45rem;
   }
 
   ${({ isHomePage }) =>
