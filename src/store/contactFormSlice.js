@@ -3,7 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 const contactFormSlice = createSlice({
   name: 'contactForm',
   initialState: {
-    isFormValid: false,
+    formValidation: {
+      name: false,
+      surname: false,
+      email: false,
+      topic: false,
+      content: false,
+      conditions: false,
+    },
+    isFormChanged: false,
+    isFormSubmitted: false,
     buttonStatus: 'primary',
     formValues: { name: '', surname: '', email: '', topic: '', content: '', conditions: false },
   },
@@ -27,14 +36,36 @@ const contactFormSlice = createSlice({
         conditions: false,
       };
     },
+    setFieldsToInvalid(state) {
+      state.formValidation = {
+        name: false,
+        surname: false,
+        email: false,
+        topic: false,
+        content: false,
+        conditions: false,
+      };
+    },
     updateFormFields(state, action) {
       state.formValues = { ...state.formValues, ...action.payload };
     },
-    formIsInvalid(state) {
-      state.isFormValid = false;
+    updateFormValidation(state, action) {
+      state.formValidation = {
+        ...state.formValidation,
+        ...action.payload,
+      };
     },
-    formIsValid(state) {
-      state.isFormValid = true;
+    setIsFormChangedToFalse(state) {
+      state.isFormChanged = false;
+    },
+    setIsFormChangedToTrue(state) {
+      state.isFormChanged = true;
+    },
+    setIsFormSubmittedToFalse(state) {
+      state.isFormSubmitted = false;
+    },
+    setIsFormSubmittedToTrue(state) {
+      state.isFormSubmitted = true;
     },
   },
 });

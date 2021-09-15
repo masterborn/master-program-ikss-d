@@ -9,11 +9,16 @@ import LinkedInIconFooter from '@assets/icons/linkedIn-icon.svg';
 import FacebookIconFooter from '@assets/icons/facebook-icon.svg';
 import InstagramIconFooter from '@assets/icons/instagram-icon.svg';
 import YouTubeIconFooter from '@assets/icons/youTube-icon.svg';
+import { getColor } from '@styles/utils';
 import IconSM from '@components/Icon/IconSM';
 
 const SocialsWrapper = styled.div`
   display: flex;
   gap: 24px;
+
+  & svg:hover circle {
+    fill: ${getColor('blue_20')};
+  }
 `;
 
 const Link = ({ url, icon, size }) => (

@@ -3,28 +3,29 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Input from '@components/ContactForm/StyledInput';
 import Checkbox from '@components/ContactForm/CheckboxField';
 import IconSM from '@components/Icon/IconSM';
 import ToolTip from '@components/ContactForm/ToolTip';
 import FormButton from '@components/ContactForm/FormButton';
-import FormIcon from '@assets/form-emoji.svg';
 import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
-import { validateInput, validateCheckbox } from '@utils/validation';
-import { contactFormActions } from '@store/formSlice';
+import { contactFormActions } from '@store/contactFormSlice';
 import { modalActions } from '@store/modalSlice';
 
 const Wrapper = styled.div`
   position: relative;
   max-width: 750px;
-  padding: 76.5px 80px;
+  padding: 47px 80px;
   box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
     1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
     0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
-  margin: 2em auto;
+    
+  margin: 2rem auto;
+
   border-radius: 16px;
   background: ${getColor('white')};
 
@@ -34,17 +35,22 @@ const Wrapper = styled.div`
 
   & > p {
     max-width: 580px;
-    margin: 25px 0 35px 0;
+    margin: 25px 0 37px;
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    padding: 76.5px 20px;
+    padding: 32px 16px;
     margin: 2em 24px;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
     max-width: 330px;
     padding: 32px 16px;
+
+    & > p {
+      max-width: 580px;
+      margin: 24px auto;
+    }
   }
 `;
 
@@ -103,25 +109,39 @@ const InfoWrapper = styled.div`
     grid-column: 1;
   }
 
-  & > p {
+  & > div {
     position: relative;
     margin-left: 1rem;
     -webkit-touch-callout: none;
     user-select: none;
+    letter-spacing: -0.015em;
+    line-height: 32px;
+    font-weight: ${getFontWeight('regular')};
+    font-size: 16px;
 
     @media (max-width: ${getMedias('mobile')}) {
       font-size: 12px;
       line-height: 15px;
     }
+  }
 
-    & a {
-      font-weight: ${getFontWeight('buttonWeight')};
-      color: ${getColor('steel_70')};
-      text-decoration: none;
+  & a {
+    font-weight: ${getFontWeight('buttonWeight')};
+    color: ${getColor('steel_70')};
+    text-decoration: none;
+    position: relative;
+    -webkit-touch-callout: none;
+    user-select: none;
+    font-size: 16px;
+    display: inline-block;
 
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: ${getMedias('mobile')}) {
+      font-size: 12px;
+      line-height: 15px;
     }
   }
 `;
@@ -140,12 +160,17 @@ const StyledCloseIcon = styled(IconSM)`
   cursor: pointer;
 `;
 
-const ContactForm = ({ modal, toolTipText, className }) => {
+const ContactForm = ({ modal, className, contactFormData }) => {
   const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const isFormValid = useSelector((state) => state.contactForm.isFormValid);
-  const buttonStatus = useSelector((state) => state.contactForm.buttonStatus);
-  const formValues = useSelector((state) => state.contactForm.formValues);
+  const formValidation = useSelector(({ contactForm }) => contactForm.formValidation);
+  const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
+  const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
+
+  const {
+    text: { title, text1 },
+    toolTip: { text1: toolTipText },
+  } = contactFormData;
 
   const closeModalButton = (
     <button type="button" onClick={() => dispatch(modalActions.closeModal())}>
@@ -154,6 +179,22 @@ const ContactForm = ({ modal, toolTipText, className }) => {
   );
 
   const handleSubmit = (event) => {
+    let isFormValid = false;
+
+    dispatch(contactFormActions.setIsFormSubmittedToTrue());
+
+    if (
+      formValidation.name &&
+      formValidation.surname &&
+      formValidation.email &&
+      formValidation.topic &&
+      formValidation.content &&
+      formValidation.conditions
+    ) {
+      isFormValid = true;
+      dispatch(contactFormActions.setIsFormSubmittedToFalse());
+    }
+
     if (!isFormValid) {
       event.preventDefault();
       return;
@@ -165,32 +206,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       dispatch(contactFormActions.setButtonToError());
     }, 3000);
 
-    dispatch(contactFormActions.clearFormFields());
-
     event.preventDefault();
-  };
-
-  const getDataFromInputs = (event) => {
-    const inputVal = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-    const { name } = event.target;
-
-    dispatch(
-      contactFormActions.updateFormFields({
-        [name]: inputVal,
-      }),
-    );
-  };
-
-  const onValidateInput = (event) => {
-    getDataFromInputs(event);
-
-    return validateInput(event, dispatch);
-  };
-
-  const onValidateCheckbox = (event) => {
-    getDataFromInputs(event);
-
-    return validateCheckbox(event, dispatch);
   };
 
   return (
@@ -198,46 +214,38 @@ const ContactForm = ({ modal, toolTipText, className }) => {
       {modal && closeModalButton}
 
       <Header>
-        <h3>Skontaktuj się z nami</h3>
-        <IconSM icon={FormIcon} size="40px" media="24px" />
+        <h3>{title}</h3>
       </Header>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ut volutpat tincidunt
-        dictumst neque neque molestie parturient.
-      </p>
+      {documentToReactComponents(text1)}
 
       <Form onSubmit={handleSubmit}>
         <StyledInput
           name="name"
           placeholder="Wpisz swoje imię"
           labelText="Imię"
-          validateCallback={onValidateInput}
-          defaultValue={formValues.name}
+          value={formValues.name}
         />
 
         <StyledInput
           name="surname"
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
-          validateCallback={onValidateInput}
-          defaultValue={formValues.surname}
+          value={formValues.surname}
         />
 
         <StyledInput
           name="email"
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
-          validateCallback={onValidateInput}
-          defaultValue={formValues.email}
+          value={formValues.email}
         />
 
         <StyledInput
           name="topic"
           placeholder="Temat wiadomości"
           labelText="Temat"
-          validateCallback={onValidateInput}
-          defaultValue={formValues.topic}
+          value={formValues.topic}
         />
 
         <StyledInput
@@ -245,13 +253,12 @@ const ContactForm = ({ modal, toolTipText, className }) => {
           name="content"
           placeholder="O czym chcesz z nami porozmawiać?"
           labelText="Treść"
-          validateCallback={onValidateInput}
-          defaultValue={formValues.content}
+          value={formValues.content}
         />
 
         <InfoWrapper>
-          <Checkbox defaultValue={formValues.conditions} validateCallback={onValidateCheckbox} />
-          <p>
+          <Checkbox value={formValues.conditions} name="conditions" />
+          <div>
             Zapoznałem się z{' '}
             <Link href="/">
               <a
@@ -262,7 +269,7 @@ const ContactForm = ({ modal, toolTipText, className }) => {
                 informacją o administratorze i przetwarzaniu danych.
               </a>
             </Link>
-          </p>
+          </div>
         </InfoWrapper>
 
         <FormButton buttonStatus={buttonStatus} />
@@ -273,13 +280,12 @@ const ContactForm = ({ modal, toolTipText, className }) => {
 
 ContactForm.defaultProps = {
   modal: false,
-  toolTipText: '',
   className: null,
 };
 
 ContactForm.propTypes = {
   modal: PropTypes.bool,
-  toolTipText: PropTypes.string,
+  contactFormData: PropTypes.instanceOf(Object).isRequired,
   className: PropTypes.string,
 };
 
