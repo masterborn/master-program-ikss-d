@@ -20,7 +20,7 @@ class ContentfulClient {
       .get('', { params: { content_type: section, select: 'fields' } })
       .then((res) => res.data)
       .catch((err) => {
-        throw err;
+        throw new Error(err);
       });
   }
 
@@ -29,7 +29,7 @@ class ContentfulClient {
       .get('', { params: { content_type: 'partnerLogos' } })
       .then((res) => getAssets(res.data))
       .catch((err) => {
-        throw err;
+        throw new Error(err);
       });
   }
 
@@ -38,7 +38,7 @@ class ContentfulClient {
       .get('', { params: { content_type: 'basicContent', 'fields.page[in]': page } })
       .then((res) => getAssets(res.data))
       .catch((err) => {
-        throw err;
+        throw new Error(err);
       });
   }
 }
