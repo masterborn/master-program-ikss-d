@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
@@ -8,14 +8,28 @@ import CooperationCard from '@components/Cooperation/CooperationCard';
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   text-align: center;
-  padding-bottom: 58rem;
-  background: linear-gradient(0deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
+  padding-bottom: 45rem;
 
   @media (max-width: ${getMedias('laptop')}) {
-    padding: 0 1.5rem 58rem;
+    padding: 0 1.5rem 40rem;
   }
+
+  @media (max-width: ${getMedias('tablet')}) {
+    padding: 0 1.5rem 45rem;
+  }
+
+  ${({ isHomePage }) =>
+    isHomePage &&
+    css`
+      padding-bottom: 58rem;
+      background: linear-gradient(0deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
+
+      @media (max-width: ${getMedias('laptop')}) {
+        padding: 0 1.5rem 58rem;
+      }
+    `}
 `;
 
 const Header = styled.header`
@@ -59,7 +73,7 @@ const CooperationWrapper = styled.div`
   }
 `;
 
-const Cooperation = ({ data }) => {
+const Cooperation = ({ data, isHomePage }) => {
   const { title, text1, partners } = data;
 
   const renderSponsors = () =>
@@ -73,7 +87,7 @@ const Cooperation = ({ data }) => {
     ));
 
   return (
-    <Wrapper>
+    <Wrapper isHomePage={isHomePage}>
       <Header>
         <h3>{title}</h3>
         {text1 && documentToReactComponents(text1)}
@@ -83,8 +97,13 @@ const Cooperation = ({ data }) => {
   );
 };
 
+Cooperation.defaultProps = {
+  isHomePage: false,
+};
+
 Cooperation.propTypes = {
   data: PropTypes.instanceOf(Object).isRequired,
+  isHomePage: PropTypes.bool,
 };
 
 export default Cooperation;

@@ -10,7 +10,7 @@ import Slider from '@components/Values/Slider';
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   margin-bottom: 180px;
   text-align: center;
   padding: 0 1.5rem;
@@ -73,7 +73,8 @@ const Values = ({ data }) => {
     };
   }, []);
 
-  const renderCards = () => cards.map((card) => <ValuesCard card={card} key={card.title} />);
+  const renderCards = () =>
+    cards.map((card) => <ValuesCard card={card} key={card.title} isValues />);
 
   const slider = isSliderVisible ? <Slider data={cards} /> : <Cards>{renderCards()}</Cards>;
 

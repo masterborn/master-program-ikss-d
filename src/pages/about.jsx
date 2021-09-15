@@ -1,14 +1,16 @@
 import SubPagesLayout from '@components/Layouts/SubPagesLayout';
-import Members from '@components/Members/Members';
 import ContentfulClient from '@api/clients/contentfulApi';
 import {
   filterBasicContentData,
   filterData,
   filterSocials,
 } from '@contentfulDataTransformers/filterData';
+import MissionAndHistory from '@components/MissionAndHistory/MissionAndHistory';
+import Members from '@components/Members/Members';
 
-const projectsPage = ({ boardMembersData }) => (
+const aboutPage = ({ boardMembersData, mission, history }) => (
   <>
+    <MissionAndHistory missionData={mission} historyData={history} />
     <Members data={boardMembersData} />
   </>
 );
@@ -18,9 +20,12 @@ export const getStaticProps = async () => {
 
   const SubPageHero = filterBasicContentData(basicContent, 'about-us-top-section');
 
-  const socials = await ContentfulClient.getBasicContentData('common');
+  const mission = filterBasicContentData(basicContent, 'about-us-content-1');
+  const history = filterBasicContentData(basicContent, 'about-us-content-2');
 
-  const socialUrls = filterSocials(socials);
+  const common = await ContentfulClient.getBasicContentData('common');
+
+  const socialUrls = filterSocials(common);
 
   const CTASection = filterBasicContentData(basicContent, 'about-us-bottom-cta');
 
@@ -35,14 +40,16 @@ export const getStaticProps = async () => {
     props: {
       SubPageHero,
       socialUrls,
+      mission,
+      history,
       CTASection,
       boardMembersData,
     },
   };
 };
 
-projectsPage.getLayout = function getLayout(page, props) {
+aboutPage.getLayout = function getLayout(page, props) {
   return <SubPagesLayout pageProps={props}>{page}</SubPagesLayout>;
 };
 
-export default projectsPage;
+export default aboutPage;
