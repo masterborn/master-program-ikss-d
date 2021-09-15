@@ -10,24 +10,19 @@ const Wrapper = styled.section`
   flex-direction: column;
   width: 100%;
   text-align: center;
-  padding-bottom: 45rem;
-
-  @media (max-width: ${getMedias('laptop')}) {
-    padding: 0 1.5rem 40rem;
-  }
-
-  @media (max-width: ${getMedias('tablet')}) {
-    padding: 0 1.5rem 45rem;
-  }
 
   ${({ isHomePage }) =>
     isHomePage &&
     css`
-      padding-bottom: 58rem;
+      padding-bottom: 45rem;
       background: linear-gradient(0deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
       @media (max-width: ${getMedias('laptop')}) {
-        padding: 0 1.5rem 58rem;
+        padding: 0 1.5rem 40rem;
+      }
+
+      @media (max-width: ${getMedias('tablet')}) {
+        padding: 0 1.5rem 45rem;
       }
     `}
 `;
