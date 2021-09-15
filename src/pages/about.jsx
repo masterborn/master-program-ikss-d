@@ -1,12 +1,18 @@
 import SubPagesLayout from '@components/Layouts/SubPagesLayout';
 import ContentfulClient from '@api/clients/contentfulApi';
-import { filterBasicContentData, filterSocials } from '@contentfulDataTransformers/filterData';
 import Team from '@components/Team/Team';
+import {
+  filterBasicContentData,
+  filterData,
+  filterSocials,
+} from '@contentfulDataTransformers/filterData';
 import MissionAndHistory from '@components/MissionAndHistory/MissionAndHistory';
+import Members from '@components/Members/Members';
 
-const aboutPage = ({ mission, history, TeamData }) => (
+const aboutPage = ({ mission, history, boardMembersData, TeamData }) => (
   <>
     <MissionAndHistory missionData={mission} historyData={history} />
+    <Members data={boardMembersData} />
     <Team data={TeamData} />
   </>
 );
@@ -31,16 +37,23 @@ export const getStaticProps = async () => {
     text: filterBasicContentData(common, 'contact-form-text'),
     toolTip: filterBasicContentData(common, 'contact-form-tooltip'),
   };
+  const boardMembers = await ContentfulClient.getFieldsData('boardMembers');
+
+  const boardMembersData = {
+    ...filterBasicContentData(basicContent, 'about-us-board-members-text'),
+    members: filterData(boardMembers, 'boardMembers'),
+  };
 
   return {
     props: {
       SubPageHero,
+      socialUrls,
       mission,
       history,
-      socialUrls,
       CTASection,
       TeamData,
       contactFormData,
+      boardMembersData,
     },
   };
 };

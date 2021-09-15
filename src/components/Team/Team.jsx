@@ -11,6 +11,7 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   padding-inline: 220px;
+  margin-top: 164px;
 
   & > h3 {
     margin-bottom: 32px;
@@ -54,6 +55,7 @@ const Wrapper = styled.section`
 
   @media (max-width: ${getMedias('tablet')}) {
     padding-inline: 24px;
+    margin-top: 80px;
 
     & > h3 {
       margin-bottom: 16px;

@@ -51,6 +51,7 @@ export const filterData = (response, section, page = null) => {
     if (section === 'boardMembers') {
       tempObject = {
         imgSrc: imageUrl ? `https:${imageUrl}` : '',
+        imgAlt: fields.name,
         name: fields.name,
         role: fields.role,
         phone: fields.phone || '',
