@@ -10,7 +10,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-inline: 230px;
+  padding-inline: 220px;
 
   & > h3 {
     margin-bottom: 32px;
@@ -19,15 +19,11 @@ const Wrapper = styled.section`
   & > p {
     margin-bottom: 64px;
     text-align: center;
-    padding-inline: 400px;
+    padding-inline: 150px;
   }
 
   @media (max-width: 1700px) {
-    padding-inline: 160px;
-
-    & > p {
-      padding-inline: 350px;
-    }
+    padding-inline: 130px;
   }
 
   @media (max-width: 1500px) {
@@ -77,7 +73,6 @@ const ImageWrapper = styled.div`
   width: 100%;
   height: 0;
   padding-bottom: 56.25%;
-  margin-bottom: 148px;
   box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
   overflow: hidden;
