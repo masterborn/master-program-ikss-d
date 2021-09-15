@@ -73,7 +73,8 @@ const Values = ({ data }) => {
     };
   }, []);
 
-  const renderCards = () => cards.map((card) => <ValuesCard card={card} key={card.title} />);
+  const renderCards = () =>
+    cards.map((card) => <ValuesCard card={card} key={card.title} isValues />);
 
   const slider = isSliderVisible ? <Slider data={cards} /> : <Cards>{renderCards()}</Cards>;
 

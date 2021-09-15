@@ -14,7 +14,7 @@ const Slider = ({ data }) => {
   const renderCards = () =>
     data.map((card) => (
       <SwiperSlide key={card.title}>
-        <ValuesCard card={card} />
+        <ValuesCard card={card} isValues />
       </SwiperSlide>
     ));
 

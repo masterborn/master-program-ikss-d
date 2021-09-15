@@ -16,7 +16,7 @@ const homePage = ({ heroData, projectsData, valuesData, cooperationData }) => (
     <HomePageHero data={heroData} />
     <Values data={valuesData} />
     <HomeProjects data={projectsData} />
-    <Cooperation data={cooperationData} />
+    <Cooperation data={cooperationData} isHomePage />
   </>
 );
 
