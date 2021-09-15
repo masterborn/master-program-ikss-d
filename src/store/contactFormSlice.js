@@ -14,7 +14,15 @@ const contactFormSlice = createSlice({
     isFormChanged: false,
     isFormSubmitted: false,
     buttonStatus: 'primary',
-    formValues: { name: '', surname: '', email: '', topic: '', content: '', conditions: false },
+    formValues: {
+      name: '',
+      surname: '',
+      email: '',
+      topic: '',
+      content: '',
+      conditions: false,
+      _gotcha: '',
+    },
   },
   reducers: {
     setButtonToLoading(state) {
@@ -44,6 +52,7 @@ const contactFormSlice = createSlice({
         topic: false,
         content: false,
         conditions: false,
+        _gotcha: '',
       };
     },
     updateFormFields(state, action) {

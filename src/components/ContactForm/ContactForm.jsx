@@ -14,6 +14,7 @@ import CloseIcon from '@assets/icons/x-icon.svg';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import { contactFormActions } from '@store/contactFormSlice';
 import { modalActions } from '@store/modalSlice';
+import useFormCarry from '@hooks/useFormCarry';
 
 const Wrapper = styled.div`
   position: relative;
@@ -23,7 +24,7 @@ const Wrapper = styled.div`
     1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
     0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
     0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
-    
+
   margin: 2rem auto;
 
   border-radius: 16px;
@@ -119,6 +120,11 @@ const InfoWrapper = styled.div`
     font-weight: ${getFontWeight('regular')};
     font-size: 16px;
 
+    & p {
+      font-size: 10px;
+      line-height: 18px;
+    }
+
     @media (max-width: ${getMedias('mobile')}) {
       font-size: 12px;
       line-height: 15px;
@@ -166,6 +172,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
   const buttonStatus = useSelector(({ contactForm }) => contactForm.buttonStatus);
   const formValues = useSelector(({ contactForm }) => contactForm.formValues);
   const dispatch = useDispatch();
+  const { submitFormMock } = useFormCarry();
 
   const {
     text: { title, text1 },
@@ -179,8 +186,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
   );
 
   const handleSubmit = (event) => {
-    let isFormValid = false;
-
+    event.preventDefault();
     dispatch(contactFormActions.setIsFormSubmittedToTrue());
 
     if (
@@ -191,22 +197,13 @@ const ContactForm = ({ modal, className, contactFormData }) => {
       formValidation.content &&
       formValidation.conditions
     ) {
-      isFormValid = true;
       dispatch(contactFormActions.setIsFormSubmittedToFalse());
+      submitFormMock(true);
     }
+  };
 
-    if (!isFormValid) {
-      event.preventDefault();
-      return;
-    }
-
-    dispatch(contactFormActions.setButtonToLoading());
-
-    setTimeout(() => {
-      dispatch(contactFormActions.setButtonToError());
-    }, 3000);
-
-    event.preventDefault();
+  const closeModal = () => {
+    dispatch(modalActions.closeModal());
   };
 
   return (
@@ -225,6 +222,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Wpisz swoje imię"
           labelText="Imię"
           value={formValues.name}
+          type="text"
         />
 
         <StyledInput
@@ -232,6 +230,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Wpisz swoje nazwisko"
           labelText="Nazwisko"
           value={formValues.surname}
+          type="text"
         />
 
         <StyledInput
@@ -239,6 +238,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Wpisz swój adres e-mail"
           labelText="Adres email"
           value={formValues.email}
+          type="email"
         />
 
         <StyledInput
@@ -246,6 +246,7 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           placeholder="Temat wiadomości"
           labelText="Temat"
           value={formValues.topic}
+          type="text"
         />
 
         <StyledInput
@@ -272,7 +273,10 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           </div>
         </InfoWrapper>
 
-        <FormButton buttonStatus={buttonStatus} />
+        {/* eslint-disable-next-line no-underscore-dangle */}
+        <StyledInput name="_gotcha" type="hidden" value={formValues._gotcha} />
+
+        <FormButton buttonStatus={buttonStatus} closeModal={closeModal} />
       </Form>
     </Wrapper>
   );
