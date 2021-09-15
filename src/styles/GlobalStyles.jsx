@@ -9,18 +9,34 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     -ms-overflow-style: none;
-    scrollbar-width: none;
     font-family: ${getFontFamily('Mulish')};
+    scrollbar-color: ${getColor('ikksBlue')} ${getColor('steel_20')};
+    scrollbar-width: auto;
   }
-
-  *::-webkit-scrollbar {
-    display: none;
-}
+  
 
   body {
     color: ${getColor('steel')};
     max-width: 100%;
     overflow-x: hidden;
+    background: linear-gradient(rgb(244, 250, 255) 0%, rgb(255 255 255 / 0%) 100%) no-repeat fixed;
+
+    &::-webkit-scrollbar {
+      background: ${getColor('steel_20')};
+      padding: 0.5rem;
+
+      &-thumb {
+        border: 4px solid ${getColor('steel_20')};
+        background: ${getColor('ikksBlue')};
+        background-clip: padding-box;
+        border-radius: 10px;
+        outline: none;
+
+        &:hover {
+          background: #2f95e8;
+        }
+      }
+    }
   }
   
   h1,h2,h3,h4,h5 {

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import IconSM from '@components/Icon/IconSM';
 import FacebookIcon from '@assets/icons/facebook-icon.svg';
+import LinkedInIcon from '@assets/icons/linkedIn-icon.svg';
 
 const styledButton = ({
   className,
@@ -17,11 +18,13 @@ const styledButton = ({
   isTypeSubmit,
   onKeyUp,
 }) => {
+  const iconType = href?.includes('linkedin') ? LinkedInIcon : FacebookIcon;
+
   if (href && link) {
     return (
       <Link href={href}>
         <a className={className}>
-          {withIcon && <IconSM icon={FacebookIcon} media="18px" />}
+          {withIcon && <IconSM icon={iconType} media="18px" />}
           {children}
         </a>
       </Link>
@@ -31,7 +34,7 @@ const styledButton = ({
   if (href && !link) {
     return (
       <a href={href} className={className}>
-        {withIcon && <IconSM icon={FacebookIcon} media="18px" />}
+        {withIcon && <IconSM icon={iconType} media="18px" />}
         {children}
       </a>
     );
@@ -43,7 +46,7 @@ const styledButton = ({
       onKeyUp={onKeyUp}
       type={isTypeSubmit ? 'submit' : 'button'}
     >
-      {withIcon && <IconSM icon={FacebookIcon} media="18px" />}
+      {withIcon && <IconSM icon={iconType} media="18px" />}
       {children}
     </button>
   );

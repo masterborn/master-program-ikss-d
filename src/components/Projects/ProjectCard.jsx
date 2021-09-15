@@ -6,7 +6,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import CardVideo from '@components/Projects/CardVideo';
 import CardImage from '@components/Projects/CardImage';
 import Button from '@components/Button/Button';
-import { getColor, getMedias } from '@styles/utils';
+import { getColor, getMedias, getShadow } from '@styles/utils';
 
 const Wrapper = styled.div`
   grid-row: span ${(props) => props.rowHeight};
@@ -22,10 +22,7 @@ const Wrapper = styled.div`
 
   overflow: hidden;
   background: ${getColor('white')};
-  box-shadow: 3.38443px 55.8976px 80px rgba(97, 121, 139, 0.07),
-    1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
-    0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
-    0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275);
+  box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
   height: fit-content;
 
@@ -39,6 +36,12 @@ const Wrapper = styled.div`
     width: auto;
     background: linear-gradient(360deg, #66757f -0.09%, rgba(102, 117, 127, 0) 100%);
     opacity: 0.6;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover img {
+    background: none;
+    opacity: 1;
   }
 
   @media (max-width: ${getMedias('desktop')}) {

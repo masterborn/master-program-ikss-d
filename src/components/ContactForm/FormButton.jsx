@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useRouter } from 'next/router';
 
 import Button from '@components/Button/Button';
 import Spinner from '@components/Spinner/Spinner';
@@ -30,6 +31,11 @@ const SuccessButton = styled(Button)`
   gap: 12px;
   margin: 28px auto 0 auto;
   background: ${getColor('success')};
+  ${({ router }) =>
+    router === '/' &&
+    css`
+      cursor: default;
+    `}
 
   & * {
     fill: ${getColor('success')};
@@ -71,6 +77,7 @@ const ErrorButton = styled(SuccessButton)`
 `;
 
 const FormButton = ({ buttonStatus, closeModal }) => {
+  const router = useRouter();
   switch (buttonStatus) {
     case 'primary':
       return <SubmitButton isTypeSubmit>Wyślij wiadomość</SubmitButton>;
@@ -82,7 +89,7 @@ const FormButton = ({ buttonStatus, closeModal }) => {
       );
     case 'success':
       return (
-        <SuccessButton onClick={() => closeModal()}>
+        <SuccessButton onClick={() => closeModal()} router={router.pathname}>
           <Success /> Wiadomość wysłana!
         </SuccessButton>
       );
