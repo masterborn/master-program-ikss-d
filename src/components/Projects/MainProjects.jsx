@@ -17,7 +17,7 @@ const GridWrapper = styled.div`
   grid-template-columns: repeat(2, max-content);
   justify-items: center;
   grid-auto-rows: 10px;
-  margin: 4em auto;
+  margin-inline: auto;
   gap: 0 24px;
 
   @media (max-width: ${getMedias('desktop')}) {
@@ -36,13 +36,15 @@ const Carousel = styled.div`
   display: flex;
   width: fit-content;
   justify-content: center;
-  margin: 2em auto;
+  margin: 2.375rem auto 3rem;
   background: ${getColor('blue_10')};
   border-radius: 26px;
+
   @media (max-width: ${getMedias('tablet')}) {
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+    margin: 2.5rem auto 3.75rem;
   }
 `;
 const CarouselButton = styled(Button)`
