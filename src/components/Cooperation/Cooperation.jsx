@@ -15,7 +15,6 @@ const Wrapper = styled.section`
     isHomePage &&
     css`
       padding-bottom: 45rem;
-      background: linear-gradient(0deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
       @media (max-width: ${getMedias('laptop')}) {
         padding: 0 1.5rem 40rem;
