@@ -7,17 +7,15 @@ import CommonSection from '@components/MissionAndHistory/CommonSection';
 
 const MissionWrapper = styled(CommonWrapper)`
   flex-direction: row;
-  & * {
-    margin-left: 3rem;
-  }
+  gap: 3rem;
+
   @media (max-width: ${getMedias('laptop')}) {
     flex-direction: column;
     font-size: 14px;
     line-height: 28px;
     margin: 2em;
-    & * {
-      margin: 0;
-    }
+
+    gap: 0;
 
     & h2 {
       margin-top: 1rem;

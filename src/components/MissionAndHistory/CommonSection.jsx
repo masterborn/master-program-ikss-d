@@ -15,11 +15,10 @@ const StyledImage = styled.div`
   margin-top: ${({ isMission }) => (isMission ? '3rem' : '0rem')};
   margin-top: ${({ isMission, isIndented }) => !isIndented && isMission && '0rem'};
   box-shadow: ${getShadow('cardShadow')};
-  & * {
-    border-radius: 16px;
-  }
+  border-radius: 16px;
+  overflow: hidden;
+
   @media (max-width: 1280px) {
-    transform: scale(0.9);
     margin: 0;
   }
   @media (max-width: 550px) {
