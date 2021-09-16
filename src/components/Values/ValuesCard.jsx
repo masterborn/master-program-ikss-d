@@ -27,7 +27,7 @@ const Card = styled.div`
   }
 
   @media (max-width: 810px) {
-    margin: ${({ isValues }) => isValues && '5em 0 3em 0'};
+    margin: ${({ isValues }) => isValues && '4.875rem 0 3rem 0'};
     min-height: 75%;
   }
 

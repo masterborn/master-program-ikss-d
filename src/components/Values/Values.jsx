@@ -14,6 +14,10 @@ const Wrapper = styled.section`
   margin-bottom: 180px;
   text-align: center;
   padding: 0 1.5rem;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    margin-bottom: 80px;
+  }
 `;
 
 const Cards = styled.div`

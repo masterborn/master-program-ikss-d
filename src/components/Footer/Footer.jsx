@@ -19,8 +19,8 @@ const Wrapper = styled.footer`
   ${({ contact }) =>
     contact === '/' &&
     css`
-      @media (max-width: 1200px) {
-        padding-top: 8em;
+      @media (max-width: ${getMedias('desktop')}) {
+        padding-top: 8rem;
         height: 880px;
       }
     `};
@@ -59,7 +59,7 @@ const ButtonWrapper = styled.div`
   ${({ contact }) =>
     contact === '/' &&
     css`
-      @media (max-width: 1200px) {
+      @media (max-width: ${getMedias('desktop')}) {
         justify-content: center;
         top: 32%;
         margin-right: 0;
@@ -78,7 +78,7 @@ const Menu = styled.div`
   ${({ contact }) =>
     contact === '/' &&
     css`
-      padding-top: 18em;
+      padding-top: 18rem;
     `};
 
   @media (max-width: ${getMedias('mobile')}) {
@@ -87,7 +87,7 @@ const Menu = styled.div`
     ${({ contact }) =>
       contact === '/' &&
       css`
-        padding-top: 7em;
+        padding-top: 7rem;
       `};
   }
 `;
@@ -110,7 +110,11 @@ const TextLogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 49px 0 0;
+  margin: 48px 0 0;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    margin: 40px 0 0;
+  }
 
   & * {
     fill: white;
@@ -135,7 +139,7 @@ const TextLogoWrapper = styled.div`
 const LogoFooter = styled(LogoAdditional)`
   width: 84px;
   height: 84px;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 66px;
@@ -146,7 +150,7 @@ const LogoFooter = styled(LogoAdditional)`
 const SocialMedias = styled(Socials)`
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   align-items: center;
   gap: 2rem;
 
@@ -166,7 +170,11 @@ const ContactFormWrapper = styled.div`
 
 const FooterContactForm = styled(ContactForm)`
   position: absolute;
-  bottom: 60%;
+  bottom: 449px;
+
+  @media (max-width: ${getMedias('desktop')}) {
+    bottom: 550px;
+  }
 
   @media (max-width: ${getMedias('mobile')}) {
     bottom: 75%;

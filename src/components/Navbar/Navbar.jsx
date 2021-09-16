@@ -33,7 +33,7 @@ const Nav = styled.nav`
   }
 
   @media (max-width: ${getMedias('desktop')}) {
-    padding: 1rem 1.25rem;
+    padding: 1.4rem 1.7rem;
   }
 `;
 

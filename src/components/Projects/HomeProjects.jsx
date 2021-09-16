@@ -38,6 +38,7 @@ const Carousel = styled.div`
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
+    margin: 1.5rem 0;
   }
 `;
 
