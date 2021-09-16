@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 import { getMedias } from '@styles/utils';
 import ContactForm from '@components/ContactForm/ContactForm';
@@ -19,24 +20,20 @@ const Wrapper = styled(motion.section)`
 
 const Backdrop = styled(motion.div)`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   left: 0;
   top: 0;
 `;
 
-const ModalWrapper = styled(motion.div)`
-  height: max-content;
-  position: absolute;
-  top: 10px;
-  right: 0;
-  left: 0;
-  margin: auto;
-`;
-
 const ModalForm = styled(ContactForm)`
   padding: 40px 80px;
   overflow: hidden;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  left: 0;
+  margin: auto;
 
   @media (max-width: 1037px) {
     width: 90%;
@@ -48,14 +45,6 @@ const ModalForm = styled(ContactForm)`
 
   @media (max-width: ${getMedias('mobile')}) {
     max-width: 330px;
-
-    & header {
-      display: none;
-    }
-
-    & > p {
-      display: none;
-    }
   }
 `;
 
@@ -66,9 +55,9 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-const Modal = () => {
+const Modal = ({ contactFormData }) => {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
+  const isModalOpen = useSelector(({ modal }) => modal.isModalOpen);
 
   const closeModal = () => {
     dispatch(modalActions.closeModal());
@@ -92,8 +81,8 @@ const Modal = () => {
           }}
         >
           <GlobalStyles />
-          <Backdrop />
-          <ModalWrapper
+          <Backdrop onClick={closeModal} onKeyUp={closeModal} />
+          <motion.div
             initial={{
               y: -1000,
             }}
@@ -106,15 +95,17 @@ const Modal = () => {
             exit={{
               y: -1000,
             }}
-            onClick={closeModal}
-            onKeyUp={closeModal}
           >
-            <ModalForm modal />
-          </ModalWrapper>
+            <ModalForm modal contactFormData={contactFormData} />
+          </motion.div>
         </Wrapper>
       )}
     </AnimatePresence>
   );
+};
+
+Modal.propTypes = {
+  contactFormData: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default Modal;

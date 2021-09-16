@@ -18,9 +18,9 @@ export const getStaticProps = async () => {
 
   const SubPageHero = filterBasicContentData(basicContent, 'projects-top-section');
 
-  const socials = await ContentfulClient.getBasicContentData('common');
+  const common = await ContentfulClient.getBasicContentData('common');
 
-  const socialUrls = filterSocials(socials);
+  const socialUrls = filterSocials(common);
 
   const projects = await ContentfulClient.getFieldsData('projects');
 
@@ -28,7 +28,15 @@ export const getStaticProps = async () => {
     projects: filterData(projects, 'projects'),
     contactBanner: filterBasicContentData(basicContent, 'projects-middle-cta-text'),
   };
+
   const CTASection = filterBasicContentData(basicContent, 'projects-bottom-cta-text');
+
+  // Contact Form
+
+  const contactFormData = {
+    text: filterBasicContentData(common, 'contact-form-text'),
+    toolTip: filterBasicContentData(common, 'contact-form-tooltip'),
+  };
 
   return {
     props: {
@@ -36,6 +44,7 @@ export const getStaticProps = async () => {
       projectsData,
       socialUrls,
       CTASection,
+      contactFormData,
     },
   };
 };
