@@ -164,6 +164,7 @@ const ContactFormWrapper = styled.div`
 
 const FooterContactForm = styled(ContactForm)`
   position: absolute;
+  z-index: 1;
   bottom: 60%;
 
   @media (max-width: ${getMedias('mobile')}) {
