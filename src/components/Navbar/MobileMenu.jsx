@@ -70,7 +70,15 @@ const StyledLink = styled(NavLink)`
   box-shadow: inset 0 1.5px 0 #eaf5ff, inset 0px -1.5px 0px #eaf5ff;
 
   @media (max-height: 520px) {
+    padding: 12px 0 12px 24px;
+  }
+
+  @media (max-height: 380px) {
     padding: 8px 0 8px 20px;
+  }
+
+  @media (max-height: 320px) {
+    padding: 6px 0 6px 20px;
   }
 `;
 
@@ -81,7 +89,12 @@ const ContactButton = styled(Button)`
     margin: 30px 0;
     height: 2em;
     font-size: 14px;
+  }
 
+  @media (max-height: 360px) {
+    margin: 20px 0;
+    height: 2em;
+    font-size: 14px;
   }
 `;
 
@@ -94,7 +107,7 @@ const LinksWrapper = styled.div`
   @media (max-width: ${getMedias('mobile')}) {
     font-size: 14px;
   }
-  
+
   @media (max-height: 520px) {
     font-size: 14px;
   }
