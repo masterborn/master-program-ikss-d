@@ -110,7 +110,7 @@ const TextLogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 2em;
+  margin: 49px 0 0;
 
   & * {
     fill: white;
@@ -135,7 +135,7 @@ const TextLogoWrapper = styled.div`
 const LogoFooter = styled(LogoAdditional)`
   width: 84px;
   height: 84px;
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 66px;
@@ -146,12 +146,14 @@ const LogoFooter = styled(LogoAdditional)`
 const SocialMedias = styled(Socials)`
   display: flex;
   justify-content: center;
-  margin-top: 2em;
+  margin-top: 2rem;
   align-items: center;
-  gap: 24px;
+  gap: 2rem;
+
   & svg * {
     transition: all 0.3s ease-in;
   }
+
   & svg:hover * {
     fill: ${getColor('blue_50')};
   }

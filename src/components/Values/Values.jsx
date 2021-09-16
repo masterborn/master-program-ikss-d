@@ -21,7 +21,7 @@ const Cards = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: 6.4rem;
+  margin-top: 6.375rem;
 
   @media (max-width: ${getMedias('desktop')}) {
     gap: 4rem 1.5rem;

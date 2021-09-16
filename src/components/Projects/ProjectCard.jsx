@@ -69,7 +69,7 @@ const Description = styled.article`
   flex-direction: column;
   align-items: flex-start;
   max-width: ${(props) => (props.isOnHomePage ? '792px' : '90%')};
-  padding: ${(props) => (props.isOnHomePage ? '0 96px 4.1em' : '0 0 40px')};
+  padding: ${(props) => (props.isOnHomePage ? '0 103px 4.1em' : '0 0 40px')};
 
   @media (max-width: ${getMedias('desktop')}) {
     & a {

@@ -40,7 +40,7 @@ const Header = styled.header`
 
   & > p {
     max-width: 635px;
-    margin: 2rem auto 5.3rem;
+    margin: 2rem auto 5.1rem;
 
     @media (max-width: ${getMedias('mobile')}) {
       margin: 1.5rem auto 2.5rem;

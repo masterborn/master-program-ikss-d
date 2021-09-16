@@ -10,12 +10,15 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2em auto 148px;
+  margin: 0 auto 148px;
+
   & a {
     text-decoration: none;
   }
+
   @media (max-width: ${getMedias('tablet')}) {
     margin: 2em 24px 80px;
+
     & > h3 {
       font-size: 24px;
       line-height: 32px;
@@ -26,9 +29,10 @@ const Wrapper = styled.main`
 const Carousel = styled.div`
   display: flex;
   justify-content: center;
-  margin: 2em 0;
+  margin: 2rem 0 4rem;
   background: ${getColor('blue_10')};
   border-radius: 26px;
+
   @media (max-width: ${getMedias('tablet')}) {
     background: none;
     align-items: center;
@@ -39,11 +43,13 @@ const Carousel = styled.div`
 
 const CarouselButton = styled(Button)`
   transition: all 0.1s ease-in;
+
   ${(props) =>
     !props.active &&
     css`
       background: ${getColor('blue_10')};
       color: ${getColor('navy')};
+
       & :hover {
         background: ${getColor('blue_20')};
         color: ${getColor('white')};
