@@ -36,7 +36,7 @@ const Carousel = styled.div`
   display: flex;
   width: fit-content;
   justify-content: center;
-  margin: 5rem auto 3rem;
+  margin: 2.375rem auto 3rem;
   background: ${getColor('blue_10')};
   border-radius: 26px;
 

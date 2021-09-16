@@ -8,18 +8,21 @@ import { getMedias, getShadow } from '@styles/utils';
 const StyledImage = styled.div`
   --imageWidth: 483px;
   --imageHeight: ${({ isMission }) => (isMission ? '265px' : '352px')};
+
   position: relative;
   width: var(--imageWidth);
   height: var(--imageHeight);
-  margin-left: 3rem;
-  margin-top: ${({ isMission }) => (isMission ? '3rem' : '0rem')};
+  margin-left: ${({ isMission, isIndented }) => (!isIndented && isMission) || '3.5rem'};
+  margin-top: ${({ isMission }) => (isMission ? '2rem' : '0rem')};
   margin-top: ${({ isMission, isIndented }) => !isIndented && isMission && '0rem'};
   box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
   overflow: hidden;
 
-  @media (max-width: 1280px) {
+  @media (max-width: ${getMedias('laptop')}) {
     margin: 0;
+    margin: ${({ isMission, isIndented }) => isIndented && isMission && '3.5rem 0 2rem'};
+    margin-top: auto;
   }
 
   @media (max-width: 550px) {
@@ -38,10 +41,11 @@ const TextWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   width: 658px;
-  margin-bottom: 2rem;
+
   & > p {
     margin-bottom: 2rem;
   }
+
   ${({ isIndented }) =>
     isIndented &&
     css`
@@ -50,20 +54,23 @@ const TextWrapper = styled.section`
 
   @media (max-width: 1280px) {
     width: 483px;
+    text-indent: 0rem;
   }
 
   @media (max-width: ${getMedias('laptop')}) {
     width: 483px;
-    margin: 2rem 0;
   }
 
   @media (max-width: 550px) {
     width: 327px;
+    & > p {
+      margin-bottom: ${({ isMission }) => (isMission ? '5rem' : '0rem')};
+      margin-bottom: ${({ isMission, isIndented }) => isIndented && isMission && '1.75rem'};
+    }
   }
 
   @media (max-width: 360px) {
     width: 261px;
-    margin: 2rem;
   }
 `;
 
@@ -72,7 +79,7 @@ const CommonSection = ({ url, alt, title, text, isMission, isIndented }) => (
     <StyledImage isMission={isMission} isIndented={isIndented}>
       <Image src={url} alt={alt} layout="fill" />
     </StyledImage>
-    <TextWrapper isIndented={isIndented}>
+    <TextWrapper isIndented={isIndented} isMission={isMission}>
       {title && <h2>{title}</h2>}
       {documentToReactComponents(text)}
     </TextWrapper>

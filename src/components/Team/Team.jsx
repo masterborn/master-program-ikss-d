@@ -78,10 +78,6 @@ const ImageWrapper = styled.div`
   box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
   overflow: hidden;
-
-  @media (max-width: ${getMedias('tablet')}) {
-    margin-bottom: 104px;
-  }
 `;
 
 const Team = ({ data }) => {
