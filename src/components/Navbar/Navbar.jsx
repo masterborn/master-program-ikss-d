@@ -74,7 +74,6 @@ const Hamburger = styled.div`
     width: 24px;
     background: ${getColor('ikksBlue')};
     margin-bottom: 4px;
-    margin-right: 27px;
     border-radius: 103px;
   }
 

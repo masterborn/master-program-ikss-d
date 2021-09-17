@@ -32,7 +32,7 @@ const CommonWrapper = styled.section`
   }
 
   @media (max-width: ${getMedias('mobile')}) {
-    margin: 5rem 2rem;
+    margin: 5rem 2rem 4.375rem;
   }
 `;
 

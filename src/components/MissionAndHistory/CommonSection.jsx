@@ -21,8 +21,7 @@ const StyledImage = styled.div`
 
   @media (max-width: ${getMedias('laptop')}) {
     margin: 0;
-    margin: ${({ isMission, isIndented }) => isIndented && isMission && '3.5rem 0 2rem'};
-    margin-top: auto;
+    margin: ${({ isMission, isIndented }) => isIndented && isMission && '2.5rem 0 2rem'};
   }
 
   @media (max-width: 550px) {

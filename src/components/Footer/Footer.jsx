@@ -113,7 +113,7 @@ const TextLogoWrapper = styled.div`
   margin: 48px 0 0;
 
   @media (max-width: ${getMedias('mobile')}) {
-    margin: 40px 0 0;
+    margin: 40px 25px 0;
   }
 
   & * {
@@ -150,9 +150,13 @@ const LogoFooter = styled(LogoAdditional)`
 const SocialMedias = styled(Socials)`
   display: flex;
   justify-content: center;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   align-items: center;
   gap: 2rem;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    margin-top: 2.5rem;
+  }
 
   & svg * {
     transition: all 0.3s ease-in;
