@@ -11,62 +11,27 @@ import LogoAdditional from '@components/Logos/LogoAdditional';
 import ContactForm from '@components/ContactForm/ContactForm';
 
 const Wrapper = styled.footer`
+  display: grid;
+  justify-content: center;
+  grid-auto-rows: min-content;
   width: 100%;
-  height: ${({ contact }) => (contact === '/' ? '728px' : '466px')};
   background: ${getColor('ikksBlue')};
   position: relative;
+  padding-bottom: 51px;
+
+  padding-top: 3.5rem;
 
   ${({ contact }) =>
     contact === '/' &&
     css`
+      padding-top: 23.75rem;
+
       @media (max-width: ${getMedias('desktop')}) {
-        padding-top: 8rem;
-        height: 880px;
-      }
-    `};
-
-  @media (max-width: ${getMedias('mobile')}) {
-    ${({ contact }) =>
-      contact !== '/' &&
-      css`
-        height: 586px;
-      `}
-  }
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
-  position: relative;
-  bottom: ${({ contact }) => (contact === '/' ? '5%' : '8%')};
-
-  @media (max-width: ${getMedias('tablet')}) {
-    margin-right: 5%;
-  }
-
-  @media (max-width: 650px) {
-    justify-content: ${({ contact }) => (contact === '/' ? 'flex-end' : 'center')};
-    margin-right: ${({ contact }) => (contact === '/' ? '5%' : '0')};
-  }
-
-  @media (max-width: ${getMedias('mobile')}) {
-    margin: 0;
-    justify-content: center;
-    bottom: 4%;
-  }
-
-  ${({ contact }) =>
-    contact === '/' &&
-    css`
-      @media (max-width: ${getMedias('desktop')}) {
-        justify-content: center;
-        top: 32%;
-        margin-right: 0;
+        padding-top: 20.75rem;
       }
 
       @media (max-width: ${getMedias('mobile')}) {
-        top: 12%;
+        padding-top: 12.25rem;
       }
     `};
 `;
@@ -75,25 +40,14 @@ const Menu = styled.div`
   display: flex;
   justify-content: center;
 
-  ${({ contact }) =>
-    contact === '/' &&
-    css`
-      padding-top: 18rem;
-    `};
-
   @media (max-width: ${getMedias('mobile')}) {
     flex-direction: column;
-
-    ${({ contact }) =>
-      contact === '/' &&
-      css`
-        padding-top: 7rem;
-      `};
+    gap: 24px;
   }
 `;
 
 const MenuLink = styled(NavLink)`
-  padding: 1rem;
+  padding: 0 1rem;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -110,7 +64,7 @@ const TextLogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 48px 0 0;
+  margin: 49px 0 0;
 
   @media (max-width: ${getMedias('mobile')}) {
     margin: 40px 25px 0;
@@ -138,24 +92,25 @@ const TextLogoWrapper = styled.div`
 
 const LogoFooter = styled(LogoAdditional)`
   width: 84px;
-  height: 84px;
+  height: 48px;
   margin-bottom: 2.5rem;
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 66px;
     height: 38px;
+    margin-bottom: 3.5rem;
   }
 `;
 
 const SocialMedias = styled(Socials)`
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 3rem;
   align-items: center;
   gap: 2rem;
 
   @media (max-width: ${getMedias('mobile')}) {
-    margin-top: 2.5rem;
+    margin-top: 3.5rem;
   }
 
   & svg * {
@@ -167,42 +122,43 @@ const SocialMedias = styled(Socials)`
   }
 `;
 
-const ContactFormWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const FooterContactForm = styled(ContactForm)`
   position: absolute;
-  bottom: 449px;
+  left: 50%;
+  bottom: 61.6%;
+  transform: translateX(-50%);
+  width: 100%;
+  margin: 0;
 
-  @media (max-width: ${getMedias('desktop')}) {
-    bottom: 550px;
+  @media (max-width: ${getMedias('tablet')}) {
+    width: 90%;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
-    bottom: 75%;
+    bottom: 79.6%;
   }
 `;
 
 const Footer = ({ urls, contactFormData }) => {
   const router = useRouter();
+
+  const contactForm = router.pathname === '/' && (
+    <FooterContactForm contactFormData={contactFormData} />
+  );
+
   return (
     <Wrapper contact={router.pathname}>
-      {router.pathname === '/' && (
-        <ContactFormWrapper>
-          <FooterContactForm contactFormData={contactFormData} />
-        </ContactFormWrapper>
-      )}
-      <ButtonWrapper contact={router.pathname}>
-        <ScrollButton />
-      </ButtonWrapper>
+      {contactForm}
+
+      <ScrollButton contact={router.pathname} />
+
       <Menu contact={router.pathname}>
         <MenuLink url="/" linkLabel="Strona główna" />
         <MenuLink url="/projects" linkLabel="Projekty" />
         <MenuLink url="/about" linkLabel="O nas" />
         <MenuLink url="/cooperation" linkLabel="Współpraca" />
       </Menu>
+
       <SocialMedias
         footer
         urls={{
@@ -212,6 +168,7 @@ const Footer = ({ urls, contactFormData }) => {
           linkedIn: urls.lnlink,
         }}
       />
+
       <TextLogoWrapper>
         <LogoFooter />
         <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
