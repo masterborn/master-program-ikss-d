@@ -8,9 +8,11 @@ import {
 } from '@contentfulDataTransformers/filterData';
 import MissionAndHistory from '@components/MissionAndHistory/MissionAndHistory';
 import Members from '@components/Members/Members';
+import SEO from '@components/SEO/SEO';
 
-const aboutPage = ({ mission, history, boardMembersData, TeamData }) => (
+const aboutPage = ({ aboutUsMeta, mission, history, boardMembersData, TeamData }) => (
   <>
+    <SEO metaData={aboutUsMeta} />
     <MissionAndHistory missionData={mission} historyData={history} />
     <Members data={boardMembersData} />
     <Team data={TeamData} />
@@ -19,6 +21,8 @@ const aboutPage = ({ mission, history, boardMembersData, TeamData }) => (
 
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('about-us');
+
+  const aboutUsMeta = filterBasicContentData(basicContent, 'about-us-meta');
 
   const SubPageHero = filterBasicContentData(basicContent, 'about-us-top-section');
 
@@ -46,6 +50,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      aboutUsMeta,
       SubPageHero,
       socialUrls,
       mission,

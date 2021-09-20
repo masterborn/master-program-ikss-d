@@ -6,15 +6,19 @@ import {
   filterBasicContentData,
   filterSocials,
 } from '@root/contentfulDataTransformers/filterData';
+import SEO from '@components/SEO/SEO';
 
-const projectsPage = ({ projectsData }) => (
+const projectsPage = ({ projectsMeta, projectsData }) => (
   <>
+    <SEO metaData={projectsMeta} />
     <MainProjects data={projectsData} />
   </>
 );
 
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
+
+  const projectsMeta = filterBasicContentData(basicContent, 'projects-meta');
 
   const SubPageHero = filterBasicContentData(basicContent, 'projects-top-section');
 
@@ -40,6 +44,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      projectsMeta,
       SubPageHero,
       projectsData,
       socialUrls,
