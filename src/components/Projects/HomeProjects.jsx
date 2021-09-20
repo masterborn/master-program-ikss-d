@@ -6,7 +6,7 @@ import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
 import ProjectCard from '@components/Projects/ProjectCard';
 
-const Wrapper = styled.main`
+const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
