@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import MemberCard from '@components/Members/MemberCard';
@@ -37,9 +37,57 @@ const MembersWrapper = styled.div`
   flex-wrap: wrap;
   gap: 24px;
 
-  @media (max-width: ${getMedias('tablet')}) {
-    gap: 24px;
-  }
+  ${({ length }) =>
+    length === 7 &&
+    css`
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      align-items: center;
+      flex-wrap: wrap;
+      grid-template-areas:
+        '. first .'
+        'second first third'
+        'second fourth third'
+        'fifth fourth sixth'
+        'fifth seventh sixth'
+        '. seventh .'
+        '. . .';
+
+      & > div:nth-child(1) {
+        grid-area: first;
+      }
+
+      & > div:nth-child(2) {
+        grid-area: second;
+      }
+
+      & > div:nth-child(3) {
+        grid-area: third;
+      }
+
+      & > div:nth-child(4) {
+        grid-area: fourth;
+      }
+
+      & > div:nth-child(5) {
+        grid-area: fifth;
+      }
+
+      & > div:nth-child(6) {
+        grid-area: sixth;
+      }
+
+      & > div:nth-child(7) {
+        grid-area: seventh;
+      }
+
+      @media (max-width: ${getMedias('desktop')}) {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    `}
 `;
 
 const Members = ({ data }) => {
@@ -54,8 +102,7 @@ const Members = ({ data }) => {
     <Wrapper>
       <h3>{title}</h3>
       {documentToReactComponents(text1)}
-
-      <MembersWrapper>{renderMembersCards()}</MembersWrapper>
+      <MembersWrapper length={members.length}>{renderMembersCards()}</MembersWrapper>
     </Wrapper>
   );
 };

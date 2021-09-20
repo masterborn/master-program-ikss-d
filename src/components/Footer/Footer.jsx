@@ -138,6 +138,7 @@ const FooterContactForm = styled(ContactForm)`
   transform: translateX(-50%);
   width: 100%;
   margin: 0;
+  z-index: 1;
 
   @media (max-width: ${getMedias('tablet')}) {
     width: 90%;

@@ -51,6 +51,10 @@ const Nav = styled.nav`
   height: 100%;
   border-radius: 16px 0 0 0;
   animation: ${slideIn} 0.5s linear;
+
+  @media (max-height: 520px) {
+    width: 240px;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -68,10 +72,34 @@ const StyledLink = styled(NavLink)`
   width: 100%;
   padding: 24px;
   box-shadow: inset 0 1.5px 0 #eaf5ff, inset 0px -1.5px 0px #eaf5ff;
+
+  @media (max-height: 520px) {
+    padding: 12px 0 12px 24px;
+  }
+
+  @media (max-height: 380px) {
+    padding: 8px 0 8px 20px;
+  }
+
+  @media (max-height: 320px) {
+    padding: 6px 0 6px 20px;
+  }
 `;
 
 const ContactButton = styled(Button)`
   margin: 40px 0;
+
+  @media (max-height: 520px) {
+    margin: 30px 0;
+    height: 2em;
+    font-size: 14px;
+  }
+
+  @media (max-height: 360px) {
+    margin: 20px 0;
+    height: 2em;
+    font-size: 14px;
+  }
 `;
 
 const LinksWrapper = styled.div`
@@ -81,6 +109,10 @@ const LinksWrapper = styled.div`
   box-shadow: 0 1.5px 0 #eaf5ff, 0px -1.5px 0px #eaf5ff;
 
   @media (max-width: ${getMedias('mobile')}) {
+    font-size: 14px;
+  }
+
+  @media (max-height: 520px) {
     font-size: 14px;
   }
 `;

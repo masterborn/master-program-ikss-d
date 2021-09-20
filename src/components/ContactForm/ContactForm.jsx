@@ -154,8 +154,13 @@ const InfoWrapper = styled.div`
 
 const InfoToolTip = styled(ToolTip)`
   bottom: 100%;
+
   @media (max-width: ${getMedias('tablet')}) {
     display: none;
+  }
+
+  & a {
+    font-size: 12px;
   }
 `;
 
