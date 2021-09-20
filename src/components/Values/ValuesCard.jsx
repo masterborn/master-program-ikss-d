@@ -11,7 +11,8 @@ const Card = styled.div`
   --pdgBottom: 3rem;
 
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
   max-width: 23.75rem;
 
@@ -37,6 +38,10 @@ const Card = styled.div`
 
   & > h5 {
     margin-bottom: 1rem;
+  }
+
+  & > p {
+    margin-top: auto;
   }
 `;
 

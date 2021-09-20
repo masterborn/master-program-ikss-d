@@ -11,15 +11,24 @@ import LogoAdditional from '@components/Logos/LogoAdditional';
 import ContactForm from '@components/ContactForm/ContactForm';
 
 const Wrapper = styled.footer`
-  display: grid;
-  justify-content: center;
-  grid-auto-rows: min-content;
   width: 100%;
   background: ${getColor('ikksBlue')};
   position: relative;
-  padding-bottom: 51px;
+`;
 
+const MediaWrapper = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-auto-rows: min-content;
+  position: relative;
+  padding-bottom: 51px;
   padding-top: 3.5rem;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    padding-bottom: 40px;
+  }
 
   ${({ contact }) =>
     contact === '/' &&
@@ -147,35 +156,37 @@ const Footer = ({ urls, contactFormData }) => {
   );
 
   return (
-    <Wrapper contact={router.pathname}>
-      {contactForm}
+    <Wrapper>
+      <MediaWrapper contact={router.pathname}>
+        {contactForm}
 
-      <ScrollButton contact={router.pathname} />
+        <ScrollButton contact={router.pathname} />
 
-      <Menu contact={router.pathname}>
-        <MenuLink url="/" linkLabel="Strona główna" />
-        <MenuLink url="/projects" linkLabel="Projekty" />
-        <MenuLink url="/about" linkLabel="O nas" />
-        <MenuLink url="/cooperation" linkLabel="Współpraca" />
-      </Menu>
+        <Menu contact={router.pathname}>
+          <MenuLink url="/" linkLabel="Strona główna" />
+          <MenuLink url="/projects" linkLabel="Projekty" />
+          <MenuLink url="/about" linkLabel="O nas" />
+          <MenuLink url="/cooperation" linkLabel="Współpraca" />
+        </Menu>
 
-      <SocialMedias
-        footer
-        urls={{
-          facebook: urls.fblink,
-          instagram: urls.inlink,
-          youTube: urls.ytlink,
-          linkedIn: urls.lnlink,
-        }}
-      />
+        <SocialMedias
+          footer
+          urls={{
+            facebook: urls.fblink,
+            instagram: urls.inlink,
+            youTube: urls.ytlink,
+            linkedIn: urls.lnlink,
+          }}
+        />
 
-      <TextLogoWrapper>
-        <LogoFooter />
-        <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
-        <p>
-          Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
-        </p>
-      </TextLogoWrapper>
+        <TextLogoWrapper>
+          <LogoFooter />
+          <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
+          <p>
+            Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
+          </p>
+        </TextLogoWrapper>
+      </MediaWrapper>
     </Wrapper>
   );
 };

@@ -17,20 +17,25 @@ import Portal from '@hoc/Portal';
 import MobileMenu from './MobileMenu';
 
 const Nav = styled.nav`
-  padding: 1.25rem 7.5rem;
-  display: flex;
-  z-index: 2;
-  align-items: center;
   background: ${getColor('white')};
   box-shadow: 0 4px 16px rgba(97, 121, 139, 0.1);
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 2;
 
   & button {
     cursor: pointer;
   }
+`;
+
+const MediaWrapper = styled.div`
+  max-width: 1920px;
+  padding: 1.25rem 7.5rem;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
 
   @media (max-width: ${getMedias('desktop')}) {
     padding: 1.4rem 1.7rem;
@@ -162,42 +167,44 @@ const Navbar = ({ urls, contactFormData }) => {
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
-        <button type="button" onClick={scrollToTopOnClick}>
-          <Logo />
-        </button>
+        <MediaWrapper>
+          <button type="button" onClick={scrollToTopOnClick}>
+            <Logo />
+          </button>
 
-        <Menu>
-          <MenuLink url="/" linkLabel="Strona główna" />
-          <MenuLink url="/projects" linkLabel="Projekty" />
-          <MenuLink url="/about" linkLabel="O nas" />
-          <MenuLink url="/cooperation" linkLabel="Współpraca" />
-        </Menu>
+          <Menu>
+            <MenuLink url="/" linkLabel="Strona główna" />
+            <MenuLink url="/projects" linkLabel="Projekty" />
+            <MenuLink url="/about" linkLabel="O nas" />
+            <MenuLink url="/cooperation" linkLabel="Współpraca" />
+          </Menu>
 
-        <SMWrapper>
-          <SocialMedias
-            visible={socialsVisibility}
-            urls={{
-              facebook: urls.fblink,
-              instagram: urls.inlink,
-              youTube: urls.ytlink,
-              linkedIn: urls.lnlink,
-            }}
-          />
-        </SMWrapper>
+          <SMWrapper>
+            <SocialMedias
+              visible={socialsVisibility}
+              urls={{
+                facebook: urls.fblink,
+                instagram: urls.inlink,
+                youTube: urls.ytlink,
+                linkedIn: urls.lnlink,
+              }}
+            />
+          </SMWrapper>
 
-        <Hamburger onClick={() => setShow(true)}>
-          <span />
-          <span />
-          <span />
-        </Hamburger>
+          <Hamburger onClick={() => setShow(true)}>
+            <span />
+            <span />
+            <span />
+          </Hamburger>
 
-        <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
-          Skontaktuj się
-        </Button>
+          <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
+            Skontaktuj się
+          </Button>
 
-        <Portal>
-          <Modal contactFormData={contactFormData} />
-        </Portal>
+          <Portal>
+            <Modal contactFormData={contactFormData} />
+          </Portal>
+        </MediaWrapper>
       </Nav>
     </>
   );
