@@ -10,7 +10,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   width: 100%;
   text-align: center;
-  padding: 0 7.875rem 0rem;
+  padding: 0 7.875rem 0;
 
   @media (max-width: ${getMedias('laptop')}) {
     padding: 0 1.5rem 0;

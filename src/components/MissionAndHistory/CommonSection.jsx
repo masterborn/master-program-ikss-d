@@ -53,11 +53,10 @@ const TextWrapper = styled.section`
 
   @media (max-width: 1280px) {
     width: 483px;
-    text-indent: 0rem;
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    width: 483px;
+    text-indent: 0;
   }
 
   @media (max-width: 550px) {
