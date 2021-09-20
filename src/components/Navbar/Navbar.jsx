@@ -163,7 +163,7 @@ const Navbar = ({ urls, contactFormData }) => {
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
-        <button type="button" onClick={scrollToTopOnClick}>
+        <button type="button" onClick={scrollToTopOnClick} aria-label="Przenieś na stronę główną">
           <Logo />
         </button>
 
