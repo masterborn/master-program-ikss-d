@@ -7,6 +7,8 @@ import { getMedias, getShadow } from '@styles/utils';
 const StyledImage = styled.div`
   --imageWidth: 483px;
 
+  min-width: var(--imageWidth);
+
   ${({ isHistory }) =>
     isHistory
       ? css`
@@ -16,7 +18,6 @@ const StyledImage = styled.div`
           margin-left: auto;
         `}
 
-  width: var(--imageWidth);
   position: relative;
   box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
@@ -24,7 +25,6 @@ const StyledImage = styled.div`
 
   @media (max-width: ${getMedias('laptop')}) {
     margin: 0;
-    margin: ${({ isMission, isIndented }) => isIndented && isMission && '2.5rem 0 2rem'};
   }
 
   @media (max-width: 550px) {
@@ -38,20 +38,22 @@ const StyledImage = styled.div`
   }
 `;
 
-const ImageWrapper = ({ url, alt, isHistory }) => (
-  <StyledImage isHistory={isHistory}>
+const ImageWrapper = ({ url, alt, isHistory, className }) => (
+  <StyledImage isHistory={isHistory} className={className}>
     <Image src={url} alt={alt} layout="fill" />
   </StyledImage>
 );
 
 ImageWrapper.defaultProps = {
   isHistory: false,
+  className: null,
 };
 
 ImageWrapper.propTypes = {
   url: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   isHistory: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default ImageWrapper;

@@ -4,14 +4,17 @@ import { getMedias } from '@styles/utils';
 
 const CommonWrapper = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-auto-rows: min-content;
-  gap: 0 56px;
-  margin: 6.625rem 0 9.25rem;
+  margin: 6.625rem auto 9.25rem auto;
+  max-width: 1197px;
 
   & h2 {
     margin-bottom: 1.5rem;
     margin-top: 1rem;
+  }
+
+  @media (max-width: ${getMedias('desktop')}) {
+    margin: 6.625rem 2rem 9.25rem 2rem;
   }
 
   @media (max-width: ${getMedias('laptop')}) {

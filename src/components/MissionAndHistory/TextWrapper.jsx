@@ -8,7 +8,6 @@ const TextWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 658px;
 
   & > p {
     margin-bottom: 2rem;
@@ -20,24 +19,8 @@ const TextWrapper = styled.section`
       text-indent: 3rem;
     `}
 
-  @media (max-width: 1280px) {
-    width: 483px;
-  }
-
   @media (max-width: ${getMedias('laptop')}) {
     text-indent: 0;
-  }
-
-  @media (max-width: 550px) {
-    width: 327px;
-    & > p {
-      margin-bottom: ${({ isMission }) => (isMission ? '5rem' : '0rem')};
-      margin-bottom: ${({ isMission, isIndented }) => isIndented && isMission && '1.75rem'};
-    }
-  }
-
-  @media (max-width: 360px) {
-    width: 261px;
   }
 `;
 
