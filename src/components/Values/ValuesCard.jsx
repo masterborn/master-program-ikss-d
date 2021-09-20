@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Icon from '@components/Icon/Icon';
-import { getMedias, getShadow } from '@styles/utils';
+import { getColor, getMedias, getShadow } from '@styles/utils';
 
 const Card = styled.div`
   --pdgTop: ${({ isValues }) => (isValues ? '11.62rem' : '12.5rem')};
@@ -18,6 +18,7 @@ const Card = styled.div`
 
   padding: var(--pdgTop) var(--pdgCenter) var(--pdgBottom) var(--pdgCenter);
   border-radius: 16px;
+  background: ${getColor('white')};
   box-shadow: ${getShadow('cardShadow')};
 
   @media (max-width: ${getMedias('mobile')}) {
