@@ -7,7 +7,7 @@ const CommonWrapper = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 6.625rem 0 9.25rem;
+  margin: 9.25rem 0;
 
   & h2 {
     margin-bottom: 1.5rem;
@@ -18,7 +18,7 @@ const CommonWrapper = styled.section`
     flex-direction: column;
     font-size: 14px;
     line-height: 28px;
-    margin: 6.625rem 0 2.625rem;
+    margin: 5rem 0 2.625rem;
   }
 
   @media (max-width: ${getMedias('tablet')}) {

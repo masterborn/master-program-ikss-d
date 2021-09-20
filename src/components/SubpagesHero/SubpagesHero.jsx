@@ -8,7 +8,7 @@ import { getMedias } from '@styles/utils';
 const Wrapper = styled.section`
   --pdg-top: 64px;
   --pdg-right: 225px;
-  --pdg-bottom: 42px;
+  --pdg-bottom: 0;
 
   display: flex;
   flex-direction: column;
@@ -33,7 +33,6 @@ const Wrapper = styled.section`
   @media (max-width: ${getMedias('mobile')}) {
     --pdg-top: 32px;
     --pdg-right: 24px;
-    --pdg-bottom: 0;
 
     & h1 {
       margin: 8px auto 24px;

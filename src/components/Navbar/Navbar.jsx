@@ -38,16 +38,16 @@ const MediaWrapper = styled.div`
   margin: 0 auto;
 
   @media (max-width: ${getMedias('desktop')}) {
-    padding: 1.4rem 1.7rem;
+    padding: 1.4rem 1.5rem;
   }
 `;
 
 const Menu = styled.div`
   display: flex;
-  margin-left: 7.8em;
+  margin-left: 6.875rem;
 
   @media (max-width: 1400px) {
-    margin-left: 2em;
+    margin-left: 2rem;
   }
 
   @media (max-width: 1100px) {
