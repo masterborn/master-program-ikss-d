@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Image from 'next/image';
 
-import { getMedias } from '@styles/utils';
+import { getMedias, getShadow } from '@styles/utils';
 import CommonWrapper from '@components/MissionAndHistory/CommonWrapper';
-import CommonSection from '@components/MissionAndHistory/CommonSection';
+import ImageWrapper from '@components/MissionAndHistory/ImageWrapper';
+import MissionAndHistoryText from '@components/MissionAndHistory/TextWrapper';
 
 const MissionWrapper = styled.div`
   display: flex;
@@ -32,7 +34,34 @@ const ArticleWrapper = styled.article`
 
 const MissionAndHistory = ({ missionData, historyData }) => (
   <CommonWrapper>
-    <MissionWrapper>
+    <ImageWrapper url={missionData.image1.url} alt={missionData.title} />
+
+    <MissionAndHistoryText title={missionData.title} text={missionData.text1} />
+
+    <MissionAndHistoryText title={historyData.title} text={historyData.text1} />
+
+    <ImageWrapper url={historyData.image1.url} alt={historyData.title} isHistory />
+    {/* <TextWrapper>
+      {historyData.title && <h2>{historyData.title}</h2>}
+      {documentToReactComponents(historyData.text1)}
+    </TextWrapper>
+
+    <TextWrapper>
+      {historyData.title && <h2>{historyData.title}</h2>}
+      {documentToReactComponents(missionData.text1)}
+    </TextWrapper> */}
+
+    {/* <StyledImage>
+      <Image src={historyData.image1.url} alt={historyData.title} layout="fill" />
+    </StyledImage>
+
+    <TextWrapper>{documentToReactComponents(historyData.text2)}</TextWrapper>
+
+    <StyledImage>
+      <Image src={historyData.image2.url} alt={historyData.title} layout="fill" />
+    </StyledImage>
+
+    {/* <MissionWrapper>
       <CommonSection
         url={missionData.image1.url}
         alt={missionData.title}
@@ -57,7 +86,7 @@ const MissionAndHistory = ({ missionData, historyData }) => (
         isMission
         isIndented
       />
-    </ArticleWrapper>
+    </ArticleWrapper> */}
   </CommonWrapper>
 );
 

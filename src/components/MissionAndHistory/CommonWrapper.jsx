@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { getMedias } from '@styles/utils';
 
 const CommonWrapper = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  gap: 0 56px;
   margin: 6.625rem 0 9.25rem;
 
   & h2 {
