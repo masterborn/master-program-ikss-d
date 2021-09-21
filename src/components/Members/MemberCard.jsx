@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 import { getColor, getFontWeight, getMedias, getShadow } from '@styles/utils';
 import Button from '@components/Button/Button';
@@ -136,13 +137,11 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const ExpandButton = styled.button`
+const ExpandButton = styled(motion.button)`
   display: none;
   position: absolute;
   right: 1%;
   top: ${({ cardExpanded }) => (cardExpanded ? '15%' : '50%')};
-  transform: ${({ cardExpanded }) =>
-    cardExpanded ? 'translate(-50%, -50%) rotate(180deg)' : 'translate(-50%, -50%)'};
 
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
@@ -189,9 +188,29 @@ const MemberCard = ({ member }) => {
     </StyledButton>
   );
 
+  const expandButtonAnimationVariants = {
+    closed: {
+      rotate: 0,
+      x: '-50%',
+      y: '-50%',
+    },
+    expanded: {
+      rotate: 180,
+      x: '-50%',
+      y: '-50%',
+    },
+  };
+
   return (
     <Wrapper cardExpanded={cardExpanded}>
-      <ExpandButton cardExpanded={cardExpanded} onClick={() => setCardExpanded(!cardExpanded)}>
+      <ExpandButton
+        cardExpanded={cardExpanded}
+        onClick={() => setCardExpanded(!cardExpanded)}
+        variants={expandButtonAnimationVariants}
+        initial={false}
+        animate={cardExpanded ? 'expanded' : 'closed'}
+        transition={{ duration: 0.5 }}
+      >
         <IconSM icon={ChevronIcon} size="26px" />
       </ExpandButton>
 
