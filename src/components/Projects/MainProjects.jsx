@@ -1,11 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import ProjectCard from '@components/Projects/ProjectCard';
 import { getColor, getMedias } from '@styles/utils';
 import ContactBanner from '@components/ContactBanner/ContactBanner';
-import Button from '@components/Button/Button';
+import CarouselButton from '@components/Projects/CarouselButton';
 
 const FlexWrapper = styled.section`
   display: flex;
@@ -46,22 +46,6 @@ const Carousel = styled.div`
     flex-wrap: wrap;
     margin: 2.5rem auto 3.75rem;
   }
-`;
-const CarouselButton = styled(Button)`
-  transition: all 0.1s ease-in;
-  ${(props) =>
-    !props.active &&
-    css`
-      background: ${getColor('blue_10')};
-      color: ${getColor('navy')};
-      & :hover {
-        background: ${getColor('blue_20')};
-      }
-
-      @media (max-width: ${getMedias('mobile')}) {
-        font-size: 10px;
-      }
-    `}
 `;
 
 const MainProjects = ({ data }) => {

@@ -64,6 +64,8 @@ const CloseButton = styled.button`
   @media (max-width: ${getMedias('mobile')}) {
     padding: 28px 24px;
   }
+
+  cursor: pointer;
 `;
 
 const StyledLink = styled(NavLink)`

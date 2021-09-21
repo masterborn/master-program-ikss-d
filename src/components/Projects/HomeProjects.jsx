@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { getColor, getMedias } from '@styles/utils';
 import Button from '@components/Button/Button';
 import ProjectCard from '@components/Projects/ProjectCard';
+import CarouselButton from '@components/Projects/CarouselButton';
 
 const Wrapper = styled.section`
   display: flex;
@@ -42,30 +43,6 @@ const Carousel = styled.div`
   }
 `;
 
-const CarouselButton = styled(Button)`
-  transition: all 0.1s ease-in;
-
-  ${(props) =>
-    !props.active &&
-    css`
-      background: ${getColor('blue_10')};
-      color: ${getColor('navy')};
-
-      & :hover {
-        background: ${getColor('blue_20')};
-        color: ${getColor('white')};
-      }
-
-      @media (max-width: ${getMedias('mobile')}) {
-        font-size: 10px;
-      }
-    `}
-
-  & :hover {
-    color: ${(props) => (props.active ? getColor('white') : getColor('navy'))};
-  }
-`;
-
 const StyledProjects = ({ data }) => {
   const { title, projects } = data;
   const [activeCard, setActiveCard] = useState(0);
@@ -74,25 +51,13 @@ const StyledProjects = ({ data }) => {
     <Wrapper>
       <h3>{title}</h3>
       <Carousel>
-        <CarouselButton
-          active={activeCard === 0}
-          onClick={() => setActiveCard(0)}
-          onKeyUp={() => setActiveCard(0)}
-        >
+        <CarouselButton active={activeCard === 0} onClick={() => setActiveCard(0)}>
           {projects[0].title}
         </CarouselButton>
-        <CarouselButton
-          active={activeCard === 1}
-          onClick={() => setActiveCard(1)}
-          onKeyUp={() => setActiveCard(1)}
-        >
+        <CarouselButton active={activeCard === 1} onClick={() => setActiveCard(1)}>
           {projects[1].title}
         </CarouselButton>
-        <CarouselButton
-          active={activeCard === 2}
-          onClick={() => setActiveCard(2)}
-          onKeyUp={() => setActiveCard(2)}
-        >
+        <CarouselButton active={activeCard === 2} onClick={() => setActiveCard(2)}>
           {projects[2].title}
         </CarouselButton>
       </Carousel>
