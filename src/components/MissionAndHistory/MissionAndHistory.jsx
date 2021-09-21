@@ -7,10 +7,10 @@ import {
   MissionWrapper,
   HistoryWrapper,
 } from '@components/MissionAndHistory/Common';
-import ImageWrapper from '@components/MissionAndHistory/ImageWrapper';
+import MissionAndHistoryImage from '@root/components/MissionAndHistory/MissionAndHistoryImage';
 import MissionAndHistoryText from '@components/MissionAndHistory/TextWrapper';
 
-const HistoryImage = styled(ImageWrapper)`
+const HistoryImage = styled(MissionAndHistoryImage)`
   max-height: 352px;
   top: 2.5ch;
 
@@ -39,7 +39,7 @@ const HistoryImage = styled(ImageWrapper)`
 const MissionAndHistory = ({ missionData, historyData }) => (
   <CommonWrapper>
     <MissionWrapper>
-      <ImageWrapper url={missionData.image1.url} alt={missionData.title} />
+      <MissionAndHistoryImage url={missionData.image1.url} alt={missionData.title} />
 
       <MissionAndHistoryText title={missionData.title} text={missionData.text1} isHistory />
     </MissionWrapper>
