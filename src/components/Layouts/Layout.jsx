@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Navbar from '@components/Navbar/Navbar';
 import Footer from '@components/Footer/Footer';
+import SEO from '@components/SEO/SEO';
 
 const Main = styled.main`
   max-width: 1440px;
@@ -10,10 +11,11 @@ const Main = styled.main`
 `;
 
 const Layout = ({ children, pageProps }) => {
-  const { socialUrls, contactFormData } = pageProps;
+  const { socialUrls, contactFormData, metaData } = pageProps;
   return (
     <>
       <Navbar urls={socialUrls} contactFormData={contactFormData} />
+      <SEO metaData={metaData} />
       <Main>{children}</Main>
       <Footer urls={socialUrls} contactFormData={contactFormData} />
     </>
@@ -29,6 +31,7 @@ Layout.propTypes = {
   pageProps: PropTypes.shape({
     socialUrls: PropTypes.shape({}),
     contactFormData: PropTypes.instanceOf(Object),
+    metaData: PropTypes.instanceOf(Object),
   }).isRequired,
 };
 

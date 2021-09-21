@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import useEscapeKey from '@hooks/useEscapeKey';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
@@ -63,7 +64,7 @@ const MenuLink = styled(NavLink)`
   }
 `;
 
-const Hamburger = styled.div`
+const Hamburger = styled.button`
   display: none;
   flex-direction: column;
   cursor: pointer;
@@ -125,6 +126,12 @@ const Navbar = ({ urls, contactFormData }) => {
 
   const areSmAlwaysDisabled = router.pathname === '/404';
 
+  const closeMobileNavbar = () => {
+    setShow(false);
+  };
+
+  useEscapeKey(closeMobileNavbar);
+
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
       setSocialsVisibility(true);
@@ -163,7 +170,7 @@ const Navbar = ({ urls, contactFormData }) => {
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
-        <button type="button" onClick={scrollToTopOnClick}>
+        <button type="button" onClick={scrollToTopOnClick} aria-label="Przenieś na stronę główną">
           <Logo />
         </button>
 

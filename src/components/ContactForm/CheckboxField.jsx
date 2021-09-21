@@ -45,6 +45,10 @@ const CheckboxField = styled.div.attrs((props) => ({
   input:checked + & {
     border: none;
   }
+
+  input:focus + & {
+    border-color: ${getColor('ikksBlue')};
+  }
   ${IconSM} {
     visibility: ${(props) => (props.checked ? 'visible' : 'hidden')};
   }

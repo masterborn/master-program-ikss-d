@@ -60,6 +60,7 @@ const Nav = styled.nav`
 const CloseButton = styled.button`
   padding: 27px 24px;
   margin-left: auto;
+  cursor: pointer;
 `;
 
 const StyledLink = styled(NavLink)`
