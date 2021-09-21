@@ -7,7 +7,7 @@ import {
   MissionWrapper,
   HistoryWrapper,
 } from '@components/MissionAndHistory/Common';
-import MissionAndHistoryImage from '@root/components/MissionAndHistory/MissionAndHistoryImage';
+import MissionAndHistoryImage from '@components/MissionAndHistory/MissionAndHistoryImage';
 import MissionAndHistoryText from '@components/MissionAndHistory/TextWrapper';
 
 const HistoryImage = styled(MissionAndHistoryImage)`

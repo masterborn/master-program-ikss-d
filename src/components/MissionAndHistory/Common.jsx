@@ -9,7 +9,7 @@ const CommonWrapper = styled.section`
 
   display: grid;
   grid-auto-rows: min-content;
-  margin: var(--margin-top) var(--margin-bottom) var(--margin-bottom) var(--margin-center);
+  margin: var(--margin-top) var(--margin-center) var(--margin-bottom) var(--margin-center);
   max-width: 1197px;
 
   & h2 {
