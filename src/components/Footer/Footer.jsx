@@ -102,12 +102,12 @@ const TextLogoWrapper = styled.div`
 const LogoFooter = styled(LogoAdditional)`
   width: 84px;
   height: 48px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3.5rem;
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 66px;
     height: 38px;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
   }
 `;
 

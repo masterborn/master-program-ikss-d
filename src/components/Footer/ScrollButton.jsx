@@ -5,7 +5,7 @@ import { animateScroll as scroll } from 'react-scroll';
 import ScrollButtonVector from '@assets/ScrollButtonVector.svg';
 import { getColor, getMedias, getShadow } from '@styles/utils';
 
-const Eclipse = styled.div`
+const Eclipse = styled.button`
   width: 64px;
   height: 64px;
 
@@ -62,7 +62,7 @@ const ScrollButton = ({ className, contact }) => {
   };
 
   return (
-    <Eclipse className={className} contact={contact} onClick={handleClick}>
+    <Eclipse className={className} contact={contact} onClick={handleClick} tabIndex={0}>
       <ScrollButtonVector />
     </Eclipse>
   );

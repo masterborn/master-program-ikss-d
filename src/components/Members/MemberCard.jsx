@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   padding: 32px 24px 40px;
   border-radius: 16px;
   text-align: center;
+  background: ${getColor('white')};
 
   box-shadow: ${getShadow('cardShadow')};
 

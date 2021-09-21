@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import useEscapeKey from '@hooks/useEscapeKey';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
@@ -38,16 +39,16 @@ const MediaWrapper = styled.div`
   margin: 0 auto;
 
   @media (max-width: ${getMedias('desktop')}) {
-    padding: 1.4rem 1.7rem;
+    padding: 1.4rem 1.5rem;
   }
 `;
 
 const Menu = styled.div`
   display: flex;
-  margin-left: 7.8em;
+  margin-left: 6.875rem;
 
   @media (max-width: 1400px) {
-    margin-left: 2em;
+    margin-left: 2rem;
   }
 
   @media (max-width: 1100px) {
@@ -68,7 +69,7 @@ const MenuLink = styled(NavLink)`
   }
 `;
 
-const Hamburger = styled.div`
+const Hamburger = styled.button`
   display: none;
   flex-direction: column;
   cursor: pointer;
@@ -129,6 +130,12 @@ const Navbar = ({ urls, contactFormData }) => {
 
   const areSmAlwaysDisabled = router.pathname === '/404';
 
+  const closeMobileNavbar = () => {
+    setShow(false);
+  };
+
+  useEscapeKey(closeMobileNavbar);
+
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
       setSocialsVisibility(true);
@@ -168,7 +175,7 @@ const Navbar = ({ urls, contactFormData }) => {
 
       <Nav>
         <MediaWrapper>
-          <button type="button" onClick={scrollToTopOnClick}>
+          <button type="button" onClick={scrollToTopOnClick} aria-label="Przenieś na stronę główną">
             <Logo />
           </button>
 

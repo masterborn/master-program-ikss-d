@@ -11,7 +11,7 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   padding-inline: 220px;
-  margin-top: 164px;
+  margin-top: 140px;
 
   & > h3 {
     margin-bottom: 32px;

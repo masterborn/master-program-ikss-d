@@ -61,6 +61,10 @@ const CooperationWrapper = styled.div`
   @media (max-width: ${getMedias('tablet')}) {
     gap: 3rem;
   }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    gap: 2.5rem 1.5rem;
+  }
 `;
 
 const Cooperation = ({ data, isHomePage }) => {
