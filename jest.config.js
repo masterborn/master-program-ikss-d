@@ -1,5 +1,6 @@
 module.exports = {
   testEnvironment: 'jsdom',
+  setupFiles: ['<rootDir>/.env'],
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   collectCoverageFrom: [
     'src/**/*.{ts,tsx,js,jsx}',
@@ -11,7 +12,7 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/mocks/.*'],
   coverageReporters: ['lcov', 'text-summary'],
   moduleNameMapper: {
-    '@root(.*)': '<rootDir>$1',
+    '@root(.*)': '<rootDir>/src/$1',
     '@api/(.*)': '<rootDir>/src/api/$1',
     '@contexts/(.*)': '<rootDir>/src/contexts/$1',
     '@contextProviders/(.*)': '<rootDir>/src/contextProviders/$1',
