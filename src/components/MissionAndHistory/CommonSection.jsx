@@ -62,7 +62,7 @@ const TextWrapper = styled.section`
   @media (max-width: 550px) {
     width: 327px;
     & > p {
-      margin-bottom: ${({ isMission }) => (isMission ? '5rem' : '0rem')};
+      margin-bottom: ${({ isMission }) => (isMission ? '5rem' : '0')};
       margin-bottom: ${({ isMission, isIndented }) => isIndented && isMission && '1.75rem'};
     }
   }
