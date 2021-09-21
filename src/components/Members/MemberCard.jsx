@@ -54,38 +54,42 @@ const Header = styled(motion.header)`
   align-items: center;
   height: 100%;
 
-  & > span > h5 {
-    margin: ${({ cardExpanded }) => (cardExpanded ? '8px 0 24px' : '8px 0 0px')};
-    color: ${getColor('steel')};
-  }
-
   @media (max-width: ${getMedias('tablet')}) {
     flex-direction: ${({ cardExpanded }) => (cardExpanded ? 'column' : 'row')};
     gap: 0 24px;
     text-align: ${({ cardExpanded }) => (cardExpanded ? 'center' : 'left')};
-
-    & > span {
-      max-width: 130px;
-    }
-
-    & > span > h4 {
-      font-size: 18px;
-      line-height: 24px;
-      font-weight: ${getFontWeight('buttonWeight')};
-    }
-
-    & > span > h5 {
-      font-size: 14px;
-      line-height: 17.57px;
-    }
   }
 
   @media (max-width: ${getMedias('mobile')}) {
     gap: 0 12px;
+  }
+`;
 
-    & > span {
-      max-width: ${({ cardExpanded }) => (cardExpanded ? '250px' : '130px')};
-    }
+const Span = styled(motion.span)`
+  @media (max-width: ${getMedias('tablet')}) {
+    max-width: 130px;
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    max-width: ${({ cardExpanded }) => (cardExpanded ? '250px' : '130px')};
+  }
+`;
+
+const H4 = styled(motion.h4)`
+  @media (max-width: ${getMedias('tablet')}) {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: ${getFontWeight('buttonWeight')};
+  }
+`;
+
+const H5 = styled(motion.h5)`
+  margin-block-start: 8px;
+  color: ${getColor('steel')};
+
+  @media (max-width: ${getMedias('tablet')}) {
+    font-size: 14px;
+    line-height: 17.57px;
   }
 `;
 
@@ -95,6 +99,7 @@ const InfoWrapper = styled(motion.div)`
   align-items: center;
   justify-content: flex-end;
   height: 100%;
+  margin-block-start: 24px;
 
   & > p > a {
     display: flex;
@@ -122,7 +127,6 @@ const StyledButton = styled(Button)`
   padding: 9px 16px 9px 13.5px;
   font-size: 14px;
   line-height: 17.57px;
-
   @media (max-width: ${getMedias('tablet')}) {
     margin-top: 16px;
   }
@@ -137,7 +141,6 @@ const ExpandButton = styled(motion.button)`
   display: none;
   position: absolute;
   right: 1%;
-  top: ${({ cardExpanded }) => (cardExpanded ? '15%' : '50%')};
 
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
@@ -188,12 +191,12 @@ const MemberCard = ({ member }) => {
     closed: {
       rotate: 0,
       x: '-50%',
-      y: '-50%',
+      y: [-100, -50, 0],
     },
     expanded: {
       rotate: 180,
       x: '-50%',
-      y: '-50%',
+      y: -200,
     },
   };
 
@@ -203,22 +206,24 @@ const MemberCard = ({ member }) => {
         cardExpanded={cardExpanded}
         onClick={() => setCardExpanded(!cardExpanded)}
         variants={expandButtonAnimationVariants}
-        initial={false}
+        initial="closed"
         animate={cardExpanded ? 'expanded' : 'closed'}
         transition={{ duration: 0.5 }}
       >
         <IconSM icon={ChevronIcon} size="26px" />
       </ExpandButton>
 
-      <Header cardExpanded={cardExpanded} layout initial={{ transition: { delay: 0.3 } }}>
+      <Header cardExpanded={cardExpanded} layout>
         <ImageWrapper cardExpanded={cardExpanded} layout>
           {imageVisibility}
         </ImageWrapper>
 
-        <span>
-          <h4>{name}</h4>
-          <h5>{role}</h5>
-        </span>
+        <Span cardExpanded={cardExpanded} layout>
+          <H4 layout>{name}</H4>
+          <H5 cardExpanded={cardExpanded} layout>
+            {role}
+          </H5>
+        </Span>
       </Header>
 
       <AnimatePresence>
