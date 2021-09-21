@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { getColor, getFontWeight, getMedias, getShadow } from '@styles/utils';
 import Button from '@components/Button/Button';
@@ -11,7 +11,7 @@ import EmailIcon from '@assets/icons/email-icon.svg';
 import ChevronIcon from '@assets/icons/chevron-icon.svg';
 import IconSM from '@components/Icon/IconSM';
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   --paddingActive: 45px 20px 32px;
 
   position: relative;
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(motion.div)`
   --imageWidth: ${({ cardExpanded }) => (cardExpanded ? '164px' : 'clamp(80px, 10vw, 164px)')};
 
   position: relative;
@@ -48,7 +48,7 @@ const ImageWrapper = styled.div`
   overflow: hidden;
 `;
 
-const Header = styled.header`
+const Header = styled(motion.header)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,16 +89,12 @@ const Header = styled.header`
   }
 `;
 
-const InfoWrapper = styled.div`
+const InfoWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   height: 100%;
-
-  @media (max-width: ${getMedias('tablet')}) {
-    display: ${({ cardExpanded }) => (cardExpanded ? 'flex' : 'none')};
-  }
 
   & > p > a {
     display: flex;
@@ -202,7 +198,7 @@ const MemberCard = ({ member }) => {
   };
 
   return (
-    <Wrapper cardExpanded={cardExpanded}>
+    <Wrapper cardExpanded={cardExpanded} layout>
       <ExpandButton
         cardExpanded={cardExpanded}
         onClick={() => setCardExpanded(!cardExpanded)}
@@ -214,8 +210,10 @@ const MemberCard = ({ member }) => {
         <IconSM icon={ChevronIcon} size="26px" />
       </ExpandButton>
 
-      <Header cardExpanded={cardExpanded}>
-        <ImageWrapper cardExpanded={cardExpanded}>{imageVisibility}</ImageWrapper>
+      <Header cardExpanded={cardExpanded} layout initial={{ transition: { delay: 0.3 } }}>
+        <ImageWrapper cardExpanded={cardExpanded} layout>
+          {imageVisibility}
+        </ImageWrapper>
 
         <span>
           <h4>{name}</h4>
@@ -223,23 +221,32 @@ const MemberCard = ({ member }) => {
         </span>
       </Header>
 
-      <InfoWrapper cardExpanded={cardExpanded}>
-        <p>
-          <a href={`tel:${phone}`}>
-            {phone && <IconSM icon={PhoneIcon} size="16px" />}
-            {phone}
-          </a>
-        </p>
+      <AnimatePresence>
+        {cardExpanded && (
+          <InfoWrapper
+            layout
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { delay: 0.3 } }}
+          >
+            <p>
+              <a href={`tel:${phone}`}>
+                {phone && <IconSM icon={PhoneIcon} size="16px" />}
+                {phone}
+              </a>
+            </p>
 
-        <p>
-          <a href={`mailto:${email}`}>
-            {email && <IconSM icon={EmailIcon} size="16px" />}
-            {email}
-          </a>
-        </p>
+            <p>
+              <a href={`mailto:${email}`}>
+                {email && <IconSM icon={EmailIcon} size="16px" />}
+                {email}
+              </a>
+            </p>
 
-        {buttonSM}
-      </InfoWrapper>
+            {buttonSM}
+          </InfoWrapper>
+        )}
+      </AnimatePresence>
     </Wrapper>
   );
 };
