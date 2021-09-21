@@ -24,17 +24,10 @@ const StyledImage = styled.div`
   overflow: hidden;
 
   @media (max-width: ${getMedias('laptop')}) {
-    margin: 0;
-  }
+    --imageWidth: 100%;
 
-  @media (max-width: 550px) {
-    --imageWidth: 327px;
-    --imageHeight: ${({ isMission }) => (isMission ? '201px' : '238px')};
-    border-radius: 8px;
-  }
-
-  @media (max-width: 360px) {
-    transform: scale(0.8);
+    padding-top: 55%;
+    margin: 0 auto;
   }
 `;
 

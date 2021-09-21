@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import Image from 'next/image';
 
 import { getMedias } from '@styles/utils';
 import CommonWrapper from '@components/MissionAndHistory/CommonWrapper';
@@ -12,6 +11,13 @@ const MissionWrapper = styled.div`
   flex-direction: row;
   gap: 3.5rem;
   margin: 0 0 9.25rem;
+
+  @media (max-width: ${getMedias('laptop')}) {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    gap: 1.75rem;
+  }
 `;
 
 const ArticleWrapper = styled.article`
@@ -22,17 +28,40 @@ const ArticleWrapper = styled.article`
   @media (max-width: ${getMedias('desktop')}) {
     gap: 0 28px;
   }
+
+  @media (max-width: ${getMedias('laptop')}) {
+    margin-top: 80px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, max-content);
+
+    & p + p {
+      margin-top: 32px;
+    }
+  }
 `;
 
 const HistoryImage = styled(ImageWrapper)`
-  height: 352px;
+  max-height: 352px;
   top: 2.5ch;
+
+  @media (max-width: ${getMedias('laptop')}) {
+    margin-bottom: 32px;
+    top: 0;
+    grid-row: 1 / 2;
+    padding-top: 75%;
+  }
 
   ${({ isSecond }) =>
     isSecond &&
     css`
-      height: 265px;
       margin-top: calc(32px);
+
+      @media (max-width: ${getMedias('laptop')}) {
+        padding-top: 55%;
+        margin-top: 32px;
+        grid-row: 3 / 4;
+        top: 0;
+      }
     `}
 `;
 
@@ -49,7 +78,7 @@ const MissionAndHistory = ({ missionData, historyData }) => (
 
       <HistoryImage url={historyData.image1.url} alt={historyData.title} isHistory />
 
-      <MissionAndHistoryText text={historyData.text2} />
+      <MissionAndHistoryText text={historyData.text2} isIndented />
 
       <HistoryImage url={historyData.image2.url} alt={historyData.title} isHistory isSecond />
     </ArticleWrapper>

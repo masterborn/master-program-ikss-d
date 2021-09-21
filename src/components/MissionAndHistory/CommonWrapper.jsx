@@ -14,17 +14,16 @@ const CommonWrapper = styled.section`
   }
 
   @media (max-width: ${getMedias('desktop')}) {
-    margin: 6.625rem 2rem 9.25rem 2rem;
+    margin: 6.625rem 2rem 9.25rem;
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    flex-direction: column;
-    font-size: 14px;
-    line-height: 28px;
-    margin: 6.625rem 0 2.625rem;
+    margin: 6.625rem 4rem 9.25rem;
   }
 
   @media (max-width: ${getMedias('tablet')}) {
+    margin: 5rem 1.5rem 4.375rem;
+
     & h2 {
       font-weight: 800;
       font-size: 24px;
@@ -32,10 +31,6 @@ const CommonWrapper = styled.section`
       margin-top: 2rem;
       margin-bottom: 1rem;
     }
-  }
-
-  @media (max-width: ${getMedias('mobile')}) {
-    margin: 5rem 2rem 4.375rem;
   }
 `;
 
