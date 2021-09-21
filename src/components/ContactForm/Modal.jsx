@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { getMedias } from '@styles/utils';
 import ContactForm from '@components/ContactForm/ContactForm';
 import { modalActions } from '@store/modalSlice';
+import useEscapeKey from '@hooks/useEscapeKey';
 
 const Wrapper = styled(motion.section)`
   background: rgb(26 40 71 / 60%);
@@ -62,6 +63,8 @@ const Modal = ({ contactFormData }) => {
   const closeModal = () => {
     dispatch(modalActions.closeModal());
   };
+
+  useEscapeKey(closeModal);
 
   return (
     <AnimatePresence>

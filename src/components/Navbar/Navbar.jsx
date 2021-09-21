@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import useEscapeKey from '@hooks/useEscapeKey';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
@@ -17,32 +18,37 @@ import Portal from '@hoc/Portal';
 import MobileMenu from './MobileMenu';
 
 const Nav = styled.nav`
-  padding: 1.25rem 7.5rem;
-  display: flex;
-  z-index: 2;
-  align-items: center;
   background: ${getColor('white')};
   box-shadow: 0 4px 16px rgba(97, 121, 139, 0.1);
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 2;
 
   & button {
     cursor: pointer;
   }
+`;
+
+const MediaWrapper = styled.div`
+  max-width: 1920px;
+  padding: 1.25rem 7.5rem;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
 
   @media (max-width: ${getMedias('desktop')}) {
-    padding: 1rem 1.25rem;
+    padding: 1.4rem 1.5rem;
   }
 `;
 
 const Menu = styled.div`
   display: flex;
-  margin-left: 7.8em;
+  margin-left: 6.875rem;
 
   @media (max-width: 1400px) {
-    margin-left: 2em;
+    margin-left: 2rem;
   }
 
   @media (max-width: 1100px) {
@@ -63,7 +69,7 @@ const MenuLink = styled(NavLink)`
   }
 `;
 
-const Hamburger = styled.div`
+const Hamburger = styled.button`
   display: none;
   flex-direction: column;
   cursor: pointer;
@@ -74,7 +80,6 @@ const Hamburger = styled.div`
     width: 24px;
     background: ${getColor('ikksBlue')};
     margin-bottom: 4px;
-    margin-right: 27px;
     border-radius: 103px;
   }
 
@@ -125,6 +130,12 @@ const Navbar = ({ urls, contactFormData }) => {
 
   const areSmAlwaysDisabled = router.pathname === '/404';
 
+  const closeMobileNavbar = () => {
+    setShow(false);
+  };
+
+  useEscapeKey(closeMobileNavbar);
+
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
       setSocialsVisibility(true);
@@ -163,42 +174,44 @@ const Navbar = ({ urls, contactFormData }) => {
       <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
 
       <Nav>
-        <button type="button" onClick={scrollToTopOnClick}>
-          <Logo />
-        </button>
+        <MediaWrapper>
+          <button type="button" onClick={scrollToTopOnClick} aria-label="Przenieś na stronę główną">
+            <Logo />
+          </button>
 
-        <Menu>
-          <MenuLink url="/" linkLabel="Strona główna" />
-          <MenuLink url="/projects" linkLabel="Projekty" />
-          <MenuLink url="/about" linkLabel="O nas" />
-          <MenuLink url="/cooperation" linkLabel="Współpraca" />
-        </Menu>
+          <Menu>
+            <MenuLink url="/" linkLabel="Strona główna" />
+            <MenuLink url="/projects" linkLabel="Projekty" />
+            <MenuLink url="/about" linkLabel="O nas" />
+            <MenuLink url="/cooperation" linkLabel="Współpraca" />
+          </Menu>
 
-        <SMWrapper>
-          <SocialMedias
-            visible={socialsVisibility}
-            urls={{
-              facebook: urls.fblink,
-              instagram: urls.inlink,
-              youTube: urls.ytlink,
-              linkedIn: urls.lnlink,
-            }}
-          />
-        </SMWrapper>
+          <SMWrapper>
+            <SocialMedias
+              visible={socialsVisibility}
+              urls={{
+                facebook: urls.fblink,
+                instagram: urls.inlink,
+                youTube: urls.ytlink,
+                linkedIn: urls.lnlink,
+              }}
+            />
+          </SMWrapper>
 
-        <Hamburger onClick={() => setShow(true)}>
-          <span />
-          <span />
-          <span />
-        </Hamburger>
+          <Hamburger onClick={() => setShow(true)}>
+            <span />
+            <span />
+            <span />
+          </Hamburger>
 
-        <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
-          Skontaktuj się
-        </Button>
+          <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
+            Skontaktuj się
+          </Button>
 
-        <Portal>
-          <Modal contactFormData={contactFormData} />
-        </Portal>
+          <Portal>
+            <Modal contactFormData={contactFormData} />
+          </Portal>
+        </MediaWrapper>
       </Nav>
     </>
   );
