@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import useEscapeKey from '@hooks/useEscapeKey';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
@@ -15,7 +16,6 @@ import Modal from '@components/ContactForm/Modal';
 import Portal from '@hoc/Portal';
 
 import MobileMenu from './MobileMenu';
-import useEscapeKey from '@hooks/useEscapeKey';
 
 const Nav = styled.nav`
   padding: 1.25rem 7.5rem;
