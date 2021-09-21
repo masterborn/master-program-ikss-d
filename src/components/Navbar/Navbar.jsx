@@ -15,6 +15,7 @@ import Modal from '@components/ContactForm/Modal';
 import Portal from '@hoc/Portal';
 
 import MobileMenu from './MobileMenu';
+import useEscapeKey from '@hooks/useEscapeKey';
 
 const Nav = styled.nav`
   padding: 1.25rem 7.5rem;
@@ -63,7 +64,7 @@ const MenuLink = styled(NavLink)`
   }
 `;
 
-const Hamburger = styled.div`
+const Hamburger = styled.button`
   display: none;
   flex-direction: column;
   cursor: pointer;
@@ -124,6 +125,12 @@ const Navbar = ({ urls, contactFormData }) => {
   const dispatch = useDispatch();
 
   const areSmAlwaysDisabled = router.pathname === '/404';
+
+  const closeMobileNavbar = () => {
+    setShow(false);
+  };
+
+  useEscapeKey(closeMobileNavbar);
 
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {

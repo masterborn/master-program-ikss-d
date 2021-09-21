@@ -169,9 +169,6 @@ const StyledCloseIcon = styled(IconSM)`
   top: 2em;
   right: 2em;
   cursor: pointer;
-  &:focus {
-    border: 2px solid red;
-  }
 `;
 
 const ContactForm = ({ modal, className, contactFormData }) => {

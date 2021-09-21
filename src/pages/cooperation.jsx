@@ -7,11 +7,9 @@ import {
 } from '@root/contentfulDataTransformers/filterData';
 import Cooperation from '@components/Cooperation/Cooperation';
 import CooperationTiles from '@components/Cooperation/CooperationTiles';
-import SEO from '@components/SEO/SEO';
 
-const projectsPage = ({ cooperationMeta, cooperationData, CooperationTilesData }) => (
+const projectsPage = ({ cooperationData, CooperationTilesData }) => (
   <>
-    <SEO metaData={cooperationMeta} />
     <CooperationTiles data={CooperationTilesData} />
     <Cooperation data={cooperationData} />
   </>
@@ -20,7 +18,7 @@ const projectsPage = ({ cooperationMeta, cooperationData, CooperationTilesData }
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('cooperation');
 
-  const cooperationMeta = filterBasicContentData(basicContent, 'cooperation-meta');
+  const metaData = filterBasicContentData(basicContent, 'cooperation-meta');
 
   const SubPageHero = filterBasicContentData(basicContent, 'cooperation-top-section');
 
@@ -50,7 +48,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      cooperationMeta,
+      metaData,
       SubPageHero,
       socialUrls,
       CTASection,
