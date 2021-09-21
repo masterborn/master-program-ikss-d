@@ -12,61 +12,35 @@ import ContactForm from '@components/ContactForm/ContactForm';
 
 const Wrapper = styled.footer`
   width: 100%;
-  height: ${({ contact }) => (contact === '/' ? '728px' : '466px')};
   background: ${getColor('ikksBlue')};
   position: relative;
-
-  ${({ contact }) =>
-    contact === '/' &&
-    css`
-      @media (max-width: 1200px) {
-        padding-top: 8em;
-        height: 880px;
-      }
-    `};
-
-  @media (max-width: ${getMedias('mobile')}) {
-    ${({ contact }) =>
-      contact !== '/' &&
-      css`
-        height: 586px;
-      `}
-  }
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
+const MediaWrapper = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-auto-rows: min-content;
   position: relative;
-  bottom: ${({ contact }) => (contact === '/' ? '5%' : '8%')};
-
-  @media (max-width: ${getMedias('tablet')}) {
-    margin-right: 5%;
-  }
-
-  @media (max-width: 650px) {
-    justify-content: ${({ contact }) => (contact === '/' ? 'flex-end' : 'center')};
-    margin-right: ${({ contact }) => (contact === '/' ? '5%' : '0')};
-  }
+  padding-bottom: 51px;
+  padding-top: 3.5rem;
+  max-width: 1920px;
+  margin: 0 auto;
 
   @media (max-width: ${getMedias('mobile')}) {
-    margin: 0;
-    justify-content: center;
-    bottom: 4%;
+    padding-bottom: 40px;
   }
 
   ${({ contact }) =>
     contact === '/' &&
     css`
-      @media (max-width: 1200px) {
-        justify-content: center;
-        top: 32%;
-        margin-right: 0;
+      padding-top: 23.75rem;
+
+      @media (max-width: ${getMedias('desktop')}) {
+        padding-top: 20.75rem;
       }
 
       @media (max-width: ${getMedias('mobile')}) {
-        top: 12%;
+        padding-top: 12.25rem;
       }
     `};
 `;
@@ -75,25 +49,14 @@ const Menu = styled.div`
   display: flex;
   justify-content: center;
 
-  ${({ contact }) =>
-    contact === '/' &&
-    css`
-      padding-top: 18em;
-    `};
-
   @media (max-width: ${getMedias('mobile')}) {
     flex-direction: column;
-
-    ${({ contact }) =>
-      contact === '/' &&
-      css`
-        padding-top: 7em;
-      `};
+    gap: 24px;
   }
 `;
 
 const MenuLink = styled(NavLink)`
-  padding: 1rem;
+  padding: 0 1rem;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -110,7 +73,11 @@ const TextLogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 2em;
+  margin: 49px 0 0;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    margin: 40px 25px 0;
+  }
 
   & * {
     fill: white;
@@ -134,78 +101,93 @@ const TextLogoWrapper = styled.div`
 
 const LogoFooter = styled(LogoAdditional)`
   width: 84px;
-  height: 84px;
-  margin-bottom: 2em;
+  height: 48px;
+  margin-bottom: 3.5rem;
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 66px;
     height: 38px;
+    margin-bottom: 2.5rem;
   }
 `;
 
 const SocialMedias = styled(Socials)`
   display: flex;
   justify-content: center;
-  margin-top: 2em;
+  margin-top: 3rem;
   align-items: center;
-  gap: 24px;
+  gap: 2rem;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    margin-top: 3.5rem;
+  }
+
   & svg * {
     transition: all 0.3s ease-in;
   }
+
   & svg:hover * {
     fill: ${getColor('blue_50')};
   }
 `;
 
-const ContactFormWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const FooterContactForm = styled(ContactForm)`
   position: absolute;
+  left: 50%;
+  bottom: 61.6%;
+  transform: translateX(-50%);
+  width: 100%;
+  margin: 0;
   z-index: 1;
-  bottom: 60%;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    width: 90%;
+  }
 
   @media (max-width: ${getMedias('mobile')}) {
-    bottom: 75%;
+    bottom: 79.6%;
   }
 `;
 
 const Footer = ({ urls, contactFormData }) => {
   const router = useRouter();
+
+  const contactForm = router.pathname === '/' && (
+    <FooterContactForm contactFormData={contactFormData} />
+  );
+
   return (
-    <Wrapper contact={router.pathname}>
-      {router.pathname === '/' && (
-        <ContactFormWrapper>
-          <FooterContactForm contactFormData={contactFormData} />
-        </ContactFormWrapper>
-      )}
-      <ButtonWrapper contact={router.pathname}>
-        <ScrollButton />
-      </ButtonWrapper>
-      <Menu contact={router.pathname}>
-        <MenuLink url="/" linkLabel="Strona główna" />
-        <MenuLink url="/projects" linkLabel="Projekty" />
-        <MenuLink url="/about" linkLabel="O nas" />
-        <MenuLink url="/cooperation" linkLabel="Współpraca" />
-      </Menu>
-      <SocialMedias
-        footer
-        urls={{
-          facebook: urls.fblink,
-          instagram: urls.inlink,
-          youTube: urls.ytlink,
-          linkedIn: urls.lnlink,
-        }}
-      />
-      <TextLogoWrapper>
-        <LogoFooter />
-        <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
-        <p>
-          Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
-        </p>
-      </TextLogoWrapper>
+    <Wrapper>
+      <MediaWrapper contact={router.pathname}>
+        {contactForm}
+
+        <ScrollButton contact={router.pathname} />
+
+        <Menu contact={router.pathname}>
+          <MenuLink url="/" linkLabel="Strona główna" />
+          <MenuLink url="/projects" linkLabel="Projekty" />
+          <MenuLink url="/about" linkLabel="O nas" />
+          <MenuLink url="/cooperation" linkLabel="Współpraca" />
+        </Menu>
+
+        <SocialMedias
+          footer
+          urls={{
+            facebook: urls.fblink,
+            instagram: urls.inlink,
+            youTube: urls.ytlink,
+            linkedIn: urls.lnlink,
+          }}
+        />
+
+        <TextLogoWrapper>
+          <LogoFooter />
+          <p>©2021 All rights reserved by Informacja Kulturalno-Sportowa Studentów</p>
+          <p>
+            Made with <Heart /> by <a href="https://masterborn.com/">MasterBorn Software</a>
+          </p>
+        </TextLogoWrapper>
+      </MediaWrapper>
     </Wrapper>
   );
 };

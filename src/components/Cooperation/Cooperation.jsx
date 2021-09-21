@@ -10,17 +10,18 @@ const Wrapper = styled.section`
   flex-direction: column;
   width: 100%;
   text-align: center;
+  padding: 0 7.875rem 0;
+
+  @media (max-width: ${getMedias('laptop')}) {
+    padding: 0 1.5rem 0;
+  }
 
   ${({ isHomePage }) =>
     isHomePage &&
     css`
-      padding-bottom: 45rem;
+      padding-bottom: 50.625rem;
 
       @media (max-width: ${getMedias('laptop')}) {
-        padding: 0 1.5rem 40rem;
-      }
-
-      @media (max-width: ${getMedias('tablet')}) {
         padding: 0 1.5rem 45rem;
       }
     `}
@@ -40,7 +41,7 @@ const Header = styled.header`
 
   & > p {
     max-width: 635px;
-    margin: 2rem auto 5.3rem;
+    margin: 2rem auto 5.1rem;
 
     @media (max-width: ${getMedias('mobile')}) {
       margin: 1.5rem auto 2.5rem;
@@ -51,19 +52,18 @@ const Header = styled.header`
 const CooperationWrapper = styled.div`
   display: inherit;
   flex-wrap: wrap;
-  width: 80%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   margin: auto;
-  gap: 1.5rem 4.5rem;
-
-  @media (max-width: ${getMedias('laptop')}) {
-    width: 100%;
-    gap: 1.5rem 3.5rem;
-  }
+  gap: 3.875rem 5.4rem;
 
   @media (max-width: ${getMedias('tablet')}) {
-    gap: 1.5rem;
+    gap: 3rem;
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    gap: 2.5rem 1.5rem;
   }
 `;
 

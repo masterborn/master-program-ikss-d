@@ -5,21 +5,18 @@ import { getMedias } from '@styles/utils';
 import CommonWrapper from '@components/MissionAndHistory/CommonWrapper';
 import CommonSection from '@components/MissionAndHistory/CommonSection';
 
-const MissionWrapper = styled(CommonWrapper)`
+const MissionWrapper = styled.div`
+  display: flex;
   flex-direction: row;
-  gap: 3rem;
+  gap: 3.5rem;
+  margin: 0 0 11rem;
 
   @media (max-width: ${getMedias('laptop')}) {
     flex-direction: column;
     font-size: 14px;
     line-height: 28px;
     margin: 2em;
-
     gap: 0;
-
-    & h2 {
-      margin-top: 1rem;
-    }
   }
 `;
 
@@ -29,6 +26,7 @@ const ArticleWrapper = styled.article`
 
   @media (max-width: ${getMedias('laptop')}) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 

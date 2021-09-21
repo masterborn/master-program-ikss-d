@@ -6,12 +6,16 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.section`
+  --pdg-top: 64px;
+  --pdg-right: 225px;
+  --pdg-bottom: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 64px 225px 42px;
+  padding: var(--pdg-top) var(--pdg-right) var(--pdg-bottom);
   background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
   & h1 {
@@ -19,15 +23,16 @@ const Wrapper = styled.section`
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    padding: 64px 100px 42px;
+    --pdg-right: 100px;
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    padding: 64px 50px 42px;
+    --pdg-right: 50px;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
-    padding: 32px 24px 0;
+    --pdg-top: 32px;
+    --pdg-right: 24px;
 
     & h1 {
       margin: 8px auto 24px;

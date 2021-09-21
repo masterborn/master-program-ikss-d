@@ -45,7 +45,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('desktop')}) {
-    margin: 0 1em 2em 1em;
+    margin: 0 1rem 2rem 1rem;
 
     & img {
       max-width: 100%;
@@ -60,7 +60,7 @@ const Wrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('mobile')}) {
-    margin: 0 0.4em 2em 0.4em;
+    margin: 0 0.5rem 2rem 0.5rem;
   }
 `;
 
@@ -69,11 +69,11 @@ const Description = styled.article`
   flex-direction: column;
   align-items: flex-start;
   max-width: ${(props) => (props.isOnHomePage ? '792px' : '90%')};
-  padding: ${(props) => (props.isOnHomePage ? '0 96px 4.1em' : '0 0 40px')};
+  padding: ${(props) => (props.isOnHomePage ? '0 103px 4.1em' : '0 0 40px')};
 
   @media (max-width: ${getMedias('desktop')}) {
     & a {
-      margin: 0 auto 2.25em auto;
+      margin: 0 auto 2rem auto;
     }
   }
 `;
@@ -98,7 +98,8 @@ const Header = styled.header`
     & h4 {
       font-size: 18px;
       line-height: 24px;
-      margin-bottom: 0.4em;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
     }
 
     & h5 {

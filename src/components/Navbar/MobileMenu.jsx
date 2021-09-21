@@ -58,8 +58,13 @@ const Nav = styled.nav`
 `;
 
 const CloseButton = styled.button`
-  padding: 27px 24px;
+  padding: 34px 24px;
   margin-left: auto;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    padding: 28px 24px;
+  }
+
   cursor: pointer;
 `;
 
