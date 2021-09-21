@@ -21,6 +21,7 @@ const TextWrapper = styled.section`
 
   @media (max-width: ${getMedias('laptop')}) {
     text-indent: 0;
+
     & > p {
       margin: 0;
     }

@@ -8,6 +8,10 @@ const StyledImage = styled.div`
   --imageWidth: 483px;
 
   min-width: var(--imageWidth);
+  position: relative;
+  box-shadow: ${getShadow('cardShadow')};
+  border-radius: 16px;
+  overflow: hidden;
 
   ${({ isHistory }) =>
     isHistory
@@ -17,11 +21,6 @@ const StyledImage = styled.div`
       : css`
           margin-left: auto;
         `}
-
-  position: relative;
-  box-shadow: ${getShadow('cardShadow')};
-  border-radius: 16px;
-  overflow: hidden;
 
   @media (max-width: ${getMedias('laptop')}) {
     --imageWidth: 100%;
