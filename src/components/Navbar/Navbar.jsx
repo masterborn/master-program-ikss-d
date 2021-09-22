@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -13,6 +12,8 @@ import NavLink from '@components/Navbar/NavLink';
 import { openContactFormNavbar } from '@utils/formVisibility';
 import Modal from '@components/ContactForm/Modal';
 import Portal from '@hoc/Portal';
+import useMobileVisibility from '@hooks/useMobileVisibility';
+import useSocialsDisplay from '@hooks/useSocialsDisplay';
 
 import MobileMenu from './MobileMenu';
 
@@ -118,51 +119,15 @@ const ContactButton = styled(Button)`
 `;
 
 const Navbar = ({ urls, contactFormData }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [socialsVisibility, setSocialsVisibility] = useState(false);
-  const [show, setShow] = useState(false);
+  const {
+    isVisible,
+    handleClickTrue: openMenu,
+    handleClickFalse: closeMenu,
+  } = useMobileVisibility('1100');
+
+  const { socialsVisibility } = useSocialsDisplay();
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const areSmAlwaysDisabled = router.pathname === '/404';
-
-  const handleChange = (event) => {
-    if (event.matches) setIsVisible(true);
-    else setIsVisible(false);
-  };
-
-  const handleScroll = () => {
-    if (window.scrollY >= window.innerHeight) {
-      setSocialsVisibility(true);
-      return;
-    }
-
-    setSocialsVisibility(false);
-  };
-
-  const closeMobileMenu = () => {
-    setShow(false);
-  };
-
-  useEffect(() => {
-    const media = window.matchMedia(`(max-width: 1100px)`);
-
-    if (media.matches) setIsVisible(true);
-    else setIsVisible(false);
-
-    media.addEventListener('change', handleChange);
-
-    if (!areSmAlwaysDisabled) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-    } else {
-      setSocialsVisibility(true);
-    }
-
-    return () => {
-      media.removeEventListener('change', handleChange);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [areSmAlwaysDisabled]);
 
   const scrollToTopOnClick = () => {
     if (router.pathname === '/') {
@@ -174,7 +139,7 @@ const Navbar = ({ urls, contactFormData }) => {
 
   return (
     <>
-      {isVisible && show && <MobileMenu urls={urls} closeMobileMenu={closeMobileMenu} />}
+      {isVisible && <MobileMenu urls={urls} closeMobileMenu={closeMenu} />}
 
       <Nav>
         <button type="button" onClick={scrollToTopOnClick}>
@@ -200,7 +165,7 @@ const Navbar = ({ urls, contactFormData }) => {
           />
         </SMWrapper>
 
-        <Hamburger onClick={() => setShow(true)}>
+        <Hamburger onClick={openMenu}>
           <span />
           <span />
           <span />
