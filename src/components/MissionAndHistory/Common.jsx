@@ -27,7 +27,7 @@ const CommonWrapper = styled.section`
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    --magin-top: 5rem;
+    --margin-top: 5rem;
     --margin-center: 1.5rem;
 
     & h2 {
@@ -37,6 +37,10 @@ const CommonWrapper = styled.section`
       margin-bottom: 1rem;
       margin-top: 0rem;
     }
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    --margin-bottom: 4.375rem;
   }
 `;
 
