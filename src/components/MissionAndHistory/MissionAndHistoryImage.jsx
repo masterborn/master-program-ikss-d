@@ -28,6 +28,10 @@ const StyledImage = styled.div`
     padding-top: 55%;
     margin: 0 auto;
   }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    border-radius: 8px;
+  }
 `;
 
 const ImageWrapper = ({ url, alt, isHistory, className }) => (

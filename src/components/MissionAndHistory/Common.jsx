@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getMedias } from '@styles/utils';
 
 const CommonWrapper = styled.section`
-  --margin-top: 6.625rem;
+  --margin-top: 9.25rem;
   --margin-bottom: 9.25rem;
   --margin-center: auto;
 
@@ -22,6 +22,7 @@ const CommonWrapper = styled.section`
   }
 
   @media (max-width: ${getMedias('laptop')}) {
+    --margin-top: 6.625rem;
     --margin-center: 4rem;
   }
 
@@ -33,8 +34,8 @@ const CommonWrapper = styled.section`
       font-weight: 800;
       font-size: 24px;
       line-height: 32px;
-      margin-top: 2rem;
       margin-bottom: 1rem;
+      margin-top: 0rem;
     }
   }
 `;
@@ -49,7 +50,7 @@ const MissionWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 0;
-    gap: 1.75rem;
+    gap: 2rem;
   }
 `;
 
@@ -57,6 +58,10 @@ const HistoryWrapper = styled.article`
   display: grid;
   grid-template-columns: 1fr min-content;
   gap: 0 56px;
+
+  & h2 {
+    margin-top: 0;
+  }
 
   @media (max-width: ${getMedias('desktop')}) {
     gap: 0 28px;
