@@ -192,12 +192,12 @@ const MemberCard = ({ member }) => {
     closed: {
       rotate: 0,
       x: '-50%',
-      y: [-100, -50, 0],
+      y: [-100, 0],
     },
     expanded: {
       rotate: 180,
       x: '-50%',
-      y: -200,
+      y: [-110, -175],
     },
   };
 
