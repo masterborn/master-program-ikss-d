@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
@@ -113,19 +113,9 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const MobileMenu = ({ show, urls, closeMobileMenu }) => {
-  const [isVisible, setIsVisible] = useState(false);
+const MobileMenu = ({ urls, closeMobileMenu }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const handleChange = (event) => {
-    if (event.matches) setIsVisible(true);
-    else setIsVisible(false);
-  };
-
-  const handleClick = () => {
-    closeMobileMenu();
-  };
 
   const handleMobileContact = () => {
     closeMobileMenu();
@@ -133,48 +123,41 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
   };
 
   useEffect(() => {
-    const media = window.matchMedia(`(max-width: 1100px)`);
-
-    if (media.matches) setIsVisible(true);
-    else setIsVisible(false);
-
-    media.addEventListener('change', handleChange);
+    router.events.on('routeChangeComplete', closeMobileMenu);
 
     return () => {
-      media.removeEventListener('change', handleChange);
+      router.events.off('routeChangeComplete', closeMobileMenu);
     };
-  }, []);
+  }, [router.events, closeMobileMenu]);
 
   return (
     <>
-      {isVisible && show && (
-        <Wrapper>
-          <Nav>
-            <CloseButton type="button" onClick={handleClick}>
-              <IconSM icon={CloseIcon} color="steel" />
-            </CloseButton>
+      <Wrapper>
+        <Nav>
+          <CloseButton type="button" onClick={closeMobileMenu}>
+            <IconSM icon={CloseIcon} color="steel" />
+          </CloseButton>
 
-            <LinksWrapper>
-              <StyledLink linkLabel="Strona główna" url="/" />
-              <StyledLink linkLabel="Projekty" url="/projects" />
-              <StyledLink linkLabel="O nas" url="/about" />
-              <StyledLink linkLabel="Współpraca" url="/cooperation" />
-            </LinksWrapper>
+          <LinksWrapper>
+            <StyledLink linkLabel="Strona główna" url="/" />
+            <StyledLink linkLabel="Projekty" url="/projects" />
+            <StyledLink linkLabel="O nas" url="/about" />
+            <StyledLink linkLabel="Współpraca" url="/cooperation" />
+          </LinksWrapper>
 
-            <ContactButton onClick={handleMobileContact}>Skontaktuj się</ContactButton>
+          <ContactButton onClick={handleMobileContact}>Skontaktuj się</ContactButton>
 
-            <Socials
-              urls={{
-                facebook: urls.fblink,
-                instagram: urls.inlink,
-                youTube: urls.ytlink,
-                linkedIn: urls.lnlink,
-              }}
-              size="32px"
-            />
-          </Nav>
-        </Wrapper>
-      )}
+          <Socials
+            urls={{
+              facebook: urls.fblink,
+              instagram: urls.inlink,
+              youTube: urls.ytlink,
+              linkedIn: urls.lnlink,
+            }}
+            size="32px"
+          />
+        </Nav>
+      </Wrapper>
     </>
   );
 };
@@ -182,7 +165,6 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
 export default MobileMenu;
 
 MobileMenu.propTypes = {
-  show: PropTypes.bool.isRequired,
   urls: PropTypes.shape({
     fblink: PropTypes.string,
     inlink: PropTypes.string,

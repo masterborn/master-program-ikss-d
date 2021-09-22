@@ -118,12 +118,18 @@ const ContactButton = styled(Button)`
 `;
 
 const Navbar = ({ urls, contactFormData }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const [socialsVisibility, setSocialsVisibility] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
 
   const areSmAlwaysDisabled = router.pathname === '/404';
+
+  const handleChange = (event) => {
+    if (event.matches) setIsVisible(true);
+    else setIsVisible(false);
+  };
 
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
@@ -139,6 +145,13 @@ const Navbar = ({ urls, contactFormData }) => {
   };
 
   useEffect(() => {
+    const media = window.matchMedia(`(max-width: 1100px)`);
+
+    if (media.matches) setIsVisible(true);
+    else setIsVisible(false);
+
+    media.addEventListener('change', handleChange);
+
     if (!areSmAlwaysDisabled) {
       window.addEventListener('scroll', handleScroll, { passive: true });
     } else {
@@ -146,6 +159,7 @@ const Navbar = ({ urls, contactFormData }) => {
     }
 
     return () => {
+      media.removeEventListener('change', handleChange);
       window.removeEventListener('scroll', handleScroll);
     };
   }, [areSmAlwaysDisabled]);
@@ -160,7 +174,7 @@ const Navbar = ({ urls, contactFormData }) => {
 
   return (
     <>
-      <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
+      {isVisible && show && <MobileMenu urls={urls} closeMobileMenu={closeMobileMenu} />}
 
       <Nav>
         <button type="button" onClick={scrollToTopOnClick}>
