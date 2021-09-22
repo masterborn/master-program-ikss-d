@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { getMedias } from '@styles/utils';
 
 const Wrapper = styled.a`
-  width: 180px;
-  height: 80px;
+  max-width: 180px;
+  max-height: 80px;
 
   & > img {
     object-fit: scale-down;
@@ -13,7 +13,7 @@ const Wrapper = styled.a`
     height: inherit;
   }
 
-  @media (max-width: ${getMedias('mobile')}) {
+  @media (max-width: ${getMedias('tablet')}) {
     width: 92.55px;
     height: 41.13px;
   }

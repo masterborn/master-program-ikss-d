@@ -11,7 +11,7 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   padding-inline: 220px;
-  margin-top: 164px;
+  margin-top: 140px;
 
   & > h3 {
     margin-bottom: 32px;
@@ -78,10 +78,6 @@ const ImageWrapper = styled.div`
   box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
   overflow: hidden;
-
-  @media (max-width: ${getMedias('tablet')}) {
-    margin-bottom: 104px;
-  }
 `;
 
 const Team = ({ data }) => {

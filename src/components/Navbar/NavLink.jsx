@@ -9,7 +9,7 @@ const NavLink = ({ url, linkLabel, className }) => {
   const router = useRouter();
 
   return (
-    <Link href={url} router={router}>
+    <Link href={url} router={router} passHref>
       <PageLink url={url} router={router} className={className}>
         {linkLabel}
       </PageLink>

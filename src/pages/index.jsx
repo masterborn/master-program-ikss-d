@@ -28,6 +28,8 @@ export const getStaticProps = async () => {
   // Hero data
   const basicContent = await ContentfulClient.getBasicContentData('homepage');
 
+  const metaData = filterBasicContentData(basicContent, 'homepage-meta');
+
   const heroData = {
     ...filterBasicContentData(basicContent, 'homepage-top-section'),
     socialUrls,
@@ -70,6 +72,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      metaData,
       heroData,
       valuesData,
       projectsData,

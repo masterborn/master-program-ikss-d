@@ -16,7 +16,6 @@ const CTASection = styled.section`
   gap: 32px;
   padding: 0 var(--pdg-center) var(--pdg-bottom);
   text-align: center;
-  background: linear-gradient(0deg, rgb(244 250 255) 0%, rgb(255 255 255 / 0%) 100%);
   margin-top: 10.25rem;
 
   @media (max-width: 1600px) {

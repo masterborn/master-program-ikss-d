@@ -11,7 +11,7 @@ import ChevronIcon from '@assets/icons/chevron-icon.svg';
 import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.div`
-  --paddingActive: 45px 20px 32px;
+  --paddingActive: 47px 20px 32px;
 
   position: relative;
   display: flex;
@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   padding: 32px 24px 40px;
   border-radius: 16px;
   text-align: center;
+  background: ${getColor('white')};
 
   box-shadow: ${getShadow('cardShadow')};
 

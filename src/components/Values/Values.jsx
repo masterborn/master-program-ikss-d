@@ -14,6 +14,10 @@ const Wrapper = styled.section`
   margin-bottom: 180px;
   text-align: center;
   padding: 0 1.5rem;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    margin-bottom: 80px;
+  }
 `;
 
 const Cards = styled.div`
@@ -21,7 +25,7 @@ const Cards = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: 6.4rem;
+  margin-top: 6.375rem;
 
   @media (max-width: ${getMedias('desktop')}) {
     gap: 4rem 1.5rem;

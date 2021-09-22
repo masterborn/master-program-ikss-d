@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import Icon from '@components/Icon/Icon';
-import { getMedias, getShadow } from '@styles/utils';
+import { getColor, getMedias, getShadow } from '@styles/utils';
 
 const Card = styled.div`
   --pdgTop: ${({ isValues }) => (isValues ? '11.62rem' : '12.5rem')};
@@ -11,12 +11,14 @@ const Card = styled.div`
   --pdgBottom: 3rem;
 
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
   max-width: 23.75rem;
 
   padding: var(--pdgTop) var(--pdgCenter) var(--pdgBottom) var(--pdgCenter);
   border-radius: 16px;
+  background: ${getColor('white')};
   box-shadow: ${getShadow('cardShadow')};
 
   @media (max-width: ${getMedias('mobile')}) {
@@ -27,7 +29,7 @@ const Card = styled.div`
   }
 
   @media (max-width: 810px) {
-    margin: ${({ isValues }) => isValues && '5em 0 3em 0'};
+    margin: ${({ isValues }) => isValues && '4.875rem 0 3rem 0'};
     min-height: 75%;
   }
 
@@ -37,6 +39,10 @@ const Card = styled.div`
 
   & > h5 {
     margin-bottom: 1rem;
+  }
+
+  & > p {
+    margin-top: auto;
   }
 `;
 
