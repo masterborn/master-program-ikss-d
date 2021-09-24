@@ -7,12 +7,14 @@ import CircleYouTube from '@assets/icons/youTube-circle-icon.svg';
 import CircleLinkedIn from '@assets/icons/linkedIN-circle-icon.svg';
 import { getMedias, getShadow } from '@styles/utils';
 import HomePageHeroSMLink from '@components/homePageHero/HomePageHeroSMLink';
+import useHeroHeight from '@hooks/useHeroHeight';
 
-const styledHeroSM = ({ socialUrls }) => {
+const StyledHeroSM = ({ socialUrls }) => {
   const { fblink, inlink, ytlink, lnlink } = socialUrls;
+  const { setHeight } = useHeroHeight();
 
   return (
-    <Wrapper>
+    <Wrapper ref={setHeight}>
       <div>
         <HomePageHeroSMLink linkText="Facebook" hrefLink={fblink} linkIcon={CircleFacebook} />
         <HomePageHeroSMLink linkText="Instagram" hrefLink={inlink} linkIcon={CircleInstagram} />
@@ -23,7 +25,7 @@ const styledHeroSM = ({ socialUrls }) => {
   );
 };
 
-const HomePageHeroSM = styled(styledHeroSM)``;
+const HomePageHeroSM = styled(StyledHeroSM)``;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -52,7 +54,7 @@ const Wrapper = styled.div`
   }
 `;
 
-HomePageHeroSM.propTypes = {
+StyledHeroSM.propTypes = {
   socialUrls: PropTypes.shape({
     fblink: PropTypes.string.isRequired,
     inlink: PropTypes.string.isRequired,
