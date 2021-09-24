@@ -46,10 +46,10 @@ const ImageWrapper = styled.div`
 `;
 
 const SubpagesHero = ({ data }) => {
-  const { setHeight } = useHeroHeight();
+  const { getRef } = useHeroHeight();
 
   return (
-    <Wrapper ref={setHeight}>
+    <Wrapper ref={getRef}>
       <ImageWrapper>
         <Image
           src={data.image1.url}

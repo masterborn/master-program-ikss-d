@@ -11,10 +11,10 @@ import useHeroHeight from '@hooks/useHeroHeight';
 
 const StyledHeroSM = ({ socialUrls }) => {
   const { fblink, inlink, ytlink, lnlink } = socialUrls;
-  const { setHeight } = useHeroHeight();
+  const { getRef } = useHeroHeight();
 
   return (
-    <Wrapper ref={setHeight}>
+    <Wrapper ref={getRef}>
       <div>
         <HomePageHeroSMLink linkText="Facebook" hrefLink={fblink} linkIcon={CircleFacebook} />
         <HomePageHeroSMLink linkText="Instagram" hrefLink={inlink} linkIcon={CircleInstagram} />
