@@ -13,7 +13,6 @@ const useHeroHeight = () => {
 
   const setHeight = useCallback(() => {
     if (!refElement) return;
-    setRefElement(refElement);
 
     const positionFromTop =
       window.pageYOffset + refElement.getBoundingClientRect().top + refElement.clientHeight;
