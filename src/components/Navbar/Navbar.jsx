@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -14,6 +13,8 @@ import NavLink from '@components/Navbar/NavLink';
 import { openContactFormNavbar } from '@utils/formVisibility';
 import Modal from '@components/ContactForm/Modal';
 import Portal from '@hoc/Portal';
+import useMobileVisibility from '@hooks/useMobileVisibility';
+import useSocialsDisplay from '@hooks/useSocialsDisplay';
 
 import MobileMenu from './MobileMenu';
 
@@ -123,43 +124,16 @@ const ContactButton = styled(Button)`
 `;
 
 const Navbar = ({ urls, contactFormData }) => {
-  const [socialsVisibility, setSocialsVisibility] = useState(false);
-  const [show, setShow] = useState(false);
+  const {
+    isVisible,
+    handleClickTrue: openMenu,
+    handleClickFalse: closeMenu,
+  } = useMobileVisibility('1100');
+
+  const { socialsVisibility } = useSocialsDisplay();
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const areSmAlwaysDisabled = router.pathname === '/404';
-
-  const closeMobileNavbar = () => {
-    setShow(false);
-  };
-
-  useEscapeKey(closeMobileNavbar);
-
-  const handleScroll = () => {
-    if (window.scrollY >= window.innerHeight) {
-      setSocialsVisibility(true);
-      return;
-    }
-
-    setSocialsVisibility(false);
-  };
-
-  const closeMobileMenu = () => {
-    setShow(false);
-  };
-
-  useEffect(() => {
-    if (!areSmAlwaysDisabled) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-    } else {
-      setSocialsVisibility(true);
-    }
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [areSmAlwaysDisabled]);
+  useEscapeKey(closeMenu);
 
   const scrollToTopOnClick = () => {
     if (router.pathname === '/') {
@@ -171,7 +145,7 @@ const Navbar = ({ urls, contactFormData }) => {
 
   return (
     <>
-      <MobileMenu urls={urls} show={show} closeMobileMenu={closeMobileMenu} />
+      {isVisible && <MobileMenu urls={urls} closeMobileMenu={closeMenu} />}
 
       <Nav>
         <MediaWrapper>
@@ -198,7 +172,7 @@ const Navbar = ({ urls, contactFormData }) => {
             />
           </SMWrapper>
 
-          <Hamburger onClick={() => setShow(true)}>
+          <Hamburger onClick={openMenu}>
             <span />
             <span />
             <span />
