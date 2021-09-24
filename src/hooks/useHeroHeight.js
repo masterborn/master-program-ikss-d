@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { heroActions } from '@store/refSlice';
+import { heroActions } from '@store/heroSlice';
 
 const useHeroHeight = () => {
-  const refValues = useSelector(({ hero }) => hero.heroHeight);
+  const refValues = useSelector(({ hero }) => hero.heroPosition);
 
   const dispatch = useDispatch();
 

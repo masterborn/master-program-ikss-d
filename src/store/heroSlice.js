@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const heroSlice = createSlice({
   name: 'hero',
-  initialState: { heroHeight: null },
+  initialState: { heroPosition: null },
   reducers: {
     setHeight(state, action) {
-      state.heroHeight = action.payload;
+      state.heroPosition = action.payload;
     },
   },
 });

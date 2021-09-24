@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
-import useHeroHeight from './useHeroHeight';
+import useHeroHeight from '@hooks/useHeroHeight';
 
 const useSocialsDisplay = () => {
   const router = useRouter();

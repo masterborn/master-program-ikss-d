@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import modalSlice from './modalSlice';
 import contactFormSlice from './contactFormSlice';
-import refSlice from './refSlice';
+import refSlice from './heroSlice';
 
 const store = configureStore({
   reducer: {
