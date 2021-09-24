@@ -15,10 +15,10 @@ const useHeroHeight = () => {
     if (!refElement) return;
     setRefElement(refElement);
 
-    const positionFormTop =
+    const positionFromTop =
       window.pageYOffset + refElement.getBoundingClientRect().top + refElement.clientHeight;
 
-    dispatch(heroActions.setHeight(positionFormTop));
+    dispatch(heroActions.setHeight(positionFromTop));
   }, [dispatch, refElement]);
 
   const getRef = (element) => {
