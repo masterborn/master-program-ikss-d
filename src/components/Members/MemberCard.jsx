@@ -105,7 +105,7 @@ const InfoWrapper = styled.div`
   margin-block-start: ${({ cardExpanded }) => (cardExpanded ? '24px' : '0')};
   opacity: ${({ cardExpanded }) => (cardExpanded ? '1' : '0')};
   overflow: hidden;
-  transition: height 0.5s, opacity 0.5s 0.3s;
+  transition: height 0.3s, opacity 0.3s 0.2s;
 
   & > p > a {
     display: flex;
@@ -150,7 +150,7 @@ const ExpandButton = styled.button`
   top: ${({ cardExpanded }) => (cardExpanded ? '15%' : '50%')};
   transform: ${({ cardExpanded }) =>
     cardExpanded ? 'translate(-50%, -50%) rotate(180deg)' : 'translate(-50%, -50%)'};
-  transition: transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, top 0.4s;
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
   }
