@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
+import { AnimatePresence } from 'framer-motion';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import useEscapeKey from '@hooks/useEscapeKey';
@@ -124,6 +125,7 @@ const ContactButton = styled(Button)`
 `;
 
 const Navbar = ({ urls, contactFormData }) => {
+  const isModalOpen = useSelector(({ modal }) => modal.isModalOpen);
   const {
     isVisible,
     handleClickTrue: openMenu,
@@ -183,7 +185,9 @@ const Navbar = ({ urls, contactFormData }) => {
           </Button>
 
           <Portal>
-            <Modal contactFormData={contactFormData} />
+            <AnimatePresence>
+              {isModalOpen && <Modal contactFormData={contactFormData} />}
+            </AnimatePresence>
           </Portal>
         </MediaWrapper>
       </Nav>

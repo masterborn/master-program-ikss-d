@@ -85,6 +85,7 @@ const MembersWrapper = styled.div`
       @media (max-width: ${getMedias('desktop')}) {
         display: flex;
         justify-content: center;
+        align-items: initial;
         flex-wrap: wrap;
       }
     `}

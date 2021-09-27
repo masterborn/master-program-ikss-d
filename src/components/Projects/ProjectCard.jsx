@@ -6,13 +6,14 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import CardVideo from '@components/Projects/CardVideo';
 import CardImage from '@components/Projects/CardImage';
 import Button from '@components/Button/Button';
-import { getColor, getMedias, getShadow } from '@styles/utils';
+import { getAnimation, getColor, getMedias, getShadow } from '@styles/utils';
 
 const Wrapper = styled.div`
   grid-row: span ${(props) => props.rowHeight};
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: ${getAnimation('fadeIn')} 1s linear forwards;
 
   ${(props) =>
     props.isOnHomePage &&

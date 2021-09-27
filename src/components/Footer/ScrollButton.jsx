@@ -14,9 +14,17 @@ const Eclipse = styled.button`
   bottom: calc(100% - 32px);
 
   @media (max-width: ${getMedias('desktop')}) {
-    bottom: calc(100% - 16px);
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    width: 40px;
+    height: 40px;
+
+    & svg {
+      transform: scale(85%);
+    }
   }
 
   ${({ contact }) =>
@@ -32,15 +40,6 @@ const Eclipse = styled.button`
         transform: none;
       }
     `};
-
-  @media (max-width: ${getMedias('mobile')}) {
-    width: 40px;
-    height: 40px;
-
-    & svg {
-      transform: scale(85%);
-    }
-  }
 
   display: flex;
   justify-content: center;

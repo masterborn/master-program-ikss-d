@@ -55,7 +55,7 @@ const CooperationWrapper = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin: auto;
+  margin: 80px auto auto;
   gap: 3.875rem 5.4rem;
 
   @media (max-width: ${getMedias('tablet')}) {
@@ -63,6 +63,7 @@ const CooperationWrapper = styled.div`
   }
 
   @media (max-width: ${getMedias('mobile')}) {
+    margin: 32px auto auto;
     gap: 2.5rem 1.5rem;
   }
 `;

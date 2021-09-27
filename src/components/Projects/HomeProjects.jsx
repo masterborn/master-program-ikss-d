@@ -47,20 +47,21 @@ const StyledProjects = ({ data }) => {
   const { title, projects } = data;
   const [activeCard, setActiveCard] = useState(0);
 
+  const renderCarouselButtons = () =>
+    projects.map((project, index) => (
+      <CarouselButton
+        key={project.order}
+        active={activeCard === index}
+        onClick={() => setActiveCard(index)}
+      >
+        {project.title}
+      </CarouselButton>
+    ));
+
   return (
     <Wrapper>
       <h3>{title}</h3>
-      <Carousel>
-        <CarouselButton active={activeCard === 0} onClick={() => setActiveCard(0)}>
-          {projects[0].title}
-        </CarouselButton>
-        <CarouselButton active={activeCard === 1} onClick={() => setActiveCard(1)}>
-          {projects[1].title}
-        </CarouselButton>
-        <CarouselButton active={activeCard === 2} onClick={() => setActiveCard(2)}>
-          {projects[2].title}
-        </CarouselButton>
-      </Carousel>
+      <Carousel>{renderCarouselButtons()}</Carousel>
       <ProjectCard projects={projects[activeCard]} isOnHomePage />
       <Button href="/projects" link secondary>
         Zobacz wszystkie projekty

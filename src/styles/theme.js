@@ -62,6 +62,22 @@ export const animations = {
         transform: rotate(360deg)
     }
 `,
+  fadeIn: keyframes`
+    from {
+       opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+`,
+  slideIn: keyframes`
+    from {
+        right: -100%;
+    }
+    to {
+        right: 0%;
+    }
+`,
 };
 
 export const shadows = {
