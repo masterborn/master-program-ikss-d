@@ -39,7 +39,7 @@ const Wrapper = styled.div`
     justify-content: space-evenly;
     align-items: center;
     box-shadow: ${getShadow('cardShadow')};
-    border-radius: 16px 0 0 16px;
+    border-radius: 16px 0 16px 16px;
     margin-inline-start: auto;
   }
 
