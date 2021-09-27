@@ -101,11 +101,15 @@ const InfoWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  height: ${({ cardExpanded }) => (cardExpanded ? '115px' : '0')};
+  height: 100%;
   margin-block-start: ${({ cardExpanded }) => (cardExpanded ? '24px' : '0')};
   opacity: ${({ cardExpanded }) => (cardExpanded ? '1' : '0')};
   overflow: hidden;
   transition: height 0.3s, opacity 0.3s 0.2s;
+
+  @media (max-width: ${getMedias('tablet')}) {
+    height: ${({ cardExpanded }) => (cardExpanded ? '115px' : '0')};
+  }
 
   & > p > a {
     display: flex;
