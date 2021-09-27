@@ -6,6 +6,7 @@ import { heroActions } from '@store/heroSlice';
 const useHeroHeight = () => {
   const [refElement, setRefElement] = useState(null);
   const refValues = useSelector(({ hero }) => hero.heroPosition);
+  const offset = 90;
 
   const dispatch = useDispatch();
 
@@ -15,7 +16,10 @@ const useHeroHeight = () => {
     if (!refElement) return;
 
     const positionFromTop =
-      window.pageYOffset + refElement.getBoundingClientRect().top + refElement.clientHeight;
+      window.pageYOffset +
+      refElement.getBoundingClientRect().top +
+      refElement.clientHeight -
+      offset;
 
     dispatch(heroActions.setHeight(positionFromTop));
   }, [dispatch, refElement]);

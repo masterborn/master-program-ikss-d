@@ -40,7 +40,7 @@ const Wrapper = styled.div`
     align-items: center;
     box-shadow: ${getShadow('cardShadow')};
     border-radius: 16px 0 0 16px;
-    margin: 0 0 0 auto;
+    margin-inline-start: auto;
   }
 
   @media (max-width: ${getMedias('homeHero')}) {
@@ -49,7 +49,7 @@ const Wrapper = styled.div`
       height: 80px;
       border-radius: 16px;
       float: none;
-      margin: 0 auto;
+      margin-inline: auto;
     }
   }
 `;

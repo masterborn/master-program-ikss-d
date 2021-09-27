@@ -6,7 +6,7 @@ import useHeroHeight from '@hooks/useHeroHeight';
 const useSocialsDisplay = () => {
   const router = useRouter();
   const [socialsVisibility, setSocialsVisibility] = useState(false);
-  const { getHeight } = useHeroHeight();
+  const { getHeight } = useHeroHeight(100);
 
   const areSmAlwaysDisabled = router.pathname === '/404';
 
