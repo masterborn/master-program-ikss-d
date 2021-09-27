@@ -34,7 +34,7 @@ const Nav = styled.nav`
 `;
 
 const MediaWrapper = styled.div`
-  max-width: 1920px;
+  max-width: 1440px;
   padding: 1.25rem 7.5rem;
   display: flex;
   align-items: center;
