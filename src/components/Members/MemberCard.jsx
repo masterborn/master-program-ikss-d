@@ -42,6 +42,8 @@ const ImageWrapper = styled(motion.div)`
   --imageWidth: ${({ cardExpanded }) => (cardExpanded ? '164px' : 'clamp(80px, 10vw, 164px)')};
 
   position: relative;
+  -webkit-touch-callout: none;
+  user-select: none;
   width: var(--imageWidth);
   padding-top: var(--imageWidth);
   margin-bottom: ${({ cardExpanded }) => (cardExpanded ? '16px' : '0')};
@@ -138,11 +140,14 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const ExpandButton = styled(motion.button)`
+const ExpandButton = styled.button`
   display: none;
   position: absolute;
   right: 1%;
-
+  top: ${({ cardExpanded }) => (cardExpanded ? '15%' : '50%')};
+  transform: ${({ cardExpanded }) =>
+    cardExpanded ? 'translate(-50%, -50%) rotate(180deg)' : 'translate(-50%, -50%)'};
+  transition: transform 0.4s ease-in-out;
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
   }
@@ -188,39 +193,21 @@ const MemberCard = ({ member }) => {
     </StyledButton>
   );
 
-  const expandButtonAnimationVariants = {
-    closed: {
-      rotate: 0,
-      x: '-50%',
-      y: [-100, 0],
-    },
-    expanded: {
-      rotate: 180,
-      x: '-50%',
-      y: [-110, -175],
-    },
-  };
-
   return (
-    <Wrapper cardExpanded={cardExpanded} layout>
-      <ExpandButton
-        cardExpanded={cardExpanded}
-        onClick={() => setCardExpanded(!cardExpanded)}
-        variants={expandButtonAnimationVariants}
-        initial="closed"
-        animate={cardExpanded ? 'expanded' : 'closed'}
-        transition={{ duration: 0.5 }}
-      >
+    <Wrapper cardExpanded={cardExpanded}>
+      <ExpandButton cardExpanded={cardExpanded} onClick={() => setCardExpanded(!cardExpanded)}>
         <IconSM icon={ChevronIcon} size="26px" />
       </ExpandButton>
 
       <Header cardExpanded={cardExpanded} layout>
-        <ImageWrapper cardExpanded={cardExpanded} layout>
+        <ImageWrapper cardExpanded={cardExpanded} layout transition={{ duration: 0 }}>
           {imageVisibility}
         </ImageWrapper>
 
-        <Span cardExpanded={cardExpanded} layout>
-          <H4 layout>{name}</H4>
+        <Span cardExpanded={cardExpanded} layout transition={{ duration: 0.1 }}>
+          <H4 layout transition={{ duration: 0 }}>
+            {name}
+          </H4>
           <H5 cardExpanded={cardExpanded} layout>
             {role}
           </H5>
@@ -230,10 +217,8 @@ const MemberCard = ({ member }) => {
       <AnimatePresence>
         {cardExpanded && (
           <InfoWrapper
-            layout
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { delay: 0.3 } }}
+            animate={{ opacity: 1, transition: { delay: 0.1 } }}
           >
             <p>
               <a href={`tel:${phone}`}>

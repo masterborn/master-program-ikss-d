@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { AnimateSharedLayout } from 'framer-motion';
 
 import MemberCard from '@components/Members/MemberCard';
 import { getMedias } from '@styles/utils';
@@ -103,9 +102,7 @@ const Members = ({ data }) => {
     <Wrapper>
       <h3>{title}</h3>
       {documentToReactComponents(text1)}
-      <AnimateSharedLayout>
-        <MembersWrapper length={members.length}>{renderMembersCards()}</MembersWrapper>
-      </AnimateSharedLayout>
+      <MembersWrapper length={members.length}>{renderMembersCards()}</MembersWrapper>
     </Wrapper>
   );
 };
