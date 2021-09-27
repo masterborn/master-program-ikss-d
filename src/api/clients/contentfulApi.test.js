@@ -4,7 +4,8 @@ describe('Test whether getBasicContentData function fetches objects from the API
   test('Common data', async () => {
     try {
       const result = await ContentfulClient.getBasicContentData('common');
-      expect(result).toBeInstanceOf(Array);
+      const isEmpty = result.length > 1;
+      expect(isEmpty).not.toBe(false);
     } catch (e) {
       expect(e).toMatch('error');
     }
@@ -13,7 +14,8 @@ describe('Test whether getBasicContentData function fetches objects from the API
   test('Homepage data', async () => {
     try {
       const result = await ContentfulClient.getBasicContentData('homepage');
-      expect(result).toBeInstanceOf(Array);
+      const isEmpty = result.length > 1;
+      expect(isEmpty).not.toBe(false);
       const includesImage1 = JSON.stringify(result).includes('image1');
       expect(includesImage1).toBe(true);
     } catch (e) {
@@ -24,7 +26,8 @@ describe('Test whether getBasicContentData function fetches objects from the API
   test('About us data', async () => {
     try {
       const result = await ContentfulClient.getBasicContentData('about-us');
-      expect(result).toBeInstanceOf(Array);
+      const isEmpty = result.length > 1;
+      expect(isEmpty).not.toBe(false);
       const includesImage1 = JSON.stringify(result).includes('image1');
       expect(includesImage1).toBe(true);
     } catch (e) {
@@ -35,7 +38,8 @@ describe('Test whether getBasicContentData function fetches objects from the API
   test('Cooperation data', async () => {
     try {
       const result = await ContentfulClient.getBasicContentData('cooperation');
-      expect(result).toBeInstanceOf(Array);
+      const isEmpty = result.length > 1;
+      expect(isEmpty).not.toBe(false);
       const includesImage1 = JSON.stringify(result).includes('image1');
       expect(includesImage1).toBe(true);
     } catch (e) {
@@ -46,7 +50,8 @@ describe('Test whether getBasicContentData function fetches objects from the API
   test('Projects data', async () => {
     try {
       const result = await ContentfulClient.getBasicContentData('projects');
-      expect(result).toBeInstanceOf(Array);
+      const isEmpty = result.length > 1;
+      expect(isEmpty).not.toBe(false);
       const includesImage1 = JSON.stringify(result).includes('image1');
       expect(includesImage1).toBe(true);
     } catch (e) {
