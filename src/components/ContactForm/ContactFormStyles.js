@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 
   & > p {
     max-width: 580px;
-    margin: 25px 0 37px;
+    margin-top: 25px;
   }
 
   @media (max-width: ${getMedias('tablet')}) {
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 
     & > p {
       max-width: 580px;
-      margin: 24px auto;
+      margin: 24px auto 0;
     }
   }
 `;
@@ -62,10 +62,12 @@ const Form = styled.form`
   gap: 9px 24px;
   font-size: 14px;
   color: ${getColor('navy')};
+  margin-top: 37px;
 
   @media (max-width: ${getMedias('mobile')}) {
     gap: 9px 0;
     grid-template-columns: 1fr;
+    margin-top: 24px;
   }
 `;
 
@@ -97,6 +99,7 @@ const InfoWrapper = styled.div`
   }
 
   & > div {
+    width: max-content;
     position: relative;
     margin-left: 1rem;
     -webkit-touch-callout: none;
@@ -106,29 +109,59 @@ const InfoWrapper = styled.div`
     font-weight: ${getFontWeight('regular')};
     font-size: 16px;
 
+    @media (max-width: ${getMedias('mobile')}) {
+      width: initial;
+    }
+
+    & > span {
+      --min-width: 100px;
+      --prefer-width: 50vw;
+      --max-width: 397px;
+
+      font-size: 12px;
+      width: clamp(var(--min-width), var(--prefer-width), var(--max-width));
+      left: 18ch;
+
+      @media (max-width: ${getMedias('tablet')}) {
+        --prefer-width: 100%;
+      }
+
+      @media (max-width: 680px) {
+        --prefer-width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      @media (max-width: 300px) {
+        --prefer-width: calc(100vw - 48px);
+        left: calc(50% - 20px);
+      }
+    }
+
     & p {
       font-size: 10px;
       line-height: 18px;
     }
 
-    @media (max-width: ${getMedias('mobile')}) {
-      font-size: 12px;
-      line-height: 15px;
-    }
-  }
+    & > p {
+      display: inline;
+      font-weight: ${getFontWeight('buttonWeight')};
+      color: ${getColor('steel_70')};
+      text-decoration: none;
+      -webkit-touch-callout: none;
+      user-select: none;
+      font-size: 16px;
+      cursor: pointer;
 
-  & a {
-    font-weight: ${getFontWeight('buttonWeight')};
-    color: ${getColor('steel_70')};
-    text-decoration: none;
-    position: relative;
-    -webkit-touch-callout: none;
-    user-select: none;
-    font-size: 16px;
-    display: inline-block;
+      &:hover,
+      &:focus {
+        color: ${getColor('ikksBlue')};
+      }
 
-    &:hover {
-      text-decoration: underline;
+      @media (max-width: ${getMedias('mobile')}) {
+        font-size: 12px;
+        line-height: 15px;
+      }
     }
 
     @media (max-width: ${getMedias('mobile')}) {
@@ -140,14 +173,7 @@ const InfoWrapper = styled.div`
 
 const InfoToolTip = styled(ToolTip)`
   bottom: 100%;
-
-  @media (max-width: ${getMedias('tablet')}) {
-    display: none;
-  }
-
-  & a {
-    font-size: 12px;
-  }
+  left: 0;
 `;
 
 const StyledCloseIcon = styled(IconSM)`

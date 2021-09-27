@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
@@ -115,15 +114,15 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           <Checkbox value={formValues.conditions} name="conditions" />
           <div>
             Zapoznałem się z{' '}
-            <Link href="/">
-              <a
-                onMouseEnter={() => setIsToolTipShown(true)}
-                onMouseLeave={() => setIsToolTipShown(false)}
-              >
-                {isToolTipShown && <InfoToolTip toolTipText={toolTipText} />}
-                informacją o administratorze i przetwarzaniu danych.
-              </a>
-            </Link>
+            <p
+              type="button"
+              onMouseEnter={() => setIsToolTipShown(true)}
+              onMouseLeave={() => setIsToolTipShown(false)}
+              onFocus={() => setIsToolTipShown(true)}
+            >
+              informacją o administratorze i przetwarzaniu danych.
+            </p>
+            {isToolTipShown && <InfoToolTip toolTipText={toolTipText} />}
           </div>
         </InfoWrapper>
 

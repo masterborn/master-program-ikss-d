@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-const useMobileVisibility = (mediaQuery) => {
+const useMobileVisibility = (mediaQuery, isMenu = false) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleChange = (event) => {
-    if (!event.matches) setIsVisible(false);
+  const handleClickOpposite = () => {
+    setIsVisible(!isVisible);
   };
 
   const handleClickTrue = () => {
@@ -15,19 +15,33 @@ const useMobileVisibility = (mediaQuery) => {
     setIsVisible(false);
   };
 
+  const handleChange = (event) => {
+    if (event.matches) setIsVisible(false);
+    else setIsVisible(true);
+  };
+
+  const handleChangeMenu = (event) => {
+    if (!event.matches) setIsVisible(false);
+  };
+
   useEffect(() => {
     const media = window.matchMedia(`(max-width: ${mediaQuery}px)`);
 
-    if (!media.matches) setIsVisible(false);
-
-    media.addEventListener('change', handleChange);
+    if (isMenu) {
+      media.addEventListener('change', handleChangeMenu);
+    } else {
+      if (media.matches) setIsVisible(false);
+      else setIsVisible(true);
+      media.addEventListener('change', handleChange);
+    }
 
     return () => {
       media.removeEventListener('change', handleChange);
+      media.addEventListener('change', handleChangeMenu);
     };
-  }, [mediaQuery]);
+  }, [mediaQuery, isMenu]);
 
-  return { isVisible, handleClickTrue, handleClickFalse };
+  return { isVisible, handleClickOpposite, handleClickTrue, handleClickFalse };
 };
 
 export default useMobileVisibility;

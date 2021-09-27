@@ -1,27 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
-import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import { getAnimation, getColor, getFontWeight, getMedias } from '@styles/utils';
 import IconSM from '@components/Icon/IconSM';
 import Button from '@components/Button/Button';
 import { openContactFormNavbar } from '@utils/formVisibility';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
-
-const slideIn = keyframes`
-from {
-  right: -100%;
-}
-
-to {
-  right: 0%;
-}
-`;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -50,7 +40,7 @@ const Nav = styled.nav`
   width: 300px;
   height: 100%;
   border-radius: 16px 0 0 0;
-  animation: ${slideIn} 0.5s linear;
+  animation: ${getAnimation('slideIn')} 0.5s linear;
 
   @media (max-height: 520px) {
     width: 240px;

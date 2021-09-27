@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
 import ValuesCard from '@components/Values/ValuesCard';
 import Slider from '@components/Values/Slider';
+import useMobileVisibility from '@root/hooks/useMobileVisibility';
 
 const Wrapper = styled.section`
   display: flex;
@@ -55,32 +55,13 @@ const Header = styled.header`
 `;
 
 const Values = ({ data }) => {
+  const { isVisible: isSliderVisible } = useMobileVisibility('810');
   const { title, text1, cards } = data;
-
-  const [isSliderVisible, setIsSliderVisible] = useState(true);
-
-  const handleChange = (event) => {
-    if (event.matches) setIsSliderVisible(true);
-    else setIsSliderVisible(false);
-  };
-
-  useEffect(() => {
-    const media = window.matchMedia(`(max-width: 810px)`);
-
-    if (media.matches) setIsSliderVisible(true);
-    else setIsSliderVisible(false);
-
-    media.addEventListener('change', handleChange);
-
-    return () => {
-      media.removeEventListener('change', handleChange);
-    };
-  }, []);
 
   const renderCards = () =>
     cards.map((card) => <ValuesCard card={card} key={card.title} isValues />);
 
-  const slider = isSliderVisible ? <Slider data={cards} /> : <Cards>{renderCards()}</Cards>;
+  const slider = isSliderVisible ? <Cards>{renderCards()}</Cards> : <Slider data={cards} />;
 
   return (
     <Wrapper>

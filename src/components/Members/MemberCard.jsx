@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 import PhoneIcon from '@assets/icons/tel-icon.svg';
@@ -15,27 +14,10 @@ import {
   ImagePlaceholder,
   ExpandButton,
 } from '@components/Members/MembersStyles';
+import useMobileVisibility from '@hooks/useMobileVisibility';
 
 const MemberCard = ({ member }) => {
-  const [cardExpanded, setCardExpanded] = useState(false);
-
-  const handleChange = (event) => {
-    if (event.matches) setCardExpanded(false);
-    else setCardExpanded(true);
-  };
-
-  useEffect(() => {
-    const media = window.matchMedia(`(max-width: 768px)`);
-
-    if (media.matches) setCardExpanded(false);
-    else setCardExpanded(true);
-
-    media.addEventListener('change', handleChange);
-
-    return () => {
-      media.removeEventListener('change', handleChange);
-    };
-  }, []);
+  const { isVisible: cardExpanded, handleClickOpposite } = useMobileVisibility('768');
 
   const { imgSrc, name, role, phone, email, linkedinUrl } = member;
 
@@ -49,7 +31,7 @@ const MemberCard = ({ member }) => {
 
   return (
     <Wrapper cardExpanded={cardExpanded}>
-      <ExpandButton cardExpanded={cardExpanded} onClick={() => setCardExpanded(!cardExpanded)}>
+      <ExpandButton cardExpanded={cardExpanded} onClick={handleClickOpposite}>
         <IconSM icon={ChevronIcon} size="26px" />
       </ExpandButton>
 

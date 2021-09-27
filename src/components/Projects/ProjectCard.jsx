@@ -13,7 +13,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: ${getAnimation('fadeIn')} 1s linear forwards;
+  box-shadow: ${getShadow('cardShadow')};
+  animation: ${getAnimation('fadeIn')} 1s linear;
 
   ${(props) =>
     props.isOnHomePage &&
@@ -23,7 +24,6 @@ const Wrapper = styled.div`
 
   overflow: hidden;
   background: ${getColor('white')};
-  box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
   height: fit-content;
 

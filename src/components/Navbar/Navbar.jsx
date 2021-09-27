@@ -130,7 +130,7 @@ const Navbar = ({ urls, contactFormData }) => {
     isVisible,
     handleClickTrue: openMenu,
     handleClickFalse: closeMenu,
-  } = useMobileVisibility('1100');
+  } = useMobileVisibility('1100', true);
 
   const { socialsVisibility } = useSocialsDisplay();
   const router = useRouter();
