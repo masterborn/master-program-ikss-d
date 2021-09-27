@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
 
 import { getColor, getFontWeight, getMedias, getShadow } from '@styles/utils';
 import Button from '@components/Button/Button';
@@ -11,7 +10,7 @@ import EmailIcon from '@assets/icons/email-icon.svg';
 import ChevronIcon from '@assets/icons/chevron-icon.svg';
 import IconSM from '@components/Icon/IconSM';
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled.div`
   --paddingActive: 47px 20px 32px;
 
   position: relative;
@@ -38,7 +37,7 @@ const Wrapper = styled(motion.div)`
   }
 `;
 
-const ImageWrapper = styled(motion.div)`
+const ImageWrapper = styled.div`
   --imageWidth: ${({ cardExpanded }) => (cardExpanded ? '164px' : 'clamp(80px, 10vw, 164px)')};
 
   position: relative;
@@ -49,9 +48,10 @@ const ImageWrapper = styled(motion.div)`
   margin-bottom: ${({ cardExpanded }) => (cardExpanded ? '16px' : '0')};
   border-radius: 50%;
   overflow: hidden;
+  transition: all 0.3s ease 0s;
 `;
 
-const Header = styled(motion.header)`
+const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +68,7 @@ const Header = styled(motion.header)`
   }
 `;
 
-const Span = styled(motion.span)`
+const Span = styled.span`
   @media (max-width: ${getMedias('tablet')}) {
     max-width: 130px;
   }
@@ -78,7 +78,7 @@ const Span = styled(motion.span)`
   }
 `;
 
-const H4 = styled(motion.h4)`
+const H4 = styled.h4`
   @media (max-width: ${getMedias('tablet')}) {
     font-size: 18px;
     line-height: 24px;
@@ -86,7 +86,7 @@ const H4 = styled(motion.h4)`
   }
 `;
 
-const H5 = styled(motion.h5)`
+const H5 = styled.h5`
   margin-block-start: 8px;
   color: ${getColor('steel')};
 
@@ -96,13 +96,16 @@ const H5 = styled(motion.h5)`
   }
 `;
 
-const InfoWrapper = styled(motion.div)`
+const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  height: 100%;
-  margin-block-start: 24px;
+  height: ${({ cardExpanded }) => (cardExpanded ? '115px' : '0')};
+  margin-block-start: ${({ cardExpanded }) => (cardExpanded ? '24px' : '0')};
+  opacity: ${({ cardExpanded }) => (cardExpanded ? '1' : '0')};
+  overflow: hidden;
+  transition: height 0.5s, opacity 0.5s 0.3s;
 
   & > p > a {
     display: flex;
@@ -199,45 +202,32 @@ const MemberCard = ({ member }) => {
         <IconSM icon={ChevronIcon} size="26px" />
       </ExpandButton>
 
-      <Header cardExpanded={cardExpanded} layout>
-        <ImageWrapper cardExpanded={cardExpanded} layout transition={{ duration: 0 }}>
-          {imageVisibility}
-        </ImageWrapper>
+      <Header cardExpanded={cardExpanded}>
+        <ImageWrapper cardExpanded={cardExpanded}>{imageVisibility}</ImageWrapper>
 
-        <Span cardExpanded={cardExpanded} layout transition={{ duration: 0.1 }}>
-          <H4 layout transition={{ duration: 0 }}>
-            {name}
-          </H4>
-          <H5 cardExpanded={cardExpanded} layout>
-            {role}
-          </H5>
+        <Span cardExpanded={cardExpanded}>
+          <H4>{name}</H4>
+          <H5>{role}</H5>
         </Span>
       </Header>
 
-      <AnimatePresence>
-        {cardExpanded && (
-          <InfoWrapper
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 0.1 } }}
-          >
-            <p>
-              <a href={`tel:${phone}`}>
-                {phone && <IconSM icon={PhoneIcon} size="16px" />}
-                {phone}
-              </a>
-            </p>
+      <InfoWrapper cardExpanded={cardExpanded}>
+        <p>
+          <a href={`tel:${phone}`}>
+            {phone && <IconSM icon={PhoneIcon} size="16px" />}
+            {phone}
+          </a>
+        </p>
 
-            <p>
-              <a href={`mailto:${email}`}>
-                {email && <IconSM icon={EmailIcon} size="16px" />}
-                {email}
-              </a>
-            </p>
+        <p>
+          <a href={`mailto:${email}`}>
+            {email && <IconSM icon={EmailIcon} size="16px" />}
+            {email}
+          </a>
+        </p>
 
-            {buttonSM}
-          </InfoWrapper>
-        )}
-      </AnimatePresence>
+        {buttonSM}
+      </InfoWrapper>
     </Wrapper>
   );
 };
