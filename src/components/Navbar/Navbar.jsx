@@ -10,6 +10,7 @@ import useEscapeKey from '@hooks/useEscapeKey';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
+import Hamburger from '@components/Navbar/Hamburger';
 import NavLink from '@components/Navbar/NavLink';
 import { openContactFormNavbar } from '@utils/formVisibility';
 import Modal from '@components/ContactForm/Modal';
@@ -68,25 +69,6 @@ const MenuLink = styled(NavLink)`
 
   &:hover {
     color: ${getColor('navy')};
-  }
-`;
-
-const Hamburger = styled.button`
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  margin-left: auto;
-
-  span {
-    height: 3px;
-    width: 24px;
-    background: ${getColor('ikksBlue')};
-    margin-bottom: 4px;
-    border-radius: 103px;
-  }
-
-  @media (max-width: 1100px) {
-    display: flex;
   }
 `;
 
@@ -174,11 +156,7 @@ const Navbar = ({ urls, contactFormData }) => {
             />
           </SMWrapper>
 
-          <Hamburger onClick={openMenu}>
-            <span />
-            <span />
-            <span />
-          </Hamburger>
+          <Hamburger openMenu={openMenu} />
 
           <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
             Skontaktuj się
@@ -195,7 +173,9 @@ const Navbar = ({ urls, contactFormData }) => {
   );
 };
 
-export default Navbar;
+Navbar.defaultProps = {
+  contactFormData: null,
+};
 
 Navbar.propTypes = {
   urls: PropTypes.shape({
@@ -204,5 +184,7 @@ Navbar.propTypes = {
     ytlink: PropTypes.string,
     lnlink: PropTypes.string,
   }).isRequired,
-  contactFormData: PropTypes.instanceOf(Object).isRequired,
+  contactFormData: PropTypes.instanceOf(Object),
 };
+
+export default Navbar;

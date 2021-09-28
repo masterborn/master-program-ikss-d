@@ -133,10 +133,12 @@ const StyledButton = styled(Button)`
 const ExpandButton = styled.button`
   display: none;
   position: absolute;
-  right: 1%;
+  right: calc(1% - 5px);
+  cursor: pointer;
   top: ${({ cardExpanded }) => (cardExpanded ? '15%' : '50%')};
   transform: ${({ cardExpanded }) =>
     cardExpanded ? 'translate(-50%, -50%) rotate(180deg)' : 'translate(-50%, -50%)'};
+  padding: 5px;
 
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
