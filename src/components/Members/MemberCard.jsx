@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-import { getColor, getFontWeight, getMedias, getShadow } from '@styles/utils';
+import { getColor, getFontWeight, getMedias, getShadow, getAnimation } from '@styles/utils';
 import Button from '@components/Button/Button';
 import PhoneIcon from '@assets/icons/tel-icon.svg';
 import EmailIcon from '@assets/icons/email-icon.svg';
@@ -12,7 +12,6 @@ import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.div`
   --paddingActive: 47px 20px 32px;
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -22,7 +21,6 @@ const Wrapper = styled.div`
   border-radius: 16px;
   text-align: center;
   background: ${getColor('white')};
-
   box-shadow: ${getShadow('cardShadow')};
 
   @media (max-width: ${getMedias('tablet')}) {
@@ -39,16 +37,12 @@ const Wrapper = styled.div`
 
 const ImageWrapper = styled.div`
   --imageWidth: ${({ cardExpanded }) => (cardExpanded ? '164px' : 'clamp(80px, 10vw, 164px)')};
-
   position: relative;
-  -webkit-touch-callout: none;
-  user-select: none;
   width: var(--imageWidth);
   padding-top: var(--imageWidth);
   margin-bottom: ${({ cardExpanded }) => (cardExpanded ? '16px' : '0')};
   border-radius: 50%;
   overflow: hidden;
-  transition: all 0.3s ease 0s;
 `;
 
 const Header = styled.header`
@@ -57,58 +51,51 @@ const Header = styled.header`
   align-items: center;
   height: 100%;
 
+  & > span > h5 {
+    margin: ${({ cardExpanded }) => (cardExpanded ? '8px 0 24px' : '8px 0 0px')};
+    color: ${getColor('steel')};
+  }
+
   @media (max-width: ${getMedias('tablet')}) {
     flex-direction: ${({ cardExpanded }) => (cardExpanded ? 'column' : 'row')};
     gap: 0 24px;
     text-align: ${({ cardExpanded }) => (cardExpanded ? 'center' : 'left')};
+
+    & > span {
+      max-width: 130px;
+    }
+
+    & > span > h4 {
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: ${getFontWeight('buttonWeight')};
+    }
+
+    & > span > h5 {
+      font-size: 14px;
+      line-height: 17.57px;
+    }
   }
 
   @media (max-width: ${getMedias('mobile')}) {
     gap: 0 12px;
-  }
-`;
-
-const Span = styled.span`
-  @media (max-width: ${getMedias('tablet')}) {
-    max-width: 130px;
-  }
-
-  @media (max-width: ${getMedias('mobile')}) {
-    max-width: ${({ cardExpanded }) => (cardExpanded ? '250px' : '130px')};
-  }
-`;
-
-const H4 = styled.h4`
-  @media (max-width: ${getMedias('tablet')}) {
-    font-size: 18px;
-    line-height: 24px;
-    font-weight: ${getFontWeight('buttonWeight')};
-  }
-`;
-
-const H5 = styled.h5`
-  margin-block-start: 8px;
-  color: ${getColor('steel')};
-
-  @media (max-width: ${getMedias('tablet')}) {
-    font-size: 14px;
-    line-height: 17.57px;
+    & > span {
+      max-width: ${({ cardExpanded }) => (cardExpanded ? '250px' : '130px')};
+    }
   }
 `;
 
 const InfoWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   height: 100%;
-  margin-block-start: ${({ cardExpanded }) => (cardExpanded ? '24px' : '0')};
-  opacity: ${({ cardExpanded }) => (cardExpanded ? '1' : '0')};
-  overflow: hidden;
-  transition: height 0.3s, opacity 0.3s 0.2s;
+  animation: ${getAnimation('cardFadeIn')} 0.5s;
 
   @media (max-width: ${getMedias('tablet')}) {
-    height: ${({ cardExpanded }) => (cardExpanded ? '115px' : '0')};
+    display: ${({ cardExpanded }) => (cardExpanded ? 'flex' : 'none')};
   }
 
   & > p > a {
@@ -137,6 +124,7 @@ const StyledButton = styled(Button)`
   padding: 9px 16px 9px 13.5px;
   font-size: 14px;
   line-height: 17.57px;
+
   @media (max-width: ${getMedias('tablet')}) {
     margin-top: 16px;
   }
@@ -154,7 +142,8 @@ const ExpandButton = styled.button`
   top: ${({ cardExpanded }) => (cardExpanded ? '15%' : '50%')};
   transform: ${({ cardExpanded }) =>
     cardExpanded ? 'translate(-50%, -50%) rotate(180deg)' : 'translate(-50%, -50%)'};
-  transition: transform 0.4s ease-in-out, top 0.4s;
+  transition: transform 0.5s;
+
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
   }
@@ -209,10 +198,10 @@ const MemberCard = ({ member }) => {
       <Header cardExpanded={cardExpanded}>
         <ImageWrapper cardExpanded={cardExpanded}>{imageVisibility}</ImageWrapper>
 
-        <Span cardExpanded={cardExpanded}>
-          <H4>{name}</H4>
-          <H5>{role}</H5>
-        </Span>
+        <span>
+          <h4>{name}</h4>
+          <h5>{role}</h5>
+        </span>
       </Header>
 
       <InfoWrapper cardExpanded={cardExpanded}>
