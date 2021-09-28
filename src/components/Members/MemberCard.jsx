@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-import { getColor, getFontWeight, getMedias, getShadow } from '@styles/utils';
+import { getColor, getFontWeight, getMedias, getShadow, getAnimation } from '@styles/utils';
 import Button from '@components/Button/Button';
 import PhoneIcon from '@assets/icons/tel-icon.svg';
 import EmailIcon from '@assets/icons/email-icon.svg';
@@ -12,7 +12,6 @@ import IconSM from '@components/Icon/IconSM';
 
 const Wrapper = styled.div`
   --paddingActive: 47px 20px 32px;
-
   position: relative;
   display: flex;
   flex-direction: column;
@@ -22,7 +21,6 @@ const Wrapper = styled.div`
   border-radius: 16px;
   text-align: center;
   background: ${getColor('white')};
-
   box-shadow: ${getShadow('cardShadow')};
 
   @media (max-width: ${getMedias('tablet')}) {
@@ -39,7 +37,6 @@ const Wrapper = styled.div`
 
 const ImageWrapper = styled.div`
   --imageWidth: ${({ cardExpanded }) => (cardExpanded ? '164px' : 'clamp(80px, 10vw, 164px)')};
-
   position: relative;
   width: var(--imageWidth);
   padding-top: var(--imageWidth);
@@ -82,7 +79,6 @@ const Header = styled.header`
 
   @media (max-width: ${getMedias('mobile')}) {
     gap: 0 12px;
-
     & > span {
       max-width: ${({ cardExpanded }) => (cardExpanded ? '250px' : '130px')};
     }
@@ -90,11 +86,13 @@ const Header = styled.header`
 `;
 
 const InfoWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   height: 100%;
+  animation: ${getAnimation('cardFadeIn')} 0.5s;
 
   @media (max-width: ${getMedias('tablet')}) {
     display: ${({ cardExpanded }) => (cardExpanded ? 'flex' : 'none')};
@@ -144,6 +142,7 @@ const ExpandButton = styled.button`
   top: ${({ cardExpanded }) => (cardExpanded ? '15%' : '50%')};
   transform: ${({ cardExpanded }) =>
     cardExpanded ? 'translate(-50%, -50%) rotate(180deg)' : 'translate(-50%, -50%)'};
+  transition: transform 0.5s;
 
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;
