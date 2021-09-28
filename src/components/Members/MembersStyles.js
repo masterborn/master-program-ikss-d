@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getColor, getFontWeight, getMedias, getShadow } from '@styles/utils';
+import { getColor, getFontWeight, getMedias, getShadow, getAnimation } from '@styles/utils';
 import Button from '@components/Button/Button';
 
 const Wrapper = styled.div`
@@ -88,6 +88,7 @@ const InfoWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   height: 100%;
+  animation: ${getAnimation('cardFadeIn')} 0.5s;
 
   @media (max-width: ${getMedias('tablet')}) {
     display: ${({ cardExpanded }) => (cardExpanded ? 'flex' : 'none')};
@@ -139,6 +140,7 @@ const ExpandButton = styled.button`
   transform: ${({ cardExpanded }) =>
     cardExpanded ? 'translate(-50%, -50%) rotate(180deg)' : 'translate(-50%, -50%)'};
   padding: 5px;
+  transition: transform 0.5s;
 
   @media (max-width: ${getMedias('tablet')}) {
     display: initial;

@@ -62,6 +62,7 @@ export const animations = {
         transform: rotate(360deg)
     }
 `,
+
   fadeIn: keyframes`
     from {
        opacity: 0
@@ -76,6 +77,16 @@ export const animations = {
     }
     to {
         right: 0%;
+    }`,
+  cardFadeIn: keyframes`
+    from {
+        top: -25px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+
     }
 `,
 };
