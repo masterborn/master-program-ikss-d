@@ -31,8 +31,13 @@ const HomePageHero = ({ data }) => {
   );
 };
 
-const HeroWrapper = styled.section.attrs({ 'aria-label': 'test' })`
+const HeroWrapper = styled.section`
   width: 100%;
+  margin-bottom: 157px;
+
+  @media (max-width: ${getMedias('homeHero')}) {
+    margin-bottom: 80px;
+  }
 `;
 
 const Wrapper = styled.section`

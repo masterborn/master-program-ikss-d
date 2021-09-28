@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
+import useHeroHeight from '@hooks/useHeroHeight';
 
 const Wrapper = styled.section`
   --pdg-top: 64px;
@@ -44,21 +45,25 @@ const ImageWrapper = styled.div`
   width: 229.89px;
 `;
 
-const SubpagesHero = ({ data }) => (
-  <Wrapper>
-    <ImageWrapper>
-      <Image
-        src={data.image1.url}
-        alt={data.image1.title}
-        height={142}
-        width={230}
-        layout="responsive"
-      />
-    </ImageWrapper>
-    <h1>{data.title}</h1>
-    {documentToReactComponents(data.text1)}
-  </Wrapper>
-);
+const SubpagesHero = ({ data }) => {
+  const { getRef } = useHeroHeight();
+
+  return (
+    <Wrapper ref={getRef}>
+      <ImageWrapper>
+        <Image
+          src={data.image1.url}
+          alt={data.image1.title}
+          height={142}
+          width={230}
+          layout="responsive"
+        />
+      </ImageWrapper>
+      <h1>{data.title}</h1>
+      {documentToReactComponents(data.text1)}
+    </Wrapper>
+  );
+};
 
 SubpagesHero.propTypes = {
   data: PropTypes.shape({
