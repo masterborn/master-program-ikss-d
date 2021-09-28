@@ -115,7 +115,6 @@ const ContactForm = ({ modal, className, contactFormData }) => {
           <div>
             Zapoznałem się z{' '}
             <p
-              type="button"
               onMouseEnter={() => setIsToolTipShown(true)}
               onMouseLeave={() => setIsToolTipShown(false)}
               onFocus={() => setIsToolTipShown(true)}
