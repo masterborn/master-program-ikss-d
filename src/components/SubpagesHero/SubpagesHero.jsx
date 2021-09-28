@@ -17,7 +17,6 @@ const Wrapper = styled.section`
   text-align: center;
   width: 100%;
   padding: var(--pdg-top) var(--pdg-right) var(--pdg-bottom);
-  background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
 
   & h1 {
     margin: 16px auto 32px;

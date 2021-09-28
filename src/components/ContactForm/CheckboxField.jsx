@@ -27,15 +27,13 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   width: 1px;
 `;
 
-const CheckboxField = styled.div.attrs((props) => ({
-  borderColor: !props.isInvalid ? getColor('steel_40') : getColor('error'),
-}))`
+const CheckboxField = styled.div`
   display: inline-block;
   width: 24px;
   height: 24px;
   overflow: hidden;
   background: ${getColor('white')};
-  border: 1.5px solid ${(props) => props.borderColor};
+  border: 1.5px solid ${({ isInvalid }) => (isInvalid ? getColor('error') : getColor('steel_40'))};
   border-radius: 4px;
   transition: all 150ms;
   input:hover + & {

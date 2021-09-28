@@ -1,14 +1,16 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
+import { AnimatePresence } from 'framer-motion';
 
 import { getColor, getFontWeight, getMedias } from '@styles/utils';
 import useEscapeKey from '@hooks/useEscapeKey';
 import Logo from '@components/Logos/Logo';
 import Button from '@components/Button/Button';
 import Socials from '@components/Navbar/Socials';
+import Hamburger from '@components/Navbar/Hamburger';
 import NavLink from '@components/Navbar/NavLink';
 import { openContactFormNavbar } from '@utils/formVisibility';
 import Modal from '@components/ContactForm/Modal';
@@ -33,7 +35,7 @@ const Nav = styled.nav`
 `;
 
 const MediaWrapper = styled.div`
-  max-width: 1920px;
+  max-width: 1440px;
   padding: 1.25rem 7.5rem;
   display: flex;
   align-items: center;
@@ -67,25 +69,6 @@ const MenuLink = styled(NavLink)`
 
   &:hover {
     color: ${getColor('navy')};
-  }
-`;
-
-const Hamburger = styled.button`
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  margin-left: auto;
-
-  span {
-    height: 3px;
-    width: 24px;
-    background: ${getColor('ikksBlue')};
-    margin-bottom: 4px;
-    border-radius: 103px;
-  }
-
-  @media (max-width: 1100px) {
-    display: flex;
   }
 `;
 
@@ -124,11 +107,12 @@ const ContactButton = styled(Button)`
 `;
 
 const Navbar = ({ urls, contactFormData }) => {
+  const isModalOpen = useSelector(({ modal }) => modal.isModalOpen);
   const {
     isVisible,
     handleClickTrue: openMenu,
     handleClickFalse: closeMenu,
-  } = useMobileVisibility('1100');
+  } = useMobileVisibility('1100', true);
 
   const { socialsVisibility } = useSocialsDisplay();
   const router = useRouter();
@@ -172,18 +156,16 @@ const Navbar = ({ urls, contactFormData }) => {
             />
           </SMWrapper>
 
-          <Hamburger onClick={openMenu}>
-            <span />
-            <span />
-            <span />
-          </Hamburger>
+          <Hamburger openMenu={openMenu} />
 
           <Button as={ContactButton} onClick={() => openContactFormNavbar(router, dispatch)}>
             Skontaktuj się
           </Button>
 
           <Portal>
-            <Modal contactFormData={contactFormData} />
+            <AnimatePresence>
+              {isModalOpen && <Modal contactFormData={contactFormData} />}
+            </AnimatePresence>
           </Portal>
         </MediaWrapper>
       </Nav>
@@ -191,7 +173,9 @@ const Navbar = ({ urls, contactFormData }) => {
   );
 };
 
-export default Navbar;
+Navbar.defaultProps = {
+  contactFormData: null,
+};
 
 Navbar.propTypes = {
   urls: PropTypes.shape({
@@ -200,5 +184,7 @@ Navbar.propTypes = {
     ytlink: PropTypes.string,
     lnlink: PropTypes.string,
   }).isRequired,
-  contactFormData: PropTypes.instanceOf(Object).isRequired,
+  contactFormData: PropTypes.instanceOf(Object),
 };
+
+export default Navbar;

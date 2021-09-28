@@ -17,6 +17,7 @@ const GridWrapper = styled.div`
   grid-template-columns: repeat(2, max-content);
   justify-items: center;
   grid-auto-rows: 10px;
+  min-height: 710px;
   margin-inline: auto;
   gap: 0 24px;
 

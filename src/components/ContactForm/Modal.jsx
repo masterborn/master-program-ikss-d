@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 import { getMedias } from '@styles/utils';
@@ -58,7 +58,6 @@ const GlobalStyles = createGlobalStyle`
 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
 const Modal = ({ contactFormData }) => {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector(({ modal }) => modal.isModalOpen);
 
   const closeModal = () => {
     dispatch(modalActions.closeModal());
@@ -67,43 +66,39 @@ const Modal = ({ contactFormData }) => {
   useEscapeKey(closeModal);
 
   return (
-    <AnimatePresence>
-      {isModalOpen && (
-        <Wrapper
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-            transition: {
-              duration: 0.5,
-            },
-          }}
-          exit={{
-            opacity: 0,
-          }}
-        >
-          <GlobalStyles />
-          <Backdrop onClick={closeModal} onKeyUp={closeModal} />
-          <motion.div
-            initial={{
-              y: -1000,
-            }}
-            animate={{
-              y: 0,
-              transition: {
-                duration: 0.5,
-              },
-            }}
-            exit={{
-              y: -1000,
-            }}
-          >
-            <ModalForm modal contactFormData={contactFormData} />
-          </motion.div>
-        </Wrapper>
-      )}
-    </AnimatePresence>
+    <Wrapper
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+        transition: {
+          duration: 0.5,
+        },
+      }}
+      exit={{
+        opacity: 0,
+      }}
+    >
+      <GlobalStyles />
+      <Backdrop onClick={closeModal} onKeyUp={closeModal} />
+      <motion.div
+        initial={{
+          y: -1000,
+        }}
+        animate={{
+          y: 0,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+        exit={{
+          y: -1000,
+        }}
+      >
+        <ModalForm modal contactFormData={contactFormData} />
+      </motion.div>
+    </Wrapper>
   );
 };
 

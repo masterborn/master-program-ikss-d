@@ -6,13 +6,15 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import CardVideo from '@components/Projects/CardVideo';
 import CardImage from '@components/Projects/CardImage';
 import Button from '@components/Button/Button';
-import { getColor, getMedias, getShadow } from '@styles/utils';
+import { getAnimation, getColor, getMedias, getShadow } from '@styles/utils';
 
 const Wrapper = styled.div`
   grid-row: span ${(props) => props.rowHeight};
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: ${getShadow('cardShadow')};
+  animation: ${getAnimation('fadeIn')} 1s linear;
 
   ${(props) =>
     props.isOnHomePage &&
@@ -22,7 +24,6 @@ const Wrapper = styled.div`
 
   overflow: hidden;
   background: ${getColor('white')};
-  box-shadow: ${getShadow('cardShadow')};
   border-radius: 16px;
   height: fit-content;
 
