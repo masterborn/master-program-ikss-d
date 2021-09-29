@@ -136,9 +136,9 @@ const MobileMenu = ({ urls, closeMobileMenu }) => {
 
           <LinksWrapper>
             <StyledLink linkLabel="Strona główna" url="/" />
-            <StyledLink linkLabel="Projekty" url="/projects" />
-            <StyledLink linkLabel="O nas" url="/about" />
-            <StyledLink linkLabel="Współpraca" url="/cooperation" />
+            <StyledLink linkLabel="Projekty" url="/projekty" />
+            <StyledLink linkLabel="O nas" url="/o-nas" />
+            <StyledLink linkLabel="Współpraca" url="/wspolpraca" />
           </LinksWrapper>
 
           <ContactButton onClick={handleMobileContact}>Skontaktuj się</ContactButton>

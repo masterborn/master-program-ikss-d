@@ -30,9 +30,9 @@ const Footer = ({ urls, contactFormData }) => {
 
         <Menu contact={router.pathname}>
           <MenuLink url="/" linkLabel="Strona główna" />
-          <MenuLink url="/projects" linkLabel="Projekty" />
-          <MenuLink url="/about" linkLabel="O nas" />
-          <MenuLink url="/cooperation" linkLabel="Współpraca" />
+          <MenuLink url="/projekty" linkLabel="Projekty" />
+          <MenuLink url="/o-nas" linkLabel="O nas" />
+          <MenuLink url="/wspolpraca" linkLabel="Współpraca" />
         </Menu>
 
         <SocialMedias

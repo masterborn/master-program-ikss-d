@@ -62,8 +62,8 @@ const StyledProjects = ({ data }) => {
     <Wrapper>
       <h3>{title}</h3>
       <Carousel>{renderCarouselButtons()}</Carousel>
-      <ProjectCard projects={projects[activeCard]} isOnHomePage />
-      <Button href="/projects" link secondary>
+      <ProjectCard projects={projects[activeCard]} isOnHomePage key={activeCard} />
+      <Button href="/projekty" link secondary>
         Zobacz wszystkie projekty
       </Button>
     </Wrapper>

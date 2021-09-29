@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: ${getShadow('cardShadow')};
-  animation: ${getAnimation('fadeIn')} 1s linear;
+  animation: ${getAnimation('fadeIn')} 0.2s linear;
 
   ${(props) =>
     props.isOnHomePage &&
