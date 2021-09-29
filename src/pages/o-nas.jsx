@@ -20,6 +20,8 @@ const aboutPage = ({ mission, history, boardMembersData, TeamData }) => (
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('about-us');
 
+  const metaData = filterBasicContentData(basicContent, 'about-us-meta');
+
   const SubPageHero = filterBasicContentData(basicContent, 'about-us-top-section');
 
   const common = await ContentfulClient.getBasicContentData('common');
@@ -46,6 +48,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      metaData,
       SubPageHero,
       socialUrls,
       mission,

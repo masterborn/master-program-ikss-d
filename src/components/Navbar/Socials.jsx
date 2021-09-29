@@ -21,18 +21,38 @@ const SocialsWrapper = styled.div`
   }
 `;
 
-const Link = ({ url, icon, size }) => (
-  <a href={url}>
+const Link = ({ url, icon, size, smName }) => (
+  <a href={url} aria-label={smName}>
     <IconSM icon={icon} size={size} />
   </a>
 );
 
 const Socials = ({ urls, size, className, footer }) => (
   <SocialsWrapper className={className}>
-    <Link url={urls.facebook} icon={!footer ? FacebookIcon : FacebookIconFooter} size={size} />
-    <Link url={urls.instagram} icon={!footer ? InstagramIcon : InstagramIconFooter} size={size} />
-    <Link url={urls.youTube} icon={!footer ? YouTubeIcon : YouTubeIconFooter} size={size} />
-    <Link url={urls.linkedIn} icon={!footer ? LinkedInIcon : LinkedInIconFooter} size={size} />
+    <Link
+      url={urls.facebook}
+      icon={!footer ? FacebookIcon : FacebookIconFooter}
+      size={size}
+      smName="facebook"
+    />
+    <Link
+      url={urls.instagram}
+      icon={!footer ? InstagramIcon : InstagramIconFooter}
+      size={size}
+      smName="instagram"
+    />
+    <Link
+      url={urls.youTube}
+      icon={!footer ? YouTubeIcon : YouTubeIconFooter}
+      size={size}
+      smName="youtube"
+    />
+    <Link
+      url={urls.linkedIn}
+      icon={!footer ? LinkedInIcon : LinkedInIconFooter}
+      size={size}
+      smName="linkedin"
+    />
   </SocialsWrapper>
 );
 
@@ -40,6 +60,7 @@ Link.propTypes = {
   url: PropTypes.string.isRequired,
   icon: PropTypes.elementType.isRequired,
   size: PropTypes.string,
+  smName: PropTypes.string.isRequired,
 };
 
 Link.defaultProps = {

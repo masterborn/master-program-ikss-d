@@ -62,6 +62,33 @@ export const animations = {
         transform: rotate(360deg)
     }
 `,
+
+  fadeIn: keyframes`
+    from {
+       opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+`,
+  slideIn: keyframes`
+    from {
+        right: -100%;
+    }
+    to {
+        right: 0%;
+    }`,
+  cardFadeIn: keyframes`
+    from {
+        top: -25px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+
+    }
+`,
 };
 
 export const shadows = {
@@ -69,6 +96,9 @@ export const shadows = {
   1.71337px 28.2982px 34.875px rgba(97, 121, 139, 0.04725),
   0.676885px 11.1795px 13px rgba(97, 121, 139, 0.035),
   0.148069px 2.44552px 4.625px rgba(97, 121, 139, 0.02275)`,
+  buttonShadow: `0px 16px 31px rgba(26, 40, 71, 0.1),
+  0px 6.16296px 9.87407px rgba(26, 40, 71, 0.0607407),
+  0px 1.3037px 2.52593px rgba(26, 40, 71, 0.0392593)`,
 };
 
 const theme = {

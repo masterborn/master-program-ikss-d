@@ -4,30 +4,35 @@ import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 import { getMedias } from '@styles/utils';
+import useHeroHeight from '@hooks/useHeroHeight';
 
 const Wrapper = styled.section`
+  --pdg-top: 64px;
+  --pdg-right: 225px;
+  --pdg-bottom: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 64px 225px 42px;
-  background: linear-gradient(180deg, #f4faff 0%, rgba(255, 255, 255, 0) 100%);
+  padding: var(--pdg-top) var(--pdg-right) var(--pdg-bottom);
 
   & h1 {
     margin: 16px auto 32px;
   }
 
   @media (max-width: ${getMedias('laptop')}) {
-    padding: 64px 100px 42px;
+    --pdg-right: 100px;
   }
 
   @media (max-width: ${getMedias('tablet')}) {
-    padding: 64px 50px 42px;
+    --pdg-right: 50px;
   }
 
   @media (max-width: ${getMedias('mobile')}) {
-    padding: 32px 24px 0;
+    --pdg-top: 32px;
+    --pdg-right: 24px;
 
     & h1 {
       margin: 8px auto 24px;
@@ -39,21 +44,25 @@ const ImageWrapper = styled.div`
   width: 229.89px;
 `;
 
-const SubpagesHero = ({ data }) => (
-  <Wrapper>
-    <ImageWrapper>
-      <Image
-        src={data.image1.url}
-        alt={data.image1.title}
-        height={142}
-        width={230}
-        layout="responsive"
-      />
-    </ImageWrapper>
-    <h1>{data.title}</h1>
-    {documentToReactComponents(data.text1)}
-  </Wrapper>
-);
+const SubpagesHero = ({ data }) => {
+  const { getRef } = useHeroHeight();
+
+  return (
+    <Wrapper ref={getRef}>
+      <ImageWrapper>
+        <Image
+          src={data.image1.url}
+          alt={data.image1.title}
+          height={142}
+          width={230}
+          layout="responsive"
+        />
+      </ImageWrapper>
+      <h1>{data.title}</h1>
+      {documentToReactComponents(data.text1)}
+    </Wrapper>
+  );
+};
 
 SubpagesHero.propTypes = {
   data: PropTypes.shape({

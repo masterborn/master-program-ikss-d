@@ -16,6 +16,8 @@ const projectsPage = ({ projectsData }) => (
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('projects');
 
+  const metaData = filterBasicContentData(basicContent, 'projects-meta');
+
   const SubPageHero = filterBasicContentData(basicContent, 'projects-top-section');
 
   const common = await ContentfulClient.getBasicContentData('common');
@@ -40,6 +42,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      metaData,
       SubPageHero,
       projectsData,
       socialUrls,

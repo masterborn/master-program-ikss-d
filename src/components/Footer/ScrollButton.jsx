@@ -1,13 +1,22 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { animateScroll as scroll } from 'react-scroll';
 
 import ScrollButtonVector from '@assets/ScrollButtonVector.svg';
-import { getColor, getMedias } from '@styles/utils';
+import { getColor, getMedias, getShadow } from '@styles/utils';
 
-const Eclipse = styled.div`
+const Eclipse = styled.button`
   width: 64px;
   height: 64px;
+
+  position: absolute;
+  right: 126px;
+  bottom: calc(100% - 32px);
+
+  @media (max-width: ${getMedias('desktop')}) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   @media (max-width: ${getMedias('mobile')}) {
     width: 40px;
@@ -18,6 +27,20 @@ const Eclipse = styled.div`
     }
   }
 
+  ${({ contact }) =>
+    contact === '/' &&
+    css`
+      @media (max-width: ${getMedias('desktop')}) {
+        position: relative;
+        bottom: initial;
+        right: initial;
+        left: initial;
+        justify-self: center;
+        margin-bottom: 40px;
+        transform: none;
+      }
+    `};
+
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -27,20 +50,18 @@ const Eclipse = styled.div`
   }
 
   background: ${getColor('white')};
-  box-shadow: 0px 16px 31px rgba(26, 40, 71, 0.1),
-    0px 6.16296px 9.87407px rgba(26, 40, 71, 0.0607407),
-    0px 1.3037px 2.52593px rgba(26, 40, 71, 0.0392593);
+  box-shadow: ${getShadow('buttonShadow')};
 
   border-radius: 50%;
 `;
 
-const ScrollButton = ({ className }) => {
+const ScrollButton = ({ className, contact }) => {
   const handleClick = () => {
     scroll.scrollToTop();
   };
 
   return (
-    <Eclipse className={className} onClick={handleClick}>
+    <Eclipse className={className} contact={contact} onClick={handleClick} tabIndex={0}>
       <ScrollButtonVector />
     </Eclipse>
   );
@@ -48,6 +69,7 @@ const ScrollButton = ({ className }) => {
 
 ScrollButton.propTypes = {
   className: PropTypes.string,
+  contact: PropTypes.string.isRequired,
 };
 
 ScrollButton.defaultProps = {

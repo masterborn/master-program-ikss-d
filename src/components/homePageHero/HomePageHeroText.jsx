@@ -46,7 +46,7 @@ const Wrapper = styled.div`
     }
 
     & p {
-      margin-bottom: 23px;
+      margin-bottom: 24px;
     }
   }
 
@@ -56,8 +56,16 @@ const Wrapper = styled.div`
 
   @media (max-width: ${getMedias('tablet')}) {
     margin: 0 20px 40px;
+
     & h1 {
       margin-top: 40.75px;
+    }
+  }
+
+  @media (max-width: ${getMedias('mobile')}) {
+    & h1 {
+      margin-top: 40.75px;
+      margin-bottom: 24px;
     }
   }
 `;

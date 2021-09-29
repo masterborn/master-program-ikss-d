@@ -22,10 +22,10 @@ const Wrapper = styled.section`
   @media (max-width: ${getMedias('tablet')}) {
     & > p {
       max-width: 327px;
+      margin-bottom: 57px;
     }
 
     & > h3 {
-      margin-top: 70px;
       margin-bottom: 16px;
     }
   }
@@ -85,6 +85,7 @@ const MembersWrapper = styled.div`
       @media (max-width: ${getMedias('desktop')}) {
         display: flex;
         justify-content: center;
+        align-items: initial;
         flex-wrap: wrap;
       }
     `}
