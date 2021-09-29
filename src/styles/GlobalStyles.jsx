@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${getColor('steel')};
     max-width: 100%;
     overflow-x: hidden;
-    background: linear-gradient(rgb(244, 250, 255) 0%, rgb(255 255 255 / 0%) 100%) no-repeat;
+    background: linear-gradient(rgb(244, 250, 255) 0%, rgb(255 255 255 / 0%) 20%) no-repeat
   }
   
   h1,h2,h3,h4,h5 {
