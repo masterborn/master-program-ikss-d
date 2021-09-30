@@ -1,5 +1,19 @@
 const topProjects = (data) =>
-  data.filter((item) => item.showOnHomepage).sort((a, b) => a.order - b.order);
+  data
+    .filter((item) => item.showOnHomepage)
+    .sort((a, b) => a.order - b.order)
+    .slice(0, 3)
+    .sort((a, b) => {
+      const yearA = a.date.split('-');
+      const yearB = b.date.split('-');
+      if (yearA[0] === yearB[0]) {
+        if (yearA[1] === yearB[1]) {
+          return Number(yearB[2]) - Number(yearB[2]);
+        }
+        return Number(yearB[1]) - Number(yearB[1]);
+      }
+      return Number(yearB[0]) - Number(yearA[0]);
+    });
 
 const addImages = (data, field) => {
   const resultObject = data;

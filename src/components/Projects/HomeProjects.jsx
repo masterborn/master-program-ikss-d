@@ -34,7 +34,7 @@ const Carousel = styled.div`
   background: ${getColor('blue_10')};
   border-radius: 26px;
 
-  @media (max-width: ${getMedias('laptop')}) {
+  @media (max-width: ${getMedias('tablet')}) {
     background: none;
     align-items: center;
     gap: 12px;
