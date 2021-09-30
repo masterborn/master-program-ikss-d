@@ -51,6 +51,10 @@ const StyledSwiper = styled(Swiper)`
     width: 20.4rem;
   }
 
+  .swiper-pagination {
+    bottom: -10px;
+  }
+
   .swiper-pagination-bullet {
     width: 16px;
     height: 16px;
