@@ -20,18 +20,21 @@ const Wrapper = styled.div`
     props.isOnHomePage &&
     css`
       margin-bottom: 56px;
+      min-width: 792px;
+
+      @media (max-width: ${getMedias('laptop')}) {
+        min-width: 728px;
+      }
+
+      @media (max-width: ${getMedias('tablet')}) {
+        min-width: 100%;
+      }
     `};
 
   overflow: hidden;
   background: ${getColor('white')};
   border-radius: 16px;
   height: fit-content;
-
-  ${(props) =>
-    !props.isOnHomePage &&
-    css`
-      max-width: 588px;
-    `};
 
   & img {
     width: auto;
@@ -63,6 +66,17 @@ const Wrapper = styled.div`
   @media (max-width: ${getMedias('mobile')}) {
     margin: 0 0.5rem 2rem 0.5rem;
   }
+
+  ${(props) =>
+    !props.isOnHomePage &&
+    css`
+      max-width: 588px;
+      width: 100%;
+
+      @media (max-width: ${getMedias('tablet')}) {
+        margin-inline: 0;
+      }
+    `};
 `;
 
 const Description = styled.article`

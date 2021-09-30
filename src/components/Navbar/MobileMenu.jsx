@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
@@ -12,6 +12,12 @@ import { openContactFormNavbar } from '@utils/formVisibility';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    overflow-y: hidden;
+  }
+`;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -128,6 +134,7 @@ const MobileMenu = ({ urls, closeMobileMenu }) => {
 
   return (
     <>
+      <GlobalStyles />
       <Wrapper>
         <Nav>
           <CloseButton type="button" onClick={closeMobileMenu}>

@@ -21,6 +21,7 @@ const Eclipse = styled.button`
   @media (max-width: ${getMedias('mobile')}) {
     width: 40px;
     height: 40px;
+    bottom: calc(100% - 20px);
 
     & svg {
       transform: scale(85%);

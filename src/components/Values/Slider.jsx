@@ -29,6 +29,7 @@ const Slider = ({ data }) => {
         pagination={{
           clickable: true,
         }}
+        loop
         className="mySwiper"
       >
         {renderCards()}
