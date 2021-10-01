@@ -9,15 +9,12 @@ import ToolTip from '@components/ContactForm/ToolTip';
 import { contactFormActions } from '@store/contactFormSlice';
 import { validateInput } from '@utils/validation';
 
-const Container = styled.div.attrs((props) => ({
-  borderColor: !props.isInvalid ? getColor('steel_30') : getColor('error'),
-  focusBorderColor: !props.isInvalid ? getColor('ikksBlue') : getColor('error'),
-}))`
+const Container = styled.div`
   & input,
   & textarea {
     width: 100%;
     position: relative;
-    border: 1.5px solid ${(props) => props.borderColor};
+    border: 1.5px solid ${({ isInvalid }) => (isInvalid ? getColor('error') : getColor('steel_30'))};
     border-radius: 4px;
     padding: 0.5em 3em 0.5em 0.5em;
     font-family: ${getFontFamily('Mulish')};
@@ -29,7 +26,7 @@ const Container = styled.div.attrs((props) => ({
 
     &:focus {
       outline: none !important;
-      border-color: ${(props) => props.focusBorderColor};
+      border-color: ${getColor('ikksBlue')};
     }
     &:invalid {
       outline: none !important;

@@ -7,7 +7,7 @@ class FormCarryClient {
 
   sendForm(formValues) {
     return this.api
-      .post(`${process.env.NEXT_PUBLIC_FORMCARRY_FORM_ID}`, formValues, {
+      .post(`${process.env.NEXT_PUBLIC_FORMCARRY_URL}`, formValues, {
         headers: { Accept: 'application/json' },
       })
       .catch((err) => {

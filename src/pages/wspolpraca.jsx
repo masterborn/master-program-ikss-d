@@ -18,11 +18,13 @@ const projectsPage = ({ cooperationData, CooperationTilesData }) => (
 export const getStaticProps = async () => {
   const basicContent = await ContentfulClient.getBasicContentData('cooperation');
 
+  const metaData = filterBasicContentData(basicContent, 'cooperation-meta');
+
   const SubPageHero = filterBasicContentData(basicContent, 'cooperation-top-section');
 
-  const socials = await ContentfulClient.getBasicContentData('common');
+  const common = await ContentfulClient.getBasicContentData('common');
 
-  const socialUrls = filterSocials(socials);
+  const socialUrls = filterSocials(common);
 
   const CTASection = filterBasicContentData(basicContent, 'cooperation-bottom-cta');
 
@@ -31,6 +33,11 @@ export const getStaticProps = async () => {
   const cooperationData = {
     ...filterBasicContentData(basicContent, 'cooperation-logos-text'),
     partners: filterLogos(partners),
+  };
+
+  const contactFormData = {
+    text: filterBasicContentData(common, 'contact-form-text'),
+    toolTip: filterBasicContentData(common, 'contact-form-tooltip'),
   };
 
   const CooperationTilesData = {
@@ -46,11 +53,13 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      metaData,
       SubPageHero,
       socialUrls,
       CTASection,
       cooperationData,
       CooperationTilesData,
+      contactFormData,
     },
   };
 };

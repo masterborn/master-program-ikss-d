@@ -1,27 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 import CloseIcon from '@assets/icons/x-icon.svg';
-import { getColor, getFontWeight, getMedias } from '@styles/utils';
+import { getAnimation, getColor, getFontWeight, getMedias } from '@styles/utils';
 import IconSM from '@components/Icon/IconSM';
 import Button from '@components/Button/Button';
 import { openContactFormNavbar } from '@utils/formVisibility';
 
 import Socials from './Socials';
 import NavLink from './NavLink';
-
-const slideIn = keyframes`
-from {
-  right: -100%;
-}
-
-to {
-  right: 0%;
-}
-`;
 
 const Wrapper = styled.div`
   position: fixed;
@@ -50,7 +40,7 @@ const Nav = styled.nav`
   width: 300px;
   height: 100%;
   border-radius: 16px 0 0 0;
-  animation: ${slideIn} 0.5s linear;
+  animation: ${getAnimation('slideIn')} 0.5s linear;
 
   @media (max-height: 520px) {
     width: 240px;
@@ -58,8 +48,14 @@ const Nav = styled.nav`
 `;
 
 const CloseButton = styled.button`
-  padding: 27px 24px;
+  padding: 34px 24px;
   margin-left: auto;
+
+  @media (max-width: ${getMedias('mobile')}) {
+    padding: 28px 24px;
+  }
+
+  cursor: pointer;
 `;
 
 const StyledLink = styled(NavLink)`
@@ -113,19 +109,9 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const MobileMenu = ({ show, urls, closeMobileMenu }) => {
-  const [isVisible, setIsVisible] = useState(false);
+const MobileMenu = ({ urls, closeMobileMenu }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const handleChange = (event) => {
-    if (event.matches) setIsVisible(true);
-    else setIsVisible(false);
-  };
-
-  const handleClick = () => {
-    closeMobileMenu();
-  };
 
   const handleMobileContact = () => {
     closeMobileMenu();
@@ -133,48 +119,41 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
   };
 
   useEffect(() => {
-    const media = window.matchMedia(`(max-width: 1100px)`);
-
-    if (media.matches) setIsVisible(true);
-    else setIsVisible(false);
-
-    media.addEventListener('change', handleChange);
+    router.events.on('routeChangeComplete', closeMobileMenu);
 
     return () => {
-      media.removeEventListener('change', handleChange);
+      router.events.off('routeChangeComplete', closeMobileMenu);
     };
-  }, []);
+  }, [router.events, closeMobileMenu]);
 
   return (
     <>
-      {isVisible && show && (
-        <Wrapper>
-          <Nav>
-            <CloseButton type="button" onClick={handleClick}>
-              <IconSM icon={CloseIcon} color="steel" />
-            </CloseButton>
+      <Wrapper>
+        <Nav>
+          <CloseButton type="button" onClick={closeMobileMenu}>
+            <IconSM icon={CloseIcon} color="steel" />
+          </CloseButton>
 
-            <LinksWrapper>
-              <StyledLink linkLabel="Strona główna" url="/" />
-              <StyledLink linkLabel="Projekty" url="/projects" />
-              <StyledLink linkLabel="O nas" url="/about" />
-              <StyledLink linkLabel="Współpraca" url="/cooperation" />
-            </LinksWrapper>
+          <LinksWrapper>
+            <StyledLink linkLabel="Strona główna" url="/" />
+            <StyledLink linkLabel="Projekty" url="/projekty" />
+            <StyledLink linkLabel="O nas" url="/o-nas" />
+            <StyledLink linkLabel="Współpraca" url="/wspolpraca" />
+          </LinksWrapper>
 
-            <ContactButton onClick={handleMobileContact}>Skontaktuj się</ContactButton>
+          <ContactButton onClick={handleMobileContact}>Skontaktuj się</ContactButton>
 
-            <Socials
-              urls={{
-                facebook: urls.fblink,
-                instagram: urls.inlink,
-                youTube: urls.ytlink,
-                linkedIn: urls.lnlink,
-              }}
-              size="32px"
-            />
-          </Nav>
-        </Wrapper>
-      )}
+          <Socials
+            urls={{
+              facebook: urls.fblink,
+              instagram: urls.inlink,
+              youTube: urls.ytlink,
+              linkedIn: urls.lnlink,
+            }}
+            size="32px"
+          />
+        </Nav>
+      </Wrapper>
     </>
   );
 };
@@ -182,7 +161,6 @@ const MobileMenu = ({ show, urls, closeMobileMenu }) => {
 export default MobileMenu;
 
 MobileMenu.propTypes = {
-  show: PropTypes.bool.isRequired,
   urls: PropTypes.shape({
     fblink: PropTypes.string,
     inlink: PropTypes.string,
