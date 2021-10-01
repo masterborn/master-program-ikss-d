@@ -7,7 +7,7 @@ import {
 } from '@root/contentfulDataTransformers/filterData';
 
 describe('Check filterData function outputs', () => {
-  test('Projects data', async () => {
+  it('Projects data', async () => {
     const projects = await ContentfulClient.getFieldsData('projects');
     const filteredProjects = filterData(projects, 'projects');
     const expectedObject = {
@@ -19,13 +19,13 @@ describe('Check filterData function outputs', () => {
       description: expect.anything(),
       url: expect.any(String),
       buttonLabel: expect.any(String),
-      showOnHomepage: expect.toBeTypeOrNull(Boolean),
-      order: expect.toBeTypeOrNull(Boolean),
+      showOnHomepage: expect.toBeTypeOrNull(Number),
+      order: expect.anything(),
     };
     expect(filteredProjects[0]).toMatchObject(expectedObject);
   });
 
-  test('Board members data', async () => {
+  it('Board members data', async () => {
     const boardMembers = await ContentfulClient.getFieldsData('boardMembers');
     const filteredBoardMembers = filterData(boardMembers, 'boardMembers');
     const expectedObject = {
@@ -57,7 +57,7 @@ describe('Check filterBasicContentData function outputs', () => {
     common = await ContentfulClient.getBasicContentData('common');
   });
 
-  test('Homepage top section', () => {
+  it('Homepage top section', () => {
     const filteredTopSection = filterBasicContentData(basicContentHomepage, 'homepage-top-section');
     const expectedObject = {
       image1: expect.any(Object),
@@ -67,7 +67,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredTopSection).toMatchObject(expectedObject);
   });
 
-  test('Homepage Values', () => {
+  it('Homepage Values', () => {
     const filteredValues = filterBasicContentData(basicContentHomepage, 'homepage-values');
     const expectedObject = {
       title: expect.any(String),
@@ -75,7 +75,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredValues).toMatchObject(expectedObject);
   });
 
-  test('Homepage Values Tiles', () => {
+  it('Homepage Values Tiles', () => {
     const filteredTile1 = filterBasicContentData(basicContentHomepage, 'homepage-tile-1');
     const filteredTile2 = filterBasicContentData(basicContentHomepage, 'homepage-tile-2');
     const filteredTile3 = filterBasicContentData(basicContentHomepage, 'homepage-tile-3');
@@ -87,7 +87,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredTile3).toMatchObject(expectedObject);
   });
 
-  test('Homepage Projects Title', () => {
+  it('Homepage Projects Title', () => {
     const filteredProjectsTitle = filterBasicContentData(
       basicContentHomepage,
       'homepage-projects-title',
@@ -98,7 +98,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredProjectsTitle).toMatchObject(expectedObject);
   });
 
-  test('Homepage Partners Text', () => {
+  it('Homepage Partners Text', () => {
     const filteredPartnersText = filterBasicContentData(
       basicContentHomepage,
       'homepage-partners-text',
@@ -109,7 +109,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredPartnersText).toMatchObject(expectedObject);
   });
 
-  test('Projects top section', () => {
+  it('Projects top section', () => {
     const filteredProjectsTopSection = filterBasicContentData(
       basicContentProjects,
       'projects-top-section',
@@ -122,7 +122,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredProjectsTopSection).toMatchObject(expectedObject);
   });
 
-  test('Projects Middle CTA Text', () => {
+  it('Projects Middle CTA Text', () => {
     const filteredProjectMiddleCTA = filterBasicContentData(
       basicContentProjects,
       'projects-middle-cta-text',
@@ -133,7 +133,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredProjectMiddleCTA).toMatchObject(expectedObject);
   });
 
-  test('Projects Bottom CTA Text', () => {
+  it('Projects Bottom CTA Text', () => {
     const filteredProjectBottomCTA = filterBasicContentData(
       basicContentProjects,
       'projects-bottom-cta-text',
@@ -144,7 +144,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredProjectBottomCTA).toMatchObject(expectedObject);
   });
 
-  test('Cooperation top section', () => {
+  it('Cooperation top section', () => {
     const filteredCooperationTopSection = filterBasicContentData(
       basicContentCooperation,
       'cooperation-top-section',
@@ -157,7 +157,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredCooperationTopSection).toMatchObject(expectedObject);
   });
 
-  test('Cooperation Bottom CTA Text', () => {
+  it('Cooperation Bottom CTA Text', () => {
     const filteredCooperationBottomCTA = filterBasicContentData(
       basicContentCooperation,
       'cooperation-bottom-cta',
@@ -168,7 +168,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredCooperationBottomCTA).toMatchObject(expectedObject);
   });
 
-  test('Cooperation Logos Text', () => {
+  it('Cooperation Logos Text', () => {
     const filteredCooperationLogosText = filterBasicContentData(
       basicContentCooperation,
       'cooperation-logos-text',
@@ -179,7 +179,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredCooperationLogosText).toMatchObject(expectedObject);
   });
 
-  test('Cooperation Tiles and Title', () => {
+  it('Cooperation Tiles and Title', () => {
     const filteredTitle = filterBasicContentData(
       basicContentCooperation,
       'cooperation-tiles-title',
@@ -200,7 +200,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredTile5).toMatchObject(expectedObject);
   });
 
-  test('About us top section', () => {
+  it('About us top section', () => {
     const filteredAboutUsTopSection = filterBasicContentData(
       basicContentAboutUs,
       'about-us-top-section',
@@ -213,7 +213,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredAboutUsTopSection).toMatchObject(expectedObject);
   });
 
-  test('About us content', () => {
+  it('About us content', () => {
     const filteredAboutUsContent1 = filterBasicContentData(
       basicContentAboutUs,
       'about-us-content-1',
@@ -236,7 +236,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredAboutUsContent3).toMatchObject(expectedObject);
   });
 
-  test('About us Bottom CTA Text', () => {
+  it('About us Bottom CTA Text', () => {
     const filteredAboutUsBottomCTA = filterBasicContentData(
       basicContentAboutUs,
       'about-us-bottom-cta',
@@ -247,7 +247,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredAboutUsBottomCTA).toMatchObject(expectedObject);
   });
 
-  test('About us Board Members Text', () => {
+  it('About us Board Members Text', () => {
     const filteredBoardMembersText = filterBasicContentData(
       basicContentAboutUs,
       'about-us-board-members-text',
@@ -258,7 +258,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredBoardMembersText).toMatchObject(expectedObject);
   });
 
-  test('Contact Form Text', () => {
+  it('Contact Form Text', () => {
     const filteredContactFormText = filterBasicContentData(common, 'contact-form-text');
     const expectedObject = {
       title: expect.any(String),
@@ -266,7 +266,7 @@ describe('Check filterBasicContentData function outputs', () => {
     expect(filteredContactFormText).toMatchObject(expectedObject);
   });
 
-  test('Common Form Tooltip', () => {
+  it('Common Form Tooltip', () => {
     const filteredContactFormText = filterBasicContentData(common, 'contact-form-tooltip');
     const expectedObject = {
       title: expect.any(String),
@@ -276,7 +276,7 @@ describe('Check filterBasicContentData function outputs', () => {
 });
 
 describe('Test wheter filterLogos function returns logos', () => {
-  test('Partner logos', async () => {
+  it('Partner logos', async () => {
     const partners = await ContentfulClient.getPartnerLogos();
     const filteredLogos = JSON.stringify(filterLogos(partners)).includes('svg');
     expect(filteredLogos).toBe(true);
@@ -284,7 +284,7 @@ describe('Test wheter filterLogos function returns logos', () => {
 });
 
 describe('Test filterSocial function, wheter it returns object with socials', () => {
-  test('Is object with socials returned ', async () => {
+  it('Is object with socials returned ', async () => {
     const socials = await ContentfulClient.getBasicContentData('common');
     const filteredSocials = filterSocials(socials);
     const expectedObject = {

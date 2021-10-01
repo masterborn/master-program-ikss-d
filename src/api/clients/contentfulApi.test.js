@@ -1,93 +1,51 @@
 import ContentfulClient from '@api/clients/contentfulApi';
 
 describe('Test whether getBasicContentData function fetches objects from the API endpoints', () => {
-  test('Common data', async () => {
-    try {
-      const result = await ContentfulClient.getBasicContentData('common');
-      const isEmpty = result.length > 1;
-      expect(isEmpty).not.toBe(false);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('Common data', async () => {
+    const result = await ContentfulClient.getBasicContentData('common');
+    expect(result.length).toBeGreaterThan(1);
   });
 
-  test('Homepage data', async () => {
-    try {
-      const result = await ContentfulClient.getBasicContentData('homepage');
-      const isEmpty = result.length > 1;
-      expect(isEmpty).not.toBe(false);
-      const includesImage1 = JSON.stringify(result).includes('image1');
-      expect(includesImage1).toBe(true);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('Homepage data', async () => {
+    const result = await ContentfulClient.getBasicContentData('homepage');
+    expect(result.length).toBeGreaterThan(1);
+    expect(JSON.stringify(result)).toContain('image1');
   });
 
-  test('About us data', async () => {
-    try {
-      const result = await ContentfulClient.getBasicContentData('about-us');
-      const isEmpty = result.length > 1;
-      expect(isEmpty).not.toBe(false);
-      const includesImage1 = JSON.stringify(result).includes('image1');
-      expect(includesImage1).toBe(true);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('About us data', async () => {
+    const result = await ContentfulClient.getBasicContentData('about-us');
+    expect(result.length).toBeGreaterThan(1);
+    expect(JSON.stringify(result)).toContain('image1');
   });
 
-  test('Cooperation data', async () => {
-    try {
-      const result = await ContentfulClient.getBasicContentData('cooperation');
-      const isEmpty = result.length > 1;
-      expect(isEmpty).not.toBe(false);
-      const includesImage1 = JSON.stringify(result).includes('image1');
-      expect(includesImage1).toBe(true);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('Cooperation data', async () => {
+    const result = await ContentfulClient.getBasicContentData('cooperation');
+    expect(result.length).toBeGreaterThan(1);
+    expect(JSON.stringify(result)).toContain('image1');
   });
 
-  test('Projects data', async () => {
-    try {
-      const result = await ContentfulClient.getBasicContentData('projects');
-      const isEmpty = result.length > 1;
-      expect(isEmpty).not.toBe(false);
-      const includesImage1 = JSON.stringify(result).includes('image1');
-      expect(includesImage1).toBe(true);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('Projects data', async () => {
+    const result = await ContentfulClient.getBasicContentData('projects');
+    expect(result.length).toBeGreaterThan(1);
+    expect(JSON.stringify(result)).toContain('image1');
   });
 });
 
 describe('Check whether getFieldsData returns objects from the API endpoints', () => {
-  test('Projects data', async () => {
-    try {
-      const result = await ContentfulClient.getFieldsData('projects');
-      expect(result).toBeInstanceOf(Object);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('Projects data', async () => {
+    const result = await ContentfulClient.getFieldsData('projects');
+    expect(result).toBeInstanceOf(Object);
   });
 
-  test('Board members data', async () => {
-    try {
-      const result = await ContentfulClient.getFieldsData('boardMembers');
-      expect(result).toBeInstanceOf(Object);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('Board members data', async () => {
+    const result = await ContentfulClient.getFieldsData('boardMembers');
+    expect(result).toBeInstanceOf(Object);
   });
 });
 
 describe('Check whether getPartnerLogos method returns objects from the API endpoints', () => {
-  test('Partner logos', async () => {
-    try {
-      const result = await ContentfulClient.getPartnerLogos();
-      const isLogo = JSON.stringify(result).includes('svg');
-      expect(isLogo).toBe(true);
-    } catch (e) {
-      expect(e).toMatch('error');
-    }
+  it('Partner logos', async () => {
+    const result = await ContentfulClient.getPartnerLogos();
+    expect(JSON.stringify(result)).toContain('svg');
   });
 });
