@@ -13,7 +13,7 @@
     "lint:fix": "eslint ./src --ext .js,.jsx --cache --fix",
     "lint:ci": "eslint ./src --ext .js,.jsx",
     "test": "jest --coverage",
-    "test:ci": "jest --coverage --maxWorkers=2",
+    "test:ci": "jest --coverage --maxWorkers=2 --testPathIgnorePatterns=['filterData.*', 'contentfulApi.*'] --passWithNoTests",
     "test:watch": "jest --watch --coverage"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "@reduxjs/toolkit": "^1.6.1",
     "@sentry/nextjs": "6.7.2",
     "axios": "0.21.1",
+    "dotenv": "^10.0.0",
     "contentful": "^8.5.8",
     "framer-motion": "^4.1.17",
     "next": "11.0.1",
